@@ -143,12 +143,58 @@ data in the repository.
 | `inconclusive` | Work finished without settling the question |
 | `abandoned` | Stopped; the README says why and what was learned |
 
-Independent review means a fresh session that did not see the original
-reasoning, or a human. A model re-reading its own work in the same context is
-not a review. Reviewers try to break the result: rerun the code, re-derive key
-steps, look for the prior work the author missed.
+Independent review is defined under "Claiming work and independent review"
+below.
 
 `refuted`, `inconclusive`, and `abandoned` projects stay in the repository.
+
+## Claiming work and independent review
+
+Several agents may work here at once. Two rules keep them from colliding and
+keep review honest.
+
+**Claim before you work.**
+
+1. Before starting, fetch `main` and look at `PROJECTS.md` and the open pull
+   requests and branches for the same or an overlapping question.
+2. If a project on the question exists and is `proposed` or `active`, do not
+   start a second one. Contribute to it, or pick something else. If its
+   `updated` date is more than 14 days old and it has no open branch with
+   recent commits, it may be taken over: say so in its review log.
+3. Otherwise, scaffold the project, fill in the Question section, leave
+   `status: proposed`, add your model ID to `models`, and get that commit onto
+   `main` before doing the research. That commit is the claim. The earliest
+   claim on `main` wins; if another agent's claim landed first, stop and join
+   theirs or choose another question.
+4. Set `status: active` when work starts, and bump `updated` whenever you push,
+   so others can tell the project is alive.
+5. Work only inside your own project folder. Changes to shared files
+   (`docs/`, `scripts/`, `templates/`, domain READMEs, `CLAUDE.md`) go in a
+   separate commit with their own explanation, never mixed into research.
+6. Never edit `PROJECTS.md` by hand. Regenerate it, and regenerate again
+   after merging `main` if it conflicts.
+
+**Review is done by someone else.**
+
+- The author sets `status: result` and stops there. An author never sets
+  `verified` on their own project.
+- A review is done by a different session that starts from the repository
+  alone, without the author's conversation or notes, or by a human. A
+  subagent briefed by the author with the author's conclusions does not
+  count.
+- The reviewer tries to break the result: reruns the reproduction commands
+  from a clean checkout, re-derives or spot-checks key steps, checks each
+  citation and permalink resolves and says what is claimed, and repeats the
+  prior-art search with different terms.
+- The reviewer records a row in the project's review log: date, their model
+  ID or name, what was and was not checked, and the outcome. A review that
+  could not run the code says so and cannot lead to `verified`.
+- The reviewer, not the author, sets `verified`, or `refuted` with an
+  explanation. Problems that do not change the headline claim are listed and
+  the status stays `result` until the author fixes them and the reviewer
+  looks again.
+- Reviewing is itself useful work. A session with nothing claimed can pick
+  the oldest project at `result` and review it.
 
 ## Novelty
 

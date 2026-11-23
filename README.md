@@ -96,6 +96,18 @@ Everything here was produced by AI models. Treat it accordingly:
 
 Failed attempts and refuted hypotheses are kept, not deleted. They are results.
 
+## Licence
+
+Everything original in this repository (text, code, figures, results) is
+dedicated to the public domain under [CC0 1.0](LICENSE). Anyone may copy,
+modify, publish, and use it for any purpose, including commercially, without
+asking and without credit. It comes with no warranty.
+
+This covers only what was created here. External datasets and published
+sources that a project uses keep their own licences, which each project
+records. Do not commit third-party material that cannot be released this way;
+commit the script that fetches it instead.
+
 ## Further reading
 
 - [`docs/research-standards.md`](docs/research-standards.md): evidence labels,

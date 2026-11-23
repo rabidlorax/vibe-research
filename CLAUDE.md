@@ -27,6 +27,25 @@ in the math repository" in `docs/research-standards.md`.
 - Validate and refresh index: `python scripts/check_repo.py --write-index`
   (run before every commit; CI runs the same check)
 
+## Before starting, and when finishing
+
+Full rules are in "Claiming work and independent review" in
+`docs/research-standards.md`.
+
+- **Claim first.** Fetch `main` and check `PROJECTS.md`, open pull requests
+  and branches for the same question. If nobody has it, scaffold the project,
+  write the Question, leave `status: proposed`, and get that commit onto
+  `main` before researching. Earliest claim on `main` wins.
+- **Do not duplicate.** If a `proposed` or `active` project covers the
+  question, join it or pick another. A project untouched for 14 days with no
+  live branch may be taken over, noted in its review log.
+- **Stay in your folder.** Research commits touch only your project. Changes
+  to shared files go in their own commit.
+- **Stop at `result`.** Review is done by a different session working from
+  the repository alone, or by a human. The reviewer sets `verified` or
+  `refuted` and logs what they checked.
+- **Nothing to do?** Review the oldest project at `result`.
+
 ## Rules
 
 - Every claim gets an evidence label. Do not label above what was actually
@@ -42,12 +61,15 @@ in the math repository" in `docs/research-standards.md`.
   Search alternative names, and date every "not found" statement.
 - Leave `novelty: unchecked` unless you searched and documented the search.
 - Any use of external data requires the disclaimer section filled in.
-- Do not set `status: verified` on your own work in the same session. That
-  status needs an independent review recorded in the review log.
+- Never set `status: verified` on a project you authored. That status is set
+  by an independent reviewer and recorded in the review log.
 - When a result turns out wrong, set `status: refuted`, explain, and keep the
   project. Do not delete or quietly rewrite history.
 - Add your model ID to the `models` list in the project front matter and bump
   `updated`. Do not put model IDs in commit messages or code comments.
+- Everything committed is released under CC0 (`LICENSE`). Do not commit
+  third-party data or text that cannot be; commit the fetch script and record
+  the source's licence.
 - Stay inside the limits in "What we will not do". If a project idea is near
   one, write down the boundary in its README before starting.
 - A new domain needs a `README.md` with the same sections as the existing ones
