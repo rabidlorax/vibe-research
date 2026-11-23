@@ -93,12 +93,15 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    Method. Counting only rows that differ by more than 5% *and* by more than
    3σ of their own stated uncertainties, the rate for the exact identities is
    0.1% to 1.9% (same-reference strata for planet-star identities;
-   literature-only strata for the stellar ones). The three stellar
-   identities are the least well obeyed: in rows whose stellar parameters
-   come from a paper, not from TICv8 or a KOI table, the surface gravity g
-   implied by `st_logg` differs from G M★/R★² by more than 5% (0.021 dex in
-   log g) in 21.7% of 7,935 rows, density in 13.4% of 3,045 (item 1
-   references removed) and luminosity in 11.5% of 2,827. Evidence: `external-data`.
+   literature-only strata for the stellar ones). Rates above 5% are
+   highest for surface gravity and planet density. In rows whose stellar
+   parameters come from a paper, not from TICv8 or a KOI table, the surface
+   gravity g implied by `st_logg` differs from G M★/R★² by more than 5%
+   (0.021 dex in log g) in 21.7% of 7,935 rows, stellar density in 13.4% of
+   3,045 (item 1 references removed) and luminosity in 11.5% of 2,827.
+   Planet density differs in 21.6% of 2,524 published rows, insolation in
+   13.7% of 766 and a/R★ in 12.6% of 2,143 same-reference rows. Evidence:
+   `external-data`.
 
 3. **In rows whose stellar parameters cite a Kepler KOI table (Q1-Q12,
    Q1-Q16, DR24, DR25), `st_dens` is a transit-fitted quantity, not the
@@ -193,7 +196,8 @@ P, which would make this σ too large), but that was not tested, and for
 identities whose two sides are measured independently the σ may be about
 right. Treat the "> 3σ" counts as indicative.
 
-Excerpt of `results/summary.md` (real output; published rows; "> 3σ" column is
+Excerpt of `results/summary.md` (real output; published rows and, for K3,
+RHOS and RATDOR, the Kepler KOI rows; "> 3σ" column is
 rows off by more than 5% and more than 3σ, as a share of rows with errors):
 
 | check | stratum | rows | median off | > 5% | > 20% | rows > 20% | rows > 2× | > 3σ and > 5% |
@@ -312,8 +316,12 @@ committed results are for the snapshot whose checksum and query are in
   (arXiv:1805.01453), Torres et al. 2017 (arXiv:1711.01267), Mann et al. 2017
   (arXiv:1705.01545) and MacDonald et al. 2016 (arXiv:1607.07540), through
   the ar5iv HTML rendering, and Mann et al. 2022 (arXiv:2110.09531v2, arXiv
-  HTML). Only the arXiv versions were read, not the journal versions or
-  their machine-readable tables, which could differ.
+  HTML). Only the arXiv versions were read, with one exception: the journal
+  table of Fulton & Petigura 2018 as served by VizieR (J/AJ/156/264, table2,
+  Harvard mirror; found by the sixth reviewer and fetched here) gives
+  K00001 with R 1.045 Rsun, Miso 0.991 Msun, rhoiso 0.87 and the unit
+  "g/cm3", so the journal table carries the same label. The journal versions
+  of the other papers could differ.
 - **Archive documentation** quoted: `docs/pscp_about.html`,
   `docs/API_PS_columns.html`, `docs/API_kepcandidate_columns.html`,
   `docs/lit_discrepancies.html`,
@@ -455,6 +463,13 @@ know.
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
   RATDOR and INSOL assume circular orbits.
+- K3 also treats `pl_orbsmax` as the semi-major axis, although the archive
+  documents it as "the projected separation in the plane of the sky" for
+  planets found by microlensing or direct imaging. 59 of the 7,132
+  same-reference K3 rows are such planets (40 imaging, 19 microlensing),
+  including 11 of the 399 rows above 5% and 5 of the 92 above 20%
+  (`results/summary.md`). Without them the rate above 5% is 388 of 7,073,
+  or 5.5%.
 - LOGG, RHOS and DEPTH discrepancies often reflect different measurement
   routes (spectroscopic gravity, transit-derived density, limb darkening),
   not mistakes.
@@ -479,3 +494,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a third fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all three download checksums and all result files identical); recomputed the main counts with separate code and added robustness checks (per stellar solution instead of per row; rounding); read `src/`; fetched all five papers, Decocq et al., arXiv:2505.22205, arXiv:2611.00856 and the archive documentation; new prior-art search. Not checked: journal versions (publisher and CDS unreachable), the ten further density references, other outlier rows | Changes needed, no headline claim or table number affected: 8 points. A wrong host count for the archive's discrepancy page (removed); the unit documentation page not cited; three correct numbers not printed by any script; Loyd et al. 2020 and the TOI-815 entry missing from prior work; "5% in log g" ambiguous; two citation markers; stale prior-work sentences; HTML entities in result files. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a fourth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (checksums and result files identical); recomputed the table and claim numbers with separate code; read `src/`; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), papers marked from memory, the ten further density references, other outlier rows | Changes needed, no headline claim overturned: 6 points. The KOI density median (56%) was diluted by TICv8-star rows of the DR25 Supplemental table (89% for KOI-table stars); MacDonald et al.'s own Table 2 carries the g cm⁻³ label, so that case is the paper's, not the archive's; a misplaced line in a results file; the order of the prior-art searches misstated; two archive values not printed by any script; a section number. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a fifth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums and all result files identical); recomputed the claim and table numbers with separate code; read `src/`; fetched and checked every quotation and every statement about a paper's tables; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 4 wording points (a stale count of reviewers, a stale count of downloads, 7 composite densities that cite the DR25 Supplemental table described as fitted, and the outlier file's omission of mixed-reference rows not stated). No claim, table number, script or label affected. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a sixth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed every line of the excerpt table and the claim numbers with separate code and regexes; read `src/`; fetched and checked every quotation; fetched the journal table of Fulton & Petigura 2018 from VizieR; new prior-art search (nothing further found). Not checked: journal versions of the other papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. One summary sentence ("the three stellar identities are the least well obeyed") was contradicted by the project's own table and is replaced; K3 did not disclose that `pl_orbsmax` is a projected separation for 59 imaging and microlensing rows; an inaccurate table caption. No claim, table number or label affected. All addressed in the following commit. Status stays `result` |

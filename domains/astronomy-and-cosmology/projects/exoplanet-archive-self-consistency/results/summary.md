@@ -71,6 +71,8 @@ Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
 - RHOS: TICv8 [2019AJ....158..138S] (4386); Fulton & Petigura 2018 [2018AJ....156..264F] (1414); Q1-Q17 DR25 KOI Table (370); Stassun et al. 2017 [2017AJ....153..136S] (151)
 - LUM: TICv8 [2019AJ....158..138S] (4382); MacDougall et al. 2023 [2023AJ....166...33M] (112); Mann et al. 2013 [2013ApJ...779..188M] (85); Ment et al. 2018 [2018AJ....156..213M] (54)
 
+K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%): Transit 4730 / 222 / 58; Radial Velocity 2298 / 165 / 29; Imaging 40 / 5 / 3; Transit Timing Variations 27 / 0 / 0; Microlensing 19 / 6 / 2; Astrometry 7 / 1 / 0; Pulsar Timing 6 / 0 / 0; Orbital Brightness Modulation 4 / 0 / 0; Pulsation Timing Variations 1 / 0 / 0
+
 Published rows with TICv8 stellar parameters (rows / rows off by > 5%): LOGG 4386 / 0; RHOS 4386 / 0; LUM 4382 / 0
 Short reference names in st_refname (published rows) standing for more than one bibcode: 247
 

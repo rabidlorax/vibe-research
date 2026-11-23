@@ -220,6 +220,13 @@ def main():
                     r[f"top{i + 1}_ref_gt5pct"] = vc.index[i]
                     r[f"top{i + 1}_ref_n_gt5pct"] = int(vc.iloc[i])
                     r[f"top{i + 1}_ref_rows_in_stratum"] = int((refcol == vc.index[i]).sum())
+                if cid == "K3" and sname == "published, same ref":
+                    # pl_orbsmax is a projected separation, not a semi-major
+                    # axis, for imaging and microlensing planets.
+                    dm = d.loc[x.index, "discoverymethod"]
+                    k3_method = pd.DataFrame({"n": dm.value_counts(),
+                                              "gt5": dm[x.abs() > np.log(1.05)].value_counts(),
+                                              "gt20": dm[x.abs() > np.log(1.20)].value_counts()}).fillna(0).astype(int)
                 if cid in STELLAR and sname == "published":
                     comp[cid] = refcol.value_counts().head(4)
                     tic = refcol.str.contains("TICv8", na=False)
@@ -274,6 +281,8 @@ def main():
     lines += ["", "Stellar-parameter references of the 'published' stellar strata (top 4 by rows):", ""]
     for cid, vc in comp.items():
         lines.append(f"- {cid}: " + "; ".join(f"{k} ({v})" for k, v in vc.items()))
+    lines += ["", "K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%): "
+              + "; ".join(f"{k} {r.n} / {r.gt5} / {r.gt20}" for k, r in k3_method.sort_values("n", ascending=False).iterrows())]
     lines += ["", "Published rows with TICv8 stellar parameters (rows / rows off by > 5%): "
               + "; ".join(f"{k} {a} / {b}" for k, (a, b) in tic_viol.items())]
     bib = d.st_refname.str.extract(r"/abs/([^/\s]+)/abstract")[0]
