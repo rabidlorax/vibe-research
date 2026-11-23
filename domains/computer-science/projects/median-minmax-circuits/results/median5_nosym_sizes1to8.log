@@ -1,0 +1,8 @@
+n=5 k=3 s=1 sym=0 comparators=0 solver=cadical153 vars=69 clauses=164 -> UNSAT in 0.0s
+n=5 k=3 s=2 sym=0 comparators=0 solver=cadical153 vars=140 clauses=348 -> UNSAT in 0.0s
+n=5 k=3 s=3 sym=0 comparators=0 solver=cadical153 vars=213 clauses=587 -> UNSAT in 0.0s
+n=5 k=3 s=4 sym=0 comparators=0 solver=cadical153 vars=288 clauses=884 -> UNSAT in 0.0s
+n=5 k=3 s=5 sym=0 comparators=0 solver=cadical153 vars=365 clauses=1242 -> UNSAT in 0.0s
+n=5 k=3 s=6 sym=0 comparators=0 solver=cadical153 vars=444 clauses=1664 -> UNSAT in 0.1s
+n=5 k=3 s=7 sym=0 comparators=0 solver=cadical153 vars=525 clauses=2153 -> UNSAT in 0.8s
+n=5 k=3 s=8 sym=0 comparators=0 solver=cadical153 vars=608 clauses=2712 -> UNSAT in 23.6s

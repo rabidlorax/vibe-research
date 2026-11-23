@@ -1,0 +1,10 @@
+n=5 s=1 solver=cadical153 vars=74 clauses=187 UNSAT 0.0s
+n=5 s=2 solver=cadical153 vars=150 clauses=461 UNSAT 0.0s
+n=5 s=3 solver=cadical153 vars=228 clauses=838 UNSAT 0.0s
+n=5 s=4 solver=cadical153 vars=308 clauses=1340 UNSAT 0.0s
+n=5 s=5 solver=cadical153 vars=390 clauses=1992 UNSAT 0.0s
+n=5 s=6 solver=cadical153 vars=474 clauses=2822 UNSAT 0.0s
+n=5 s=7 solver=cadical153 vars=560 clauses=3861 UNSAT 0.0s
+n=5 s=8 solver=cadical153 vars=648 clauses=5143 UNSAT 0.3s
+n=5 s=9 solver=cadical153 vars=738 clauses=6705 UNSAT 4.1s
+n=5 s=10 solver=cadical153 vars=830 clauses=8587 SAT 3.5s
