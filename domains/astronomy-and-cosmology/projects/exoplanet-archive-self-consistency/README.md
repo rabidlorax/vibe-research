@@ -33,8 +33,8 @@ most discrepant rows that a reader can check against the cited papers.
 
 The archive is the default input for exoplanet population studies, and users
 commonly combine columns (for example, deriving insolation or density
-themselves). A measured error rate per identity tells them how far to trust
-that, and a list of grossly inconsistent rows is something the archive's
+themselves). A measured discrepancy rate per identity tells them how far to
+trust that, and a list of grossly inconsistent rows is something the archive's
 maintainers can correct.
 
 ## Summary of result
