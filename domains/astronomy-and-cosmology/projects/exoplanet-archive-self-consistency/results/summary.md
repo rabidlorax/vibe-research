@@ -75,6 +75,8 @@ K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%)
 
 RHOP, published: rows with ratio 1.055-1.085 (Jupiter mean-radius density convention, factor 1.0694): 277; mirror window: 31; off by > 5% outside that window: 267 of 2247 (11.9%); median pl_dens / (M/R^3 in Jupiter units) in the window: 1.328 g/cm^3 (equatorial-radius Jupiter density 1.240, mean-radius 1.326)
 
+DEPTH, published: rows with ratio within 1% of 0.01 or of 10 (unit candidates): HAT-P-25 b, Wang et al. 2018 [2018PASP..130f4401W] (0.009998); HD 189733 b, Morello et al. 2014 [2014ApJ...786...22M] (0.01); K2-114 b, Ikwut-Ukwa et al. 2020 [2020AJ....160..209I] (0.009996); TOI-5624 c, Bonfanti et al. 2026 [2026A&A...709A.265B] (10)
+
 Published rows with TICv8 stellar parameters (rows / rows off by > 5%): LOGG 4386 / 0; RHOS 4386 / 0; LUM 4382 / 0
 Short reference names in st_refname (published rows) standing for more than one bibcode: 247
 

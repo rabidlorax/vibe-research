@@ -119,7 +119,7 @@ def checks(d):
     pred = a * AU / (Rs * R_SUN)
     m = pos(a, Rs, aR)
     sig = np.sqrt(rel(d, "pl_ratdor") ** 2 + rel(d, "pl_orbsmax") ** 2 + rel(d, "st_rad") ** 2)
-    yield "RATDOR", "a/R* vs a / R*", "pl_ratdor", m, np.log(aR / pred), sig, True, "exact"
+    yield "RATDOR", "a/R* vs a / R*", "pl_ratdor", m, np.log(aR / pred), sig, True, "exact for circular orbits"
 
     # DEPTH: transit depth vs squared radius ratio (limb darkening and grazing
     # geometry make this approximate: tens of per cent is expected).
@@ -223,6 +223,12 @@ def main():
                     r[f"top{i + 1}_ref_gt5pct"] = vc.index[i]
                     r[f"top{i + 1}_ref_n_gt5pct"] = int(vc.iloc[i])
                     r[f"top{i + 1}_ref_rows_in_stratum"] = int((refcol == vc.index[i]).sum())
+                if cid == "DEPTH" and sname == "published":
+                    # pl_trandep is documented in per cent; a ratio of 0.01
+                    # means the fraction was stored, a ratio of 10 parts per
+                    # thousand. Count rows within 1% of either.
+                    u = d.loc[x.index, ["pl_name", "pl_ref"]].assign(ratio=np.exp(x))
+                    depth_units = u[((x - np.log(0.01)).abs() < np.log(1.01)) | ((x - np.log(10)).abs() < np.log(1.01))]
                 if cid == "RHOP" and sname == "published":
                     # A Jupiter density defined with the volumetric mean radius
                     # (69,911 km) instead of the equatorial one used here
@@ -304,6 +310,8 @@ def main():
               f"{rhop_conv[2]} of {rhop_conv[3]} ({100 * rhop_conv[2] / rhop_conv[3]:.1f}%); median pl_dens / "
               f"(M/R^3 in Jupiter units) in the window: {rhop_conv[4]:.3f} g/cm^3 "
               f"(equatorial-radius Jupiter density {RHO_JUP_EQ:.3f}, mean-radius {RHO_JUP_EQ * JUP_CONV:.3f})"]
+    lines += ["", "DEPTH, published: rows with ratio within 1% of 0.01 or of 10 (unit candidates): "
+              + "; ".join(f"{r.pl_name}, {r.pl_ref} ({r.ratio:.4g})" for r in depth_units.sort_values("pl_name").itertuples())]
     lines += ["", "Published rows with TICv8 stellar parameters (rows / rows off by > 5%): "
               + "; ".join(f"{k} {a} / {b}" for k, (a, b) in tic_viol.items())]
     bib = d.st_refname.str.extract(r"/abs/([^/\s]+)/abstract")[0]

@@ -129,14 +129,22 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    that 370 "published" planet rows also carry KOI-table stellar values. In
    the composite table, 1,340 of the 5,859 stellar densities cite the DR24
    or DR25 KOI table and are therefore fitted values; 7 more cite the DR25
-   Supplemental table. Evidence: `external-data`; the column
+   Supplemental table. With the 1,067 of item 1, that is 2,407 of 5,859
+   composite stellar densities (41%) that are not a mass-radius density in
+   g/cm³. Evidence: `external-data`; the column
    definition is supporting `literature`.
 
 4. `results/outliers.csv` lists 3,276 row-identity entries (3,100 distinct
    published rows, 2,595 planets) where the two sides of an identity differ
    by more than 20%. Of the entries, 1,453 are the item 1 densities, 324 are
    KOI-table fitted densities (item 3), 156 belong to the approximate DEPTH
-   identity and 2 are rounding. The remaining 1,341 entries (1,192 rows, 941
+   identity and 2 are rounding. Among the 156 DEPTH entries, three (HAT-P-25 b
+   under Wang et al. 2018, HD 189733 b under Morello et al. 2014, K2-114 b
+   under Ikwut-Ukwa et al. 2020) have a ratio of 0.0100: `pl_trandep`,
+   documented in per cent, holds the fraction (Rp/R★)². One (TOI-5624 c
+   under Bonfanti et al. 2026) has a ratio of 10.0. These four are unit
+   candidates, not limb-darkening effects; none was traced to its paper.
+   The remaining 1,341 entries (1,192 rows, 941
    planets) are candidate inconsistencies. For the planet-star identities
    (K3, RATROR, RATDOR, INSOL) only same-reference rows are listed; 6
    mixed-reference entries above 20% (1 K3, 5 RATROR) are not. Only the cases named in this
@@ -431,13 +439,13 @@ Found:
   off by more than a factor of 2. This is the INSOL identity and the same
   ingestion mechanism as in summary item 1, for another column. No rates.
   Found by the third reviewer; passage read here.
-- Howe, Becker & Stark, "Architecture Classification for Extrasolar
-  Planetary Systems", arXiv:2501.08191, section II.2: "several dozen entries
+- Howe, Becker, Stark & Adams, "Architecture Classification for Extrasolar
+  Planetary Systems", arXiv:2501.08191 (AJ 169, 149), section II.2: "several dozen entries
   in the Exoplanet Archive have mass and radius measurements that result in
   unphysically high (or in one case low) densities". This is a plausibility
   check on mass and radius, not a test of one column against others. Found
-  by the seventh reviewer; passage read here (title and authors as the
-  reviewer gave them).
+  by the seventh reviewer; passage read here, authors from the arXiv record
+  as checked by the eighth reviewer.
 - The archive's discrepancy page already records one stellar-density unit
   slip, of a different kind: TOI-815, Psaridi et al. 2024, literature value
   "2431 +122 −125 ρ⊙" against archive value "2.431 +0.122 -0.125 g/cm^3",
@@ -508,7 +516,7 @@ know.
   not traced.
 - K3 and RATDOR discrepancies in transit papers can also come from
   different measurement routes (a from the fitted a/R★ and R★, against a
-  mass from isochrones), as with LOGG, RHOS and DEPTH below.
+  mass from isochrones), as with LOGG, RHOS and DEPTH.
 - `pl_refname == st_refname` is taken as "single reference". Whether the
   archive ever fills individual cells of such a row from elsewhere was not
   checked.
@@ -527,3 +535,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a fifth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums and all result files identical); recomputed the claim and table numbers with separate code; read `src/`; fetched and checked every quotation and every statement about a paper's tables; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 4 wording points (a stale count of reviewers, a stale count of downloads, 7 composite densities that cite the DR25 Supplemental table described as fitted, and the outlier file's omission of mixed-reference rows not stated). No claim, table number, script or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a sixth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed every line of the excerpt table and the claim numbers with separate code and regexes; read `src/`; fetched and checked every quotation; fetched the journal table of Fulton & Petigura 2018 from VizieR; new prior-art search (nothing further found). Not checked: journal versions of the other papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. One summary sentence ("the three stellar identities are the least well obeyed") was contradicted by the project's own table and is replaced; K3 did not disclose that `pl_orbsmax` is a projected separation for 59 imaging and microlensing rows; an inaccurate table caption. No claim, table number or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a seventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts and medians with separate code; read `src/`; fetched and checked every quotation, including the VizieR table; new prior-art search (found Howe, Becker & Stark, arXiv:2501.08191, which notes "several dozen entries" with unphysical densities from mass and radius: a plausibility check, not a row-identity test). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. Half of the planet-density rows above 5% are a Jupiter-radius unit convention (ratio 1.069), so the sentence added after the sixth review ("highest for surface gravity and planet density") overstated; the reviewer-attributed rounding figures were not a bound; the archive's acknowledgement text was retrievable and missing. No bold headline, claim number or label affected. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, an eighth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; tested every identity for systematic non-error explanations (narrow peaks in the ratio, per-reference and per-method concentration, planet mass in K3, eccentricity in RATDOR and INSOL, SI-for-cgs and linear-for-log slips) and found none beyond those already disclosed; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 3 points (a missing author in a citation; a stale "below"; four DEPTH outliers at ratios of exactly 0.01 and 10 are unit candidates and were lumped with limb-darkening effects). No claim, table number, script result or label affected. All addressed in the following commit. Status stays `result` |
