@@ -219,6 +219,12 @@ def main():
                 # Which reference contributes most of the > 5% rows.
                 refcol = d.loc[x.index, "st_ref" if cid in STELLAR else "pl_ref"]
                 vc = refcol[x.abs() > np.log(1.05)].value_counts()
+                # Largest reference of the stratum and its share of > 5% rows:
+                # a bulk reference can dilute a row-weighted rate.
+                big = refcol.value_counts()
+                r["largest_ref"] = big.index[0]
+                r["largest_ref_rows"] = int(big.iloc[0])
+                r["largest_ref_n_gt5pct"] = int(vc.get(big.index[0], 0))
                 for i in range(min(2, len(vc))):
                     r[f"top{i + 1}_ref_gt5pct"] = vc.index[i]
                     r[f"top{i + 1}_ref_n_gt5pct"] = int(vc.iloc[i])
@@ -300,6 +306,14 @@ def main():
                  for i in (1, 2) if isinstance(r.get(f"top{i}_ref_gt5pct"), str)]
         if parts:
             lines.append(f"- {r.check}, {r.stratum}: " + "; ".join(parts))
+    lines += ["", "Largest reference of each published stratum (its rows / its rows off by > 5%), and the "
+              "stratum's rate above 5% without it:", ""]
+    for _, r in summ.iterrows():
+        if r.stratum.startswith("published") and "mixed" not in r.stratum:
+            lines.append(f"- {r.check}, {r.stratum}: {r.largest_ref} ({int(r.largest_ref_rows)} / "
+                         f"{int(r.largest_ref_n_gt5pct)}); without it {r.n_gt5pct - int(r.largest_ref_n_gt5pct)} of "
+                         f"{r.n - int(r.largest_ref_rows)} = "
+                         f"{100 * (r.n_gt5pct - r.largest_ref_n_gt5pct) / (r.n - r.largest_ref_rows):.2f}%")
     lines += ["", "Stellar-parameter references of the 'published' stellar strata (top 4 by rows):", ""]
     for cid, vc in comp.items():
         lines.append(f"- {cid}: " + "; ".join(f"{k} ({v})" for k, v in vc.items()))
@@ -310,6 +324,13 @@ def main():
               f"{rhop_conv[2]} of {rhop_conv[3]} ({100 * rhop_conv[2] / rhop_conv[3]:.1f}%); median pl_dens / "
               f"(M/R^3 in Jupiter units) in the window: {rhop_conv[4]:.3f} g/cm^3 "
               f"(equatorial-radius Jupiter density {RHO_JUP_EQ:.3f}, mean-radius {RHO_JUP_EQ * JUP_CONV:.3f})"]
+    named = [("HAT-P-7 b", "2025ApJ...986..117Y", ["pl_orbper", "pl_orbsmax", "st_mass"]),
+             ("Kepler-138 b", "2014ApJ...787...80H", ["pl_masse", "pl_massj"]),
+             ("TOI-2049 b", "2026AJ....172...54G", ["pl_ratror", "pl_radj", "pl_rade", "st_rad"])]
+    lines += ["", "Raw values of rows named in the README:"]
+    for pl, bibc, cs in named:
+        for _, x in d[(d.pl_name == pl) & d.pl_ref.str.contains(bibc, regex=False)].iterrows():
+            lines.append(f"- {pl}, {x.pl_ref}: " + ", ".join(f"{c} {x[c]:g}" for c in cs))
     lines += ["", "DEPTH, published: rows with ratio within 1% of 0.01 or of 10 (unit candidates): "
               + "; ".join(f"{r.pl_name}, {r.pl_ref} ({r.ratio:.4g})" for r in depth_units.sort_values("pl_name").itertuples())]
     lines += ["", "Published rows with TICv8 stellar parameters (rows / rows off by > 5%): "

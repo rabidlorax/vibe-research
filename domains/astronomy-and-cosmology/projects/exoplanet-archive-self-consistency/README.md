@@ -87,10 +87,14 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    Among published rows whose planet and star parameters cite the same
    reference, the tabulated semi-major axis differs from the Kepler's-third-law
    value by more than 5% in 5.6% of 7,132 rows (399 rows) and by more than 20%
-   in 1.3% (92 rows). One reference, Stassun et al. 2017, supplies 118 of the
-   399; it recomputes stellar masses and radii for already-known planets
-   `[from memory, unverified]`, so its rows may not be one orbital solution. Without it the rate is 281 of
-   6,928, or 4.1%. Rates for the other identities are in the table under
+   in 1.3% (92 rows). These row-weighted rates depend on a few bulk
+   references, in both directions. Stassun et al. 2017 ("Accurate, Empirical
+   Radii and Masses of Planets and their Host Stars with Gaia Parallaxes";
+   title only, paper not read) supplies 118 of the 399, and its rows may not
+   be one orbital solution; without it the rate is 281 of 6,928, or 4.1%.
+   Fulton & Petigura 2018 supplies 1,401 of the 7,132 rows and none of the
+   399; without it the rate is 399 of 5,731, or 7.0%, and without both it is
+   281 of 5,527, or 5.1%. Rates for the other identities are in the table under
    Method. Counting only rows that differ by more than 5% *and* by more than
    3σ of their own stated uncertainties, the rate for the exact identities is
    0.1% to 1.9% (same-reference strata for planet-star identities;
@@ -98,7 +102,9 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    highest for surface gravity. In rows whose stellar parameters come from
    a paper, not from TICv8 or a KOI table, the surface gravity g implied by
    `st_logg` differs from G M★/R★² by more than 5% (0.021 dex in log g) in
-   21.7% of 7,935 rows, stellar density in 13.4% of 3,045 (item 1
+   21.7% of 7,935 rows (30.3% of 5,693 without the largest reference, Morton
+   et al. 2016, which has 2,242 rows and one of the 1,724 above 5%), stellar
+   density in 13.4% of 3,045 (item 1
    references removed) and luminosity in 11.5% of 2,827. Insolation differs
    in 13.7% of 766 and a/R★ in 12.6% of 2,143 same-reference rows. Planet
    density differs in 21.6% of 2,524 published rows, but 277 of those 544
@@ -154,7 +160,8 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
 The front-matter `evidence: external-data` is the label of headline items 1
 to 3, which rest on claims 1, 2, 5 and 6. The `literature` claims (3, 4, 7,
 8) support the interpretation of who introduced an error and are not
-headline; claims 8 to 10 are a side result.
+headline; claims 8 to 10 are a side result, and claim 10 is already in the
+literature.
 
 ## Claims
 
@@ -169,7 +176,7 @@ headline; claims 8 to 10 are a side result.
 | 7 | The archive's KOI column documentation defines `koi_srho` as a fitted transit quantity "completely independent from the listed stellar mass and radius" | `literature` | Read `docs/API_kepcandidate_columns.html` on the archive |
 | 8 | Mann et al. 2022 (TOI-1227) print L★ = (2.51 ± 0.17) × 10⁻³ L☉, R★ = 0.56 R☉, Teff = 3072 K, F_bol = 7.87 × 10⁻¹¹ erg cm⁻² s⁻¹ and X, Y, Z = 51.34, −85.22, −16.95 pc. The radius and temperature give 0.0252 L☉; the flux and position (100.9 pc) give 0.0251 L☉ | `literature` | Read the stellar-parameter table of arXiv:2110.09531; `python src/toi1227_luminosity.py` does the arithmetic |
 | 9 | The archive's `st_lum` for TOI-1227 (−2.600) equals the printed 2.51 × 10⁻³ | `external-data` | TOI-1227 b rows in `results/outliers.csv` (LUM) |
-| 10 | The printed luminosity in claim 8 has a wrong exponent (10⁻³ for 10⁻²) | `conjecture` | Ask the authors or check for an erratum |
+| 10 | The printed luminosity in claim 8 has a wrong exponent (10⁻³ for 10⁻²). Varga et al. 2025 (arXiv:2506.04440) list the Mann et al. 2022 value as (2.51 ± 0.17) × 10⁻² with the table note "The listed M+22 values have been corrected for a typo in the value of L_bol stated in their paper" | `literature` | Read the stellar-parameter table of arXiv:2506.04440 |
 
 ## Method
 
@@ -269,8 +276,9 @@ Reading the table:
   published stratum, including the literature-only ones (largest: LOGG,
   0.98%), so the typical row is self-consistent.
 - `results/summary.md` also lists, for every stratum, the two references
-  that contribute most of the rows above 5%, the TICv8 counts and the
-  number of ambiguous short names. References are keyed by short name
+  that contribute most of the rows above 5%, the largest reference with the
+  rate without it, the TICv8 counts, the number of ambiguous short names,
+  and the raw values of the rows named in this README. References are keyed by short name
   plus ADS bibcode throughout, because 247 short names in `st_refname` (for
   example "Mann et al. 2017") stand for more than one paper.
 
@@ -401,7 +409,9 @@ Found:
   mass and radius (summary item 3) is a known and used effect. The archive's
   KOI documentation cites Seager & Mallén-Ornelas 2003 for it; the
   "asterodensity profiling" and "photoeccentric effect" literature (for
-  example Sliski & Kipping 2014 `[from memory, unverified]`) exploits it. Item 3 is
+  example Sliski & Kipping, "A High False Positive Rate for Kepler Planetary
+  Candidates of Giant Stars using Asterodensity Profiling", arXiv:1401.1207;
+  title only, paper not read) exploits it. Item 3 is
   therefore `known` in substance; only its counts are from this project.
 - Bashi, Helled & Zucker 2018, "A Quantitative Comparison of Exoplanet
   Catalogs" (arXiv:1808.10236) and Alei et al. 2020, "Exo-MerCat". These
@@ -450,6 +460,24 @@ Found:
   check on mass and radius, not a test of one column against others. Found
   by the seventh reviewer; passage read here, authors from the arXiv record
   as checked by the eighth reviewer.
+- Varga, Kastner, Binks, Guenther & Murphy, "The Age and High Energy
+  Environment of the Very Young Transiting Exoplanet TOI 1227b",
+  arXiv:2506.04440. Their stellar-parameter table lists the Mann et al. 2022
+  luminosity as (2.51 ± 0.17) × 10⁻² L⊙ with the note: "The listed M+22
+  values have been corrected for a typo in the value of L_bol stated in
+  their paper". Claim 10 is therefore `known`; what this project adds is
+  that the archive still carries the uncorrected value. Found by the tenth
+  reviewer; passage read here.
+- `exoatlas` (github.com/zkbt/exoatlas), notebook
+  `details/compare-nasa-exoplanet-archive-tables.ipynb` at commit
+  `3d0fefd2b6ae9c49b663b30cdfb87322b1cf04e5`. It plots the LUM identity and
+  the Earth/Jupiter unit pairs for the archive's `ps` and `pscomppars`
+  tables. Under "Are stellar luminosities, radii, and effective temperatures
+  consistent?" it answers "Is that true? No!", and under "Are there weird
+  unit problems?" it says: "for some planets we'll get different answers
+  whether we ingest the planet quantities like mass and radius in Earth
+  units or in Jupiter units." No rates and no attribution to references.
+  Found by the tenth reviewer; notebook read here as data, not run.
 - Tang, "Self-Consistency Rupture in Stellar Atmosphere Models: The Second
   Astronomical Empirical Case for the Factor Hierarchy Law", Research Square
   preprint, DOI 10.21203/rs.3.rs-10341037/v1 (posted 2026-07-14, not peer
@@ -474,13 +502,16 @@ exoplanet databases, typos and transcription errors in the archive, the
 archive's 2025 description paper arXiv:2506.03299 and its release notes;
 web, OpenAlex and arXiv). The second found the two log g items, the third
 found Loyd et al. 2020 and the TOI-815 entry, the seventh found Howe et al.,
-the ninth found the Tang preprint, and the others found nothing further. None found a prior statement of the density problem for the four
+the ninth found the Tang preprint, the tenth found Varga et al. and
+exoatlas, and the others found nothing further. None found a prior statement of the density problem for the four
 references.
 
 Not found in the searches described: violation rates for the identities
 other than log g, or any statement that the densities of the four references
 are in solar units in the archive. Hence `partially-known`: the Kepler's-law
-check, an insolation check (Loyd et al. 2020), a log g consistency rate, a
+check, an insolation check (Loyd et al. 2020), a Stefan-Boltzmann and a
+unit-pair check (exoatlas), the TOI-1227 luminosity typo (Varga et al.
+2025), a log g consistency rate, a
 comparison of `st_dens` with M★/R★³ that assumes solar units (Tang 2026), and
 individual unit slips at ingestion (Loyd et al. 2020; the TOI-815 entry)
 exist; the per-identity rates other than log g and the density finding for
@@ -503,7 +534,10 @@ know.
   et al. 2017 densities).
 - The "published" strata mix literature solutions with catalogue stellar
   parameters (TICv8, KOI tables) and with re-analyses such as Stassun et al.
-  2017, so their rates are not rates of error in individual papers.
+  2017, so their rates are not rates of error in individual papers. The
+  rates are row-weighted and move by a few points when a single bulk
+  reference is removed, in either direction (`results/summary.md` gives the
+  rate without each stratum's largest reference).
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
   RATDOR and INSOL assume circular orbits.
@@ -537,7 +571,10 @@ know.
 - `pl_refname == st_refname` is taken as "single reference". Whether the
   archive ever fills individual cells of such a row from elsewhere was not
   checked.
-- Open: trace the remaining factor-of-two outliers to their papers; check
+- Open: the archive still lists `st_lum` = −2.600 for TOI-1227 although the
+  typo is known (Varga et al. 2025), and its discrepancy page has no
+  TOI-1227 entry. Also open: trace the remaining factor-of-two outliers to
+  their papers; check
   the ten further density references; report confirmed cases to the archive
   helpdesk (needs the repository owner; nothing has been sent).
 
@@ -554,3 +591,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a seventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts and medians with separate code; read `src/`; fetched and checked every quotation, including the VizieR table; new prior-art search (found Howe, Becker & Stark, arXiv:2501.08191, which notes "several dozen entries" with unphysical densities from mass and radius: a plausibility check, not a row-identity test). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. Half of the planet-density rows above 5% are a Jupiter-radius unit convention (ratio 1.069), so the sentence added after the sixth review ("highest for surface gravity and planet density") overstated; the reviewer-attributed rounding figures were not a bound; the archive's acknowledgement text was retrievable and missing. No bold headline, claim number or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, an eighth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; tested every identity for systematic non-error explanations (narrow peaks in the ratio, per-reference and per-method concentration, planet mass in K3, eccentricity in RATDOR and INSOL, SI-for-cgs and linear-for-log slips) and found none beyond those already disclosed; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 3 points (a missing author in a citation; a stale "below"; four DEPTH outliers at ratios of exactly 0.01 and 10 are unit candidates and were lumped with limb-darkening effects). No claim, table number, script result or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a ninth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation and, through the arXiv API, every title and author list; new prior-art search. Not checked: journal versions of four papers, items marked from memory, the DEPTH unit candidates, the ten further density references and other outlier rows against their papers | One minor point: a July 2026 preprint (Tang, Research Square) that compares `st_dens` with M★/R★³ assuming solar units was missing from prior work. No number, claim, label, script or headline affected. Addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a tenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search. Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, no headline number, table entry or script result wrong: 4 points. The TOI-1227 luminosity typo is already stated by Varga et al. 2025, so claim 10 becomes `literature`; the exoatlas notebook, which plots two of the identities on these tables, was missing from prior work; the K3 rate was adjusted for the reference that inflates it but not for the one that dilutes it, and the LOGG rate not at all; two quoted raw values were not printed by any script. All addressed in the following commit. Status stays `result` |

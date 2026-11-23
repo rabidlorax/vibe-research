@@ -65,6 +65,24 @@ Two references contributing most rows off by > 5%, per stratum (count of the str
 - INSOL, published, same ref: Torres et al. 2017 [2017AJ....154..264T] (9 of 105 / 22); Guenther et al. 2026 [2026AJ....172...54G] (5 of 105 / 5)
 - INSOL, published, mixed refs: Dressing et al. 2017 [2017AJ....154..207D] (1 of 1 / 1)
 
+Largest reference of each published stratum (its rows / its rows off by > 5%), and the stratum's rate above 5% without it:
+
+- K3, published, same ref: Fulton & Petigura 2018 [2018AJ....156..264F] (1401 / 0); without it 399 of 5731 = 6.96%
+- LOGG, published: TICv8 [2019AJ....158..138S] (4386 / 0); without it 1724 of 8305 = 20.76%
+- LOGG, published, literature star ref: Morton et al. 2016 [2016ApJ...822...86M] (2242 / 1); without it 1723 of 5693 = 30.27%
+- RHOS, published: TICv8 [2019AJ....158..138S] (4386 / 0); without it 2222 of 4875 = 45.58%
+- RHOS, published, literature star ref: Stassun et al. 2017 [2017AJ....153..136S] (151 / 1); without it 406 of 2894 = 14.03%
+- LUM, published: TICv8 [2019AJ....158..138S] (4382 / 0); without it 325 of 2827 = 11.50%
+- LUM, published, literature star ref: MacDougall et al. 2023 [2023AJ....166...33M] (112 / 0); without it 325 of 2715 = 11.97%
+- RHOP, published: Bonomo et al. 2017 [2017A&A...602A.107B] (231 / 9); without it 535 of 2293 = 23.33%
+- URAD, published: Morton et al. 2016 [2016ApJ...822...86M] (2255 / 0); without it 6 of 10948 = 0.05%
+- UMASS, published: Bonomo et al. 2017 [2017A&A...602A.107B] (231 / 0); without it 12 of 4608 = 0.26%
+- UMSINI, published: Stassun et al. 2017 [2017AJ....153..136S] (204 / 0); without it 3 of 2556 = 0.12%
+- RATROR, published, same ref: Morton et al. 2016 [2016ApJ...822...86M] (2239 / 56); without it 186 of 5231 = 3.56%
+- RATDOR, published, same ref: Livingston et al. 2018 [2018AJ....156..277L] (79 / 65); without it 206 of 2064 = 9.98%
+- DEPTH, published: Kruse et al. 2019 [2019ApJS..244...11K] (301 / 265); without it 349 of 924 = 37.77%
+- INSOL, published, same ref: Yee et al. 2025 [2025ApJS..280...30Y] (30 / 0); without it 105 of 736 = 14.27%
+
 Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
 
 - LOGG: TICv8 [2019AJ....158..138S] (4386); Morton et al. 2016 [2016ApJ...822...86M] (2242); Q1-Q17 DR25 KOI Table (370); Stassun et al. 2017 [2017AJ....153..136S] (355)
@@ -74,6 +92,11 @@ Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
 K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%): Transit 4730 / 222 / 58; Radial Velocity 2298 / 165 / 29; Imaging 40 / 5 / 3; Transit Timing Variations 27 / 0 / 0; Microlensing 19 / 6 / 2; Astrometry 7 / 1 / 0; Pulsar Timing 6 / 0 / 0; Orbital Brightness Modulation 4 / 0 / 0; Pulsation Timing Variations 1 / 0 / 0
 
 RHOP, published: rows with ratio 1.055-1.085 (Jupiter mean-radius density convention, factor 1.0694): 277; mirror window: 31; off by > 5% outside that window: 267 of 2247 (11.9%); median pl_dens / (M/R^3 in Jupiter units) in the window: 1.328 g/cm^3 (equatorial-radius Jupiter density 1.240, mean-radius 1.326)
+
+Raw values of rows named in the README:
+- HAT-P-7 b, Yang et al. 2025 [2025ApJ...986..117Y]: pl_orbper 2.2, pl_orbsmax 3, st_mass 1.35
+- Kepler-138 b, Hadden et al. 2014 [2014ApJ...787...80H]: pl_masse 0.5, pl_massj 0.002
+- TOI-2049 b, Guenther et al. 2026 [2026AJ....172...54G]: pl_ratror 1.49, pl_radj 1.485, pl_rade 16.6453, st_rad 3.2
 
 DEPTH, published: rows with ratio within 1% of 0.01 or of 10 (unit candidates): HAT-P-25 b, Wang et al. 2018 [2018PASP..130f4401W] (0.009998); HD 189733 b, Morello et al. 2014 [2014ApJ...786...22M] (0.01); K2-114 b, Ikwut-Ukwa et al. 2020 [2020AJ....160..209I] (0.009996); TOI-5624 c, Bonfanti et al. 2026 [2026A&A...709A.265B] (10)
 
