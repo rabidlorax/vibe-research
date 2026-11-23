@@ -1,7 +1,7 @@
 ---
 title: Trend in statistical reporting inconsistencies in an open-access psychology journal, 2010 to 2026
 domain: metascience
-status: proposed
+status: active
 evidence: conjecture
 novelty: unchecked
 models: [claude-fable-5-2]
