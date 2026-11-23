@@ -10,4 +10,10 @@ decision inconsistencies per year 2010-2025 (primary): min 9, max 363
 median body length in characters by year: 2010: 36420, 2011: 41219, 2012: 40307, 2013: 40970, 2014: 39951, 2015: 39657, 2016: 41006, 2017: 40978, 2018: 42515, 2019: 43532, 2020: 43466, 2021: 43739, 2022: 44120, 2023: 43827, 2024: 42971, 2025: 44413, 2026: 50966
 share of results whose p is printed with exactly three decimals, by year: 2010: 34.7%, 2011: 52.4%, 2012: 55.9%, 2013: 53.7%, 2014: 58.0%, 2015: 61.0%, 2016: 63.1%, 2017: 62.7%, 2018: 66.2%, 2019: 66.7%, 2020: 69.8%, 2021: 70.4%, 2022: 73.8%, 2023: 73.3%, 2024: 73.4%, 2025: 78.0%, 2026: 86.9%
 median extracted results per article with results, by year: 2010: 8, 2011: 11, 2012: 11, 2013: 11, 2014: 10, 2015: 10, 2016: 9, 2017: 9, 2018: 8, 2019: 9, 2020: 8, 2021: 7, 2022: 6, 2023: 7, 2024: 6, 2025: 5, 2026: 4
-z results: 14709, flagged (no allowance) 2435; with Kolmogorov / Shapiro / 'normality' within 150 characters: 63, of which flagged 25
+hand-check: 250 items; by stratum and label: {'flagged': {'correctly_extracted': 0, 'explained_by_stated_correction': 4, 'extraction_error': 0, 'inconsistent_as_printed': 131, 'probably_one_tailed': 5}, 'flagged_decision': {'correctly_extracted': 0, 'explained_by_stated_correction': 1, 'extraction_error': 3, 'inconsistent_as_printed': 48, 'probably_one_tailed': 8}, 'not_flagged': {'correctly_extracted': 50, 'explained_by_stated_correction': 0, 'extraction_error': 0, 'inconsistent_as_printed': 0, 'probably_one_tailed': 0}}
+hand-check: items in the 'flagged' stratum that are decision inconsistencies: 24 of 140; distinct non-empty notes: 13
+hand-check, flagged: 140 items, 131 labelled inconsistent as printed, 23 with a label or note pointing to something other than a wrong number
+hand-check, flagged_decision: 60 items, 48 labelled inconsistent as printed, 24 with a label or note pointing to something other than a wrong number
+share of results with exactly reported p (p = x), by year: 2010: 37.0%, 2011: 43.3%, 2012: 46.8%, 2013: 49.0%, 2014: 52.1%, 2015: 53.6%, 2016: 54.3%, 2017: 53.1%, 2018: 54.9%, 2019: 56.1%, 2020: 55.9%, 2021: 56.2%, 2022: 54.2%, 2023: 55.2%, 2024: 54.6%, 2025: 51.6%, 2026: 53.8%
+rate (no allowance) for p = x: 2010 19.5%, 2025 18.5%, 2026 12.0%
+rate (no allowance) for p < x or p > x: 2010 7.3%, 2025 3.3%, 2026 1.7%

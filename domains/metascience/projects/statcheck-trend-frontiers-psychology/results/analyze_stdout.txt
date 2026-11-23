@@ -41,8 +41,8 @@ article level 2010-2025, any inconsistency, adjusted for log(number of results):
 article level 2010-2025, any decision inconsistency, adjusted for log(number of results): OR/yr 1.0062 [0.9916, 1.0210] p=0.41  (n articles = 16007)
 benchmark 2010-2013, all article types: articles=2156 with results=991 results=14407 mean per-article % inconsistent: 11.29 (primary), 11.80 (one-tailed allowance, p=.000 counted wrong), 12.89 (no allowance, p=.000 counted wrong)
 benchmark 2010-2013, research-article only: articles=1537 with results=974 results=14331 mean per-article % inconsistent: 11.30 (primary), 11.81 (one-tailed allowance, p=.000 counted wrong), 12.92 (no allowance, p=.000 counted wrong)
-benchmark Nuijten 2017 split, received before March 2014: research articles=2078 with results=1320 results=19622 mean per-article % inconsistent: 11.36 (primary), 13.04 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 2.11
-benchmark Nuijten 2017 split, received from March 2014: research articles=1032 with results=616 results=8564 mean per-article % inconsistent: 11.24 (primary), 12.45 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 1.67
+benchmark Nuijten 2017 split, received before March 2014: research articles=2078 with results=1320 results=19622 mean per-article % inconsistent: 11.36 (primary), 11.92 (one-tailed allowance, p=.000 counted wrong), 13.04 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 2.11
+benchmark Nuijten 2017 split, received from March 2014: research articles=1032 with results=616 results=8564 mean per-article % inconsistent: 11.24 (primary), 11.72 (one-tailed allowance, p=.000 counted wrong), 12.45 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 1.67
 half_year  articles  articles_with_results  results  pct_inconsistent  ci_lo  ci_hi  pct_inconsistent_no_allowance  na_ci_lo  na_ci_hi  pct_decision  pct_articles_mentioning_one_tailed_words  pct_articles_one_tailed_or_one_sided_only
    2023H1      2925                    768     8015             11.34   9.38  13.80                          11.65      9.71     13.98          1.65                                     11.73                                       2.32
    2023H2      2049                    530     5831             10.96   9.21  12.93                          11.40      9.72     13.44          1.54                                     15.03                                       3.12
@@ -102,7 +102,13 @@ decision inconsistencies per year 2010-2025 (primary): min 9, max 363
 median body length in characters by year: 2010: 36420, 2011: 41219, 2012: 40307, 2013: 40970, 2014: 39951, 2015: 39657, 2016: 41006, 2017: 40978, 2018: 42515, 2019: 43532, 2020: 43466, 2021: 43739, 2022: 44120, 2023: 43827, 2024: 42971, 2025: 44413, 2026: 50966
 share of results whose p is printed with exactly three decimals, by year: 2010: 34.7%, 2011: 52.4%, 2012: 55.9%, 2013: 53.7%, 2014: 58.0%, 2015: 61.0%, 2016: 63.1%, 2017: 62.7%, 2018: 66.2%, 2019: 66.7%, 2020: 69.8%, 2021: 70.4%, 2022: 73.8%, 2023: 73.3%, 2024: 73.4%, 2025: 78.0%, 2026: 86.9%
 median extracted results per article with results, by year: 2010: 8, 2011: 11, 2012: 11, 2013: 11, 2014: 10, 2015: 10, 2016: 9, 2017: 9, 2018: 8, 2019: 9, 2020: 8, 2021: 7, 2022: 6, 2023: 7, 2024: 6, 2025: 5, 2026: 4
-z results: 14709, flagged (no allowance) 2435; with Kolmogorov / Shapiro / 'normality' within 150 characters: 63, of which flagged 25
+hand-check: 250 items; by stratum and label: {'flagged': {'correctly_extracted': 0, 'explained_by_stated_correction': 4, 'extraction_error': 0, 'inconsistent_as_printed': 131, 'probably_one_tailed': 5}, 'flagged_decision': {'correctly_extracted': 0, 'explained_by_stated_correction': 1, 'extraction_error': 3, 'inconsistent_as_printed': 48, 'probably_one_tailed': 8}, 'not_flagged': {'correctly_extracted': 50, 'explained_by_stated_correction': 0, 'extraction_error': 0, 'inconsistent_as_printed': 0, 'probably_one_tailed': 0}}
+hand-check: items in the 'flagged' stratum that are decision inconsistencies: 24 of 140; distinct non-empty notes: 13
+hand-check, flagged: 140 items, 131 labelled inconsistent as printed, 23 with a label or note pointing to something other than a wrong number
+hand-check, flagged_decision: 60 items, 48 labelled inconsistent as printed, 24 with a label or note pointing to something other than a wrong number
+share of results with exactly reported p (p = x), by year: 2010: 37.0%, 2011: 43.3%, 2012: 46.8%, 2013: 49.0%, 2014: 52.1%, 2015: 53.6%, 2016: 54.3%, 2017: 53.1%, 2018: 54.9%, 2019: 56.1%, 2020: 55.9%, 2021: 56.2%, 2022: 54.2%, 2023: 55.2%, 2024: 54.6%, 2025: 51.6%, 2026: 53.8%
+rate (no allowance) for p = x: 2010 19.5%, 2025 18.5%, 2026 12.0%
+rate (no allowance) for p < x or p > x: 2010 7.3%, 2025 3.3%, 2026 1.7%
 2026 vs 2023-2025, error_1t: 6.82% vs 10.70%, odds ratio 0.611 [0.506, 0.738] p=3.1e-07
 trend 2010-2025, error_1t: OR/yr 1.0020 [0.9927, 1.0113] p=0.67
 2026 vs 2023-2025, error: 7.22% vs 11.18%, odds ratio 0.618 [0.515, 0.743] p=2.8e-07
@@ -191,6 +197,18 @@ received 2025Q1-2026Q1: consistent three-decimal 'p =' results that match the fa
 received Apr-May 2026: consistent three-decimal 'p =' results that match the face-value p exactly: 42.1% of 648
 received Jun 2026 on: consistent three-decimal 'p =' results that match the face-value p exactly: 51.2% of 848
 flagged 'p =' results (18251): 31.2% are within one further unit of the last printed digit; 11.5% would be consistent if p had been truncated, not rounded
+trend 2010-2025, p = x only, error_1t: OR/yr 1.0054 [0.9941, 1.0168] p=0.35
+trend 2010-2025, p = x only, error: OR/yr 1.0025 [0.9914, 1.0137] p=0.66
+trend 2010-2025, p < x or p > x only, error_1t: OR/yr 0.9697 [0.9562, 0.9835] p=1.9e-05
+trend 2010-2025, p < x or p > x only, error: OR/yr 0.9631 [0.9499, 0.9765] p=9e-08
+received Apr-May 2026 vs received 2025Q2-2026Q1, no allowance: 6.27% vs 9.45%, odds ratio 0.641 [0.387, 1.062]
+received Jun 2026 on vs received 2025Q2-2026Q1, no allowance: 2.68% vs 9.45%, odds ratio 0.264 [0.182, 0.383]
+kind = F, received Jun 2026 on vs 2023-2024, no allowance: 2.63% of 1408 vs 9.72% of 10473, odds ratio 0.251 [0.136, 0.463]
+kind = chi2, received Jun 2026 on vs 2023-2024, no allowance: 1.80% of 946 vs 10.19% of 1934, odds ratio 0.161 [0.077, 0.340]
+kind = r, received Jun 2026 on vs 2023-2024, no allowance: 0 flagged of 27 vs 18.40% of 538; odds ratio not estimated
+kind = t, received Jun 2026 on vs 2023-2024, no allowance: 3.44% of 726 vs 14.66% of 4891, odds ratio 0.208 [0.101, 0.426]
+kind = z, received Jun 2026 on vs 2023-2024, no allowance: 3.89% of 360 vs 13.54% of 2061, odds ratio 0.258 [0.127, 0.524]
+received Jun 2026 on: median body length 54162 characters (1369 articles)
 kind  results  pct_inconsistent  pct_decision
    F   115631              9.65          1.13
 chi2    18855              9.30          1.61

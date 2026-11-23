@@ -5,7 +5,8 @@ Reads data/articles.csv.gz and data/results.csv.gz (written by extract.py) and
 writes, in results/: yearly.csv, variants.csv, trend.txt, by_kind.csv, trend.png
 (planned before the full data were seen) and yearly_no_one_tailed_allowance.csv,
 half_years_2023_2026.csv, received_quarters.csv, received_quarters_fast.csv,
-received_months.csv, post_hoc.txt, descriptives.txt (added afterwards).
+received_months.csv, post_hoc.txt, descriptives.txt, handcheck_summary.csv (added
+afterwards; descriptives_from_text.txt is rewritten only when data/raw/ is present).
 
 Usage: python src/analyze.py        (under a minute; seed fixed)
 """
@@ -164,9 +165,10 @@ def main():
              b2a.received_year * 12 + b2a.received_month >= 2014 * 12 + 3)):
         d = b2[sel]
         pe = d.groupby("pmcid").agg(n=("error", "size"), e=("error_1t", "sum"), e3=("error_raw0", "sum"),
-                                    g=("decision_error", "sum"))
+                                    e2=("error_strict0", "sum"), g=("decision_error", "sum"))
         lines.append(f"benchmark Nuijten 2017 split, {name}: research articles={int(sela.sum())} with results={len(pe)} "
                      f"results={len(d)} mean per-article % inconsistent: {100 * (pe.e / pe.n).mean():.2f} (primary), "
+                     f"{100 * (pe.e2 / pe.n).mean():.2f} (one-tailed allowance, p=.000 counted wrong), "
                      f"{100 * (pe.e3 / pe.n).mean():.2f} (no allowance, p=.000 counted wrong); "
                      f"mean per-article % decision, no allowance: {100 * (pe.g / pe.n).mean():.2f}")
     (OUT / "trend.txt").write_text("\n".join(lines) + "\n")
@@ -355,6 +357,45 @@ def main():
     post.append(f"flagged 'p =' results ({len(fl)}): {100 * near.mean():.1f}% are within one further unit of the last "
                 f"printed digit; {100 * trunc.mean():.1f}% would be consistent if p had been truncated, not rounded")
 
+    # ---- Added after a third quality-control review (post hoc) ----
+    # (p) the pooled 2010-2025 trend split by how p is written
+    r25 = res[res.year <= 2025]
+    for form, d in (("p = x", r25[r25.p_cmp == "="]), ("p < x or p > x", r25[r25.p_cmp != "="])):
+        for col in ("error_1t", "error"):
+            orr, lo, hi, pv = clustered_trend(d, col)
+            post.append(f"trend 2010-2025, {form} only, {col}: OR/yr {orr:.4f} [{lo:.4f}, {hi:.4f}] p={pv:.2g}")
+    # (q) where the decline begins: April-May and June-on receipts against 2025Q2-2026Q1
+    rmon_all = mr.received_year * 12 + mr.received_month
+    base = (rmon_all >= 2025 * 12 + 4) & (rmon_all <= 2026 * 12 + 3)
+    for name, sel in (("received Apr-May 2026", (rmon_all >= 2026 * 12 + 4) & (rmon_all <= 2026 * 12 + 5)),
+                      ("received Jun 2026 on", rmon_all >= 2026 * 12 + 6)):
+        d = mr[base | sel]
+        x = sel[d.index].astype(float)
+        g = sm.GLM(d.error, pd.DataFrame({"const": 1.0, "x": x}), family=sm.families.Binomial()).fit(
+            cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
+        b, se = g.params["x"], g.bse["x"]
+        post.append(f"{name} vs received 2025Q2-2026Q1, no allowance: {100 * d[x == 1].error.mean():.2f}% vs "
+                    f"{100 * d[x == 0].error.mean():.2f}%, odds ratio {np.exp(b):.3f} "
+                    f"[{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}]")
+    # (r) by test type: received June 2026 on against received 2023-2024
+    old = (rmon_all >= 2023 * 12 + 1) & (rmon_all <= 2024 * 12 + 12)
+    new = rmon_all >= 2026 * 12 + 6
+    for k, d in mr[old | new].groupby("kind"):
+        x = new[d.index].astype(float)
+        if d[x == 1].error.sum() == 0:
+            post.append(f"kind = {k}, received Jun 2026 on vs 2023-2024, no allowance: 0 flagged of {int(x.sum())} vs "
+                        f"{100 * d[x == 0].error.mean():.2f}% of {int((1 - x).sum())}; odds ratio not estimated")
+            continue
+        g = sm.GLM(d.error, pd.DataFrame({"const": 1.0, "x": x}), family=sm.families.Binomial()).fit(
+            cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
+        b, se = g.params["x"], g.bse["x"]
+        post.append(f"kind = {k}, received Jun 2026 on vs 2023-2024, no allowance: {100 * d[x == 1].error.mean():.2f}% "
+                    f"of {int(x.sum())} vs {100 * d[x == 0].error.mean():.2f}% of {int((1 - x).sum())}, odds ratio "
+                    f"{np.exp(b):.3f} [{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}]")
+    late_a = ar[(arm >= 2026 * 12 + 6)]
+    post.append(f"received Jun 2026 on: median body length {late_a.body_chars.median():.0f} characters "
+                f"({len(late_a)} articles)")
+
     # Descriptive numbers quoted in the README
     desc = [f"article types: {arts.article_type.value_counts().to_dict()}"]
     mism = (arts.year != arts.epub_year).groupby(arts.year).mean()
@@ -385,15 +426,36 @@ def main():
     desc.append("median extracted results per article with results, by year: "
                 + ", ".join(f"{r.year}: {r.median_results_per_article:.0f}" for r in yr.itertuples()))
     ctx = ROOT / "data" / "raw" / "contexts.csv.gz"
-    if ctx.exists():  # needs the downloaded article text
+    if ctx.exists():  # needs the downloaded article text; otherwise the committed file is left as it is
         c = pd.read_csv(ctx)
         z = c[c.kind == "z"]
-        ks = z.context.str.contains("Kolmogorov|Shapiro|normality|Begg|Egger|Mann-Whitney|Wilcoxon", case=False)
         norm = z.context.str.contains("Kolmogorov|Shapiro|normality", case=False)
-        desc.append(f"z results: {len(z)}, flagged (no allowance) {int(z.error.sum())}; with Kolmogorov / Shapiro / "
-                    f"'normality' within 150 characters: {int(norm.sum())}, of which flagged {int(z[norm].error.sum())}")
-    else:
-        desc.append("z-context counts skipped: data/raw/contexts.csv.gz not present")
+        (OUT / "descriptives_from_text.txt").write_text(
+            f"z results: {len(z)}, flagged (no allowance) {int(z.error.sum())}; with Kolmogorov / Shapiro / "
+            f"'normality' within 150 characters: {int(norm.sum())}, of which flagged {int(z[norm].error.sum())}\n")
+    # hand-check tallies from the recorded labels
+    hc = pd.read_csv(OUT / "handcheck.csv", dtype=str, keep_default_na=False)
+    pd.crosstab([hc.stratum, hc.period], hc.label).to_csv(OUT / "handcheck_summary.csv")
+    fl_s = hc[hc.stratum == "flagged"]
+    desc.append(f"hand-check: {len(hc)} items; by stratum and label: "
+                f"{pd.crosstab(hc.stratum, hc.label).to_dict('index')}")
+    desc.append(f"hand-check: items in the 'flagged' stratum that are decision inconsistencies: "
+                f"{int((fl_s.decision_flag == '1').sum())} of {len(fl_s)}; distinct non-empty notes: "
+                f"{hc.note[hc.note != ''].nunique()}")
+    other = (hc.label != "inconsistent_as_printed") | hc.note.str.startswith(
+        ("neighbouring", "the printed value may", "degrees of freedom"))
+    for st in ("flagged", "flagged_decision"):
+        d = hc[hc.stratum == st]
+        desc.append(f"hand-check, {st}: {len(d)} items, {int((d.label == 'inconsistent_as_printed').sum())} labelled "
+                    f"inconsistent as printed, {int(other[d.index].sum())} with a label or note pointing to something "
+                    f"other than a wrong number")
+    ex = (res.p_cmp == "=").groupby(res.year).mean()
+    desc.append("share of results with exactly reported p (p = x), by year: "
+                + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in ex.items()))
+    for form, d in (("p = x", res[res.p_cmp == "="]), ("p < x or p > x", res[res.p_cmp != "="])):
+        byy = d.groupby("year").error.mean()
+        desc.append(f"rate (no allowance) for {form}: 2010 {100 * byy[2010]:.1f}%, 2025 {100 * byy[2025]:.1f}%, "
+                    f"2026 {100 * byy[2026]:.1f}%")
     (OUT / "descriptives.txt").write_text("\n".join(desc) + "\n")
     print("\n".join(desc))
     (OUT / "post_hoc.txt").write_text("\n".join(post) + "\n")
