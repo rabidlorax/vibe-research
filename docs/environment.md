@@ -87,8 +87,27 @@ The environment's setup script installs scipy, sympy, matplotlib, networkx and
 statsmodels; numpy and pandas are already present. Other Python packages can
 be installed from PyPI during a session; pin the versions in the project.
 
-Lean is not installed and this repository holds no Lean code. A project that
-needs a proof states the theorem precisely in its README and marks the claim
-`conjecture` or `proved-informal` until the proof exists in
-[rabidlorax/math](https://github.com/rabidlorax/math). Cloud sessions here
-have read access to that repository, not write access.
+### Lean
+
+This repository holds no Lean code, but a session can build and check the
+proofs in [rabidlorax/math](https://github.com/rabidlorax/math). The setup
+script installs `elan` and puts `lean` and `lake` on the path; the Lean version
+is fetched on first use from that repository's `lean-toolchain` file.
+
+```bash
+git clone https://github.com/rabidlorax/math
+cd math
+lake exe cache get   # prebuilt Mathlib, from cache.mathlib.org
+lake build           # all four libraries; fails on any warning
+```
+
+Tested on 2026-11-23 at math commit `a7744cb`, Lean 4.37.0-rc1: the build
+completed successfully (18,371 jobs) in about two minutes with the cache, on 4
+cores and 15 GB of memory. It uses about 11 GB of disk. Never build Mathlib
+without the cache; it takes hours.
+
+A session can read and build that repository but cannot push to it unless the
+owner attaches it to the session with write access. Without that, write the
+proof on a local branch, confirm `lake build` passes, and hand the patch to
+the owner; the claim here stays `proved-informal` until the proof is on the
+math repository's `main` and can be cited by permalink.
