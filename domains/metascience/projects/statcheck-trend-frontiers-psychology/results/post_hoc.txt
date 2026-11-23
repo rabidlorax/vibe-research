@@ -1,7 +1,7 @@
-2026 vs 2023-2025, error_1t: 6.82% vs 10.70%, odds ratio 0.610 [0.505, 0.737] p=3e-07
-trend 2010-2025, error_1t: OR/yr 1.0020 [0.9928, 1.0114] p=0.67
-2026 vs 2023-2025, error: 7.22% vs 11.19%, odds ratio 0.618 [0.515, 0.743] p=2.7e-07
-trend 2010-2025, error: OR/yr 0.9984 [0.9894, 1.0075] p=0.73
+2026 vs 2023-2025, error_1t: 6.82% vs 10.70%, odds ratio 0.611 [0.506, 0.738] p=3.1e-07
+trend 2010-2025, error_1t: OR/yr 1.0020 [0.9927, 1.0113] p=0.67
+2026 vs 2023-2025, error: 7.22% vs 11.18%, odds ratio 0.618 [0.515, 0.743] p=2.8e-07
+trend 2010-2025, error: OR/yr 0.9983 [0.9893, 1.0074] p=0.72
 2026 vs 2023-2025, decision_error_1t: 0.83% vs 1.47%, odds ratio 0.564 [0.401, 0.793] p=0.00099
 trend 2010-2025, decision_error_1t: OR/yr 1.0258 [1.0096, 1.0422] p=0.0017
 2026 vs 2023-2025, decision_error: 0.89% vs 1.56%, odds ratio 0.568 [0.410, 0.787] p=0.00068
@@ -10,48 +10,79 @@ trend 2010-2025, decision_error: OR/yr 1.0086 [0.9934, 1.0240] p=0.27
 2026 drop by kind = chi2: 2023-2025 9.71% of 3315; 2026 4.59% of 2462
 2026 drop by kind = r: 2023-2025 19.80% of 717; 2026 10.88% of 285
 2026 drop by kind = t: 2023-2025 12.26% of 7788; 2026 9.31% of 2943
-2026 drop by kind = z: 2023-2025 13.13% of 3183; 2026 10.44% of 1447
+2026 drop by kind = z: 2023-2025 13.11% of 3181; 2026 10.44% of 1447
 2026 drop by p_form = p < x or p > x: 2023-2025 3.49% of 14687; 2026 1.56% of 6488
-2026 drop by p_form = p = x: 2023-2025 16.87% of 17181; 2026 11.34% of 7547
+2026 drop by p_form = p = x: 2023-2025 16.87% of 17179; 2026 11.34% of 7547
 2026 vs 2023-2025 odds ratio, kind = F: 0.579 [0.453, 0.740]
 2026 vs 2023-2025 odds ratio, kind = chi2: 0.447 [0.299, 0.670]
 2026 vs 2023-2025 odds ratio, kind = r: 0.494 [0.209, 1.167]
 2026 vs 2023-2025 odds ratio, kind = t: 0.735 [0.493, 1.095]
-2026 vs 2023-2025 odds ratio, kind = z: 0.771 [0.496, 1.197]
+2026 vs 2023-2025 odds ratio, kind = z: 0.772 [0.497, 1.199]
 2026 vs 2023-2025 odds ratio, p_form = p < x or p > x: 0.438 [0.305, 0.628]
 2026 vs 2023-2025 odds ratio, p_form = p = x: 0.630 [0.513, 0.775]
-published Jul-Nov 2026, received before April 2026, no allowance: 9.39% [6.55, 12.56] (201 articles, 1907 results)
-published Jul-Nov 2026, received April-May 2026, no allowance: 6.49% [3.68, 9.77] (311 articles, 2451 results)
-published Jul-Nov 2026, received June 2026 or later, no allowance: 2.68% [1.84, 3.63] (452 articles, 3467 results)
-published 2018-2021, received-to-published 0-3 months, no allowance: 11.16% [10.00, 12.42] (1315 articles, 14374 results)
-published 2018-2021, received-to-published 4-5 months, no allowance: 10.67% [9.90, 11.46] (2334 articles, 26721 results)
-published 2018-2021, received-to-published 6-8 months, no allowance: 11.50% [10.33, 12.77] (1630 articles, 21349 results)
-published 2018-2021, received-to-published 9+ months, no allowance: 11.06% [9.68, 12.66] (671 articles, 8984 results)
-published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [9.96, 12.14] (1546 articles, 15646 results)
-published 2022-2024, received-to-published 4-5 months, no allowance: 10.51% [9.53, 11.53] (1552 articles, 16852 results)
-published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.11, 14.52] (784 articles, 8214 results)
-published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.45, 14.81] (277 articles, 3150 results)
-published 2025H1, AI statement 'none', no allowance: 10.93% [7.96, 14.45] (165 articles, 1363 results)
-published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.59, 17.33] (265 articles, 2349 results)
-published 2025H1, AI statement 'used', no allowance: 14.08% [6.88, 21.51] (31 articles, 355 results)
-published 2025H2, AI statement 'none', no allowance: 18.64% [9.44, 28.62] (34 articles, 279 results)
-published 2025H2, AI statement 'not_used', no allowance: 9.63% [8.02, 11.36] (476 articles, 4549 results)
+published Jul-Nov 2026, received before April 2026, no allowance: 9.39% [6.46, 12.72] (201 articles, 1907 results)
+published Jul-Nov 2026, received April-May 2026, no allowance: 6.49% [3.65, 9.86] (311 articles, 2451 results)
+published Jul-Nov 2026, received June 2026 or later, no allowance: 2.68% [1.87, 3.63] (452 articles, 3467 results)
+published 2018-2021, received-to-published 0-3 months, no allowance: 11.16% [9.89, 12.45] (1315 articles, 14374 results)
+published 2018-2021, received-to-published 4-5 months, no allowance: 10.67% [9.85, 11.53] (2334 articles, 26721 results)
+published 2018-2021, received-to-published 6-8 months, no allowance: 11.50% [10.37, 12.87] (1629 articles, 21345 results)
+published 2018-2021, received-to-published 9+ months, no allowance: 11.06% [9.63, 12.59] (671 articles, 8984 results)
+published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [10.04, 12.16] (1546 articles, 15646 results)
+published 2022-2024, received-to-published 4-5 months, no allowance: 10.48% [9.54, 11.54] (1551 articles, 16847 results)
+published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.13, 14.45] (784 articles, 8214 results)
+published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.46, 14.84] (277 articles, 3150 results)
+published 2025H1, AI statement 'none', no allowance: 10.93% [8.00, 14.06] (165 articles, 1363 results)
+published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.85, 17.17] (265 articles, 2349 results)
+published 2025H1, AI statement 'used', no allowance: 14.08% [6.84, 21.69] (31 articles, 355 results)
+published 2025H2, AI statement 'none', no allowance: 18.64% [8.86, 28.64] (34 articles, 279 results)
+published 2025H2, AI statement 'not_used', no allowance: 9.63% [7.88, 11.41] (476 articles, 4548 results)
 published 2025H2, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2025H2, AI statement 'used', no allowance: 6.76% [3.89, 10.78] (67 articles, 651 results)
+published 2025H2, AI statement 'used', no allowance: 6.76% [3.85, 10.64] (67 articles, 651 results)
 published 2026H1, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 11 results)
-published 2026H1, AI statement 'not_used', no allowance: 8.84% [6.90, 11.03] (696 articles, 5579 results)
+published 2026H1, AI statement 'not_used', no allowance: 8.84% [6.90, 10.94] (696 articles, 5579 results)
 published 2026H1, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2026H1, AI statement 'used', no allowance: 12.93% [8.97, 17.10] (218 articles, 1756 results)
+published 2026H1, AI statement 'used', no allowance: 12.93% [9.02, 17.10] (218 articles, 1756 results)
 published 2026H2, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 3 results)
-published 2026H2, AI statement 'not_used', no allowance: 6.32% [4.54, 8.35] (640 articles, 4924 results)
-published 2026H2, AI statement 'used', no allowance: 4.14% [2.76, 5.68] (322 articles, 2898 results)
-received 2026Q1, AI statement 'not_used', no allowance: 8.57% [5.66, 11.98] (341 articles, 2568 results)
-received 2026Q1, AI statement 'used', no allowance: 11.41% [6.91, 16.53] (135 articles, 1341 results)
+published 2026H2, AI statement 'not_used', no allowance: 6.32% [4.53, 8.27] (640 articles, 4924 results)
+published 2026H2, AI statement 'used', no allowance: 4.14% [2.81, 5.71] (322 articles, 2898 results)
+received 2026Q1, AI statement 'not_used', no allowance: 8.57% [5.55, 11.75] (341 articles, 2568 results)
+received 2026Q1, AI statement 'used', no allowance: 11.41% [6.65, 16.67] (135 articles, 1341 results)
 received 2026Q2, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (1 articles, 2 results)
-received 2026Q2, AI statement 'not_used', no allowance: 5.15% [2.93, 7.96] (380 articles, 2874 results)
-received 2026Q2, AI statement 'used', no allowance: 5.23% [2.92, 8.02] (175 articles, 1395 results)
+received 2026Q2, AI statement 'not_used', no allowance: 5.15% [2.91, 7.94] (380 articles, 2874 results)
+received 2026Q2, AI statement 'used', no allowance: 5.23% [2.97, 7.97] (175 articles, 1395 results)
 received 2026Q3, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (1 articles, 1 results)
-received 2026Q3, AI statement 'not_used', no allowance: 2.18% [0.77, 4.15] (140 articles, 963 results)
-received 2026Q3, AI statement 'used', no allowance: 2.27% [0.93, 3.79] (107 articles, 924 results)
+received 2026Q3, AI statement 'not_used', no allowance: 2.18% [0.81, 4.06] (140 articles, 963 results)
+received 2026Q3, AI statement 'used', no allowance: 2.27% [0.94, 3.77] (107 articles, 924 results)
 received 2026Q4, AI statement 'not_used', no allowance: 0.00% [0.00, 0.00] (1 articles, 2 results)
 received 2026Q4, AI statement 'used', no allowance: 3.03% [0.00, 3.57] (2 articles, 33 results)
+received 2025Q2-2026Q1 vs 2023Q1-2025Q1, error: 9.45% vs 11.70%, odds ratio 0.787 [0.666, 0.931]
+received 2025Q2-2026Q1 vs 2023Q1-2025Q1, error_1t: 8.99% vs 11.16%, odds ratio 0.786 [0.663, 0.932]
+received 2023-2024: articles 7850, first affiliation in China 28.8%; of results, chi-square 9.7%, repeated strings 1.7%; rate excluding repeated strings, no allowance: 11.66%
+received 2023-2024, China, no allowance: 10.20% [8.39, 12.21] (410 articles, 4391 results)
+received 2023-2024, United States, no allowance: 9.27% [7.29, 11.72] (237 articles, 2383 results)
+received 2023-2024, all other countries, no allowance: 12.50% [11.36, 13.71] (1318 articles, 13123 results)
+received 2025Q1-2026Q1: articles 6605, first affiliation in China 47.8%; of results, chi-square 13.2%, repeated strings 3.5%; rate excluding repeated strings, no allowance: 10.09%
+received 2025Q1-2026Q1, China, no allowance: 9.41% [7.52, 11.47] (691 articles, 5695 results)
+received 2025Q1-2026Q1, United States, no allowance: 11.19% [6.76, 16.61] (132 articles, 1635 results)
+received 2025Q1-2026Q1, all other countries, no allowance: 10.18% [8.91, 11.59] (892 articles, 7596 results)
+received Apr-May 2026: articles 1243, first affiliation in China 53.2%; of results, chi-square 14.3%, repeated strings 4.2%; rate excluding repeated strings, no allowance: 6.43%
+received Apr-May 2026, China, no allowance: 3.42% [1.55, 5.43] (181 articles, 1315 results)
+received Apr-May 2026, United States, no allowance: 4.17% [0.92, 10.59] (14 articles, 120 results)
+received Apr-May 2026, all other countries, no allowance: 9.37% [4.59, 14.44] (160 articles, 1292 results)
+received Jun 2026 on: articles 1369, first affiliation in China 58.0%; of results, chi-square 27.3%, repeated strings 6.8%; rate excluding repeated strings, no allowance: 2.85%
+received Jun 2026 on, China, no allowance: 2.78% [1.60, 4.29] (255 articles, 1832 results)
+received Jun 2026 on, United States, no allowance: 6.17% [0.00, 9.48] (12 articles, 81 results)
+received Jun 2026 on, all other countries, no allowance: 2.38% [1.26, 3.63] (185 articles, 1554 results)
+received 2025Q1: of 267 articles with results, 9.7% declare generative AI used, 86.9% not used, 3.4% no or other statement
+received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 82.4% not used, 2.3% no or other statement
+received 2025Q3: of 332 articles with results, 17.8% declare generative AI used, 80.1% not used, 2.1% no or other statement
+received 2025Q4: of 384 articles with results, 19.8% declare generative AI used, 79.7% not used, 0.5% no or other statement
+received 2026Q1: of 476 articles with results, 28.4% declare generative AI used, 71.6% not used, 0.0% no or other statement
+received 2026Q2: of 556 articles with results, 31.5% declare generative AI used, 68.3% not used, 0.2% no or other statement
+received 2026Q3: of 248 articles with results, 43.1% declare generative AI used, 56.5% not used, 0.4% no or other statement
+received 2026Q4: of 3 articles with results, 66.7% declare generative AI used, 33.3% not used, 0.0% no or other statement
+received 2023-2024: consistent three-decimal 'p =' results that match the face-value p exactly: 49.2% of 2839
+received 2025Q1-2026Q1: consistent three-decimal 'p =' results that match the face-value p exactly: 45.8% of 2361
+received Apr-May 2026: consistent three-decimal 'p =' results that match the face-value p exactly: 42.1% of 648
+received Jun 2026 on: consistent three-decimal 'p =' results that match the face-value p exactly: 51.2% of 848
+flagged 'p =' results (18251): 31.2% are within one further unit of the last printed digit; 11.5% would be consistent if p had been truncated, not rounded

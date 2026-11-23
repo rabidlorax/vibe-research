@@ -33,7 +33,7 @@ DROP = {"tex-math", "graphic", "inline-graphic", "media", "object-id"}
 CELL = {"td", "th"}
 
 ART_COLS = ["pmcid", "doi", "year", "epub_year", "epub_month", "received_year", "received_month",
-            "new_date_markup", "article_type", "section", "ai_statement", "has_body", "body_chars",
+            "new_date_markup", "article_type", "section", "ai_statement", "country", "has_body", "body_chars",
             "one_tail_text", "one_tail_strict", "n_results"]
 FLAGS = ["error", "decision_error", "error_1t", "decision_error_1t", "error_1t_strict",
          "decision_error_1t_strict", "half_p_consistent", "p_zero"]
@@ -51,6 +51,20 @@ def ai_statement(article):
     if AI_NOT.search(text):
         return "not_used"
     return "used" if AI_USED.search(text) else "other"
+
+
+COUNTRY = {"usa": "United States", "united states of america": "United States", "u.s.a.": "United States",
+           "us": "United States", "uk": "United Kingdom", "people's republic of china": "China",
+           "pr china": "China", "p.r. china": "China", "turkey": "Türkiye", "the netherlands": "Netherlands"}
+
+
+def first_country(meta):
+    """Country of the first affiliation: the last comma-separated part of its <country> element."""
+    c = meta.find(".//aff//country")
+    if c is None or not "".join(c.itertext()).strip():
+        return ""
+    name = "".join(c.itertext()).split(",")[-1].strip().rstrip(".")
+    return COUNTRY.get(name.lower().replace("\u2019", "'"), name)
 
 
 class HashingGzip:
@@ -141,7 +155,7 @@ def process(path):
             ctxs.append([pmcid, year, r["kind"], r["raw"], r["start"], int(r["error"]), int(r["decision_error"]),
                          int(r["error_1t"]), text[max(0, r["start"] - 150):r["end"] + 150]])
         arts.append([pmcid, ids.get("doi", ""), year, ey, em, ry, rm, new_format,
-                     a.get("article-type", ""), subjects[-1] if subjects else "", ai_statement(a),
+                     a.get("article-type", ""), subjects[-1] if subjects else "", ai_statement(a), first_country(meta),
                      int(body is not None), len(text), int(bool(ONE_TAIL.search(text))),
                      int(bool(ONE_TAIL_STRICT.search(text))), len(found)])
     return arts, ress, ctxs

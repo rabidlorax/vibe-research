@@ -1,74 +1,112 @@
-articles=54015 with_body=54015 results=205847 articles_with_results=17749
+articles=54015 with_body=54015 results=205835 articles_with_results=17746
  year  articles  articles_with_results  results  pct_results_inconsistent  ci_lo  ci_hi  pct_results_decision  dec_ci_lo  dec_ci_hi  pct_articles_any_inconsistent  pct_articles_any_decision
  2010       142                     59      651                     11.37   7.09  16.40                  1.38       0.46       2.46                          52.54                      11.86
  2011       397                    175     2649                     12.53  10.03  15.18                  1.85       1.21       2.57                          59.43                      17.14
  2012       621                    286     4241                     10.00   8.38  11.73                  1.11       0.72       1.55                          46.50                      10.49
  2013       996                    471     6866                      9.34   8.06  10.72                  1.02       0.72       1.35                          49.04                      11.04
  2014      1607                    740    10735                     11.31  10.01  12.74                  1.47       1.13       1.83                          50.41                      14.32
- 2015      2045                   1011    14326                     10.32   9.21  11.51                  1.17       0.93       1.39                          46.88                      11.28
- 2016      2074                    964    12816                     10.18   9.08  11.28                  1.04       0.84       1.25                          46.27                      10.68
- 2017      2366                   1083    14455                     11.33   9.77  13.12                  1.30       0.98       1.69                          44.97                      10.43
- 2018      2783                   1286    16318                      9.96   9.09  10.90                  1.08       0.87       1.30                          44.32                       9.95
- 2019      3075                   1278    16726                     10.09   9.15  11.09                  1.20       0.99       1.42                          44.05                      10.95
- 2020      4088                   1452    16919                     10.78   9.71  11.91                  1.71       1.34       2.14                          42.29                      11.64
- 2021      6675                   2061    22715                     10.72   9.56  12.02                  1.60       1.28       1.93                          36.49                       9.36
- 2022      8500                   1941    20527                     10.87   9.72  12.15                  1.64       1.36       1.94                          40.24                      10.20
- 2023      4634                   1235    13087                     10.77   9.66  11.93                  1.53       1.25       1.82                          40.49                      11.01
- 2024      3477                    857     8866                     10.75   9.45  12.10                  1.50       1.14       1.93                          39.91                       9.80
- 2025      4525                   1111     9915                     10.57   9.15  11.98                  1.36       1.07       1.69                          32.85                       8.46
- 2026      6010                   1739    14035                      6.82   5.73   7.90                  0.83       0.59       1.12                          19.26                       3.62
-primary (one-tailed forgiven when article mentions it)               inconsistent n= 205847  2010-13 10.21%  2023-26  9.52%  OR/yr 0.9896 [0.9814, 0.9978]  p=0.013
-primary (one-tailed forgiven when article mentions it)               decision     n= 205847  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
-no one-tailed allowance                                              inconsistent n= 205847  2010-13 11.04%  2023-26  9.98%  OR/yr 0.9867 [0.9787, 0.9947]  p=0.0011
-no one-tailed allowance                                              decision     n= 205847  2010-13  1.57%  2023-26  1.35%  OR/yr 0.9937 [0.9806, 1.0070]  p=0.35
-p = .000 counted as inconsistent                                     inconsistent n= 205847  2010-13 10.54%  2023-26 10.54%  OR/yr 0.9959 [0.9880, 1.0039]  p=0.32
-p = .000 counted as inconsistent                                     decision     n= 205847  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
-exactly reported p only (p = ...)                                    inconsistent n= 111063  2010-13 16.31%  2023-26 15.19%  OR/yr 0.9937 [0.9839, 1.0036]  p=0.21
-exactly reported p only (p = ...)                                    decision     n= 111063  2010-13  1.72%  2023-26  1.74%  OR/yr 1.0159 [0.9990, 1.0330]  p=0.065
-inequality p only (p < or >)                                         inconsistent n=  94784  2010-13  4.85%  2023-26  2.89%  OR/yr 0.9553 [0.9434, 0.9674]  p=9.6e-13
-inequality p only (p < or >)                                         decision     n=  94784  2010-13  0.77%  2023-26  0.73%  OR/yr 0.9887 [0.9662, 1.0117]  p=0.33
-article-type research-article only                                   inconsistent n= 197635  2010-13 10.19%  2023-26  9.25%  OR/yr 0.9876 [0.9792, 0.9960]  p=0.0039
-article-type research-article only                                   decision     n= 197635  2010-13  1.20%  2023-26  1.22%  OR/yr 1.0047 [0.9906, 1.0190]  p=0.52
+ 2015      2045                   1010    14324                     10.30   9.21  11.47                  1.17       0.96       1.40                          46.83                      11.29
+ 2016      2074                    964    12816                     10.18   9.11  11.31                  1.04       0.84       1.26                          46.27                      10.68
+ 2017      2366                   1083    14455                     11.33   9.76  13.18                  1.30       0.99       1.65                          44.97                      10.43
+ 2018      2783                   1286    16318                      9.96   9.09  10.89                  1.08       0.88       1.29                          44.32                       9.95
+ 2019      3075                   1278    16726                     10.09   9.15  11.05                  1.20       0.99       1.41                          44.05                      10.95
+ 2020      4088                   1451    16915                     10.77   9.69  11.97                  1.71       1.33       2.20                          42.25                      11.65
+ 2021      6675                   2061    22715                     10.72   9.56  11.95                  1.60       1.29       1.93                          36.49                       9.36
+ 2022      8500                   1940    20523                     10.85   9.79  12.13                  1.64       1.35       1.93                          40.21                      10.21
+ 2023      4634                   1235    13086                     10.77   9.67  11.89                  1.53       1.26       1.83                          40.49                      11.01
+ 2024      3477                    857     8866                     10.75   9.49  12.08                  1.50       1.14       1.92                          39.91                       9.80
+ 2025      4525                   1111     9914                     10.57   9.19  12.01                  1.36       1.08       1.69                          32.85                       8.46
+ 2026      6010                   1739    14035                      6.82   5.76   7.89                  0.83       0.60       1.12                          19.26                       3.62
+primary (one-tailed forgiven when article mentions it)               inconsistent n= 205835  2010-13 10.21%  2023-26  9.51%  OR/yr 0.9895 [0.9814, 0.9977]  p=0.012
+primary (one-tailed forgiven when article mentions it)               decision     n= 205835  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
+no one-tailed allowance                                              inconsistent n= 205835  2010-13 11.04%  2023-26  9.97%  OR/yr 0.9866 [0.9787, 0.9946]  p=0.0011
+no one-tailed allowance                                              decision     n= 205835  2010-13  1.57%  2023-26  1.35%  OR/yr 0.9937 [0.9806, 1.0070]  p=0.35
+p = .000 counted as inconsistent                                     inconsistent n= 205835  2010-13 10.54%  2023-26 10.54%  OR/yr 0.9959 [0.9880, 1.0039]  p=0.32
+p = .000 counted as inconsistent                                     decision     n= 205835  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
+exactly reported p only (p = ...)                                    inconsistent n= 111052  2010-13 16.31%  2023-26 15.18%  OR/yr 0.9937 [0.9839, 1.0036]  p=0.21
+exactly reported p only (p = ...)                                    decision     n= 111052  2010-13  1.72%  2023-26  1.74%  OR/yr 1.0159 [0.9990, 1.0330]  p=0.065
+inequality p only (p < or >)                                         inconsistent n=  94783  2010-13  4.85%  2023-26  2.89%  OR/yr 0.9553 [0.9434, 0.9674]  p=9.6e-13
+inequality p only (p < or >)                                         decision     n=  94783  2010-13  0.77%  2023-26  0.73%  OR/yr 0.9887 [0.9662, 1.0117]  p=0.33
+article-type research-article only                                   inconsistent n= 197627  2010-13 10.19%  2023-26  9.24%  OR/yr 0.9876 [0.9792, 0.9960]  p=0.0039
+article-type research-article only                                   decision     n= 197627  2010-13  1.20%  2023-26  1.22%  OR/yr 1.0047 [0.9906, 1.0190]  p=0.52
 t and F tests only                                                   inconsistent n= 167209  2010-13  9.97%  2023-26  9.25%  OR/yr 0.9879 [0.9789, 0.9970]  p=0.0092
 t and F tests only                                                   decision     n= 167209  2010-13  1.15%  2023-26  1.14%  OR/yr 0.9970 [0.9811, 1.0131]  p=0.71
-one-tailed allowance without the word 'directional' (added post hoc) inconsistent n= 205847  2010-13 10.31%  2023-26  9.66%  OR/yr 0.9899 [0.9818, 0.9981]  p=0.015
-one-tailed allowance without the word 'directional' (added post hoc) decision     n= 205847  2010-13  1.27%  2023-26  1.29%  OR/yr 1.0062 [0.9925, 1.0201]  p=0.38
-excluding 2026 (incomplete year)                                     inconsistent n= 191812  2010-13 10.21%  2023-26 10.70%  OR/yr 1.0020 [0.9928, 1.0114]  p=0.67
-excluding 2026 (incomplete year)                                     decision     n= 191812  2010-13  1.21%  2023-26  1.47%  OR/yr 1.0258 [1.0096, 1.0422]  p=0.0017
-article level 2010-2026, any inconsistency, adjusted for log(number of results): OR/yr 0.9607 [0.9524, 0.9690] p=8.9e-20  (n articles = 17749)
-article level 2010-2026, any decision inconsistency, adjusted for log(number of results): OR/yr 0.9844 [0.9716, 0.9974] p=0.019  (n articles = 17749)
-article level 2010-2025, any inconsistency, adjusted for log(number of results): OR/yr 0.9860 [0.9764, 0.9958] p=0.0049  (n articles = 16010)
-article level 2010-2025, any decision inconsistency, adjusted for log(number of results): OR/yr 1.0062 [0.9916, 1.0210] p=0.41  (n articles = 16010)
+one-tailed allowance without the word 'directional' (added post hoc) inconsistent n= 205835  2010-13 10.31%  2023-26  9.66%  OR/yr 0.9899 [0.9818, 0.9980]  p=0.015
+one-tailed allowance without the word 'directional' (added post hoc) decision     n= 205835  2010-13  1.27%  2023-26  1.29%  OR/yr 1.0062 [0.9925, 1.0201]  p=0.38
+excluding 2026 (incomplete year)                                     inconsistent n= 191800  2010-13 10.21%  2023-26 10.70%  OR/yr 1.0020 [0.9927, 1.0113]  p=0.67
+excluding 2026 (incomplete year)                                     decision     n= 191800  2010-13  1.21%  2023-26  1.47%  OR/yr 1.0258 [1.0096, 1.0422]  p=0.0017
+article level 2010-2026, any inconsistency, adjusted for log(number of results): OR/yr 0.9607 [0.9525, 0.9691] p=1.1e-19  (n articles = 17746)
+article level 2010-2026, any decision inconsistency, adjusted for log(number of results): OR/yr 0.9844 [0.9716, 0.9974] p=0.019  (n articles = 17746)
+article level 2010-2025, any inconsistency, adjusted for log(number of results): OR/yr 0.9861 [0.9765, 0.9958] p=0.0052  (n articles = 16007)
+article level 2010-2025, any decision inconsistency, adjusted for log(number of results): OR/yr 1.0062 [0.9916, 1.0210] p=0.41  (n articles = 16007)
 benchmark 2010-2013, all article types: articles=2156 with results=991 results=14407 mean per-article % inconsistent: 11.29 (primary), 11.80 (one-tailed allowance, p=.000 counted wrong), 12.89 (no allowance, p=.000 counted wrong)
 benchmark 2010-2013, research-article only: articles=1537 with results=974 results=14331 mean per-article % inconsistent: 11.30 (primary), 11.81 (one-tailed allowance, p=.000 counted wrong), 12.92 (no allowance, p=.000 counted wrong)
 benchmark Nuijten 2017 split, received before March 2014: research articles=2078 with results=1320 results=19622 mean per-article % inconsistent: 11.36 (primary), 13.04 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 2.11
 benchmark Nuijten 2017 split, received from March 2014: research articles=1032 with results=616 results=8564 mean per-article % inconsistent: 11.24 (primary), 12.45 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 1.67
 half_year  articles  articles_with_results  results  pct_inconsistent  ci_lo  ci_hi  pct_inconsistent_no_allowance  na_ci_lo  na_ci_hi  pct_decision  pct_articles_mentioning_one_tailed_words  pct_articles_one_tailed_or_one_sided_only
-   2023H1      2925                    768     8016             11.35   9.40  13.82                          11.66      9.72     14.01          1.65                                     11.73                                       2.32
+   2023H1      2925                    768     8015             11.34   9.38  13.80                          11.65      9.71     13.98          1.65                                     11.73                                       2.32
    2023H2      2049                    530     5831             10.96   9.21  12.93                          11.40      9.72     13.44          1.54                                     15.03                                       3.12
    2024H1      1923                    505     5287             10.25   8.60  11.92                          10.93      9.32     12.65          1.76                                     13.16                                       2.55
    2024H2      1620                    383     3933             11.01   9.02  13.19                          11.29      9.31     13.36          1.32                                     14.51                                       2.96
    2025H1      1899                    461     4067             12.29  10.20  14.72                          12.84     10.65     15.18          1.87                                     17.17                                       1.95
-   2025H2      2368                    578     5483              9.19   7.65  10.80                           9.74      8.19     11.38          1.06                                     21.71                                       1.86
+   2025H2      2368                    578     5482              9.19   7.65  10.81                           9.74      8.19     11.38          1.06                                     21.71                                       1.86
    2026H1      3509                    917     7350              9.14   7.41  11.19                           9.80      7.98     11.79          0.88                                     30.52                                       2.22
    2026H2      3042                    964     7825              5.30   4.06   6.65                           5.51      4.33      6.99          0.79                                     35.93                                       2.89
 received_quarter  articles_published_so_far  articles_with_results  results  pct_inconsistent  ci_lo  ci_hi  pct_inconsistent_no_allowance  na_ci_lo  na_ci_hi  pct_decision_no_allowance  pct_articles_any_inconsistent_no_allowance
-          2024Q1                        918                    223     1972             11.51   9.10  14.24                          12.93     10.02     15.92                       1.77                                       42.15
-          2024Q2                        944                    219     2096             10.31   7.89  13.07                          10.78      8.19     13.56                       1.77                                       38.81
-          2024Q3                        821                    197     1961             11.78   8.87  15.04                          12.24      9.31     15.35                       1.38                                       36.55
-          2024Q4                        915                    222     2177             11.85   8.76  15.51                          12.49      9.13     16.09                       1.47                                       37.84
-          2025Q1                        963                    267     2888             12.02   8.84  15.72                          12.29      9.31     15.79                       1.52                                       37.83
-          2025Q2                       1045                    256     2259              9.83   7.67  12.00                          10.31      8.03     12.64                       1.46                                       33.98
-          2025Q3                       1328                    332     2462              8.61   6.32  10.96                           9.30      7.10     11.79                       1.06                                       25.90
-          2025Q4                       1506                    384     3409              8.59   6.90  10.40                           8.86      7.09     10.92                       0.73                                       31.77
-          2026Q1                       1763                    476     3909              9.08   6.62  11.70                           9.54      6.96     12.43                       1.59                                       22.48
-          2026Q2                       1822                    556     4271              4.92   3.17   6.94                           5.17      3.43      7.30                       0.61                                       13.85
-          2026Q3                        764                    248     1888              1.69   0.91   2.61                           2.22      1.17      3.42                       0.26                                        8.06
+          2023Q1                       1259                    346     3731             11.18   9.29  13.26                          11.87      9.96     13.86                       1.31                                       46.53
+          2023Q2                        943                    261     2680             10.82   8.65  13.29                          10.86      8.64     13.22                       1.87                                       41.00
+          2023Q3                       1075                    266     2710             12.03   9.67  14.72                          12.55      9.93     15.13                       2.07                                       44.74
+          2023Q4                        975                    231     2570              8.99   6.85  11.24                           9.46      7.30     11.79                       1.63                                       36.80
+          2024Q1                        918                    223     1972             11.51   8.98  14.14                          12.93     10.19     16.01                       1.77                                       42.15
+          2024Q2                        944                    219     2096             10.31   7.80  12.94                          10.78      8.33     13.51                       1.77                                       38.81
+          2024Q3                        821                    197     1961             11.78   8.89  14.96                          12.24      9.28     15.35                       1.38                                       36.55
+          2024Q4                        915                    222     2177             11.85   8.80  15.36                          12.49      9.24     16.39                       1.47                                       37.84
+          2025Q1                        963                    267     2888             12.02   8.86  15.39                          12.29      9.13     15.87                       1.52                                       37.83
+          2025Q2                       1045                    256     2258              9.83   7.73  11.97                          10.32      8.07     12.68                       1.46                                       33.98
+          2025Q3                       1328                    332     2462              8.61   6.46  11.03                           9.30      7.13     11.78                       1.06                                       25.90
+          2025Q4                       1506                    384     3409              8.59   6.86  10.48                           8.86      7.15     10.72                       0.73                                       31.77
+          2026Q1                       1763                    476     3909              9.08   6.47  11.80                           9.54      7.00     12.33                       1.59                                       22.48
+          2026Q2                       1822                    556     4271              4.92   3.18   6.99                           5.17      3.46      7.26                       0.61                                       13.85
+          2026Q3                        764                    248     1888              1.69   0.90   2.61                           2.22      1.18      3.38                       0.26                                        8.06
           2026Q4                         26                      3       35              2.86   0.00   3.57                           2.86      0.00      3.57                       0.00                                       33.33
-2026 vs 2023-2025, error_1t: 6.82% vs 10.70%, odds ratio 0.610 [0.505, 0.737] p=3e-07
-trend 2010-2025, error_1t: OR/yr 1.0020 [0.9928, 1.0114] p=0.67
-2026 vs 2023-2025, error: 7.22% vs 11.19%, odds ratio 0.618 [0.515, 0.743] p=2.7e-07
-trend 2010-2025, error: OR/yr 0.9984 [0.9894, 1.0075] p=0.73
+received_quarter  articles_with_results  results  pct_inconsistent_no_allowance  ci_lo  ci_hi
+          2022Q1                    203     2112                          11.13   8.48  13.96
+          2022Q2                    207     1971                          14.41  10.79  18.59
+          2022Q3                    238     2646                           9.26   7.15  11.76
+          2022Q4                    205     2044                           9.00   6.88  11.52
+          2023Q1                    116     1126                          14.21  10.50  18.32
+          2023Q2                     83      800                          13.63   8.82  19.55
+          2023Q3                     83      691                          11.14   7.63  15.38
+          2023Q4                     74      778                           6.81   4.06   9.78
+          2024Q1                     70      669                          12.26   6.99  17.89
+          2024Q2                     59      479                           9.39   6.03  13.05
+          2024Q3                     53      815                          12.02   6.79  17.88
+          2024Q4                     55      519                          14.84   8.87  22.20
+          2025Q1                     80      701                          13.98   8.98  19.67
+          2025Q2                     80      576                           8.16   4.78  12.52
+          2025Q3                    116      932                           6.33   3.55   9.63
+          2025Q4                    167     1442                           9.50   6.66  12.80
+          2026Q1                    256     1792                          10.66   6.40  15.60
+          2026Q2                    344     2595                           4.28   2.91   5.84
+          2026Q3                    231     1766                           2.38   1.28   3.67
+          2026Q4                      3       35                           2.86   0.00   3.57
+article types: {'research-article': 41222, 'review-article': 3622, 'brief-report': 2383, 'editorial': 2061, 'systematic-review': 1500, 'discussion': 871, 'correction': 862, 'article-commentary': 548, 'methods-article': 476, 'book-review': 189, 'retraction': 96, 'case-report': 81, 'data-paper': 81, 'other': 18, 'addendum': 2, 'expression-of-concern': 2, 'product-review': 1}
+share of articles whose PUB_YEAR differs from the electronic publication year, by PUB_YEAR: 2010: 8.5%, 2011: 3.5%, 2012: 7.4%, 2013: 0.9%, 2014: 7.0%, 2015: 6.5%, 2016: 3.8%, 2017: 5.6%, 2018: 6.7%, 2019: 7.9%, 2020: 11.9%, 2021: 10.8%, 2022: 8.1%, 2023: 7.5%, 2024: 8.1%, 2025: 12.0%, 2026: 0.0%
+articles with electronic publication year 2026: 6551; of these with PUB_YEAR 2025: 541; published November 2026: 165
+articles published 2026 with a generative-AI statement of either kind: 97.0%
+articles without a received date: 2; without a first-affiliation country: 105
+share of articles with no extracted result: overall 67.1%; by year: 2010: 58.5%, 2011: 55.9%, 2012: 53.9%, 2013: 52.7%, 2014: 54.0%, 2015: 50.6%, 2016: 53.5%, 2017: 54.2%, 2018: 53.8%, 2019: 58.4%, 2020: 64.5%, 2021: 69.1%, 2022: 77.2%, 2023: 73.3%, 2024: 75.4%, 2025: 75.4%, 2026: 71.1%
+F results with df1 > df2: 270, flagged (no allowance) 74.1%
+t results with df < 3: 86, flagged (no allowance) 80.2%
+decision inconsistencies per year 2010-2025 (primary): min 9, max 363
+median body length in characters by year: 2010: 36420, 2011: 41219, 2012: 40307, 2013: 40970, 2014: 39951, 2015: 39657, 2016: 41006, 2017: 40978, 2018: 42515, 2019: 43532, 2020: 43466, 2021: 43739, 2022: 44120, 2023: 43827, 2024: 42971, 2025: 44413, 2026: 50966
+share of results whose p is printed with exactly three decimals, by year: 2010: 34.7%, 2011: 52.4%, 2012: 55.9%, 2013: 53.7%, 2014: 58.0%, 2015: 61.0%, 2016: 63.1%, 2017: 62.7%, 2018: 66.2%, 2019: 66.7%, 2020: 69.8%, 2021: 70.4%, 2022: 73.8%, 2023: 73.3%, 2024: 73.4%, 2025: 78.0%, 2026: 86.9%
+median extracted results per article with results, by year: 2010: 8, 2011: 11, 2012: 11, 2013: 11, 2014: 10, 2015: 10, 2016: 9, 2017: 9, 2018: 8, 2019: 9, 2020: 8, 2021: 7, 2022: 6, 2023: 7, 2024: 6, 2025: 5, 2026: 4
+z results: 14709, flagged (no allowance) 2435; with Kolmogorov / Shapiro / 'normality' within 150 characters: 63, of which flagged 25
+2026 vs 2023-2025, error_1t: 6.82% vs 10.70%, odds ratio 0.611 [0.506, 0.738] p=3.1e-07
+trend 2010-2025, error_1t: OR/yr 1.0020 [0.9927, 1.0113] p=0.67
+2026 vs 2023-2025, error: 7.22% vs 11.18%, odds ratio 0.618 [0.515, 0.743] p=2.8e-07
+trend 2010-2025, error: OR/yr 0.9983 [0.9893, 1.0074] p=0.72
 2026 vs 2023-2025, decision_error_1t: 0.83% vs 1.47%, odds ratio 0.564 [0.401, 0.793] p=0.00099
 trend 2010-2025, decision_error_1t: OR/yr 1.0258 [1.0096, 1.0422] p=0.0017
 2026 vs 2023-2025, decision_error: 0.89% vs 1.56%, odds ratio 0.568 [0.410, 0.787] p=0.00068
@@ -77,54 +115,85 @@ trend 2010-2025, decision_error: OR/yr 1.0086 [0.9934, 1.0240] p=0.27
 2026 drop by kind = chi2: 2023-2025 9.71% of 3315; 2026 4.59% of 2462
 2026 drop by kind = r: 2023-2025 19.80% of 717; 2026 10.88% of 285
 2026 drop by kind = t: 2023-2025 12.26% of 7788; 2026 9.31% of 2943
-2026 drop by kind = z: 2023-2025 13.13% of 3183; 2026 10.44% of 1447
+2026 drop by kind = z: 2023-2025 13.11% of 3181; 2026 10.44% of 1447
 2026 drop by p_form = p < x or p > x: 2023-2025 3.49% of 14687; 2026 1.56% of 6488
-2026 drop by p_form = p = x: 2023-2025 16.87% of 17181; 2026 11.34% of 7547
+2026 drop by p_form = p = x: 2023-2025 16.87% of 17179; 2026 11.34% of 7547
 2026 vs 2023-2025 odds ratio, kind = F: 0.579 [0.453, 0.740]
 2026 vs 2023-2025 odds ratio, kind = chi2: 0.447 [0.299, 0.670]
 2026 vs 2023-2025 odds ratio, kind = r: 0.494 [0.209, 1.167]
 2026 vs 2023-2025 odds ratio, kind = t: 0.735 [0.493, 1.095]
-2026 vs 2023-2025 odds ratio, kind = z: 0.771 [0.496, 1.197]
+2026 vs 2023-2025 odds ratio, kind = z: 0.772 [0.497, 1.199]
 2026 vs 2023-2025 odds ratio, p_form = p < x or p > x: 0.438 [0.305, 0.628]
 2026 vs 2023-2025 odds ratio, p_form = p = x: 0.630 [0.513, 0.775]
-published Jul-Nov 2026, received before April 2026, no allowance: 9.39% [6.55, 12.56] (201 articles, 1907 results)
-published Jul-Nov 2026, received April-May 2026, no allowance: 6.49% [3.68, 9.77] (311 articles, 2451 results)
-published Jul-Nov 2026, received June 2026 or later, no allowance: 2.68% [1.84, 3.63] (452 articles, 3467 results)
-published 2018-2021, received-to-published 0-3 months, no allowance: 11.16% [10.00, 12.42] (1315 articles, 14374 results)
-published 2018-2021, received-to-published 4-5 months, no allowance: 10.67% [9.90, 11.46] (2334 articles, 26721 results)
-published 2018-2021, received-to-published 6-8 months, no allowance: 11.50% [10.33, 12.77] (1630 articles, 21349 results)
-published 2018-2021, received-to-published 9+ months, no allowance: 11.06% [9.68, 12.66] (671 articles, 8984 results)
-published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [9.96, 12.14] (1546 articles, 15646 results)
-published 2022-2024, received-to-published 4-5 months, no allowance: 10.51% [9.53, 11.53] (1552 articles, 16852 results)
-published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.11, 14.52] (784 articles, 8214 results)
-published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.45, 14.81] (277 articles, 3150 results)
-published 2025H1, AI statement 'none', no allowance: 10.93% [7.96, 14.45] (165 articles, 1363 results)
-published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.59, 17.33] (265 articles, 2349 results)
-published 2025H1, AI statement 'used', no allowance: 14.08% [6.88, 21.51] (31 articles, 355 results)
-published 2025H2, AI statement 'none', no allowance: 18.64% [9.44, 28.62] (34 articles, 279 results)
-published 2025H2, AI statement 'not_used', no allowance: 9.63% [8.02, 11.36] (476 articles, 4549 results)
+published Jul-Nov 2026, received before April 2026, no allowance: 9.39% [6.46, 12.72] (201 articles, 1907 results)
+published Jul-Nov 2026, received April-May 2026, no allowance: 6.49% [3.65, 9.86] (311 articles, 2451 results)
+published Jul-Nov 2026, received June 2026 or later, no allowance: 2.68% [1.87, 3.63] (452 articles, 3467 results)
+published 2018-2021, received-to-published 0-3 months, no allowance: 11.16% [9.89, 12.45] (1315 articles, 14374 results)
+published 2018-2021, received-to-published 4-5 months, no allowance: 10.67% [9.85, 11.53] (2334 articles, 26721 results)
+published 2018-2021, received-to-published 6-8 months, no allowance: 11.50% [10.37, 12.87] (1629 articles, 21345 results)
+published 2018-2021, received-to-published 9+ months, no allowance: 11.06% [9.63, 12.59] (671 articles, 8984 results)
+published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [10.04, 12.16] (1546 articles, 15646 results)
+published 2022-2024, received-to-published 4-5 months, no allowance: 10.48% [9.54, 11.54] (1551 articles, 16847 results)
+published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.13, 14.45] (784 articles, 8214 results)
+published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.46, 14.84] (277 articles, 3150 results)
+published 2025H1, AI statement 'none', no allowance: 10.93% [8.00, 14.06] (165 articles, 1363 results)
+published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.85, 17.17] (265 articles, 2349 results)
+published 2025H1, AI statement 'used', no allowance: 14.08% [6.84, 21.69] (31 articles, 355 results)
+published 2025H2, AI statement 'none', no allowance: 18.64% [8.86, 28.64] (34 articles, 279 results)
+published 2025H2, AI statement 'not_used', no allowance: 9.63% [7.88, 11.41] (476 articles, 4548 results)
 published 2025H2, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2025H2, AI statement 'used', no allowance: 6.76% [3.89, 10.78] (67 articles, 651 results)
+published 2025H2, AI statement 'used', no allowance: 6.76% [3.85, 10.64] (67 articles, 651 results)
 published 2026H1, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 11 results)
-published 2026H1, AI statement 'not_used', no allowance: 8.84% [6.90, 11.03] (696 articles, 5579 results)
+published 2026H1, AI statement 'not_used', no allowance: 8.84% [6.90, 10.94] (696 articles, 5579 results)
 published 2026H1, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2026H1, AI statement 'used', no allowance: 12.93% [8.97, 17.10] (218 articles, 1756 results)
+published 2026H1, AI statement 'used', no allowance: 12.93% [9.02, 17.10] (218 articles, 1756 results)
 published 2026H2, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 3 results)
-published 2026H2, AI statement 'not_used', no allowance: 6.32% [4.54, 8.35] (640 articles, 4924 results)
-published 2026H2, AI statement 'used', no allowance: 4.14% [2.76, 5.68] (322 articles, 2898 results)
-received 2026Q1, AI statement 'not_used', no allowance: 8.57% [5.66, 11.98] (341 articles, 2568 results)
-received 2026Q1, AI statement 'used', no allowance: 11.41% [6.91, 16.53] (135 articles, 1341 results)
+published 2026H2, AI statement 'not_used', no allowance: 6.32% [4.53, 8.27] (640 articles, 4924 results)
+published 2026H2, AI statement 'used', no allowance: 4.14% [2.81, 5.71] (322 articles, 2898 results)
+received 2026Q1, AI statement 'not_used', no allowance: 8.57% [5.55, 11.75] (341 articles, 2568 results)
+received 2026Q1, AI statement 'used', no allowance: 11.41% [6.65, 16.67] (135 articles, 1341 results)
 received 2026Q2, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (1 articles, 2 results)
-received 2026Q2, AI statement 'not_used', no allowance: 5.15% [2.93, 7.96] (380 articles, 2874 results)
-received 2026Q2, AI statement 'used', no allowance: 5.23% [2.92, 8.02] (175 articles, 1395 results)
+received 2026Q2, AI statement 'not_used', no allowance: 5.15% [2.91, 7.94] (380 articles, 2874 results)
+received 2026Q2, AI statement 'used', no allowance: 5.23% [2.97, 7.97] (175 articles, 1395 results)
 received 2026Q3, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (1 articles, 1 results)
-received 2026Q3, AI statement 'not_used', no allowance: 2.18% [0.77, 4.15] (140 articles, 963 results)
-received 2026Q3, AI statement 'used', no allowance: 2.27% [0.93, 3.79] (107 articles, 924 results)
+received 2026Q3, AI statement 'not_used', no allowance: 2.18% [0.81, 4.06] (140 articles, 963 results)
+received 2026Q3, AI statement 'used', no allowance: 2.27% [0.94, 3.77] (107 articles, 924 results)
 received 2026Q4, AI statement 'not_used', no allowance: 0.00% [0.00, 0.00] (1 articles, 2 results)
 received 2026Q4, AI statement 'used', no allowance: 3.03% [0.00, 3.57] (2 articles, 33 results)
+received 2025Q2-2026Q1 vs 2023Q1-2025Q1, error: 9.45% vs 11.70%, odds ratio 0.787 [0.666, 0.931]
+received 2025Q2-2026Q1 vs 2023Q1-2025Q1, error_1t: 8.99% vs 11.16%, odds ratio 0.786 [0.663, 0.932]
+received 2023-2024: articles 7850, first affiliation in China 28.8%; of results, chi-square 9.7%, repeated strings 1.7%; rate excluding repeated strings, no allowance: 11.66%
+received 2023-2024, China, no allowance: 10.20% [8.39, 12.21] (410 articles, 4391 results)
+received 2023-2024, United States, no allowance: 9.27% [7.29, 11.72] (237 articles, 2383 results)
+received 2023-2024, all other countries, no allowance: 12.50% [11.36, 13.71] (1318 articles, 13123 results)
+received 2025Q1-2026Q1: articles 6605, first affiliation in China 47.8%; of results, chi-square 13.2%, repeated strings 3.5%; rate excluding repeated strings, no allowance: 10.09%
+received 2025Q1-2026Q1, China, no allowance: 9.41% [7.52, 11.47] (691 articles, 5695 results)
+received 2025Q1-2026Q1, United States, no allowance: 11.19% [6.76, 16.61] (132 articles, 1635 results)
+received 2025Q1-2026Q1, all other countries, no allowance: 10.18% [8.91, 11.59] (892 articles, 7596 results)
+received Apr-May 2026: articles 1243, first affiliation in China 53.2%; of results, chi-square 14.3%, repeated strings 4.2%; rate excluding repeated strings, no allowance: 6.43%
+received Apr-May 2026, China, no allowance: 3.42% [1.55, 5.43] (181 articles, 1315 results)
+received Apr-May 2026, United States, no allowance: 4.17% [0.92, 10.59] (14 articles, 120 results)
+received Apr-May 2026, all other countries, no allowance: 9.37% [4.59, 14.44] (160 articles, 1292 results)
+received Jun 2026 on: articles 1369, first affiliation in China 58.0%; of results, chi-square 27.3%, repeated strings 6.8%; rate excluding repeated strings, no allowance: 2.85%
+received Jun 2026 on, China, no allowance: 2.78% [1.60, 4.29] (255 articles, 1832 results)
+received Jun 2026 on, United States, no allowance: 6.17% [0.00, 9.48] (12 articles, 81 results)
+received Jun 2026 on, all other countries, no allowance: 2.38% [1.26, 3.63] (185 articles, 1554 results)
+received 2025Q1: of 267 articles with results, 9.7% declare generative AI used, 86.9% not used, 3.4% no or other statement
+received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 82.4% not used, 2.3% no or other statement
+received 2025Q3: of 332 articles with results, 17.8% declare generative AI used, 80.1% not used, 2.1% no or other statement
+received 2025Q4: of 384 articles with results, 19.8% declare generative AI used, 79.7% not used, 0.5% no or other statement
+received 2026Q1: of 476 articles with results, 28.4% declare generative AI used, 71.6% not used, 0.0% no or other statement
+received 2026Q2: of 556 articles with results, 31.5% declare generative AI used, 68.3% not used, 0.2% no or other statement
+received 2026Q3: of 248 articles with results, 43.1% declare generative AI used, 56.5% not used, 0.4% no or other statement
+received 2026Q4: of 3 articles with results, 66.7% declare generative AI used, 33.3% not used, 0.0% no or other statement
+received 2023-2024: consistent three-decimal 'p =' results that match the face-value p exactly: 49.2% of 2839
+received 2025Q1-2026Q1: consistent three-decimal 'p =' results that match the face-value p exactly: 45.8% of 2361
+received Apr-May 2026: consistent three-decimal 'p =' results that match the face-value p exactly: 42.1% of 648
+received Jun 2026 on: consistent three-decimal 'p =' results that match the face-value p exactly: 51.2% of 848
+flagged 'p =' results (18251): 31.2% are within one further unit of the last printed digit; 11.5% would be consistent if p had been truncated, not rounded
 kind  results  pct_inconsistent  pct_decision
    F   115631              9.65          1.13
 chi2    18855              9.30          1.61
    r     5062             16.99          1.78
    t    51578             10.25          1.40
-   z    14721             15.13          2.41
+   z    14709             15.09          2.41

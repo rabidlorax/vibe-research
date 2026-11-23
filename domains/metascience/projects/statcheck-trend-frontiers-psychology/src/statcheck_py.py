@@ -16,8 +16,8 @@ ALPHA = 0.05
 NUM = r"-?\s?\d*\.?\d+"
 PVAL = (r"\s?[,;]\s?[pP]\s?(?P<pc>[<>=])\s?(?P<p>\d?\.\d+)"
         # the p-value must end here: not more digits, a second decimal point, scientific
-        # notation (x 10, E-4) or a division such as ".05/3". A sentence-ending full stop is fine.
-        r"(?!\d|\.\d|\s?[×x*·⋅]\s?\d|\s?[eE]\s?-?\d|\s?/\s?\d)")
+        # notation (x 10, E-4), a division such as ".05/3" or a range such as ".01-.05". A full stop is fine.
+        r"(?!\d|\.\d|\s?[×x*·⋅]\s?\d|\s?[eE]\s?-?\d|\s?/\s?\d|\s?-\s?\d?\.\d)")
 NB = r"(?<![A-Za-z0-9])"  # statistic letter must not be the tail of a word
 
 PATTERNS = {
@@ -31,6 +31,8 @@ PATTERNS = {
 }
 ONE_TAIL = re.compile(r"one[- ]?tailed|one[- ]?sided|directional", re.I)  # the three statcheck words
 ONE_TAIL_STRICT = re.compile(r"one[- ]?tailed|one[- ]?sided", re.I)  # without "directional"
+
+MNI_Y = re.compile(r"y\s?=\s?-?\s?\d+\.?\d*\s?[,;]?\s?$")
 
 _TRANS = str.maketrans({
     "−": "-", "–": "-", "‒": "-", "‐": "-", "‑": "-", "﹣": "-", "－": "-",
@@ -141,6 +143,8 @@ def extract(text):
     for kind, pat in PATTERNS.items():
         for m in pat.finditer(text):
             g = m.groupdict()
+            if kind == "z" and MNI_Y.search(text[max(0, m.start() - 30):m.start()]):
+                continue  # "x = .., y = .., z = .." is a brain coordinate, not a test statistic
             res = check(kind, g["stat"], g.get("df1"), g.get("df2"), g["pc"], g["p"], one_tail, strict)
             if res is None:
                 continue

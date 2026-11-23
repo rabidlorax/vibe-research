@@ -5,7 +5,7 @@ flagged,2022-2026,0,0,0,38,2
 flagged,2026H2,0,0,0,18,2
 flagged_decision,2010-2015,0,0,0,17,3
 flagged_decision,2016-2021,0,0,0,18,2
-flagged_decision,2022-2026,0,1,2,14,3
+flagged_decision,2022-2026,0,1,3,13,3
 not_flagged,2010-2015,10,0,0,0,0
 not_flagged,2016-2021,10,0,0,0,0
 not_flagged,2022-2026,10,0,0,0,0

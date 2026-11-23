@@ -4,10 +4,12 @@
 Reads data/articles.csv.gz and data/results.csv.gz (written by extract.py) and
 writes, in results/: yearly.csv, variants.csv, trend.txt, by_kind.csv, trend.png
 (planned before the full data were seen) and yearly_no_one_tailed_allowance.csv,
-half_years_2023_2026.csv, received_quarters.csv, post_hoc.txt (added afterwards).
+half_years_2023_2026.csv, received_quarters.csv, received_quarters_fast.csv,
+received_months.csv, post_hoc.txt, descriptives.txt (added afterwards).
 
 Usage: python src/analyze.py        (under a minute; seed fixed)
 """
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -16,6 +18,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from statcheck_py import _p, consistent  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "results"
@@ -81,9 +86,10 @@ def clustered_trend(res, col, extra=None):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    arts = pd.read_csv(ROOT / "data" / "articles.csv.gz", dtype={"ai_statement": str}, keep_default_na=False,
+    arts = pd.read_csv(ROOT / "data" / "articles.csv.gz", dtype={"ai_statement": str, "country": str},
+                       keep_default_na=False, low_memory=False,
                        na_values={"received_year": [""], "received_month": [""]})
-    res = pd.read_csv(ROOT / "data" / "results.csv.gz", dtype={"stat": str, "p_rep": str})
+    res = pd.read_csv(ROOT / "data" / "results.csv.gz", dtype={"stat": str, "p_rep": str})  # keep trailing zeros
     print(f"articles={len(arts)} with_body={int(arts.has_body.sum())} results={len(res)} "
           f"articles_with_results={res.pmcid.nunique()}")
 
@@ -229,7 +235,7 @@ def main():
                 + ((ar.received_month.astype(int) - 1) // 3 + 1).astype(str))
     rng = np.random.default_rng(SEED + 2)
     qrows = []
-    for q, d in mr[mr.received_year >= 2024].groupby("rq"):
+    for q, d in mr[mr.received_year >= 2023].groupby("rq"):
         lo, hi = cluster_boot(d, "error_1t", rng)
         lo2, hi2 = cluster_boot(d, "error", rng)
         any_flag = d.groupby("pmcid").error.max()
@@ -270,6 +276,126 @@ def main():
         post.append(f"published {h}, AI statement '{st or 'none'}', no allowance: {rate(d)}")
     for (q, st), d in mr[(mr.received_year == 2026)].groupby(["rq", "ai_statement"]):
         post.append(f"received {q}, AI statement '{st or 'none'}', no allowance: {rate(d)}")
+    # ---- Added after a second quality-control review (post hoc) ----
+    # (i) by month of receipt from January 2025
+    mr["rm"] = mr.received_year.astype(int).astype(str) + "-" + mr.received_month.astype(int).astype(str).str.zfill(2)
+    mrows = []
+    for mth, d in mr[mr.received_year >= 2025].groupby("rm"):
+        lo, hi = cluster_boot(d, "error", rng)
+        mrows.append({"received_month": mth, "articles_with_results": d.pmcid.nunique(), "results": len(d),
+                      "pct_inconsistent_no_allowance": 100 * d.error.mean(), "ci_lo": 100 * lo, "ci_hi": 100 * hi,
+                      "pct_inconsistent": 100 * d.error_1t.mean()})
+    pd.DataFrame(mrows).to_csv(OUT / "received_months.csv", index=False, float_format="%.3f")
+    # (j) an earlier, smaller decline: received 2025Q2-2026Q1 against 2023Q1-2025Q1
+    rmon_all = mr.received_year * 12 + mr.received_month
+    d = mr[(rmon_all >= 2023 * 12 + 1) & (rmon_all <= 2026 * 12 + 3)]
+    later = ((d.received_year * 12 + d.received_month) >= 2025 * 12 + 4).astype(float)
+    for col in ("error", "error_1t"):
+        g = sm.GLM(d[col], pd.DataFrame({"const": 1.0, "later": later}), family=sm.families.Binomial()).fit(
+            cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
+        b, se = g.params["later"], g.bse["later"]
+        post.append(f"received 2025Q2-2026Q1 vs 2023Q1-2025Q1, {col}: {100 * d[later == 1][col].mean():.2f}% vs "
+                    f"{100 * d[later == 0][col].mean():.2f}%, odds ratio {np.exp(b):.3f} "
+                    f"[{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}]")
+    # (k) every receipt cohort restricted to articles published within 3 months of receipt,
+    #     the only kind the newest cohorts can contain
+    frows = []
+    for q, d in mr[(mr.received_year >= 2022) & (mr.lag <= 3)].groupby("rq"):
+        lo, hi = cluster_boot(d, "error", rng)
+        frows.append({"received_quarter": q, "articles_with_results": d.pmcid.nunique(), "results": len(d),
+                      "pct_inconsistent_no_allowance": 100 * d.error.mean(), "ci_lo": 100 * lo, "ci_hi": 100 * hi})
+    fast = pd.DataFrame(frows)
+    fast.to_csv(OUT / "received_quarters_fast.csv", index=False, float_format="%.3f")
+    print(fast.round(2).to_string(index=False))
+    # (l) composition: country of first affiliation, test type, repeated strings, by receipt period
+    arm = ar.received_year * 12 + ar.received_month
+    periods = (("received 2023-2024", 2023 * 12 + 1, 2024 * 12 + 12), ("received 2025Q1-2026Q1", 2025 * 12 + 1, 2026 * 12 + 3),
+               ("received Apr-May 2026", 2026 * 12 + 4, 2026 * 12 + 5), ("received Jun 2026 on", 2026 * 12 + 6, 9e9))
+    mr = mr.merge(arts[["pmcid", "country"]], on="pmcid")
+    mr["group"] = np.where(mr.country == "China", "China", np.where(mr.country == "United States", "United States",
+                                                                    "all other countries"))
+    key = ["pmcid", "kind", "df1", "df2", "stat", "p_cmp", "p_rep"]
+    mr["repeat"] = mr.duplicated(key, keep="first")
+    rmon_all = mr.received_year * 12 + mr.received_month
+    for name, a, b in periods:
+        d = mr[(rmon_all >= a) & (rmon_all <= b)]
+        aa = ar[(arm >= a) & (arm <= b)]
+        post.append(f"{name}: articles {len(aa)}, first affiliation in China {100 * (aa.country == 'China').mean():.1f}%; "
+                    f"of results, chi-square {100 * (d.kind == 'chi2').mean():.1f}%, repeated strings "
+                    f"{100 * d.repeat.mean():.1f}%; rate excluding repeated strings, no allowance: "
+                    f"{100 * d[~d.repeat].error.mean():.2f}%")
+        for grp, dd in d.groupby("group"):
+            post.append(f"{name}, {grp}, no allowance: {rate(dd)}")
+    # (m) share of articles declaring generative-AI use, by receipt quarter (articles with results)
+    for q, d in mr[mr.received_year >= 2025].drop_duplicates("pmcid").groupby("rq"):
+        st = d.ai_statement
+        post.append(f"received {q}: of {len(d)} articles with results, {100 * (st == 'used').mean():.1f}% declare "
+                    f"generative AI used, {100 * (st == 'not_used').mean():.1f}% not used, "
+                    f"{100 * (~st.isin(['used', 'not_used'])).mean():.1f}% no or other statement")
+    # (n) are consistent p-values now exact recomputations of the printed statistic? Among consistent
+    #     "p = x" results with three decimals whose rounding range spans more than one three-decimal value,
+    #     the share whose p equals the one computed from the printed statistic taken at face value.
+    c3 = mr[(mr.error == 0) & (mr.p_cmp == "=") & (mr.p_rep.str.split(".").str[1].str.len() == 3)
+            & (mr.p_min.round(3) != mr.p_max.round(3))].copy()
+    c3["p_face"] = [_p(k, abs(float(x)), a if a == a else None, b if b == b else None)
+                    for k, x, a, b in zip(c3.kind, c3.stat, c3.df1, c3.df2)]
+    c3["exact"] = (c3.p_face.round(3) - c3.p_rep.astype(float)).abs() < 5e-4
+    cm = c3.received_year * 12 + c3.received_month
+    for name, a, b in periods:
+        d = c3[(cm >= a) & (cm <= b)]
+        post.append(f"{name}: consistent three-decimal 'p =' results that match the face-value p exactly: "
+                    f"{100 * d.exact.mean():.1f}% of {len(d)}")
+    # (o) how far off are flagged "p = x" results?
+    fl = res[(res.error == 1) & (res.p_cmp == "=")]
+    dec = fl.p_rep.str.split(".").str[1].str.len()
+    unit = 10.0 ** (-dec)
+    pr = fl.p_rep.astype(float)
+    near = (pr - 1.5 * unit <= fl.p_max) & (pr + 1.5 * unit >= fl.p_min)
+    trunc = (pr <= fl.p_max) & (pr + unit >= fl.p_min)
+    post.append(f"flagged 'p =' results ({len(fl)}): {100 * near.mean():.1f}% are within one further unit of the last "
+                f"printed digit; {100 * trunc.mean():.1f}% would be consistent if p had been truncated, not rounded")
+
+    # Descriptive numbers quoted in the README
+    desc = [f"article types: {arts.article_type.value_counts().to_dict()}"]
+    mism = (arts.year != arts.epub_year).groupby(arts.year).mean()
+    desc.append("share of articles whose PUB_YEAR differs from the electronic publication year, by PUB_YEAR: "
+                + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in mism.items()))
+    desc.append(f"articles with electronic publication year 2026: {int((arts.epub_year == 2026).sum())}; of these with "
+                f"PUB_YEAR 2025: {int(((arts.epub_year == 2026) & (arts.year == 2025)).sum())}; published November "
+                f"2026: {int(((arts.epub_year == 2026) & (arts.epub_month == 11)).sum())}")
+    e26 = arts[arts.epub_year == 2026]
+    desc.append(f"articles published 2026 with a generative-AI statement of either kind: "
+                f"{100 * e26.ai_statement.isin(['used', 'not_used']).mean():.1f}%")
+    desc.append(f"articles without a received date: {int(arts.received_year.isna().sum())}; "
+                f"without a first-affiliation country: {int((arts.country == '').sum())}")
+    nores = 1 - (arts.n_results > 0).groupby(arts.year).mean()
+    desc.append(f"share of articles with no extracted result: overall {100 * (arts.n_results == 0).mean():.1f}%; by year: "
+                + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in nores.items()))
+    fsw = res[(res.kind == "F") & (res.df1 > res.df2)]
+    desc.append(f"F results with df1 > df2: {len(fsw)}, flagged (no allowance) {100 * fsw.error.mean():.1f}%")
+    tl = res[(res.kind == "t") & (res.df2 < 3)]
+    desc.append(f"t results with df < 3: {len(tl)}, flagged (no allowance) {100 * tl.error.mean():.1f}%")
+    dc = res[res.year <= 2025].groupby("year").decision_error_1t.sum()
+    desc.append(f"decision inconsistencies per year 2010-2025 (primary): min {dc.min()}, max {dc.max()}")
+    desc.append("median body length in characters by year: "
+                + ", ".join(f"{k}: {x:.0f}" for k, x in arts.groupby("year").body_chars.median().items()))
+    three = (res.p_rep.str.split(".").str[1].str.len() == 3).groupby(res.year).mean()
+    desc.append("share of results whose p is printed with exactly three decimals, by year: "
+                + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in three.items()))
+    desc.append("median extracted results per article with results, by year: "
+                + ", ".join(f"{r.year}: {r.median_results_per_article:.0f}" for r in yr.itertuples()))
+    ctx = ROOT / "data" / "raw" / "contexts.csv.gz"
+    if ctx.exists():  # needs the downloaded article text
+        c = pd.read_csv(ctx)
+        z = c[c.kind == "z"]
+        ks = z.context.str.contains("Kolmogorov|Shapiro|normality|Begg|Egger|Mann-Whitney|Wilcoxon", case=False)
+        norm = z.context.str.contains("Kolmogorov|Shapiro|normality", case=False)
+        desc.append(f"z results: {len(z)}, flagged (no allowance) {int(z.error.sum())}; with Kolmogorov / Shapiro / "
+                    f"'normality' within 150 characters: {int(norm.sum())}, of which flagged {int(z[norm].error.sum())}")
+    else:
+        desc.append("z-context counts skipped: data/raw/contexts.csv.gz not present")
+    (OUT / "descriptives.txt").write_text("\n".join(desc) + "\n")
+    print("\n".join(desc))
     (OUT / "post_hoc.txt").write_text("\n".join(post) + "\n")
     print("\n".join(post))
 

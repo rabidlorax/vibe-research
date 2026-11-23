@@ -58,7 +58,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 57,2010-2015,flagged_decision,PMC4516813,F,"F(1,36) = 2.43, p = 0.011",1,inconsistent_as_printed,
 58,2010-2015,flagged_decision,PMC3842028,t,"t(205) = 16.50, p = 0.053",1,inconsistent_as_printed,
 59,2010-2015,flagged_decision,PMC3985017,r,r(40) = 0.31; p = 0.057,1,inconsistent_as_printed,
-60,2010-2015,flagged_decision,PMC4598580,F,"F(3,268) = 1.79, p < 0.01",1,inconsistent_as_printed,
+60,2010-2015,flagged_decision,PMC4598580,F,"F(3,268) = 1.79, p < 0.01",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (here a multivariate test, Pillai's trace, is named just before), in which case the article's numbers can all be right and the flag is the extractor's misreading"
 61,2010-2015,not_flagged,PMC3888940,F,"F(1,71) = 1.74, p = 0.191",0,correctly_extracted,
 62,2010-2015,not_flagged,PMC4145714,F,"F(2, 96) = 31.78, p < 0.001",0,correctly_extracted,
 63,2010-2015,not_flagged,PMC4703753,F,"F(1, 28) = 10.59, p = 0.003",0,correctly_extracted,
@@ -123,7 +123,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 122,2016-2021,flagged_decision,PMC5972315,F,"F(1, 50) = 6.37, p > 0.05",1,inconsistent_as_printed,
 123,2016-2021,flagged_decision,PMC6685415,F,"F(1, 39) = 3.425, p = 0.043",1,inconsistent_as_printed,
 124,2016-2021,flagged_decision,PMC8649631,F,"F (1, 34.965) = 4.663; p = 0.054",1,inconsistent_as_printed,
-125,2016-2021,flagged_decision,PMC5487462,F,"F(1.187, 1.039) = 10.013, p = 0.004",1,inconsistent_as_printed,
+125,2016-2021,flagged_decision,PMC5487462,F,"F(1.187, 1.039) = 10.013, p = 0.004",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed; 'Greenhouse-Geisser corrected' is stated just before
 126,2016-2021,flagged_decision,PMC6831644,t,"t(20) = 1.94, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
 127,2016-2021,flagged_decision,PMC6673756,t,"t(437) = 2.32, p = 0.16",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 128,2016-2021,flagged_decision,PMC8176019,F,"F (2, 46) = 3.27, p = 0.068",1,inconsistent_as_printed,
@@ -196,7 +196,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 195,2022-2026,flagged_decision,PMC11578697,t,"t (148.74) = 1.79, p = 0.038",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
 196,2022-2026,flagged_decision,PMC8969415,t,"t (78) = 1.123, p < 0.001",1,inconsistent_as_printed,
 197,2022-2026,flagged_decision,PMC12327518,F,"F (2, 192) = 7.52, p = 0.35",1,inconsistent_as_printed,
-198,2022-2026,flagged_decision,PMC9685298,t,"t(2.72) = 0.008, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+198,2022-2026,flagged_decision,PMC9685298,t,"t(2.72) = 0.008, p < 0.001",1,extraction_error,the number in parentheses is not a degrees-of-freedom value; still extracted by the current code
 199,2022-2026,flagged_decision,PMC13719614,z,"z = -2.08, p = 0.14",1,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
 200,2022-2026,flagged_decision,PMC9681152,t,"t(32) = -2.099, p = 0.08",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 201,2022-2026,not_flagged,PMC11153775,chi2,"χ2(84, N = 280) = 323.114, p < 0.05",0,correctly_extracted,
@@ -211,7 +211,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 210,2022-2026,not_flagged,PMC12463962,F,"F(1, 182) = 0.04, p = 0.84",0,correctly_extracted,
 211,2026H2,flagged,PMC13553237,F,"F(4, 751) = 2.99, p = 0.022",0,inconsistent_as_printed,
 212,2026H2,flagged,PMC13719614,z,"z = -0.75, p = 0.91",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
-213,2026H2,flagged,PMC13526591,z,"z = -1.75, p = 0.0931",0,inconsistent_as_printed,
+213,2026H2,flagged,PMC13526591,z,"z = -1.75, p = 0.0931",0,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (here a publication-bias test in a table), in which case the article's numbers can all be right and the flag is the extractor's misreading"
 214,2026H2,flagged,PMC13422211,chi2,"χ2 (613) = 1126.02, p > 0.05",1,inconsistent_as_printed,
 215,2026H2,flagged,PMC13506903,F,"F(3,151) = 2.99, p = 0.04",0,inconsistent_as_printed,
 216,2026H2,flagged,PMC13553237,F,"F(4, 751) = 3.35, p = 0.012",0,inconsistent_as_printed,
