@@ -4,13 +4,16 @@ article, run the statcheck-style extractor on it, and write
 
   data/articles.csv.gz       one row per article
   data/results.csv.gz        one row per extracted test result (no article text)
-  data/raw/contexts.csv.gz   the same results with 150 characters of context
+  data/raw/contexts.csv.gz   the same results with their position and 150 characters of context
                              either side (CC BY article text; not committed)
 
 Usage: python src/extract.py        (about 3 minutes on 4 cores)
 """
 import csv
 import gzip
+import hashlib
+import io
+import re
 import sys
 from multiprocessing import Pool
 from pathlib import Path
@@ -18,27 +21,64 @@ from pathlib import Path
 from lxml import etree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from statcheck_py import ONE_TAIL, extract, normalize  # noqa: E402
+from statcheck_py import ONE_TAIL, ONE_TAIL_STRICT, extract, normalize  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw" / "xml"
 MML = "{http://www.w3.org/1998/Math/MathML}"
 INLINE = {"italic", "bold", "sub", "sup", "sc", "underline", "monospace", "roman", "sans-serif",
-          "styled-content", "named-content", "ext-link", "uri", "xref", "inline-formula",
+          "styled-content", "named-content", "ext-link", "uri", "inline-formula",
           "alternatives", "email", "overline", "strike"}
 DROP = {"tex-math", "graphic", "inline-graphic", "media", "object-id"}
 CELL = {"td", "th"}
 
-ART_COLS = ["pmcid", "doi", "year", "epub_year", "epub_month", "new_date_markup", "article_type", "section", "has_body",
-            "body_chars", "one_tail_text", "n_results"]
-RES_COLS = ["pmcid", "year", "kind", "df1", "df2", "stat", "p_cmp", "p_rep", "p_min", "p_max",
-            "error", "decision_error", "error_1t", "decision_error_1t", "p_zero"]
+ART_COLS = ["pmcid", "doi", "year", "epub_year", "epub_month", "received_year", "received_month",
+            "new_date_markup", "article_type", "section", "ai_statement", "has_body", "body_chars",
+            "one_tail_text", "one_tail_strict", "n_results"]
+FLAGS = ["error", "decision_error", "error_1t", "decision_error_1t", "error_1t_strict",
+         "decision_error_1t_strict", "half_p_consistent", "p_zero"]
+RES_COLS = ["pmcid", "year", "kind", "df1", "df2", "stat", "p_cmp", "p_rep", "p_min", "p_max"] + FLAGS
+AI_USED = re.compile(r"Gen(erative)? AI was used", re.I)
+AI_NOT = re.compile(r"Gen(erative)? AI was not used|no Gen(erative)? AI was used", re.I)
+
+
+def ai_statement(article):
+    """'' if the article has no generative-AI statement section, else what it declares."""
+    sec = article.find(".//sec[@sec-type='ai-statement']")
+    if sec is None:
+        return ""
+    text = " ".join("".join(sec.itertext()).split())
+    if AI_NOT.search(text):
+        return "not_used"
+    return "used" if AI_USED.search(text) else "other"
+
+
+class HashingGzip:
+    """Text writer to a gzip file with no timestamp in the header (so the file is
+    byte-reproducible) that also keeps a SHA-256 of the uncompressed content."""
+
+    def __init__(self, path):
+        self.raw = open(path, "wb")
+        self.gz = gzip.GzipFile(filename="", mode="wb", fileobj=self.raw, mtime=0)
+        self.text = io.TextIOWrapper(self.gz, encoding="utf-8", newline="")
+        self.sha = hashlib.sha256()
+
+    def write(self, s):
+        self.sha.update(s.encode("utf-8"))
+        return self.text.write(s)
+
+    def close(self):
+        self.text.close()
+        self.raw.close()
+        return self.sha.hexdigest()
 
 
 def flatten(el, out):
     """Serialize an element to text: inline markup vanishes, block markup
     becomes a space, table cells are separated by ' | ', TeX duplicates and
-    display formulas are dropped, MathML keeps its characters."""
+    display formulas are dropped, MathML keeps its characters. Cross-references
+    (xref) count as block markup, so a footnote marker cannot fuse with a number
+    before it ("p = 0.01" + marker "3" must not become "p = 0.013")."""
     tag = el.tag
     if not isinstance(tag, str):  # comment / processing instruction
         out.append(el.tail or "")
@@ -81,6 +121,8 @@ def process(path):
             epub = meta.find("pub-date[@date-type='pub']")
         ey, em = (first(epub, "year"), first(epub, "month")) if epub is not None else ("", "")
         new_format = int(meta.find("pub-date[@pub-type='epub']") is None)
+        rec = meta.find("history/date[@date-type='received']")
+        ry, rm = (first(rec, "year"), first(rec, "month")) if rec is not None else ("", "")
         body = a.find("body")
         text = ""
         if body is not None:
@@ -93,28 +135,28 @@ def process(path):
         for r in found:
             row = {"pmcid": pmcid, "year": year, **r}
             row["p_min"], row["p_max"] = f"{r['p_min']:.6g}", f"{r['p_max']:.6g}"
-            for k in ("error", "decision_error", "error_1t", "decision_error_1t", "p_zero"):
+            for k in FLAGS:
                 row[k] = int(r[k])
             ress.append([row[c] for c in RES_COLS])
-            ctxs.append([pmcid, year, r["kind"], r["raw"], int(r["error"]), int(r["decision_error"]),
+            ctxs.append([pmcid, year, r["kind"], r["raw"], r["start"], int(r["error"]), int(r["decision_error"]),
                          int(r["error_1t"]), text[max(0, r["start"] - 150):r["end"] + 150]])
-        arts.append([pmcid, ids.get("doi", ""), year, ey, em, new_format,
-                     a.get("article-type", ""), subjects[-1] if subjects else "",
-                     int(body is not None), len(text), int(bool(ONE_TAIL.search(text))), len(found)])
+        arts.append([pmcid, ids.get("doi", ""), year, ey, em, ry, rm, new_format,
+                     a.get("article-type", ""), subjects[-1] if subjects else "", ai_statement(a),
+                     int(body is not None), len(text), int(bool(ONE_TAIL.search(text))),
+                     int(bool(ONE_TAIL_STRICT.search(text))), len(found)])
     return arts, ress, ctxs
 
 
 def main():
     files = sorted(RAW.glob("*.xml.gz"))
     seen = set()
-    with Pool(4) as pool, \
-            gzip.open(ROOT / "data" / "articles.csv.gz", "wt", newline="") as fa, \
-            gzip.open(ROOT / "data" / "results.csv.gz", "wt", newline="") as fr, \
-            gzip.open(ROOT / "data" / "raw" / "contexts.csv.gz", "wt", newline="") as fc:
+    fa = HashingGzip(ROOT / "data" / "articles.csv.gz")
+    fr = HashingGzip(ROOT / "data" / "results.csv.gz")
+    with Pool(4) as pool, gzip.open(ROOT / "data" / "raw" / "contexts.csv.gz", "wt", newline="") as fc:
         wa, wr, wc = csv.writer(fa), csv.writer(fr), csv.writer(fc)
         wa.writerow(ART_COLS)
         wr.writerow(RES_COLS)
-        wc.writerow(["pmcid", "year", "kind", "raw", "error", "decision_error", "error_1t", "context"])
+        wc.writerow(["pmcid", "year", "kind", "raw", "start", "error", "decision_error", "error_1t", "context"])
         n_res = 0
         for arts, ress, ctxs in pool.imap(process, files, chunksize=4):
             keep = {a[0] for a in arts if a[0] not in seen}
@@ -130,6 +172,8 @@ def main():
         requested |= set(f.read_text().split())
     print(f"files={len(files)} articles={len(seen)} results={n_res} "
           f"requested_ids={len(requested)} not_returned={len(requested - seen)}")
+    print(f"sha256 of uncompressed articles.csv: {fa.close()}")
+    print(f"sha256 of uncompressed results.csv:  {fr.close()}")
 
 
 if __name__ == "__main__":

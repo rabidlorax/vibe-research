@@ -14,7 +14,10 @@ from scipy import stats
 
 ALPHA = 0.05
 NUM = r"-?\s?\d*\.?\d+"
-PVAL = r"\s?[,;]\s?[pP]\s?(?P<pc>[<>=])\s?(?P<p>\d?\.\d+)(?![\d.]|\s?[×x*]\s?\d|\s?[eE]\s?-?\d)"
+PVAL = (r"\s?[,;]\s?[pP]\s?(?P<pc>[<>=])\s?(?P<p>\d?\.\d+)"
+        # the p-value must end here: not more digits, a second decimal point, scientific
+        # notation (x 10, E-4) or a division such as ".05/3". A sentence-ending full stop is fine.
+        r"(?!\d|\.\d|\s?[×x*·⋅]\s?\d|\s?[eE]\s?-?\d|\s?/\s?\d)")
 NB = r"(?<![A-Za-z0-9])"  # statistic letter must not be the tail of a word
 
 PATTERNS = {
@@ -24,9 +27,10 @@ PATTERNS = {
     "r": re.compile(NB + r"r\s?\(\s?(?P<df2>\d+)\s?\)\s?=\s?(?P<stat>-?\s?[01]?\.\d+)" + PVAL),
     "chi2": re.compile(r"(?:χ|Χ|𝜒|(?<![A-Za-z0-9])[Xx]|[Cc]hi)\s?(?:2|²)\s?\(\s?(?P<df1>\d+)\s?"
                        r"(?:,\s?[Nn]\s?=\s?\d[\d,]*\s?)?\)\s?=\s?(?P<stat>" + NUM + ")" + PVAL),
-    "z": re.compile(NB + r"(?P<zcase>[zZ])\s?=\s?(?P<stat>" + NUM + ")" + PVAL),
+    "z": re.compile(r"(?<![A-Za-z0-9\-])(?P<zcase>[zZ])\s?=\s?(?P<stat>" + NUM + ")" + PVAL),
 }
-ONE_TAIL = re.compile(r"one[- ]?tailed|one[- ]?sided|directional", re.I)
+ONE_TAIL = re.compile(r"one[- ]?tailed|one[- ]?sided|directional", re.I)  # the three statcheck words
+ONE_TAIL_STRICT = re.compile(r"one[- ]?tailed|one[- ]?sided", re.I)  # without "directional"
 
 _TRANS = str.maketrans({
     "−": "-", "–": "-", "‒": "-", "‐": "-", "‑": "-", "﹣": "-", "－": "-",
@@ -93,7 +97,7 @@ def reported_significant(pc, p_str):
     return False if p >= ALPHA else None
 
 
-def check(kind, stat_str, df1, df2, pc, p_str, one_tail_text=False):
+def check(kind, stat_str, df1, df2, pc, p_str, one_tail_text=False, one_tail_strict=False):
     """Return a dict of flags for one extracted result, or None if not computable."""
     try:
         df1 = float(df1) if df1 is not None else None
@@ -101,7 +105,11 @@ def check(kind, stat_str, df1, df2, pc, p_str, one_tail_text=False):
         p = float(p_str)
     except ValueError:
         return None
-    if p > 1 or (df1 is not None and df1 <= 0) or (df2 is not None and df2 <= 0):
+    # Not checkable: p above 1, degrees of freedom below 1 (usually a standard error
+    # printed in the parentheses), or "p < .000", which no p-value can satisfy.
+    if p > 1 or (df1 is not None and df1 < 1) or (df2 is not None and df2 < 1):
+        return None
+    if pc == "<" and p == 0:
         return None
     if kind == "r" and abs(float(stat_str.replace(" ", ""))) > 1:
         return None
@@ -117,22 +125,23 @@ def check(kind, stat_str, df1, df2, pc, p_str, one_tail_text=False):
     dec = err and decision(pmin, pmax)
     # Variant that forgives results matching a one-tailed test when the article
     # mentions one-tailed / one-sided / directional tests anywhere in its body.
-    err1, dec1 = err, dec
-    if err and one_tail_text and kind in ("t", "r", "z"):
-        if consistent(pc, p_str, pmin / 2, pmax / 2):
-            err1, dec1 = False, False
+    half_ok = err and kind in ("t", "r", "z") and consistent(pc, p_str, pmin / 2, pmax / 2)
+    err1, dec1 = (False, False) if (half_ok and one_tail_text) else (err, dec)
+    err1s, dec1s = (False, False) if (half_ok and one_tail_strict) else (err, dec)
     return {"p_min": pmin, "p_max": pmax, "error": err, "decision_error": dec,
             "error_1t": err1, "decision_error_1t": dec1,
+            "error_1t_strict": err1s, "decision_error_1t_strict": dec1s, "half_p_consistent": bool(half_ok),
             "p_zero": pc == "=" and p == 0.0}
 
 
 def extract(text):
     """Yield one dict per test result found in already-normalized text."""
     one_tail = bool(ONE_TAIL.search(text))
+    strict = bool(ONE_TAIL_STRICT.search(text))
     for kind, pat in PATTERNS.items():
         for m in pat.finditer(text):
             g = m.groupdict()
-            res = check(kind, g["stat"], g.get("df1"), g.get("df2"), g["pc"], g["p"], one_tail)
+            res = check(kind, g["stat"], g.get("df1"), g.get("df2"), g["pc"], g["p"], one_tail, strict)
             if res is None:
                 continue
             res.update(kind=kind, df1=g.get("df1") or "", df2=g.get("df2") or "",

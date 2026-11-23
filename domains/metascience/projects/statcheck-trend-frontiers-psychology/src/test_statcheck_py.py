@@ -52,5 +52,12 @@ r = one("t(50) = 2.00, p = .000"); assert r["error"]
 none("Yt(28) = 2.20, p = .03"); none("t(28) = 2.20, d = 0.4, p = .03"); none("t(28) < 1, p = .5")
 none("t(28) = 2.20, p = 3.1 × 10-5"); none("t(28) = 2.20, p = .03.4"); none("r(48) = 3.0, p = .03")
 none("t(76) = -3.99, p = 1.00E-04"); none("t(18) = 7.04, p = 1.00 * 10-6")
+# sentence-ending full stop after the p-value is accepted; ".05/3" and "0.31 · 10-3" are not
+r = one("F(1, 30) = 4.50, p = .04."); assert not r["error"]
+r = one("t(28) = 2.20, p = .036. Next sentence"); assert not r["error"]
+none("t(28) = 2.20, p < .05/3"); none("t(28) = 5.20, p = 0.31 · 10-3"); none("t(28) = 2.20, p < .000")
+none("t(0.097) = -2.734, p < .01"); none("Cohen's d-z = 0.50, p = .04")
+# "directional" triggers the statcheck allowance but not the strict one
+r = one("A bidirectional link. t(28) = 1.80, p = .04"); assert not r["error_1t"] and r["error_1t_strict"] and r["half_p_consistent"]
 none("Wald z-score: Wz = 2.0, p = .04"); none("t(28) = 2.20, ns")
 print("all tests passed")

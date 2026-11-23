@@ -2,10 +2,11 @@
 """Yearly rates of statistical reporting inconsistencies and their trend.
 
 Reads data/articles.csv.gz and data/results.csv.gz (written by extract.py) and
-writes results/yearly.csv, results/variants.csv, results/trend.txt,
-results/by_kind.csv and results/trend.png.
+writes, in results/: yearly.csv, variants.csv, trend.txt, by_kind.csv, trend.png
+(planned before the full data were seen) and yearly_no_one_tailed_allowance.csv,
+half_years_2023_2026.csv, received_quarters.csv, post_hoc.txt (added afterwards).
 
-Usage: python src/analyze.py        (about 2 minutes; seed fixed)
+Usage: python src/analyze.py        (under a minute; seed fixed)
 """
 from pathlib import Path
 
@@ -66,7 +67,7 @@ def yearly(res, arts, err="error_1t", dec="decision_error_1t"):
     return pd.DataFrame(rows)
 
 
-def gee_trend(res, col, extra=None):
+def clustered_trend(res, col, extra=None):
     """Logistic regression of a result-level flag on publication year with
     standard errors clustered on article. Returns odds ratio per year and CI."""
     X = pd.DataFrame({"const": 1.0, "year": res.year - 2018})
@@ -80,7 +81,8 @@ def gee_trend(res, col, extra=None):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    arts = pd.read_csv(ROOT / "data" / "articles.csv.gz")
+    arts = pd.read_csv(ROOT / "data" / "articles.csv.gz", dtype={"ai_statement": str}, keep_default_na=False,
+                       na_values={"received_year": [""], "received_month": [""]})
     res = pd.read_csv(ROOT / "data" / "results.csv.gz", dtype={"stat": str, "p_rep": str})
     print(f"articles={len(arts)} with_body={int(arts.has_body.sum())} results={len(res)} "
           f"articles_with_results={res.pmcid.nunique()}")
@@ -103,37 +105,64 @@ def main():
         "inequality p only (p < or >)": (res[res.p_cmp != "="], "error_1t", "decision_error_1t"),
         "article-type research-article only": (res[res.pmcid.isin(research)], "error_1t", "decision_error_1t"),
         "t and F tests only": (res[res.kind.isin(["t", "F"])], "error_1t", "decision_error_1t"),
+        "one-tailed allowance without the word 'directional' (added post hoc)":
+            (res, "error_1t_strict", "decision_error_1t_strict"),
         "excluding 2026 (incomplete year)": (res[res.year < 2026], "error_1t", "decision_error_1t"),
     }
     lines, vrows = [], []
     for name, (d, e, dcol) in variants.items():
         for label, col in (("inconsistent", e), ("decision", dcol)):
-            orr, lo, hi, p = gee_trend(d, col)
+            orr, lo, hi, p = clustered_trend(d, col)
             first = d[d.year <= 2013][col].mean() * 100
             last = d[d.year >= 2023][col].mean() * 100
             vrows.append({"variant": name, "outcome": label, "n_results": len(d), "pct_2010_2013": first,
                           "pct_2023_2026": last, "odds_ratio_per_year": orr, "or_lo": lo, "or_hi": hi, "p": p})
-            lines.append(f"{name:55s} {label:12s} n={len(d):7d}  2010-13 {first:5.2f}%  2023-26 {last:5.2f}%  "
+            lines.append(f"{name:68s} {label:12s} n={len(d):7d}  2010-13 {first:5.2f}%  2023-26 {last:5.2f}%  "
                          f"OR/yr {orr:.4f} [{lo:.4f}, {hi:.4f}]  p={p:.2g}")
     pd.DataFrame(vrows).to_csv(OUT / "variants.csv", index=False, float_format="%.5f")
 
     # Article level: any inconsistency, adjusting for how many results the article reports.
     per = res.groupby(["pmcid", "year"]).agg(n=("error_1t", "size"), e=("error_1t", "sum"),
                                              d=("decision_error_1t", "sum")).reset_index()
-    for label, col in (("any inconsistency", "e"), ("any decision inconsistency", "d")):
-        X = sm.add_constant(pd.DataFrame({"year": per.year - 2018, "log_n": np.log(per.n)}))
-        m = sm.Logit((per[col] > 0).astype(int), X).fit(disp=0)
-        ci = m.conf_int().loc["year"]
-        lines.append(f"article level, {label}, adjusted for log(number of results): OR/yr "
-                     f"{np.exp(m.params['year']):.4f} [{np.exp(ci[0]):.4f}, {np.exp(ci[1]):.4f}] "
-                     f"p={m.pvalues['year']:.2g}  (n articles = {len(per)})")
+    for span, pp in (("2010-2026", per), ("2010-2025", per[per.year <= 2025])):
+        for label, col in (("any inconsistency", "e"), ("any decision inconsistency", "d")):
+            X = sm.add_constant(pd.DataFrame({"year": pp.year - 2018, "log_n": np.log(pp.n)}))
+            m = sm.Logit((pp[col] > 0).astype(int), X).fit(disp=0)
+            ci = m.conf_int().loc["year"]
+            lines.append(f"article level {span}, {label}, adjusted for log(number of results): OR/yr "
+                         f"{np.exp(m.params['year']):.4f} [{np.exp(ci[0]):.4f}, {np.exp(ci[1]):.4f}] "
+                         f"p={m.pvalues['year']:.2g}  (n articles = {len(pp)})")
 
     # Benchmark against Nuijten et al. (2016), Frontiers in Psychology 2010-2013: 12.8 %.
-    early = res[res.year <= 2013]
-    pe = early.groupby("pmcid").agg(n=("error_1t", "size"), e=("error_strict0", "sum"), e2=("error_1t", "sum"))
-    lines.append(f"benchmark 2010-2013: articles={arts[arts.year <= 2013].shape[0]} with results={len(pe)} "
-                 f"results={len(early)} mean per-article % inconsistent: {100 * (pe.e / pe.n).mean():.2f} "
-                 f"(p=.000 wrong, statcheck-2016 convention), {100 * (pe.e2 / pe.n).mean():.2f} (primary)")
+    res["error_raw0"] = ((res.error == 1) | (res.p_zero == 1)).astype(int)
+    for name, ok in (("all article types", arts.pmcid), ("research-article only", arts.pmcid[arts.article_type == "research-article"])):
+        early = res[(res.year <= 2013) & res.pmcid.isin(set(ok))]
+        pe = early.groupby("pmcid").agg(n=("error_1t", "size"), e=("error_strict0", "sum"), e2=("error_1t", "sum"),
+                                        e3=("error_raw0", "sum"))
+        lines.append(f"benchmark 2010-2013, {name}: articles={int(((arts.year <= 2013) & arts.pmcid.isin(set(ok))).sum())} "
+                     f"with results={len(pe)} results={len(early)} mean per-article % inconsistent: "
+                     f"{100 * (pe.e2 / pe.n).mean():.2f} (primary), "
+                     f"{100 * (pe.e / pe.n).mean():.2f} (one-tailed allowance, p=.000 counted wrong), "
+                     f"{100 * (pe.e3 / pe.n).mean():.2f} (no allowance, p=.000 counted wrong)")
+    # Second benchmark: Nuijten et al. (2017), Study 2. Research articles published March 2010 to
+    # April 2015, split by received before / from March 2014; they report 13.1% and 16.2%.
+    b2 = res.merge(arts[["pmcid", "epub_year", "epub_month", "received_year", "received_month", "article_type"]],
+                   on="pmcid").dropna(subset=["received_year"])
+    b2 = b2[(b2.article_type == "research-article") & (b2.epub_year * 12 + b2.epub_month <= 2015 * 12 + 4)]
+    b2a = arts[(arts.article_type == "research-article") & (arts.epub_year * 12 + arts.epub_month <= 2015 * 12 + 4)
+               & arts.received_year.notna()]
+    for name, sel, sela in (
+            ("received before March 2014", b2.received_year * 12 + b2.received_month < 2014 * 12 + 3,
+             b2a.received_year * 12 + b2a.received_month < 2014 * 12 + 3),
+            ("received from March 2014", b2.received_year * 12 + b2.received_month >= 2014 * 12 + 3,
+             b2a.received_year * 12 + b2a.received_month >= 2014 * 12 + 3)):
+        d = b2[sel]
+        pe = d.groupby("pmcid").agg(n=("error", "size"), e=("error_1t", "sum"), e3=("error_raw0", "sum"),
+                                    g=("decision_error", "sum"))
+        lines.append(f"benchmark Nuijten 2017 split, {name}: research articles={int(sela.sum())} with results={len(pe)} "
+                     f"results={len(d)} mean per-article % inconsistent: {100 * (pe.e / pe.n).mean():.2f} (primary), "
+                     f"{100 * (pe.e3 / pe.n).mean():.2f} (no allowance, p=.000 counted wrong); "
+                     f"mean per-article % decision, no allowance: {100 * (pe.g / pe.n).mean():.2f}")
     (OUT / "trend.txt").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
 
@@ -154,7 +183,8 @@ def main():
                       "results": len(d), "pct_inconsistent": 100 * d.error_1t.mean(), "ci_lo": 100 * lo,
                       "ci_hi": 100 * hi, "pct_inconsistent_no_allowance": 100 * d.error.mean(),
                       "na_ci_lo": 100 * lo2, "na_ci_hi": 100 * hi2, "pct_decision": 100 * d.decision_error_1t.mean(),
-                      "pct_articles_mentioning_one_tailed_words": 100 * am[am.half == h].one_tail_text.mean()})
+                      "pct_articles_mentioning_one_tailed_words": 100 * am[am.half == h].one_tail_text.mean(),
+                      "pct_articles_one_tailed_or_one_sided_only": 100 * am[am.half == h].one_tail_strict.mean()})
     hy = pd.DataFrame(hrows)
     hy.to_csv(OUT / "half_years_2023_2026.csv", index=False, float_format="%.3f")
     print(hy.round(2).to_string(index=False))
@@ -169,7 +199,7 @@ def main():
         post.append(f"2026 vs 2023-2025, {col}: {100 * late[late.year == 2026][col].mean():.2f}% vs "
                     f"{100 * late[late.year < 2026][col].mean():.2f}%, odds ratio {np.exp(b):.3f} "
                     f"[{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}] p={g.pvalues['y2026']:.2g}")
-        orr, lo, hi, pv = gee_trend(res[res.year <= 2025], col)
+        orr, lo, hi, pv = clustered_trend(res[res.year <= 2025], col)
         post.append(f"trend 2010-2025, {col}: OR/yr {orr:.4f} [{lo:.4f}, {hi:.4f}] p={pv:.2g}")
     # (d) is the 2026 drop confined to one kind of test or one way of writing p?
     late = late.assign(group=np.where(late.year == 2026, "2026", "2023-2025"),
@@ -180,6 +210,66 @@ def main():
             post.append(f"2026 drop by {key} = {k}: 2023-2025 {100 * row[('mean', '2023-2025')]:.2f}% of "
                         f"{int(row[('size', '2023-2025')])}; 2026 {100 * row[('mean', '2026')]:.2f}% of "
                         f"{int(row[('size', '2026')])}")
+    for key in ("kind", "p_form"):
+        for k, d in late.groupby(key):
+            g = sm.GLM(d.error_1t, pd.DataFrame({"const": 1.0, "y2026": (d.year == 2026).astype(float)}),
+                       family=sm.families.Binomial()).fit(
+                cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
+            b, se = g.params["y2026"], g.bse["y2026"]
+            post.append(f"2026 vs 2023-2025 odds ratio, {key} = {k}: {np.exp(b):.3f} "
+                        f"[{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}]")
+
+    # (e) by the date the manuscript was received (from the XML history), quarters from 2024
+    cols = ["pmcid", "epub_year", "epub_month", "received_year", "received_month", "ai_statement"]
+    mr = res.merge(arts[cols], on="pmcid", suffixes=("", "_a")).dropna(subset=["received_year"])
+    mr["rq"] = (mr.received_year.astype(int).astype(str) + "Q"
+                + ((mr.received_month.astype(int) - 1) // 3 + 1).astype(str))
+    ar = arts.dropna(subset=["received_year"]).copy()
+    ar["rq"] = (ar.received_year.astype(int).astype(str) + "Q"
+                + ((ar.received_month.astype(int) - 1) // 3 + 1).astype(str))
+    rng = np.random.default_rng(SEED + 2)
+    qrows = []
+    for q, d in mr[mr.received_year >= 2024].groupby("rq"):
+        lo, hi = cluster_boot(d, "error_1t", rng)
+        lo2, hi2 = cluster_boot(d, "error", rng)
+        any_flag = d.groupby("pmcid").error.max()
+        qrows.append({"received_quarter": q, "articles_published_so_far": int((ar.rq == q).sum()),
+                      "articles_with_results": d.pmcid.nunique(), "results": len(d),
+                      "pct_inconsistent": 100 * d.error_1t.mean(), "ci_lo": 100 * lo, "ci_hi": 100 * hi,
+                      "pct_inconsistent_no_allowance": 100 * d.error.mean(), "na_ci_lo": 100 * lo2,
+                      "na_ci_hi": 100 * hi2, "pct_decision_no_allowance": 100 * d.decision_error.mean(),
+                      "pct_articles_any_inconsistent_no_allowance": 100 * any_flag.mean()})
+    rq = pd.DataFrame(qrows)
+    rq.to_csv(OUT / "received_quarters.csv", index=False, float_format="%.3f")
+    print(rq.round(2).to_string(index=False))
+
+    def rate(d, col="error"):
+        if len(d) == 0:
+            return "no results"
+        lo, hi = cluster_boot(d, col, rng)
+        return (f"{100 * d[col].mean():.2f}% [{100 * lo:.2f}, {100 * hi:.2f}] "
+                f"({d.pmcid.nunique()} articles, {len(d)} results)")
+
+    # (f) articles published July-November 2026, split by when they were received
+    pub = mr[(mr.epub_year == 2026) & (mr.epub_month >= 7)]
+    rmon = pub.received_year * 12 + pub.received_month
+    for name, sel in (("received before April 2026", rmon < 2026 * 12 + 4),
+                      ("received April-May 2026", (rmon >= 2026 * 12 + 4) & (rmon <= 2026 * 12 + 5)),
+                      ("received June 2026 or later", rmon >= 2026 * 12 + 6)):
+        post.append(f"published Jul-Nov 2026, {name}, no allowance: {rate(pub[sel])}")
+    # (g) does a short received-to-published interval go with a lower rate in earlier years?
+    mr["lag"] = (mr.epub_year * 12 + mr.epub_month) - (mr.received_year * 12 + mr.received_month)
+    for a, b in ((2018, 2021), (2022, 2024)):
+        d = mr[(mr.epub_year >= a) & (mr.epub_year <= b)]
+        for name, sel in (("0-3 months", d.lag <= 3), ("4-5 months", (d.lag >= 4) & (d.lag <= 5)),
+                          ("6-8 months", (d.lag >= 6) & (d.lag <= 8)), ("9+ months", d.lag >= 9)):
+            post.append(f"published {a}-{b}, received-to-published {name}, no allowance: {rate(d[sel])}")
+    # (h) by the article's generative-AI statement, half-years of publication from 2025
+    mr["half"] = mr.epub_year.astype(int).astype(str) + "H" + np.where(mr.epub_month <= 6, "1", "2")
+    for (h, st), d in mr[mr.epub_year >= 2025].groupby(["half", "ai_statement"]):
+        post.append(f"published {h}, AI statement '{st or 'none'}', no allowance: {rate(d)}")
+    for (q, st), d in mr[(mr.received_year == 2026)].groupby(["rq", "ai_statement"]):
+        post.append(f"received {q}, AI statement '{st or 'none'}', no allowance: {rate(d)}")
     (OUT / "post_hoc.txt").write_text("\n".join(post) + "\n")
     print("\n".join(post))
 
@@ -194,7 +284,11 @@ def main():
                                       ("pct_results_decision", "dec_ci_lo", "dec_ci_hi",
                                        "Decision inconsistencies (verdict at .05 changes)")]):
         a.fill_between(yr.year, yr[lo], yr[hi], alpha=0.25, color="#3b6ea8", linewidth=0)
-        a.plot(yr.year, yr[c], "o-", color="#3b6ea8")
+        a.plot(yr.year, yr[c], "-", color="#3b6ea8")
+        a.plot(yr.year[:-1], yr[c][:-1], "o", color="#3b6ea8")
+        a.plot(yr.year[-1:], yr[c][-1:], "o", mfc="white", color="#3b6ea8")
+        a.annotate("2026: to early\nNovember only", (2026, yr[c].iloc[-1]), xytext=(-8, -30),
+                   textcoords="offset points", ha="right", fontsize=8)
         a.set_ylim(0, None)
         a.set_xlabel("Publication year")
         a.set_ylabel("% of extracted results")

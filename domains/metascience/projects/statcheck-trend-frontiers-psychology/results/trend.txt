@@ -1,19 +1,26 @@
-primary (one-tailed forgiven when article mentions it)  inconsistent n= 188597  2010-13 10.35%  2023-26  9.92%  OR/yr 0.9918 [0.9833, 1.0003]  p=0.059
-primary (one-tailed forgiven when article mentions it)  decision     n= 188597  2010-13  1.21%  2023-26  1.35%  OR/yr 1.0117 [0.9965, 1.0272]  p=0.13
-no one-tailed allowance                                 inconsistent n= 188597  2010-13 11.17%  2023-26 10.36%  OR/yr 0.9886 [0.9803, 0.9969]  p=0.0071
-no one-tailed allowance                                 decision     n= 188597  2010-13  1.56%  2023-26  1.42%  OR/yr 0.9963 [0.9818, 1.0109]  p=0.61
-p = .000 counted as inconsistent                        inconsistent n= 188597  2010-13 10.71%  2023-26 11.00%  OR/yr 0.9982 [0.9899, 1.0065]  p=0.67
-p = .000 counted as inconsistent                        decision     n= 188597  2010-13  1.21%  2023-26  1.35%  OR/yr 1.0117 [0.9965, 1.0272]  p=0.13
-exactly reported p only (p = ...)                       inconsistent n= 100976  2010-13 16.55%  2023-26 15.37%  OR/yr 0.9936 [0.9834, 1.0039]  p=0.22
-exactly reported p only (p = ...)                       decision     n= 100976  2010-13  1.76%  2023-26  1.74%  OR/yr 1.0141 [0.9964, 1.0320]  p=0.12
-inequality p only (p < or >)                            inconsistent n=  87621  2010-13  4.96%  2023-26  3.61%  OR/yr 0.9683 [0.9552, 0.9816]  p=3.7e-06
-inequality p only (p < or >)                            decision     n=  87621  2010-13  0.74%  2023-26  0.90%  OR/yr 1.0029 [0.9755, 1.0311]  p=0.84
-article-type research-article only                      inconsistent n= 181074  2010-13 10.33%  2023-26  9.61%  OR/yr 0.9896 [0.9809, 0.9983]  p=0.02
-article-type research-article only                      decision     n= 181074  2010-13  1.20%  2023-26  1.30%  OR/yr 1.0088 [0.9932, 1.0247]  p=0.27
-t and F tests only                                      inconsistent n= 154331  2010-13 10.07%  2023-26  9.58%  OR/yr 0.9892 [0.9798, 0.9986]  p=0.024
-t and F tests only                                      decision     n= 154331  2010-13  1.15%  2023-26  1.23%  OR/yr 1.0007 [0.9826, 1.0191]  p=0.94
-excluding 2026 (incomplete year)                        inconsistent n= 175989  2010-13 10.35%  2023-26 11.09%  OR/yr 1.0040 [0.9944, 1.0137]  p=0.42
-excluding 2026 (incomplete year)                        decision     n= 175989  2010-13  1.21%  2023-26  1.55%  OR/yr 1.0295 [1.0114, 1.0480]  p=0.0013
-article level, any inconsistency, adjusted for log(number of results): OR/yr 0.9625 [0.9541, 0.9709] p=9.8e-18  (n articles = 17210)
-article level, any decision inconsistency, adjusted for log(number of results): OR/yr 0.9877 [0.9744, 1.0012] p=0.075  (n articles = 17210)
-benchmark 2010-2013: articles=2156 with results=970 results=12690 mean per-article % inconsistent: 11.42 (p=.000 wrong, statcheck-2016 convention), 10.91 (primary)
+primary (one-tailed forgiven when article mentions it)               inconsistent n= 205847  2010-13 10.21%  2023-26  9.52%  OR/yr 0.9896 [0.9814, 0.9978]  p=0.013
+primary (one-tailed forgiven when article mentions it)               decision     n= 205847  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
+no one-tailed allowance                                              inconsistent n= 205847  2010-13 11.04%  2023-26  9.98%  OR/yr 0.9867 [0.9787, 0.9947]  p=0.0011
+no one-tailed allowance                                              decision     n= 205847  2010-13  1.57%  2023-26  1.35%  OR/yr 0.9937 [0.9806, 1.0070]  p=0.35
+p = .000 counted as inconsistent                                     inconsistent n= 205847  2010-13 10.54%  2023-26 10.54%  OR/yr 0.9959 [0.9880, 1.0039]  p=0.32
+p = .000 counted as inconsistent                                     decision     n= 205847  2010-13  1.21%  2023-26  1.27%  OR/yr 1.0081 [0.9943, 1.0221]  p=0.25
+exactly reported p only (p = ...)                                    inconsistent n= 111063  2010-13 16.31%  2023-26 15.19%  OR/yr 0.9937 [0.9839, 1.0036]  p=0.21
+exactly reported p only (p = ...)                                    decision     n= 111063  2010-13  1.72%  2023-26  1.74%  OR/yr 1.0159 [0.9990, 1.0330]  p=0.065
+inequality p only (p < or >)                                         inconsistent n=  94784  2010-13  4.85%  2023-26  2.89%  OR/yr 0.9553 [0.9434, 0.9674]  p=9.6e-13
+inequality p only (p < or >)                                         decision     n=  94784  2010-13  0.77%  2023-26  0.73%  OR/yr 0.9887 [0.9662, 1.0117]  p=0.33
+article-type research-article only                                   inconsistent n= 197635  2010-13 10.19%  2023-26  9.25%  OR/yr 0.9876 [0.9792, 0.9960]  p=0.0039
+article-type research-article only                                   decision     n= 197635  2010-13  1.20%  2023-26  1.22%  OR/yr 1.0047 [0.9906, 1.0190]  p=0.52
+t and F tests only                                                   inconsistent n= 167209  2010-13  9.97%  2023-26  9.25%  OR/yr 0.9879 [0.9789, 0.9970]  p=0.0092
+t and F tests only                                                   decision     n= 167209  2010-13  1.15%  2023-26  1.14%  OR/yr 0.9970 [0.9811, 1.0131]  p=0.71
+one-tailed allowance without the word 'directional' (added post hoc) inconsistent n= 205847  2010-13 10.31%  2023-26  9.66%  OR/yr 0.9899 [0.9818, 0.9981]  p=0.015
+one-tailed allowance without the word 'directional' (added post hoc) decision     n= 205847  2010-13  1.27%  2023-26  1.29%  OR/yr 1.0062 [0.9925, 1.0201]  p=0.38
+excluding 2026 (incomplete year)                                     inconsistent n= 191812  2010-13 10.21%  2023-26 10.70%  OR/yr 1.0020 [0.9928, 1.0114]  p=0.67
+excluding 2026 (incomplete year)                                     decision     n= 191812  2010-13  1.21%  2023-26  1.47%  OR/yr 1.0258 [1.0096, 1.0422]  p=0.0017
+article level 2010-2026, any inconsistency, adjusted for log(number of results): OR/yr 0.9607 [0.9524, 0.9690] p=8.9e-20  (n articles = 17749)
+article level 2010-2026, any decision inconsistency, adjusted for log(number of results): OR/yr 0.9844 [0.9716, 0.9974] p=0.019  (n articles = 17749)
+article level 2010-2025, any inconsistency, adjusted for log(number of results): OR/yr 0.9860 [0.9764, 0.9958] p=0.0049  (n articles = 16010)
+article level 2010-2025, any decision inconsistency, adjusted for log(number of results): OR/yr 1.0062 [0.9916, 1.0210] p=0.41  (n articles = 16010)
+benchmark 2010-2013, all article types: articles=2156 with results=991 results=14407 mean per-article % inconsistent: 11.29 (primary), 11.80 (one-tailed allowance, p=.000 counted wrong), 12.89 (no allowance, p=.000 counted wrong)
+benchmark 2010-2013, research-article only: articles=1537 with results=974 results=14331 mean per-article % inconsistent: 11.30 (primary), 11.81 (one-tailed allowance, p=.000 counted wrong), 12.92 (no allowance, p=.000 counted wrong)
+benchmark Nuijten 2017 split, received before March 2014: research articles=2078 with results=1320 results=19622 mean per-article % inconsistent: 11.36 (primary), 13.04 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 2.11
+benchmark Nuijten 2017 split, received from March 2014: research articles=1032 with results=616 results=8564 mean per-article % inconsistent: 11.24 (primary), 12.45 (no allowance, p=.000 counted wrong); mean per-article % decision, no allowance: 1.67

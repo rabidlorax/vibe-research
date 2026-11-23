@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Draw the fixed random sample of extracted results that is read by hand.
+"""Draw, or look up again, the sample of extracted results that was read by hand.
 
-Per period (2010-2015, 2016-2021, 2022-2026): 40 results flagged inconsistent,
-20 flagged as decision inconsistencies, 10 not flagged; plus, added post hoc,
-20 flagged and 20 not flagged from July-November 2026. Written with context to
-data/raw/handcheck_sample.csv (article text, CC BY, not committed).
+--redraw draws a new sample. Per period (2010-2015, 2016-2021, 2022-2026): 20
+results flagged as decision inconsistencies, then 40 flagged results of any kind
+from those left (so this second stratum also contains some decision
+inconsistencies), then 10 unflagged results; plus 20 flagged and 20 unflagged
+from articles published July-November 2026.
 
 The sample that was actually read is recorded in results/handcheck.csv. It was
-drawn with --redraw from the extraction as it stood before a bug fix removed
-four results, so --redraw on the current data gives a different draw. Without
-arguments this script looks the recorded sample up again and writes it with
-context, so the labels can be re-read against the article text.
+drawn from an earlier state of the extraction (before the fixes described in the
+README), so --redraw on the current data gives a different draw. Without
+arguments this script looks the recorded items up in the current extraction and
+writes them with 150 characters of context to data/raw/handcheck_sample.csv
+(article text, CC BY, not committed), so the labels can be re-read. Items are
+matched on article and extracted string; when the same string occurs more than
+once in an article the first occurrence is shown, which may not be the one
+originally read.
 
 Usage: python src/sample_handcheck.py [--redraw]
 """
