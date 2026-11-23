@@ -6,6 +6,7 @@ koi_srho and koi_dor.
 Usage: python src/koi_columns.py   (one TAP query; needs data/raw/ps.csv)
 Writes results/koi_columns.md.
 """
+import hashlib
 import io
 import pathlib
 import urllib.parse
@@ -23,11 +24,14 @@ def main():
     req = urllib.request.Request(url, headers={"User-Agent": "vibe-research-consistency-audit/0.1 (research script)"})
     raw = urllib.request.urlopen(req, timeout=300).read()
     (HERE / "data" / "raw" / "dr25_koi.csv").write_bytes(raw)
+    sha = hashlib.sha256(raw).hexdigest()
+    (HERE / "data" / "dr25_koi.sha256").write_text(f"{sha}  dr25_koi.csv\nquery: {q}\n")
     k = pd.read_csv(io.BytesIO(raw))
     d = pd.read_csv(HERE / "data" / "raw" / "ps.csv", low_memory=False)
     d = d[d.soltype == "Kepler Project Candidate (q1_q17_dr25_koi)"]
     m = d.merge(k.drop_duplicates("kepler_name"), left_on="pl_name", right_on="kepler_name")
-    out = [f"ps rows with soltype 'Kepler Project Candidate (q1_q17_dr25_koi)': {len(d)}; "
+    out = [f"dr25_koi download sha256 {sha}",
+           f"ps rows with soltype 'Kepler Project Candidate (q1_q17_dr25_koi)': {len(d)}; "
            f"matched to a DR25 KOI by planet name: {len(m)}"]
     for a, b in (("st_dens", "koi_srho"), ("pl_ratdor", "koi_dor")):
         both = m[m[a].notna() & m[b].notna()]

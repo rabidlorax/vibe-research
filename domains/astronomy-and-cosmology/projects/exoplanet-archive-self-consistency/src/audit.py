@@ -142,9 +142,17 @@ def refshort(col):
             .str.replace("&amp;", "&").str.replace("&scaron;", "s"))
 
 
+def refkey(col):
+    """Short name plus ADS bibcode. The short name alone is not unique:
+    several hundred of them (e.g. "Mann et al. 2017") stand for 2+ papers."""
+    short = refshort(col)
+    bib = col.str.extract(r"/abs/([^/\s]+)/abstract")[0].str.replace("%26", "&")
+    return (short + " [" + bib + "]").where(bib.notna(), short)
+
+
 STELLAR = ("LOGG", "RHOS", "LUM")
 # References whose st_dens values are in solar units (see density_units.py).
-SOLAR_UNIT_REFS = ("Fulton & Petigura 2018", "Torres et al. 2017", "MacDonald et al. 2016")
+SOLAR_UNIT_BIBCODES = ("2018AJ....156..264F", "2017AJ....154..264T", "2016AJ....152..105M", "2017AJ....153..267M")
 THR = [("gt1pct", np.log(1.01)), ("gt5pct", np.log(1.05)), ("gt20pct", np.log(1.20)), ("gt2x", np.log(2.0))]
 
 
@@ -153,8 +161,10 @@ def main():
     sha = hashlib.sha256(raw).hexdigest()
     d = pd.read_csv(CSV, low_memory=False)
     d = pd.concat([d, pd.DataFrame({
-        "cls": d.soltype.map(source_class), "pl_ref": refshort(d.pl_refname),
-        "st_ref": refshort(d.st_refname), "same_ref": d.pl_refname == d.st_refname})], axis=1)
+        "cls": d.soltype.map(source_class), "pl_ref": refkey(d.pl_refname),
+        "st_ref": refkey(d.st_refname), "same_ref": d.pl_refname == d.st_refname})], axis=1)
+    solar_ref = d.st_ref.str.extract(r"\[(.+)\]$")[0].isin(SOLAR_UNIT_BIBCODES)
+    catalogue_star = d.st_ref.str.contains("KOI Table|TICv8", na=False)
     rows, outl, byref, hist, comp = [], [], [], {}, {}
     with np.errstate(all="ignore"):
         for cid, desc, obscol, m, dd, sig, cross, exact in checks(d):
@@ -167,12 +177,16 @@ def main():
             if cross:
                 strata = [("published, same ref", (d.cls == "published") & d.same_ref),
                           ("published, mixed refs", (d.cls == "published") & ~d.same_ref)]
-            if cid == "RHOS":
-                # Published planet rows can carry stellar values from a Kepler
-                # KOI table; those densities are transit-fitted (koi_srho).
-                strata.append(("published, excl. KOI-table stars and solar-unit refs",
-                               (d.cls == "published") & ~d.st_ref.isin(SOLAR_UNIT_REFS)
-                               & ~d.st_ref.str.contains("KOI Table", na=False)))
+            if cid in STELLAR:
+                # Published planet rows can carry stellar values from TICv8
+                # (consistent by construction) or from a Kepler KOI table
+                # (density is the transit-fitted koi_srho). The literature
+                # stratum drops both and, for density, the references whose
+                # values are in solar units (see density_units.py).
+                lit = (d.cls == "published") & ~catalogue_star
+                if cid == "RHOS":
+                    lit &= ~solar_ref
+                strata.append(("published, literature star ref", lit))
             strata += [("kepler-koi", d.cls == "kepler-koi"), ("tess-exofop", d.cls == "tess-exofop")]
             for sname, sm in strata:
                 sel = m & sm.to_numpy()
@@ -248,6 +262,13 @@ def main():
     lines += ["", f"Outlier entries (published, |d| > 20%): {len(out)} row-identity entries, "
               f"{n_distinct_rows} distinct rows, "
               f"{out.pl_name.nunique()} planets, {out.groupby('check').size().to_dict()}"]
+    o_sol = (out.check == "RHOS") & out.st_ref.str.extract(r"\[(.+)\]$")[0].isin(SOLAR_UNIT_BIBCODES)
+    o_koi = (out.check == "RHOS") & out.st_ref.str.contains("KOI Table", na=False)
+    o_dep, o_um = out.check == "DEPTH", out.check == "UMASS"
+    rest = out[~(o_sol | o_koi | o_dep | o_um)]
+    lines += [f"Of these entries: {int(o_sol.sum())} RHOS solar-unit references, {int(o_koi.sum())} RHOS KOI-table "
+              f"stars, {int(o_dep.sum())} DEPTH (approximate identity), {int(o_um.sum())} UMASS (rounding); "
+              f"remaining {len(rest)} entries, {rest.index.nunique()} distinct rows, {rest.pl_name.nunique()} planets."]
     # Clustering of factor-2 outliers by reference.
     big = out[np.abs(np.log(out.ratio_obs_over_pred)) > np.log(2)]
     lines += ["", "Factor-of-2 outliers by check and reference (top 5 references per check):", ""]

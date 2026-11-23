@@ -45,7 +45,12 @@ def main():
     raw.mkdir(parents=True, exist_ok=True)
     (raw / "ps.csv").write_bytes(data)
     digest = hashlib.sha256(data).hexdigest()
-    (HERE / "data" / "ps.sha256").write_text(digest + "  ps.csv\n")
+    sha_file = HERE / "data" / "ps.sha256"
+    if sha_file.exists() and sha_file.read_text().split()[0] == digest:
+        # Same snapshot as the committed one: keep its recorded access time.
+        print("matches committed checksum", digest)
+        return
+    sha_file.write_text(digest + "  ps.csv\n")
     (HERE / "data" / "fetch_meta.json").write_text(json.dumps({
         "accessed_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
         "query": QUERY, "url": URL, "bytes": len(data),
