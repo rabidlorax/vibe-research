@@ -53,20 +53,28 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    that have a stellar density (18.2%; 16.5% of all 6,473 planets) take it
    from one of these references, 1,049 of them from Fulton & Petigura. Two
    different mechanisms are involved:
-   - *Fulton & Petigura 2018: the paper's label.* Its Table 2 heads the
-     density column "g/cc" while the tabulated values are in solar units
-     (KOI-1: M = 0.99, R = 1.04, ρ = 0.87; 0.99/1.04³ = 0.88). The archive
-     reproduces the printed numbers.
-   - *The other three: the archive's ingestion.* Each paper states solar
-     units and the archive stores the same numbers in its g/cm³ column
-     without converting. Torres et al. 2017, Table 6, column "(ρ☉)":
-     KOI-3282 = Kepler-1455, 3.89. Mann et al. 2017, stellar table, column
-     "(ρ⊙)": Kepler-138 5.00, Kepler-42 26.80. MacDonald et al. 2016, text:
-     "a mean stellar density of ρ = 2.33 ± 0.15 ρ⊙" for Kepler-80. The
-     archive does convert in other cases: Mann et al. 2022 print
-     ρ★ = 0.94 ρ☉ for TOI-1227 and the archive has 1.325.
+   - *Fulton & Petigura 2018 and MacDonald et al. 2016: the paper's table
+     label.* Fulton & Petigura's Table 2 heads the density column "g/cc"
+     while the tabulated values are in solar units (KOI-1: M = 0.99,
+     R = 1.04, ρ = 0.87; 0.99/1.04³ = 0.88). MacDonald et al. give "a mean
+     stellar density of ρ = 2.33 ± 0.15 ρ⊙" in the text, but their Table 2
+     lists the same value with the unit g cm⁻³ (0.730/0.678³ = 2.34 in solar
+     units, so the table's unit is the wrong one). In both cases the archive
+     reproduces the printed table.
+   - *Torres et al. 2017 and Mann et al. 2017: the archive's ingestion.*
+     Each paper gives solar units only and the archive stores the same
+     numbers in its g/cm³ column without converting. Torres et al., Table 6,
+     column "(ρ☉)": KOI-3282 = Kepler-1455, 3.89. Mann et al. 2017, stellar
+     table, column "(ρ⊙)": Kepler-138 5.00, Kepler-42 26.80. The archive
+     does convert in other cases: Mann et al. 2022 print ρ★ = 0.94 ρ☉ for
+     TOI-1227 and the archive has 1.325.
 
-   The 1,460 is a lower bound. Among the remaining 3,045 literature rows, 43
+   The archive values quoted here are printed at the end of
+   `results/density_units.md`.
+
+   The 1,460 counts whole references and is, to within the few rows of
+   those references that do not fit (98 are not within 10% of the
+   solar-unit value), a lower bound. Among the remaining 3,045 literature rows, 43
    lie within 3% of the solar-unit value, against 5 to 10 in control windows
    of the same width; ten further references have all of their rows (2 to 4
    each) there. None of those was read, so they are leads only. Evidence:
@@ -92,22 +100,27 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    log g) in 21.7% of 7,935 rows, density in 13.4% of 3,045 (item 1
    references removed) and luminosity in 11.5% of 2,827. Evidence: `external-data`.
 
-3. **In rows from the Kepler KOI tables, `st_dens` and `pl_ratdor` are
-   transit-fitted quantities, not the mass-radius density or `pl_orbsmax`/
-   `st_rad`.** There the stellar density differs from 3M★/4πR★³ by a median of
-   56% and a/R★ differs from `pl_orbsmax`/`st_rad` by a median of 25%, while
-   Kepler's third law, log g and Rp/R★ hold to within 5% in over 99.9% of the
-   same rows. For the DR25 KOI table, all 2,683 matched rows have `st_dens`
-   equal to the KOI table's `koi_srho` and `pl_ratdor` equal to `koi_dor`.
-   The archive documents `koi_srho` as "Fitted stellar density ... a direct
-   observable from the light curve ... completely independent from the listed
-   stellar mass and radius". This is documented behaviour and the
+3. **In rows whose stellar parameters cite a Kepler KOI table (Q1-Q12,
+   Q1-Q16, DR24, DR25), `st_dens` is a transit-fitted quantity, not the
+   mass-radius density; and in all rows of the Q1-Q8 to DR25 KOI tables,
+   `pl_ratdor` is the fitted a/R★, not `pl_orbsmax`/`st_rad`.** In those
+   10,816 rows the stellar density differs from 3M★/4πR★³ by a median of 89%
+   (95.4% of rows by more than 5%). a/R★ differs from `pl_orbsmax`/`st_rad`
+   by a median of 25% (13,124 rows), while Kepler's third law, log g and
+   Rp/R★ hold to within 5% in over 99.9% of the same rows. In every row
+   matched to its KOI table, `st_dens` equals that table's `koi_srho` and
+   `pl_ratdor` equals `koi_dor`. The archive documents `koi_srho` as "Fitted
+   stellar density ... a direct observable from the light curve ...
+   completely independent from the listed stellar mass and radius". Rows of
+   the DR25 Supplemental KOI table are different: their stellar values cite
+   TICv8, their density is the mass-radius value (no row off by more than
+   5%) and they have no `pl_ratdor`. This is documented behaviour and the
    fitted-versus-catalogue density difference is a known effect; the point
    for users is that the `ps` column name does not distinguish the two, and
-   that 370 "published" planet rows also carry these KOI-table stellar
-   values. In the composite table, 1,347 of the 5,859 stellar densities
-   cite a KOI table. Evidence: `external-data`; the column definition is supporting
-   `literature`.
+   that 370 "published" planet rows also carry KOI-table stellar values. In
+   the composite table, 1,347 of the 5,859 stellar densities cite a KOI
+   table (1,340 of them DR24 or DR25). Evidence: `external-data`; the column
+   definition is supporting `literature`.
 
 4. `results/outliers.csv` lists 3,276 row-identity entries (3,100 distinct
    published rows, 2,595 planets) where the two sides of an identity differ
@@ -129,13 +142,13 @@ headline; claims 8 to 10 are a side result.
 |---|-------|----------|--------------|
 | 1 | In the 2026-11-23 snapshot, `st_dens` for rows citing Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2017 (bibcode 2017AJ....153..267M) and MacDonald et al. 2016 (1,460 rows, 1,435 planets, 856 hosts) matches M★/R★³ in solar units (median ratio 1.010, 0.990, 1.000, 0.995; 93%, 82%, 100%, 100% of rows within 10%) and not in g/cm³ (median ratio 0.716, 0.703, 0.709, 0.706; 0.1%, 0%, 0%, 0% within 10%). No other reference with ≥ 5 rows, of 140 (references keyed by name and bibcode), meets the same criterion (≥ 80% within 10% in solar units and ≤ 20% in g/cm³) | `external-data` | `python src/density_units.py`; see `results/density_units.md` |
 | 2 | 1,067 of 5,859 planets with a stellar density in `pscomppars` (18.2%) take it from one of those four references | `external-data` | same command |
-| 3 | Fulton & Petigura 2018, Table 2 (arXiv version), gives the unit of ρ_iso as "g/cc" and lists KOI-1 with R = 1.04 R☉, M_iso = 0.99 M☉, ρ_iso = 0.87; the archive's row for TrES-2 b (KOI-1) from that reference has `st_dens` = 0.87 | `literature` | Read Table 2 of arXiv:1805.01453; query the archive for TrES-2 b |
-| 4 | Three papers give density in solar units with values the archive stores unchanged in `st_dens`: Torres et al. 2017, Table 6, "(ρ☉)", KOI-3282 0.544 / 0.518 / 3.89 (archive, Kepler-1455 b: same three numbers); Mann et al. 2017, stellar table, "(ρ⊙)", 5.00, 7.03, 26.80 for Kepler-138, -560, -42; MacDonald et al. 2016, "M = 0.730 ± 0.030 M⊙, a radius of R = 0.678 ± 0.023 R⊙, a mean stellar density of ρ = 2.33 ± 0.15 ρ⊙" | `literature` | Read arXiv:1711.01267 (Table 6), arXiv:1705.01545 (stellar table), arXiv:1607.07540 (stellar-parameter paragraph); compare with the archive rows in `results/outliers.csv` |
+| 3 | Fulton & Petigura 2018, Table 2 (arXiv version), gives the unit of ρ_iso as "g/cc" and lists KOI-1 with R = 1.04 R☉, M_iso = 0.99 M☉, ρ_iso = 0.87; the archive's row for TrES-2 b (KOI-1) from that reference has `st_dens` = 0.87 | `literature` | Read Table 2 of arXiv:1805.01453; the archive's value is at the end of `results/density_units.md` |
+| 4 | Two papers give density in solar units only, with values the archive stores unchanged in `st_dens`: Torres et al. 2017, Table 6, "(ρ☉)", KOI-3282 0.544 / 0.518 / 3.89; Mann et al. 2017, stellar table, "(ρ⊙)", 5.00, 7.03, 26.80 for Kepler-138, -560, -42. MacDonald et al. 2016 give it in solar units in the text ("M = 0.730 ± 0.030 M⊙, a radius of R = 0.678 ± 0.023 R⊙, a mean stellar density of ρ = 2.33 ± 0.15 ρ⊙") and as 2.33 ± 0.15 g cm⁻³ in Table 2 | `literature` | Read arXiv:1711.01267 (Table 6), arXiv:1705.01545 (stellar table), arXiv:1607.07540 (stellar-parameter paragraph and Table 2); the archive's values are at the end of `results/density_units.md` |
 | 5 | Per-identity rates for published, KOI and TESS rows are as in `results/summary.md` (excerpt under Method) | `external-data` | `python src/audit.py` |
-| 6 | For all 2,683 `ps` rows of the DR25 KOI table that match a DR25 KOI by planet name, `st_dens` = `koi_srho` and `pl_ratdor` = `koi_dor` | `external-data` | `python src/koi_columns.py` |
+| 6 | For every `ps` row of the Q1-Q12, Q1-Q16, DR24 and DR25 KOI tables that matches a KOI of the same table by planet name and has both values (2,642, 2,683, 2,671 and 2,683 rows), `st_dens` = `koi_srho` and `pl_ratdor` = `koi_dor`; for Q1-Q8 (2,279 rows) `pl_ratdor` = `koi_dor` and there is no density | `external-data` | `python src/koi_columns.py`; see `results/koi_columns.md` |
 | 7 | The archive's KOI column documentation defines `koi_srho` as a fitted transit quantity "completely independent from the listed stellar mass and radius" | `literature` | Read `docs/API_kepcandidate_columns.html` on the archive |
 | 8 | Mann et al. 2022 (TOI-1227) print L★ = (2.51 ± 0.17) × 10⁻³ L☉, R★ = 0.56 R☉, Teff = 3072 K, F_bol = 7.87 × 10⁻¹¹ erg cm⁻² s⁻¹ and X, Y, Z = 51.34, −85.22, −16.95 pc. The radius and temperature give 0.0252 L☉; the flux and position (100.9 pc) give 0.0251 L☉ | `literature` | Read the stellar-parameter table of arXiv:2110.09531; `python src/toi1227_luminosity.py` does the arithmetic |
-| 9 | The archive's `st_lum` for TOI-1227 (−2.600) equals the printed 2.51 × 10⁻³ | `external-data` | TOI-1227 b rows in `results/outliers.csv` |
+| 9 | The archive's `st_lum` for TOI-1227 (−2.600) equals the printed 2.51 × 10⁻³ | `external-data` | TOI-1227 b rows in `results/outliers.csv` (LUM) |
 | 10 | The printed luminosity in claim 8 has a wrong exponent (10⁻³ for 10⁻²) | `conjecture` | Ask the authors or check for an erratum |
 
 ## Method
@@ -166,7 +179,8 @@ Kepler KOI tables, and TESS/ExoFOP. For identities that join planet and star
 columns, published rows are further split by whether `pl_refname` equals
 `st_refname`; only the equal case tests a single reference.
 
-For the logarithmic columns `st_logg` and `st_lum` the "ratio" is that of g
+"Off by more than x%" always means a factor of more than 1 + x/100 in
+either direction (|ln ratio| > ln(1 + x/100)). For the logarithmic columns `st_logg` and `st_lum` the "ratio" is that of g
 or L, that is 10^(difference of the logs); 5% is 0.021 dex.
 
 Where every input has a two-sided uncertainty, z = ln(ratio)/σ, with σ from
@@ -189,6 +203,8 @@ rows off by more than 5% and more than 3σ, as a share of rows with errors):
 | RHOS | published | 9,261 | 0.04% | 23.99% | 21.25% | 1,968 | 252 | 15.43% |
 | RHOS | published, literature star ref | 3,045 | 0.55% | 13.37% | 6.27% | 191 | 37 | 1.88% |
 | RHOS | Kepler KOI | 13,363 | 56.3% | 77.21% | 67.48% | 9,018 | 5,076 | 6.15% |
+| RHOS | Kepler KOI, KOI-table star ref | 10,816 | 88.8% | 95.40% | 83.38% | 9,018 | 5,076 | 6.51% |
+| RHOS | Kepler KOI, TICv8 star ref | 2,547 | 0.00% | 0.00% | 0.00% | 0 | 0 | 0.00% |
 | LUM | published | 7,209 | 0.00% | 4.51% | 1.15% | 83 | 24 | 0.34% |
 | LUM | published, literature star ref | 2,827 | 0.59% | 11.50% | 2.94% | 83 | 24 | 0.55% |
 | RHOP | published | 2,524 | 0.63% | 21.55% | 3.01% | 76 | 16 | 0.24% |
@@ -211,6 +227,10 @@ Reading the table:
   lines to use for the stellar identities. The plain "RHOS published" line
   is dominated by the item 1 references (1,453 of its 1,968 rows above 20%)
   and KOI-table stars (324).
+- The plain "RHOS Kepler KOI" line mixes two populations: rows whose star
+  cites a KOI table (fitted density) and 2,547 rows whose star cites TICv8
+  (mass-radius density); TICv8 is the stellar reference of every DR25
+  Supplemental row.
 - The "> 3σ and > 5%" figure for the approximate DEPTH identity (8.97%) is
   expected and is not a count of errors. Mixed-reference strata are shown
   for comparison only (RATROR mixed: 2.68%, not in the excerpt).
@@ -238,8 +258,8 @@ the solar-unit value (ratio 0.709 to the g/cm³ value), against 5, 9 and 10
 rows in windows of the same width centred on ratios 0.65, 0.76 and 1.41. The
 excess is real, and `results/density_units.md` lists the ten references
 whose rows all fall in the window.
-`src/koi_columns.py` compares the DR25 KOI rows of `ps` with the KOI table
-itself, and `src/toi1227_luminosity.py` redoes the TOI-1227 luminosity
+`src/koi_columns.py` compares the KOI-table rows of `ps` with the five KOI
+tables themselves, and `src/toi1227_luminosity.py` redoes the TOI-1227 luminosity
 arithmetic.
 
 Things tried that are not headline results: the largest single outliers
@@ -258,7 +278,7 @@ cd domains/astronomy-and-cosmology/projects/exoplanet-archive-self-consistency
 python src/fetch.py           # ~31 MB from exoplanetarchive.ipac.caltech.edu, about 1 minute
 python src/audit.py           # about 5 seconds; writes results/summary.*, outliers.csv, by_reference.csv, PNG
 python src/density_units.py   # one more small TAP query (pscomppars); --offline skips it
-python src/koi_columns.py     # one more TAP query (q1_q17_dr25_koi)
+python src/koi_columns.py     # five more TAP queries (the KOI tables)
 python src/toi1227_luminosity.py   # no input, no network
 ```
 
@@ -267,7 +287,7 @@ The archive changes continuously. A later download may not match
 move as rows are added or corrected. `fetch.py` keeps the committed
 `data/fetch_meta.json` when the checksum matches. The two smaller downloads
 have their checksums and queries in `data/pscomppars_dens.sha256` and
-`data/dr25_koi.sha256`. The queries have no `ORDER BY`, so a checksum can
+`data/koi_tables.sha256`. The queries have no `ORDER BY`, so a checksum can
 also change if the server returns rows in another order. The
 committed results are for the snapshot whose checksum and query are in
 `data/fetch_meta.json`. The raw file is not committed.
@@ -279,8 +299,8 @@ committed results are for the snapshot whose checksum and query are in
   `https://exoplanetarchive.ipac.caltech.edu/TAP/sync`, accessed 2026-11-23.
   Exact queries are in `src/fetch.py` and `src/density_units.py`. Dataset DOIs
   10.26133/NEA12 (`ps`) and 10.26133/NEA13 (`pscomppars`), from the archive's
-  `docs/doi.html`. The KOI table `q1_q17_dr25_koi` is queried by
-  `src/koi_columns.py`. Licence: no licence statement was found; the
+  `docs/doi.html`. Five KOI tables (`q1_q8_koi` to
+  `q1_q17_dr25_koi`) are queried by `src/koi_columns.py`. Licence: no licence statement was found; the
   archive's data are, as far as is known here, public and free to use with
   acknowledgement `[from memory, unverified]`. Only
   derived ratios and the identifying values of outlier rows are committed.
@@ -311,15 +331,18 @@ No fetched page contained instructions addressed to an AI.
 
 ## Prior work and novelty
 
-Searched on 2026-11-23, before the analysis: web search (five queries on
-exoplanet-archive internal consistency, self-consistency, Kepler's third law
-checks, catalogue errors and typos, and the Fulton & Petigura density
-units); OpenAlex (three queries: "exoplanet catalog internal consistency
+Searched on 2026-11-23. Before the analysis: web search (four queries on
+exoplanet-archive internal consistency, catalogue comparison and typos,
+self-consistency of the composite table, and Kepler's third law checks);
+OpenAlex (three queries: "exoplanet catalog internal consistency
 parameters", "exoplanet archive data quality errors catalogue",
 "self-consistent exoplanet catalog homogeneous parameters inconsistencies");
-arXiv API ("exoplanet archive" with "inconsistencies", "internal
-consistency", "self-consistency", "unit error"); and the archive's own
-documentation. Alternative names used: self-consistency, internal
+arXiv API ("exoplanet archive" with "inconsistencies"); and the archive's
+own documentation. After the first audit run: one web query to identify
+the Kepler's-law paper below. After the density offset was found: one web
+query on the Fulton & Petigura density units and one arXiv API query
+("exoplanet archive" with "internal consistency", "self-consistency",
+"unit error"). Alternative names used: self-consistency, internal
 consistency, Keplerian consistency, catalogue validation, data quality,
 literature discrepancies.
 
@@ -334,8 +357,9 @@ Found:
   consistency when selecting exoplanet system parameters." They give no
   rates and no numerical threshold for the archive comparison, and test no
   identity other than Kepler's third law and an equilibrium-temperature
-  relation. Read as the arXiv HTML through a summarising tool; the quoted
-  sentence was confirmed, the other details are second-hand.
+  relation. Read here through a summarising tool; the quoted sentence, the
+  five outliers and the two tested relations were confirmed first-hand by
+  the reviewers.
 - The difference between a transit-fitted stellar density and one from
   mass and radius (summary item 3) is a known and used effect. The archive's
   KOI documentation cites Seager & Mallén-Ornelas 2003 for it; the
@@ -367,7 +391,7 @@ Found:
   radius differs from the tabulated one by more than 10%. The LOGG rates here are
   therefore a replication.
 - Lanzafame et al., "Tracking the evolution of sub-Neptunes. I.",
-  arXiv:2611.00856, Appendix A.8 ("Cross-parameter coherence"): "If the
+  arXiv:2611.00856, Appendix A.8.3 ("Cross-parameter coherence"): "If the
   selected log g differs from log g_M,R by more than 0.3 dex, all the gravity
   measurements available for that star are reconsidered". The check is
   applied to values selected across references, not within one archive row.
@@ -413,10 +437,10 @@ know.
   units (25 of them in ten references whose rows all match), against a
   background of 5 to 10, and were not traced.
 - A discrepancy does not say which column is wrong, or whether the paper or
-  the archive introduced it. Of the five cases traced, two originate in the
-  paper (Fulton & Petigura's unit label, the TOI-1227 luminosity) and three
-  in the archive (Torres et al., Mann et al. 2017 and MacDonald et al.
-  densities).
+  the archive introduced it. Of the five cases traced, three originate in the
+  paper (Fulton & Petigura's unit label, MacDonald et al.'s Table 2 unit,
+  the TOI-1227 luminosity) and two in the archive (Torres et al. and Mann
+  et al. 2017 densities).
 - The "published" strata mix literature solutions with catalogue stellar
   parameters (TICv8, KOI tables) and with re-analyses such as Stassun et al.
   2017, so their rates are not rates of error in individual papers.
@@ -441,3 +465,4 @@ know.
 | 2026-11-23 | Fresh agent session launched by the author's session, given the repository and the review rules but not the author's conclusions (model ID unknown: the agent did not report it) | Clean clone; reran all commands (checksum and all result files identical); read `src/` line by line and recomputed key numbers with separate code; fetched Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2022, Decocq et al. 2026 and the archive documentation; repeated the prior-art search with other terms. Not checked: MacDonald et al. 2016, Mann et al. 2017, journal versions, other outlier rows | Changes needed, none overturning a headline claim: 17 points (outlier entries miscounted as rows; a rate range that omitted DEPTH; undisclosed concentration of violations in catalogue stellar parameters and in Stassun et al. 2017; Torres et al. error is the archive's, not the paper's; denominator of the 18%; KOI-column and TOI-1227 claims labelled weaker than checkable; smaller wording and code points). All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a second fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all result files identical); recomputed the main counts with separate code; read `src/`; fetched Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2017 and 2022, MacDonald et al. 2016, Decocq et al. 2026 and the archive documentation; new prior-art search. Not checked: journal versions, the ten further density references, other outlier rows | Changes needed, headline items stand: 12 points. A bug made the density "control window" identical to the test window, reversing a stated conclusion; references were grouped by short name, which merged two "Mann et al. 2017" papers and hid a fourth affected reference; TICv8 rows diluted the stellar rates; a prior log g consistency rate (arXiv:2505.22205) was missed; claims with two labels; missing checksums. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a third fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all three download checksums and all result files identical); recomputed the main counts with separate code and added robustness checks (per stellar solution instead of per row; rounding); read `src/`; fetched all five papers, Decocq et al., arXiv:2505.22205, arXiv:2611.00856 and the archive documentation; new prior-art search. Not checked: journal versions (publisher and CDS unreachable), the ten further density references, other outlier rows | Changes needed, no headline claim or table number affected: 8 points. A wrong host count for the archive's discrepancy page (removed); the unit documentation page not cited; three correct numbers not printed by any script; Loyd et al. 2020 and the TOI-815 entry missing from prior work; "5% in log g" ambiguous; two citation markers; stale prior-work sentences; HTML entities in result files. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a fourth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (checksums and result files identical); recomputed the table and claim numbers with separate code; read `src/`; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), papers marked from memory, the ten further density references, other outlier rows | Changes needed, no headline claim overturned: 6 points. The KOI density median (56%) was diluted by TICv8-star rows of the DR25 Supplemental table (89% for KOI-table stars); MacDonald et al.'s own Table 2 carries the g cm⁻³ label, so that case is the paper's, not the archive's; a misplaced line in a results file; the order of the prior-art searches misstated; two archive values not printed by any script; a section number. All addressed in the following commit. Status stays `result` |

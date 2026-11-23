@@ -1,2 +1,0 @@
-dfb500b2c86a83238121bc5a6837b6fd9f50b6feea01322bd9f3b0a223bef896  dr25_koi.csv
-query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q17_dr25_koi where kepler_name is not null

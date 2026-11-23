@@ -8,12 +8,17 @@ Input: ps.csv, sha256 f7f15dabf8bbae042698ab40c2f5188f9d20b08f79974348f7f2b679da
 | LOGG | published | 12691 | 0.233 | 31.03 | 13.58 | 6.07 | 770 | 90 | 9668 | 56 | 0.58 |
 | LOGG | published, literature star ref | 7935 | 0.979 | 49.29 | 21.73 | 9.7 | 770 | 90 | 7713 | 56 | 0.73 |
 | LOGG | kepler-koi | 15671 | 0.088 | 5.6 | 0.08 | 0.0 | 0 | 0 | 13707 | 0 | 0.0 |
+| LOGG | kepler-koi, KOI-table star ref | 13124 | 0.118 | 6.68 | 0.09 | 0.0 | 0 | 0 | 13065 | 0 | 0.0 |
+| LOGG | kepler-koi, TICv8 star ref | 2547 | 0.001 | 0.0 | 0.0 | 0.0 | 0 | 0 | 642 | 0 | 0.0 |
 | RHOS | published | 9261 | 0.042 | 30.89 | 23.99 | 21.25 | 1968 | 252 | 6441 | 994 | 15.43 |
 | RHOS | published, literature star ref | 3045 | 0.554 | 33.89 | 13.37 | 6.27 | 191 | 37 | 3039 | 57 | 1.88 |
 | RHOS | kepler-koi | 13363 | 56.294 | 80.18 | 77.21 | 67.48 | 9018 | 5076 | 11440 | 703 | 6.15 |
+| RHOS | kepler-koi, KOI-table star ref | 10816 | 88.83 | 99.07 | 95.4 | 83.38 | 9018 | 5076 | 10798 | 703 | 6.51 |
+| RHOS | kepler-koi, TICv8 star ref | 2547 | 0.003 | 0.0 | 0.0 | 0.0 | 0 | 0 | 642 | 0 | 0.0 |
 | LUM | published | 7209 | 0.001 | 14.15 | 4.51 | 1.15 | 83 | 24 | 4141 | 14 | 0.34 |
 | LUM | published, literature star ref | 2827 | 0.591 | 36.08 | 11.5 | 2.94 | 83 | 24 | 2560 | 14 | 0.55 |
 | LUM | kepler-koi | 2547 | 0.001 | 0.0 | 0.0 | 0.0 | 0 | 0 | 642 | 0 | 0.0 |
+| LUM | kepler-koi, TICv8 star ref | 2547 | 0.001 | 0.0 | 0.0 | 0.0 | 0 | 0 | 642 | 0 | 0.0 |
 | RHOP | published | 2524 | 0.633 | 40.57 | 21.55 | 3.01 | 76 | 16 | 2501 | 6 | 0.24 |
 | URAD | published | 13203 | 0.0 | 0.82 | 0.05 | 0.0 | 0 | 0 | 0 | n/a | n/a |
 | URAD | kepler-koi | 13124 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 0 | 0 | n/a | n/a |
@@ -38,9 +43,11 @@ Two references contributing most rows off by > 5%, per stratum (count of the str
 - LOGG, published: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167); Stassun et al. 2017 [2017AJ....153..136S] (122 of 1724 / 355)
 - LOGG, published, literature star ref: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167); Stassun et al. 2017 [2017AJ....153..136S] (122 of 1724 / 355)
 - LOGG, kepler-koi: Q1-Q8 KOI Table (12 of 12 / 2308)
+- LOGG, kepler-koi, KOI-table star ref: Q1-Q8 KOI Table (12 of 12 / 2308)
 - RHOS, published: Fulton & Petigura 2018 [2018AJ....156..264F] (1414 of 2222 / 1414); Q1-Q17 DR25 KOI Table (355 of 2222 / 370)
 - RHOS, published, literature star ref: Livingston et al. 2018 [2018AJ....156..277L] (54 of 407 / 56); Marcy et al. 2014 [2014ApJS..210...20M] (20 of 407 / 49)
 - RHOS, kepler-koi: Q1-Q16 KOI Table (2596 of 10318 / 2720); Q1-Q17 DR25 KOI Table (2587 of 10318 / 2718)
+- RHOS, kepler-koi, KOI-table star ref: Q1-Q16 KOI Table (2596 of 10318 / 2720); Q1-Q17 DR25 KOI Table (2587 of 10318 / 2718)
 - LUM, published: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7); Marmier et al. 2013 [2013A&A...551A..90M] (6 of 325 / 8)
 - LUM, published, literature star ref: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7); Marmier et al. 2013 [2013A&A...551A..90M] (6 of 325 / 8)
 - RHOP, published: Howard et al. 2025 [2025ApJS..278...52H] (39 of 544 / 63); Hadden & Lithwick 2017 [2017AJ....154....5H] (32 of 544 / 49)

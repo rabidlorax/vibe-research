@@ -63,7 +63,8 @@ def main():
     bad = set(sol.ref)
     aff = d[d.ref.isin(bad)]
     out += [f"Affected ps rows: {len(aff)} ({aff.pl_name.nunique()} planets, {aff.hostname.nunique()} host stars); "
-            f"of these, default_flag=1 rows: {int((aff.default_flag == 1).sum())}", ""]
+            f"of these, default_flag=1 rows: {int((aff.default_flag == 1).sum())}",
+            f"Affected rows not within 10% of the solar-unit value: {int((~within(aff.r_solar, 1, 1.1)).sum())}", ""]
     # Row-level leads in the remaining literature rows: st_dens within 3% of
     # the solar-unit value, i.e. r_cgs within 3% of 1/rho_sun. Controls are
     # windows of the same logarithmic width elsewhere in r_cgs, including the
@@ -101,10 +102,21 @@ def main():
                 f"{len(ca)} ({100 * len(ca) / len(c):.1f}% of those, {100 * len(ca) / ntot:.1f}% of all) "
                 f"take it from an affected reference:",
                 ca.ref.value_counts().to_string(), "",
-                f"Composite stellar densities that cite a Kepler KOI table (transit-fitted values): "
-                f"{int(c.ref.str.contains('KOI Table', na=False).sum())} of {len(c)}", "",
-                f"For those composite rows, st_dens / (M*/R*^3 in solar units) has median {r.median():.3f} "
-                f"(composite mass and radius may come from other references)."]
+                f"For the composite rows from an affected reference, st_dens / (M*/R*^3 in solar units) has "
+                f"median {r.median():.3f} (composite mass and radius may come from other references).", "",
+                "Composite stellar densities that cite a Kepler KOI table: "
+                + "; ".join(f"{k} ({v})" for k, v in c.ref[c.ref.str.contains("KOI Table", na=False)].value_counts().items())
+                + f"; total {int(c.ref.str.contains('KOI Table', na=False).sum())} of {len(c)}"]
+    # Archive values for the stars compared with the papers in the README.
+    spot = [("TrES-2 b", "2018AJ....156..264F"), ("Kepler-1455 b", "2017AJ....154..264T"),
+            ("Kepler-138 b", "2017AJ....153..267M"), ("Kepler-560 b", "2017AJ....153..267M"),
+            ("Kepler-42 b", "2017AJ....153..267M"), ("Kepler-80 b", "2016AJ....152..105M"),
+            ("TOI-1227 b", "2022AJ....163..156M")]
+    out += ["", "Archive values for the rows compared with the papers (planet, stellar reference, st_mass, st_rad, st_dens):"]
+    for pl, bibc in spot:
+        for _, x in d[(d.pl_name == pl) & d.ref.str.contains(bibc, regex=False)].drop_duplicates(
+                ["st_mass", "st_rad", "st_dens"]).iterrows():
+            out.append(f"- {pl}, {x.ref}: {x.st_mass:g}, {x.st_rad:g}, {x.st_dens:g}")
     (HERE / "results" / "density_units.md").write_text("\n".join(out) + "\n")
     print("\n".join(out))
 

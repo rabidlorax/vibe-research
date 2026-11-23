@@ -2,7 +2,9 @@
 """Internal-consistency audit of the NASA Exoplanet Archive `ps` table.
 
 For each identity, compares a tabulated value ("obs") with the value implied
-by other columns of the same row ("pred"). d = ln(obs/pred). Where every
+by other columns of the same row ("pred"). d = ln(obs/pred). "Off by more
+than x%" means |d| > ln(1 + x/100), i.e. a factor of more than 1 + x/100 in
+either direction. Where every
 input has a reported two-sided uncertainty, z = d / sigma with sigma from
 first-order propagation assuming independent errors.
 
@@ -187,7 +189,15 @@ def main():
                 if cid == "RHOS":
                     lit &= ~solar_ref
                 strata.append(("published, literature star ref", lit))
-            strata += [("kepler-koi", d.cls == "kepler-koi"), ("tess-exofop", d.cls == "tess-exofop")]
+            strata.append(("kepler-koi", d.cls == "kepler-koi"))
+            if cid in STELLAR:
+                # KOI rows of the DR25 Supplemental table take their stellar
+                # values from TICv8, so split by where the star comes from.
+                strata.append(("kepler-koi, KOI-table star ref",
+                               (d.cls == "kepler-koi") & d.st_ref.str.contains("KOI Table", na=False)))
+                strata.append(("kepler-koi, TICv8 star ref",
+                               (d.cls == "kepler-koi") & d.st_ref.str.contains("TICv8", na=False)))
+            strata.append(("tess-exofop", d.cls == "tess-exofop"))
             for sname, sm in strata:
                 sel = m & sm.to_numpy()
                 x, zz = dd[sel], z[sel]

@@ -10,6 +10,7 @@ Fulton & Petigura 2018 [2018AJ....156..264F]  1414     1405    838              
  MacDonald et al. 2016 [2016AJ....152..105M]    11        6      1               0.7056                 0.9948                  0.0                  100.0
 
 Affected ps rows: 1460 (1435 planets, 856 host stars); of these, default_flag=1 rows: 16
+Affected rows not within 10% of the solar-unit value: 98
 
 Remaining published rows (KOI-table and TICv8 stars excluded): 3045.
 Rows with st_dens within 3% of M*/R*^3 in solar units (r_cgs = 0.7093): 43 rows, 41 planets, 33 hosts.
@@ -25,6 +26,15 @@ Torres et al. 2017 [2017AJ....154..264T]           8
 Mann et al. 2017 [2017AJ....153..267M]             5
 MacDonald et al. 2016 [2016AJ....152..105M]        5
 
-Composite stellar densities that cite a Kepler KOI table (transit-fitted values): 1347 of 5859
+For the composite rows from an affected reference, st_dens / (M*/R*^3 in solar units) has median 0.998 (composite mass and radius may come from other references).
 
-For those composite rows, st_dens / (M*/R*^3 in solar units) has median 0.998 (composite mass and radius may come from other references).
+Composite stellar densities that cite a Kepler KOI table: Q1-Q17 DR25 KOI Table (721); Q1-Q17 DR24 KOI Table (619); Q1-Q17 DR25 Supplemental KOI Table (7); total 1347 of 5859
+
+Archive values for the rows compared with the papers (planet, stellar reference, st_mass, st_rad, st_dens):
+- TrES-2 b, Fulton & Petigura 2018 [2018AJ....156..264F]: 0.991, 1.045, 0.87
+- Kepler-1455 b, Torres et al. 2017 [2017AJ....154..264T]: 0.544, 0.518, 3.89
+- Kepler-138 b, Mann et al. 2017 [2017AJ....153..267M]: 0.468, 0.454, 5
+- Kepler-560 b, Mann et al. 2017 [2017AJ....153..267M]: 0.381, 0.378, 7.03
+- Kepler-42 b, Mann et al. 2017 [2017AJ....153..267M]: 0.144, 0.175, 26.8
+- Kepler-80 b, MacDonald et al. 2016 [2016AJ....152..105M]: 0.73, 0.678, 2.33
+- TOI-1227 b, Mann et al. 2022 [2022AJ....163..156M]: 0.17, 0.56, 1.32524
