@@ -31,31 +31,31 @@ Input: ps.csv, sha256 f7f15dabf8bbae042698ab40c2f5188f9d20b08f79974348f7f2b679da
 | INSOL | published, same ref | 766 | 0.494 | 35.9 | 13.71 | 3.13 | 24 | 9 | 743 | 11 | 1.48 |
 | INSOL | published, mixed refs | 9 | 0.448 | 11.11 | 11.11 | 0.0 | 0 | 0 | 9 | 0 | 0.0 |
 
-Reference contributing most rows off by > 5%, per stratum (count / that reference's rows in the stratum):
+Two references contributing most rows off by > 5%, per stratum (count of the stratum's > 5% rows / that reference's rows in the stratum):
 
-- K3, published, same ref: Stassun et al. 2017 [2017AJ....153..136S] (118 of 399 / 204)
-- K3, published, mixed refs: Butler et al. 2006 [2006ApJ...646..505B] (5 of 22 / 19)
-- LOGG, published: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167)
-- LOGG, published, literature star ref: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167)
+- K3, published, same ref: Stassun et al. 2017 [2017AJ....153..136S] (118 of 399 / 204); Castro-González et al. 2022 [2022MNRAS.509.1075C] (13 of 399 / 22)
+- K3, published, mixed refs: Butler et al. 2006 [2006ApJ...646..505B] (5 of 22 / 19); Wright et al. 2009 [2009ApJ...693.1084W] (4 of 22 / 26)
+- LOGG, published: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167); Stassun et al. 2017 [2017AJ....153..136S] (122 of 1724 / 355)
+- LOGG, published, literature star ref: Mayo et al. 2018 [2018AJ....155..136M] (148 of 1724 / 167); Stassun et al. 2017 [2017AJ....153..136S] (122 of 1724 / 355)
 - LOGG, kepler-koi: Q1-Q8 KOI Table (12 of 12 / 2308)
-- RHOS, published: Fulton & Petigura 2018 [2018AJ....156..264F] (1414 of 2222 / 1414)
-- RHOS, published, literature star ref: Livingston et al. 2018 [2018AJ....156..277L] (54 of 407 / 56)
-- RHOS, kepler-koi: Q1-Q16 KOI Table (2596 of 10318 / 2720)
-- LUM, published: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7)
-- LUM, published, literature star ref: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7)
-- RHOP, published: Howard et al. 2025 [2025ApJS..278...52H] (39 of 544 / 63)
-- URAD, published: Yu et al. 2018 [2018AJ....156...22Y] (3 of 6 / 18)
-- UMASS, published: Marois et al. 2008 [2008Sci...322.1348M] (3 of 12 / 3)
-- UMSINI, published: Anglada-Escude et al. 2013 [2013A&A...556A.126A] (2 of 3 / 5)
-- RATROR, published, same ref: Vanderburg et al. 2016 [2016ApJS..222...14V] (90 of 242 / 107)
-- RATROR, published, mixed refs: Morton et al. 2016 [2016ApJ...822...86M] (10 of 17 / 15)
-- RATROR, kepler-koi: Q1-Q8 KOI Table (5 of 7 / 2308)
-- RATDOR, published, same ref: Livingston et al. 2018 [2018AJ....156..277L] (65 of 271 / 79)
-- RATDOR, published, mixed refs: Greklek-McKeon et al. 2025 [2025AJ....170...65G] (1 of 3 / 1)
-- RATDOR, kepler-koi: Q1-Q16 KOI Table (2361 of 11406 / 2720)
-- DEPTH, published: Kruse et al. 2019 [2019ApJS..244...11K] (265 of 614 / 301)
-- DEPTH, kepler-koi: Q1-Q16 KOI Table (2540 of 11845 / 2720)
-- INSOL, published, same ref: Torres et al. 2017 [2017AJ....154..264T] (9 of 105 / 22)
+- RHOS, published: Fulton & Petigura 2018 [2018AJ....156..264F] (1414 of 2222 / 1414); Q1-Q17 DR25 KOI Table (355 of 2222 / 370)
+- RHOS, published, literature star ref: Livingston et al. 2018 [2018AJ....156..277L] (54 of 407 / 56); Marcy et al. 2014 [2014ApJS..210...20M] (20 of 407 / 49)
+- RHOS, kepler-koi: Q1-Q16 KOI Table (2596 of 10318 / 2720); Q1-Q17 DR25 KOI Table (2587 of 10318 / 2718)
+- LUM, published: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7); Marmier et al. 2013 [2013A&A...551A..90M] (6 of 325 / 8)
+- LUM, published, literature star ref: Naef et al. 2010 [2010A&A...523A..15N] (7 of 325 / 7); Marmier et al. 2013 [2013A&A...551A..90M] (6 of 325 / 8)
+- RHOP, published: Howard et al. 2025 [2025ApJS..278...52H] (39 of 544 / 63); Hadden & Lithwick 2017 [2017AJ....154....5H] (32 of 544 / 49)
+- URAD, published: Yu et al. 2018 [2018AJ....156...22Y] (3 of 6 / 18); Kruse et al. 2019 [2019ApJS..244...11K] (2 of 6 / 300)
+- UMASS, published: Marois et al. 2008 [2008Sci...322.1348M] (3 of 12 / 3); Hadden et al. 2014 [2014ApJ...787...80H] (2 of 12 / 139)
+- UMSINI, published: Anglada-Escude et al. 2013 [2013A&A...556A.126A] (2 of 3 / 5); Lin et al. 2024 [2024AJ....168...27L] (1 of 3 / 7)
+- RATROR, published, same ref: Vanderburg et al. 2016 [2016ApJS..222...14V] (90 of 242 / 107); Morton et al. 2016 [2016ApJ...822...86M] (56 of 242 / 2239)
+- RATROR, published, mixed refs: Morton et al. 2016 [2016ApJ...822...86M] (10 of 17 / 15); Dressing et al. 2017 [2017AJ....154..207D] (2 of 17 / 4)
+- RATROR, kepler-koi: Q1-Q8 KOI Table (5 of 7 / 2308); Q1-Q12 KOI Table (1 of 7 / 2678)
+- RATDOR, published, same ref: Livingston et al. 2018 [2018AJ....156..277L] (65 of 271 / 79); Livingston et al. 2018 [2018AJ....156...78L] (33 of 271 / 45)
+- RATDOR, published, mixed refs: Greklek-McKeon et al. 2025 [2025AJ....170...65G] (1 of 3 / 1); Dressing et al. 2017 [2017AJ....154..207D] (1 of 3 / 1)
+- RATDOR, kepler-koi: Q1-Q16 KOI Table (2361 of 11406 / 2720); Q1-Q17 DR24 KOI Table (2348 of 11406 / 2700)
+- DEPTH, published: Kruse et al. 2019 [2019ApJS..244...11K] (265 of 614 / 301); Vanderburg et al. 2016 [2016ApJS..222...14V] (103 of 614 / 107)
+- DEPTH, kepler-koi: Q1-Q16 KOI Table (2540 of 11845 / 2720); Q1-Q17 DR24 KOI Table (2521 of 11845 / 2700)
+- INSOL, published, same ref: Torres et al. 2017 [2017AJ....154..264T] (9 of 105 / 22); Guenther et al. 2026 [2026AJ....172...54G] (5 of 105 / 5)
 - INSOL, published, mixed refs: Dressing et al. 2017 [2017AJ....154..207D] (1 of 1 / 1)
 
 Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
@@ -64,6 +64,9 @@ Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
 - RHOS: TICv8 [2019AJ....158..138S] (4386); Fulton & Petigura 2018 [2018AJ....156..264F] (1414); Q1-Q17 DR25 KOI Table (370); Stassun et al. 2017 [2017AJ....153..136S] (151)
 - LUM: TICv8 [2019AJ....158..138S] (4382); MacDougall et al. 2023 [2023AJ....166...33M] (112); Mann et al. 2013 [2013ApJ...779..188M] (85); Ment et al. 2018 [2018AJ....156..213M] (54)
 
+Published rows with TICv8 stellar parameters (rows / rows off by > 5%): LOGG 4386 / 0; RHOS 4386 / 0; LUM 4382 / 0
+Short reference names in st_refname (published rows) standing for more than one bibcode: 247
+
 Outlier entries (published, |d| > 20%): 3276 row-identity entries, 3100 distinct rows, 2595 planets, {'DEPTH': 156, 'INSOL': 24, 'K3': 92, 'LOGG': 770, 'LUM': 83, 'RATDOR': 84, 'RATROR': 21, 'RHOP': 76, 'RHOS': 1968, 'UMASS': 2}
 Of these entries: 1453 RHOS solar-unit references, 324 RHOS KOI-table stars, 156 DEPTH (approximate identity), 2 UMASS (rounding); remaining 1341 entries, 1192 distinct rows, 941 planets.
 
@@ -71,12 +74,12 @@ Factor-of-2 outliers by check and reference (top 5 references per check):
 
 - DEPTH: 15 rows; Kruse et al. 2019 [2019ApJS..244...11K] (4); Guenther et al. 2026 [2026AJ....172...54G] (1); Wang et al. 2018 [2018PASP..130f4401W] (1); Morello et al. 2014 [2014ApJ...786...22M] (1); Ikwut-Ukwa et al. 2020 [2020AJ....160..209I] (1)
 - INSOL: 9 rows; Lockley et al. 2025 [2025MNRAS.541..919L] (3); Barkaoui et al. 2025 [2025A&A...695A.281B] (2); Sgro et al. 2024 [2024AJ....168...26S] (1); Mann et al. 2022 [2022AJ....163..156M] (1); Psaridi et al. 2022 [2022A&A...664A..94P] (1)
-- K3: 5 rows; Stassun et al. 2017 [2017AJ....153..136S] (2); Yang et al. 2025 [2025ApJ...986..117Y] (1); Ca&ntilde;as et al. 2023 [2023ApJS..265...50C] (1); Everett et al. 2015 [2015AJ....149...55E] (1)
+- K3: 5 rows; Stassun et al. 2017 [2017AJ....153..136S] (2); Yang et al. 2025 [2025ApJ...986..117Y] (1); Cañas et al. 2023 [2023ApJS..265...50C] (1); Everett et al. 2015 [2015AJ....149...55E] (1)
 - LOGG: 90 rows; Stassun et al. 2017 [2017AJ....153..136S] (7); Fabrycky et al. 2012 [2012ApJ...750..114F] (5); Steffen et al. 2012 [2012MNRAS.421.2342S] (4); Hartogh et al. 2026 [2026A&A...707A..93H] (4); Moutou et al. 2015 [2015A&A...576A..48M] (3)
 - LUM: 24 rows; West et al. 2009 [2009A&A...502..395W] (3); Moutou et al. 2011 [2011A&A...527A..63M] (3); Lockley et al. 2025 [2025MNRAS.541..919L] (3); Barkaoui et al. 2025 [2025A&A...695A.281B] (2); Niedzielski et al. 2009 [2009ApJ...707..768N] (2)
 - RATDOR: 6 rows; Livingston et al. 2018 [2018AJ....156..277L] (2); Montet et al. 2015 [2015ApJ...809...25M] (1); Schwamb et al. 2013 [2013ApJ...768..127S] (1); Kostov et al. 2014 [2014ApJ...784...14K] (1); Schlieder et al. 2016 [2016ApJ...818...87S] (1)
 - RATROR: 2 rows; Guenther et al. 2026 [2026AJ....172...54G] (1); Beard et al. 2022 [2022ApJ...936...55B] (1)
-- RHOP: 16 rows; Hobson et al. 2026 [2026A&A...711A.198H] (6); Yee et al. 2022 [2022AJ....164...70Y] (2); Esteves et al. 2015 [2015ApJ...804..150E] (2); Yahalomi et al. 2024 [2024MNRAS.527..620Y] (1); G&uuml;nther et al. 2018 [2018MNRAS.478.4720G] (1)
+- RHOP: 16 rows; Hobson et al. 2026 [2026A&A...711A.198H] (6); Yee et al. 2022 [2022AJ....164...70Y] (2); Esteves et al. 2015 [2015ApJ...804..150E] (2); Yahalomi et al. 2024 [2024MNRAS.527..620Y] (1); Günther et al. 2018 [2018MNRAS.478.4720G] (1)
 - RHOS: 252 rows; Q1-Q17 DR25 KOI Table (213); Livingston et al. 2018 [2018AJ....156..277L] (17); Soto et al. 2018 [2018MNRAS.478.5356S] (5); Crouzet et al. 2017 [2017AJ....153...94C] (4); Dawson et al. 2014 [2014ApJ...791...89D] (2)
 
 References with >= 5 published rows whose median obs/pred is off by more than 10%:
@@ -93,7 +96,7 @@ References with >= 5 published rows whose median obs/pred is off by more than 10
 | INSOL | Guenther et al. 2026 [2026AJ....172...54G] | 5 | 0.8139 | 0.8054 | 0.8452 |
 | K3 | Oddo et al. 2023 [2023AJ....165..134O] | 9 | 1.2025 | 1.0561 | 1.3989 |
 | K3 | del Ser et al. 2023 [2023MNRAS.518..669D] | 6 | 0.8992 | 0.7867 | 0.9847 |
-| K3 | Pel&aacute;ez-Torres et al. 2024 [2024A&A...690A..62P] | 5 | 1.2238 | 1.1103 | 1.2761 |
+| K3 | Peláez-Torres et al. 2024 [2024A&A...690A..62P] | 5 | 1.2238 | 1.1103 | 1.2761 |
 | K3 | Quintana et al. 2014 [2014Sci...344..277Q] | 5 | 0.9068 | 0.9044 | 0.9068 |
 | LOGG | Johnson et al. 2011 [2011ApJS..197...26J] | 18 | 1.1805 | 1.0068 | 1.5458 |
 | LOGG | Jenkins et al. 2025 [2025A&A...704A.283J] | 15 | 0.8458 | 0.7193 | 1.05 |
@@ -122,7 +125,7 @@ References with >= 5 published rows whose median obs/pred is off by more than 10
 | LOGG | Burt et al. 2021 [2021AJ....161...10B] | 5 | 1.1238 | 0.8907 | 1.1571 |
 | LOGG | Christiansen et al. 2018 [2018AJ....155...57C] | 5 | 1.1284 | 1.1284 | 1.1284 |
 | LOGG | Fischer et al. 2007 [2007ApJ...669.1336F] | 5 | 1.2194 | 1.0302 | 1.2465 |
-| LOGG | Gonz&aacute;lez Hern&aacute;ndez et al. 2024 [2024A&A...690A..79G] | 5 | 0.612 | 0.612 | 0.612 |
+| LOGG | González Hernández et al. 2024 [2024A&A...690A..79G] | 5 | 0.612 | 0.612 | 0.612 |
 | LOGG | Lillo-Box et al. 2026 [2026arXiv260719756L] | 5 | 1.1542 | 1.0044 | 1.1586 |
 | LOGG | Motalebi et al. 2015 [2015A&A...584A..72M] | 5 | 1.2072 | 1.2072 | 1.2072 |
 | LOGG | Moutou et al. 2009 [2009A&A...496..513M] | 5 | 0.8445 | 0.4843 | 1.3077 |
@@ -134,7 +137,7 @@ References with >= 5 published rows whose median obs/pred is off by more than 10
 | LUM | Liu et al. 2014 [2014RAA....14.1447L] | 8 | 1.1104 | 0.9863 | 1.1603 |
 | LUM | Moutou et al. 2011 [2011A&A...527A..63M] | 6 | 0.7098 | 0.4908 | 1.0414 |
 | LUM | Gillon et al. 2013 [2013A&A...552A..82G] | 5 | 1.1086 | 0.9828 | 1.1086 |
-| LUM | Gonz&aacute;lez Hern&aacute;ndez et al. 2024 [2024A&A...690A..79G] | 5 | 1.1049 | 1.1049 | 1.1049 |
+| LUM | González Hernández et al. 2024 [2024A&A...690A..79G] | 5 | 1.1049 | 1.1049 | 1.1049 |
 | LUM | Moutou et al. 2014 [2014A&A...563A..22M] | 5 | 0.8185 | 0.8185 | 1.0398 |
 | RATDOR | Sinukoff et al. 2016 [2016ApJ...827...78S] | 26 | 0.8738 | 0.7538 | 0.9875 |
 | RATROR | Hedges et al. 2019 [2019ApJ...880L...5H] | 7 | 0.7543 | 0.6497 | 0.8175 |

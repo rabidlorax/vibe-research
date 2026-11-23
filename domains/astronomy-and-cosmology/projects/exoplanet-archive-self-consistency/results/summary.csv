@@ -1,29 +1,29 @@
-check,identity,exactness,stratum,n,median_abs_pct,n_gt1pct,pct_gt1pct,n_gt5pct,pct_gt5pct,n_gt20pct,pct_gt20pct,n_gt2x,pct_gt2x,n_with_errors,n_gt3sigma_and_gt5pct,pct_gt3sigma_and_gt5pct,top_ref_gt5pct,top_ref_n_gt5pct,top_ref_rows_in_stratum
-K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,"published, same ref",7132,0.063,969,13.59,399,5.59,92,1.29,5,0.07,6205,58,0.93,Stassun et al. 2017 [2017AJ....153..136S],118.0,204.0
-K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,"published, mixed refs",356,0.509,138,38.76,22,6.18,1,0.28,1,0.28,315,2,0.63,Butler et al. 2006 [2006ApJ...646..505B],5.0,19.0
-K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,kepler-koi,13124,0.088,161,1.23,0,0.0,0,0.0,0,0.0,0,0,0.0,,,
-LOGG,log g vs log(G M*/R*^2),exact,published,12691,0.233,3938,31.03,1724,13.58,770,6.07,90,0.71,9668,56,0.58,Mayo et al. 2018 [2018AJ....155..136M],148.0,167.0
-LOGG,log g vs log(G M*/R*^2),exact,"published, literature star ref",7935,0.979,3911,49.29,1724,21.73,770,9.7,90,1.13,7713,56,0.73,Mayo et al. 2018 [2018AJ....155..136M],148.0,167.0
-LOGG,log g vs log(G M*/R*^2),exact,kepler-koi,15671,0.088,877,5.6,12,0.08,0,0.0,0,0.0,13707,0,0.0,Q1-Q8 KOI Table,12.0,2308.0
-RHOS,rho* vs 3 M*/(4 pi R*^3),exact,published,9261,0.042,2861,30.89,2222,23.99,1968,21.25,252,2.72,6441,994,15.43,Fulton & Petigura 2018 [2018AJ....156..264F],1414.0,1414.0
-RHOS,rho* vs 3 M*/(4 pi R*^3),exact,"published, literature star ref",3045,0.554,1032,33.89,407,13.37,191,6.27,37,1.22,3039,57,1.88,Livingston et al. 2018 [2018AJ....156..277L],54.0,56.0
-RHOS,rho* vs 3 M*/(4 pi R*^3),exact,kepler-koi,13363,56.294,10715,80.18,10318,77.21,9018,67.48,5076,37.99,11440,703,6.15,Q1-Q16 KOI Table,2596.0,2720.0
-LUM,log L* vs log(R*^2 Teff^4),exact,published,7209,0.001,1020,14.15,325,4.51,83,1.15,24,0.33,4141,14,0.34,Naef et al. 2010 [2010A&A...523A..15N],7.0,7.0
-LUM,log L* vs log(R*^2 Teff^4),exact,"published, literature star ref",2827,0.591,1020,36.08,325,11.5,83,2.94,24,0.85,2560,14,0.55,Naef et al. 2010 [2010A&A...523A..15N],7.0,7.0
-LUM,log L* vs log(R*^2 Teff^4),exact,kepler-koi,2547,0.001,0,0.0,0,0.0,0,0.0,0,0.0,642,0,0.0,,,
-RHOP,rho_p vs 3 M_p/(4 pi R_p^3),exact,published,2524,0.633,1024,40.57,544,21.55,76,3.01,16,0.63,2501,6,0.24,Howard et al. 2025 [2025ApJS..278...52H],39.0,63.0
-URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,published,13203,0.0,108,0.82,6,0.05,0,0.0,0,0.0,0,0,0.0,Yu et al. 2018 [2018AJ....156...22Y],3.0,18.0
-URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,kepler-koi,13124,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0,0.0,,,
-URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,tess-exofop,1563,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0,0.0,,,
-UMASS,M_p[Earth] vs M_p[Jup] x M_J/M_E,exact,published,4839,0.0,148,3.06,12,0.25,2,0.04,0,0.0,0,0,0.0,Marois et al. 2008 [2008Sci...322.1348M],3.0,3.0
-UMSINI,M sin i [Earth] vs [Jup] x M_J/M_E,exact,published,2760,0.001,31,1.12,3,0.11,0,0.0,0,0.0,0,0,0.0,Anglada-Escude et al. 2013 [2013A&A...556A.126A],2.0,5.0
-RATROR,Rp/R* vs R_p / R*,exact,"published, same ref",7470,0.233,1898,25.41,242,3.24,21,0.28,2,0.03,6951,10,0.14,Vanderburg et al. 2016 [2016ApJS..222...14V],90.0,107.0
-RATROR,Rp/R* vs R_p / R*,exact,"published, mixed refs",236,0.059,38,16.1,17,7.2,5,2.12,4,1.69,224,6,2.68,Morton et al. 2016 [2016ApJ...822...86M],10.0,15.0
-RATROR,Rp/R* vs R_p / R*,exact,kepler-koi,13124,0.154,350,2.67,7,0.05,0,0.0,0,0.0,13062,0,0.0,Q1-Q8 KOI Table,5.0,2308.0
-RATDOR,a/R* vs a / R*,exact,"published, same ref",2143,0.192,541,25.24,271,12.65,84,3.92,6,0.28,2092,22,1.05,Livingston et al. 2018 [2018AJ....156..277L],65.0,79.0
-RATDOR,a/R* vs a / R*,exact,"published, mixed refs",33,0.277,12,36.36,3,9.09,0,0.0,0,0.0,30,0,0.0,Greklek-McKeon et al. 2025 [2025AJ....170...65G],1.0,1.0
-RATDOR,a/R* vs a / R*,exact,kepler-koi,13124,24.563,12746,97.12,11406,86.91,7401,56.39,1562,11.9,0,0,0.0,Q1-Q16 KOI Table,2361.0,2720.0
-DEPTH,depth[%] vs 100 (Rp/R*)^2,approximate,published,1225,5.089,706,57.63,614,50.12,156,12.73,15,1.22,914,82,8.97,Kruse et al. 2019 [2019ApJS..244...11K],265.0,301.0
-DEPTH,depth[%] vs 100 (Rp/R*)^2,approximate,kepler-koi,13124,18.511,12903,98.32,11845,90.25,4983,37.97,121,0.92,10813,2927,27.07,Q1-Q16 KOI Table,2540.0,2720.0
-INSOL,S vs L*/a^2,exact for circular orbits,"published, same ref",766,0.494,275,35.9,105,13.71,24,3.13,9,1.17,743,11,1.48,Torres et al. 2017 [2017AJ....154..264T],9.0,22.0
-INSOL,S vs L*/a^2,exact for circular orbits,"published, mixed refs",9,0.448,1,11.11,1,11.11,0,0.0,0,0.0,9,0,0.0,Dressing et al. 2017 [2017AJ....154..207D],1.0,1.0
+check,identity,exactness,stratum,n,median_abs_pct,n_gt1pct,pct_gt1pct,n_gt5pct,pct_gt5pct,n_gt20pct,pct_gt20pct,n_gt2x,pct_gt2x,n_with_errors,n_gt3sigma_and_gt5pct,pct_gt3sigma_and_gt5pct,top1_ref_gt5pct,top1_ref_n_gt5pct,top1_ref_rows_in_stratum,top2_ref_gt5pct,top2_ref_n_gt5pct,top2_ref_rows_in_stratum
+K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,"published, same ref",7132,0.063,969,13.59,399,5.59,92,1.29,5,0.07,6205,58,0.93,Stassun et al. 2017 [2017AJ....153..136S],118.0,204.0,Castro-González et al. 2022 [2022MNRAS.509.1075C],13.0,22.0
+K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,"published, mixed refs",356,0.509,138,38.76,22,6.18,1,0.28,1,0.28,315,2,0.63,Butler et al. 2006 [2006ApJ...646..505B],5.0,19.0,Wright et al. 2009 [2009ApJ...693.1084W],4.0,26.0
+K3,a vs (G M* P^2 / 4 pi^2)^(1/3),exact up to planet mass,kepler-koi,13124,0.088,161,1.23,0,0.0,0,0.0,0,0.0,0,0,0.0,,,,,,
+LOGG,log g vs log(G M*/R*^2),exact,published,12691,0.233,3938,31.03,1724,13.58,770,6.07,90,0.71,9668,56,0.58,Mayo et al. 2018 [2018AJ....155..136M],148.0,167.0,Stassun et al. 2017 [2017AJ....153..136S],122.0,355.0
+LOGG,log g vs log(G M*/R*^2),exact,"published, literature star ref",7935,0.979,3911,49.29,1724,21.73,770,9.7,90,1.13,7713,56,0.73,Mayo et al. 2018 [2018AJ....155..136M],148.0,167.0,Stassun et al. 2017 [2017AJ....153..136S],122.0,355.0
+LOGG,log g vs log(G M*/R*^2),exact,kepler-koi,15671,0.088,877,5.6,12,0.08,0,0.0,0,0.0,13707,0,0.0,Q1-Q8 KOI Table,12.0,2308.0,,,
+RHOS,rho* vs 3 M*/(4 pi R*^3),exact,published,9261,0.042,2861,30.89,2222,23.99,1968,21.25,252,2.72,6441,994,15.43,Fulton & Petigura 2018 [2018AJ....156..264F],1414.0,1414.0,Q1-Q17 DR25 KOI Table,355.0,370.0
+RHOS,rho* vs 3 M*/(4 pi R*^3),exact,"published, literature star ref",3045,0.554,1032,33.89,407,13.37,191,6.27,37,1.22,3039,57,1.88,Livingston et al. 2018 [2018AJ....156..277L],54.0,56.0,Marcy et al. 2014 [2014ApJS..210...20M],20.0,49.0
+RHOS,rho* vs 3 M*/(4 pi R*^3),exact,kepler-koi,13363,56.294,10715,80.18,10318,77.21,9018,67.48,5076,37.99,11440,703,6.15,Q1-Q16 KOI Table,2596.0,2720.0,Q1-Q17 DR25 KOI Table,2587.0,2718.0
+LUM,log L* vs log(R*^2 Teff^4),exact,published,7209,0.001,1020,14.15,325,4.51,83,1.15,24,0.33,4141,14,0.34,Naef et al. 2010 [2010A&A...523A..15N],7.0,7.0,Marmier et al. 2013 [2013A&A...551A..90M],6.0,8.0
+LUM,log L* vs log(R*^2 Teff^4),exact,"published, literature star ref",2827,0.591,1020,36.08,325,11.5,83,2.94,24,0.85,2560,14,0.55,Naef et al. 2010 [2010A&A...523A..15N],7.0,7.0,Marmier et al. 2013 [2013A&A...551A..90M],6.0,8.0
+LUM,log L* vs log(R*^2 Teff^4),exact,kepler-koi,2547,0.001,0,0.0,0,0.0,0,0.0,0,0.0,642,0,0.0,,,,,,
+RHOP,rho_p vs 3 M_p/(4 pi R_p^3),exact,published,2524,0.633,1024,40.57,544,21.55,76,3.01,16,0.63,2501,6,0.24,Howard et al. 2025 [2025ApJS..278...52H],39.0,63.0,Hadden & Lithwick 2017 [2017AJ....154....5H],32.0,49.0
+URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,published,13203,0.0,108,0.82,6,0.05,0,0.0,0,0.0,0,0,0.0,Yu et al. 2018 [2018AJ....156...22Y],3.0,18.0,Kruse et al. 2019 [2019ApJS..244...11K],2.0,300.0
+URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,kepler-koi,13124,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0,0.0,,,,,,
+URAD,R_p[Earth] vs R_p[Jup] x R_J/R_E,exact,tess-exofop,1563,0.0,0,0.0,0,0.0,0,0.0,0,0.0,0,0,0.0,,,,,,
+UMASS,M_p[Earth] vs M_p[Jup] x M_J/M_E,exact,published,4839,0.0,148,3.06,12,0.25,2,0.04,0,0.0,0,0,0.0,Marois et al. 2008 [2008Sci...322.1348M],3.0,3.0,Hadden et al. 2014 [2014ApJ...787...80H],2.0,139.0
+UMSINI,M sin i [Earth] vs [Jup] x M_J/M_E,exact,published,2760,0.001,31,1.12,3,0.11,0,0.0,0,0.0,0,0,0.0,Anglada-Escude et al. 2013 [2013A&A...556A.126A],2.0,5.0,Lin et al. 2024 [2024AJ....168...27L],1.0,7.0
+RATROR,Rp/R* vs R_p / R*,exact,"published, same ref",7470,0.233,1898,25.41,242,3.24,21,0.28,2,0.03,6951,10,0.14,Vanderburg et al. 2016 [2016ApJS..222...14V],90.0,107.0,Morton et al. 2016 [2016ApJ...822...86M],56.0,2239.0
+RATROR,Rp/R* vs R_p / R*,exact,"published, mixed refs",236,0.059,38,16.1,17,7.2,5,2.12,4,1.69,224,6,2.68,Morton et al. 2016 [2016ApJ...822...86M],10.0,15.0,Dressing et al. 2017 [2017AJ....154..207D],2.0,4.0
+RATROR,Rp/R* vs R_p / R*,exact,kepler-koi,13124,0.154,350,2.67,7,0.05,0,0.0,0,0.0,13062,0,0.0,Q1-Q8 KOI Table,5.0,2308.0,Q1-Q12 KOI Table,1.0,2678.0
+RATDOR,a/R* vs a / R*,exact,"published, same ref",2143,0.192,541,25.24,271,12.65,84,3.92,6,0.28,2092,22,1.05,Livingston et al. 2018 [2018AJ....156..277L],65.0,79.0,Livingston et al. 2018 [2018AJ....156...78L],33.0,45.0
+RATDOR,a/R* vs a / R*,exact,"published, mixed refs",33,0.277,12,36.36,3,9.09,0,0.0,0,0.0,30,0,0.0,Greklek-McKeon et al. 2025 [2025AJ....170...65G],1.0,1.0,Dressing et al. 2017 [2017AJ....154..207D],1.0,1.0
+RATDOR,a/R* vs a / R*,exact,kepler-koi,13124,24.563,12746,97.12,11406,86.91,7401,56.39,1562,11.9,0,0,0.0,Q1-Q16 KOI Table,2361.0,2720.0,Q1-Q17 DR24 KOI Table,2348.0,2700.0
+DEPTH,depth[%] vs 100 (Rp/R*)^2,approximate,published,1225,5.089,706,57.63,614,50.12,156,12.73,15,1.22,914,82,8.97,Kruse et al. 2019 [2019ApJS..244...11K],265.0,301.0,Vanderburg et al. 2016 [2016ApJS..222...14V],103.0,107.0
+DEPTH,depth[%] vs 100 (Rp/R*)^2,approximate,kepler-koi,13124,18.511,12903,98.32,11845,90.25,4983,37.97,121,0.92,10813,2927,27.07,Q1-Q16 KOI Table,2540.0,2720.0,Q1-Q17 DR24 KOI Table,2521.0,2700.0
+INSOL,S vs L*/a^2,exact for circular orbits,"published, same ref",766,0.494,275,35.9,105,13.71,24,3.13,9,1.17,743,11,1.48,Torres et al. 2017 [2017AJ....154..264T],9.0,22.0,Guenther et al. 2026 [2026AJ....172...54G],5.0,5.0
+INSOL,S vs L*/a^2,exact for circular orbits,"published, mixed refs",9,0.448,1,11.11,1,11.11,0,0.0,0,0.0,9,0,0.0,Dressing et al. 2017 [2017AJ....154..207D],1.0,1.0,,,

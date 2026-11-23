@@ -11,6 +11,7 @@ Usage: python src/density_units.py [--offline]
 Writes results/density_units.md and results/density_units_by_reference.csv.
 """
 import hashlib
+import html
 import io
 import pathlib
 import sys
@@ -27,7 +28,7 @@ REF = r">\s*([^<]+?)\s*</a>"
 
 def refkey(col):
     """Short name plus ADS bibcode; the short name alone is not unique."""
-    short = col.str.extract(REF)[0].str.replace("&amp;", "&")
+    short = col.str.extract(REF)[0].map(html.unescape, na_action="ignore")
     bib = col.str.extract(r"/abs/([^/\s]+)/abstract")[0].str.replace("%26", "&")
     return (short + " [" + bib + "]").where(bib.notna(), short)
 
@@ -100,6 +101,8 @@ def main():
                 f"{len(ca)} ({100 * len(ca) / len(c):.1f}% of those, {100 * len(ca) / ntot:.1f}% of all) "
                 f"take it from an affected reference:",
                 ca.ref.value_counts().to_string(), "",
+                f"Composite stellar densities that cite a Kepler KOI table (transit-fitted values): "
+                f"{int(c.ref.str.contains('KOI Table', na=False).sum())} of {len(c)}", "",
                 f"For those composite rows, st_dens / (M*/R*^3 in solar units) has median {r.median():.3f} "
                 f"(composite mass and radius may come from other references)."]
     (HERE / "results" / "density_units.md").write_text("\n".join(out) + "\n")

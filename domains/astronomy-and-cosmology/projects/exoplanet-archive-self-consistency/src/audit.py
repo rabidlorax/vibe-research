@@ -11,6 +11,7 @@ Writes results/summary.csv, results/summary.md, results/outliers.csv,
 results/discrepancy_histograms.png. Uses no randomness.
 """
 import hashlib
+import html
 import pathlib
 import sys
 
@@ -138,8 +139,7 @@ def source_class(s):
 
 
 def refshort(col):
-    return (col.str.extract(r">\s*([^<]+?)\s*</a>")[0].fillna(col)
-            .str.replace("&amp;", "&").str.replace("&scaron;", "s"))
+    return col.str.extract(r">\s*([^<]+?)\s*</a>")[0].fillna(col).map(html.unescape, na_action="ignore")
 
 
 def refkey(col):
@@ -165,7 +165,7 @@ def main():
         "st_ref": refkey(d.st_refname), "same_ref": d.pl_refname == d.st_refname})], axis=1)
     solar_ref = d.st_ref.str.extract(r"\[(.+)\]$")[0].isin(SOLAR_UNIT_BIBCODES)
     catalogue_star = d.st_ref.str.contains("KOI Table|TICv8", na=False)
-    rows, outl, byref, hist, comp = [], [], [], {}, {}
+    rows, outl, byref, hist, comp, tic_viol = [], [], [], {}, {}, {}
     with np.errstate(all="ignore"):
         for cid, desc, obscol, m, dd, sig, cross, exact in checks(d):
             dd = pd.Series(np.asarray(dd, float), index=d.index)
@@ -206,12 +206,14 @@ def main():
                 # Which reference contributes most of the > 5% rows.
                 refcol = d.loc[x.index, "st_ref" if cid in STELLAR else "pl_ref"]
                 vc = refcol[x.abs() > np.log(1.05)].value_counts()
-                if len(vc):
-                    r["top_ref_gt5pct"] = vc.index[0]
-                    r["top_ref_n_gt5pct"] = int(vc.iloc[0])
-                    r["top_ref_rows_in_stratum"] = int((refcol == vc.index[0]).sum())
+                for i in range(min(2, len(vc))):
+                    r[f"top{i + 1}_ref_gt5pct"] = vc.index[i]
+                    r[f"top{i + 1}_ref_n_gt5pct"] = int(vc.iloc[i])
+                    r[f"top{i + 1}_ref_rows_in_stratum"] = int((refcol == vc.index[i]).sum())
                 if cid in STELLAR and sname == "published":
                     comp[cid] = refcol.value_counts().head(4)
+                    tic = refcol.str.contains("TICv8", na=False)
+                    tic_viol[cid] = (int(tic.sum()), int((tic & (x.abs() > np.log(1.05))).sum()))
                 rows.append(r)
                 if sname in ("published", "published, same ref"):
                     hist[cid] = (x.to_numpy(), desc)
@@ -251,14 +253,24 @@ def main():
         if r.n_with_errors == 0:  # no z statistic without errors
             v[-2:] = ["n/a", "n/a"]
         lines.append("| " + " | ".join(v) + " |")
-    lines += ["", "Reference contributing most rows off by > 5%, per stratum (count / that reference's rows in the stratum):", ""]
+    lines += ["", "Two references contributing most rows off by > 5%, per stratum "
+              "(count of the stratum's > 5% rows / that reference's rows in the stratum):", ""]
     for _, r in summ.iterrows():
-        if isinstance(r.get("top_ref_gt5pct"), str):
-            lines.append(f"- {r.check}, {r.stratum}: {r.top_ref_gt5pct} "
-                         f"({int(r.top_ref_n_gt5pct)} of {r.n_gt5pct} / {int(r.top_ref_rows_in_stratum)})")
+        parts = [f"{r[f'top{i}_ref_gt5pct']} ({int(r[f'top{i}_ref_n_gt5pct'])} of {r.n_gt5pct} / "
+                 f"{int(r[f'top{i}_ref_rows_in_stratum'])})"
+                 for i in (1, 2) if isinstance(r.get(f"top{i}_ref_gt5pct"), str)]
+        if parts:
+            lines.append(f"- {r.check}, {r.stratum}: " + "; ".join(parts))
     lines += ["", "Stellar-parameter references of the 'published' stellar strata (top 4 by rows):", ""]
     for cid, vc in comp.items():
         lines.append(f"- {cid}: " + "; ".join(f"{k} ({v})" for k, v in vc.items()))
+    lines += ["", "Published rows with TICv8 stellar parameters (rows / rows off by > 5%): "
+              + "; ".join(f"{k} {a} / {b}" for k, (a, b) in tic_viol.items())]
+    bib = d.st_refname.str.extract(r"/abs/([^/\s]+)/abstract")[0]
+    amb = (pd.DataFrame({"s": refshort(d.st_refname), "b": bib})[(d.cls == "published").to_numpy()]
+           .dropna().drop_duplicates().groupby("s").b.nunique())
+    lines += [f"Short reference names in st_refname (published rows) standing for more than one bibcode: "
+              f"{int((amb > 1).sum())}"]
     lines += ["", f"Outlier entries (published, |d| > 20%): {len(out)} row-identity entries, "
               f"{n_distinct_rows} distinct rows, "
               f"{out.pl_name.nunique()} planets, {out.groupby('check').size().to_dict()}"]

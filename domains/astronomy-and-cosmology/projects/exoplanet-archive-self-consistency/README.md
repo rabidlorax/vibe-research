@@ -44,7 +44,8 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
 
 1. **A unit error affects the stellar density of 18% of the composite-table
    planets that have one.** For four references, the value in the `st_dens`
-   column (documented unit g/cm³) equals M★/R★³ in *solar* units and is a
+   column (documented unit g/cm³: the archive's `docs/API_PS_columns.html`
+   gives "Stellar Density [g/cm**3]") equals M★/R★³ in *solar* units and is a
    factor 1.41 too low for g/cm³: Fulton & Petigura 2018 (1,414 rows), Torres
    et al. 2017 (22), Mann et al. 2017, AJ 153, 267 (13) and MacDonald et al.
    2016 (11 rows, all for one star, Kepler-80). That is 1,460 rows for 1,435
@@ -78,18 +79,18 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    reference, the tabulated semi-major axis differs from the Kepler's-third-law
    value by more than 5% in 5.6% of 7,132 rows (399 rows) and by more than 20%
    in 1.3% (92 rows). One reference, Stassun et al. 2017, supplies 118 of the
-   399; it recomputes stellar masses and radii for already-known planets, so
-   its rows may not be one orbital solution. Without it the rate is 281 of
+   399; it recomputes stellar masses and radii for already-known planets
+   `[from memory, unverified]`, so its rows may not be one orbital solution. Without it the rate is 281 of
    6,928, or 4.1%. Rates for the other identities are in the table under
    Method. Counting only rows that differ by more than 5% *and* by more than
    3σ of their own stated uncertainties, the rate for the exact identities is
    0.1% to 1.9% (same-reference strata for planet-star identities;
    literature-only strata for the stellar ones). The three stellar
    identities are the least well obeyed: in rows whose stellar parameters
-   come from a paper, not from TICv8 or a KOI table, log g differs from the
-   mass-radius value by more than 5% in 21.7% of 7,935 rows, density in
-   13.4% of 3,045 (item 1 references removed) and luminosity in 11.5% of
-   2,827. Evidence: `external-data`.
+   come from a paper, not from TICv8 or a KOI table, the surface gravity g
+   implied by `st_logg` differs from G M★/R★² by more than 5% (0.021 dex in
+   log g) in 21.7% of 7,935 rows, density in 13.4% of 3,045 (item 1
+   references removed) and luminosity in 11.5% of 2,827. Evidence: `external-data`.
 
 3. **In rows from the Kepler KOI tables, `st_dens` and `pl_ratdor` are
    transit-fitted quantities, not the mass-radius density or `pl_orbsmax`/
@@ -104,7 +105,8 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    fitted-versus-catalogue density difference is a known effect; the point
    for users is that the `ps` column name does not distinguish the two, and
    that 370 "published" planet rows also carry these KOI-table stellar
-   values. Evidence: `external-data`; the column definition is supporting
+   values. In the composite table, 1,347 of the 5,859 stellar densities
+   cite a KOI table. Evidence: `external-data`; the column definition is supporting
    `literature`.
 
 4. `results/outliers.csv` lists 3,276 row-identity entries (3,100 distinct
@@ -164,6 +166,9 @@ Kepler KOI tables, and TESS/ExoFOP. For identities that join planet and star
 columns, published rows are further split by whether `pl_refname` equals
 `st_refname`; only the equal case tests a single reference.
 
+For the logarithmic columns `st_logg` and `st_lum` the "ratio" is that of g
+or L, that is 10^(difference of the logs); 5% is 0.021 dex.
+
 Where every input has a two-sided uncertainty, z = ln(ratio)/σ, with σ from
 first-order propagation treating the errors as independent. Published
 uncertainties are often correlated (for K3, a is commonly derived from M★ and
@@ -211,14 +216,15 @@ Reading the table:
   for comparison only (RATROR mixed: 2.68%, not in the excerpt).
 - The two UMASS rows above 20% are one-significant-figure rounding (for
   example 0.002 M_J beside 0.5 M⊕), not errors.
-- LOGG rows above 5% are led by Mayo et al. 2018 (148) and Stassun et al.
-  2017 (122). A probable cause, not checked against any paper, is a
+- LOGG rows above 5% (in g) are led by Mayo et al. 2018 (148) and Stassun
+  et al. 2017 (122). A probable cause, not checked against any paper, is a
   spectroscopic log g quoted beside an isochrone mass and radius.
 - The median discrepancy is below 1% for every exact identity in every
   published stratum, including the literature-only ones (largest: LOGG,
   0.98%), so the typical row is self-consistent.
-- `results/summary.md` also lists, for every stratum, the reference that
-  contributes most of the rows above 5%. References are keyed by short name
+- `results/summary.md` also lists, for every stratum, the two references
+  that contribute most of the rows above 5%, the TICv8 counts and the
+  number of ambiguous short names. References are keyed by short name
   plus ADS bibcode throughout, because 247 short names in `st_refname` (for
   example "Mann et al. 2017") stand for more than one paper.
 
@@ -285,7 +291,8 @@ committed results are for the snapshot whose checksum and query are in
   HTML). Only the arXiv versions were read, not the journal versions or
   their machine-readable tables, which could differ.
 - **Archive documentation** quoted: `docs/pscp_about.html`,
-  `docs/API_kepcandidate_columns.html`, `docs/lit_discrepancies.html`,
+  `docs/API_PS_columns.html`, `docs/API_kepcandidate_columns.html`,
+  `docs/lit_discrepancies.html`,
   `docs/doi.html`, all fetched 2026-11-23.
 
 None of the underlying measurements were made here and none can be
@@ -295,7 +302,7 @@ references; claims 3 and 4 check one to three stars per paper.
 
 Known problems with the source: the archive states that the composite table
 is "not necessarily self-consistent", and it kept a page of confirmed
-discrepancies between literature and archive values (66 hosts; marked as no
+discrepancies between literature and archive values (marked as no
 longer updated from August 2026, with discrepancies now recorded on System
 Overview pages). None of the four density references appears on that page
 as fetched on 2026-11-23. The System Overview notes were not searched.
@@ -333,7 +340,7 @@ Found:
   mass and radius (summary item 3) is a known and used effect. The archive's
   KOI documentation cites Seager & Mallén-Ornelas 2003 for it; the
   "asterodensity profiling" and "photoeccentric effect" literature (for
-  example Sliski & Kipping 2014 `[not read]`) exploits it. Item 3 is
+  example Sliski & Kipping 2014 `[from memory, unverified]`) exploits it. Item 3 is
   therefore `known` in substance; only its counts are from this project.
 - Bashi, Helled & Zucker 2018, "A Quantitative Comparison of Exoplanet
   Catalogs" (arXiv:1808.10236) and Alei et al. 2020, "Exo-MerCat". These
@@ -353,26 +360,48 @@ Found:
   and 8% of the EHS have a recomputed mass that differ by more than 5% and
   20%, respectively, with respect to the database values." That is the LOGG
   identity at the same thresholds, and it agrees with the literature-only
-  LOGG line here (21.7% and 9.7%). Which database it used was not
-  established. It also flags 278 planets whose recomputed mass or radius
-  differs from the tabulated one by more than 10%. The LOGG rates here are
+  LOGG line here (21.7% and 9.7%). Its sample merges exoplanet.eu and the
+  NASA archive ("the confirmed exoplanets listed in the EES and NEA (versions
+  of July, 8, 2024)") and counts stars, not rows, so the agreement is
+  indicative. It also flags 278 cases where a recomputed planet mass or
+  radius differs from the tabulated one by more than 10%. The LOGG rates here are
   therefore a replication.
 - Lanzafame et al., "Tracking the evolution of sub-Neptunes. I.",
-  arXiv:2611.00856, reported by the second reviewer to flag hosts whose
-  log g differs by more than 0.3 dex from the mass-radius value; only the
-  abstract was read here and it does not mention this.
+  arXiv:2611.00856, Appendix A.8 ("Cross-parameter coherence"): "If the
+  selected log g differs from log g_M,R by more than 0.3 dex, all the gravity
+  measurements available for that star are reconsidered". The check is
+  applied to values selected across references, not within one archive row.
+  Found by the second reviewer; passage read here.
+- Loyd et al. 2020, "Current Population Statistics Do Not Favor
+  Photoevaporation over Core-Powered Mass Loss as the Dominant Cause of the
+  Exoplanet Radius Gap", arXiv:1912.12305, appendix. They compare the
+  archive's insolation with L/4πa², find some values off by factors of 20
+  to 1000, and report: "A closer examination of one target, HATS-18b, showed
+  that the appropriate unit conversion had not been applied when the planet
+  parameters were ingested into the NASA archive." They then exclude systems
+  off by more than a factor of 2. This is the INSOL identity and the same
+  ingestion mechanism as in summary item 1, for another column. No rates.
+  Found by the third reviewer; passage read here.
+- The archive's discrepancy page already records one stellar-density unit
+  slip, of a different kind: TOI-815, Psaridi et al. 2024, literature value
+  "2431 +122 −125 ρ⊙" against archive value "2.431 +0.122 -0.125 g/cm^3",
+  "Typo in stellar density in Table E.1."
 
-An independent reviewer repeated the search on 2026-11-23 with different
-terms (density mislabel or erratum, physically inconsistent rows, unit
-mistakes in curated catalogues; web, OpenAlex and arXiv) and found no prior
-statement of the density problem and no per-identity rate study.
+Three reviewers repeated the search on 2026-11-23 with other terms (density
+mislabel or erratum, physically inconsistent rows, unit mistakes in curated
+catalogues, `st_dens` unit error, log g inconsistent with mass and radius;
+web, OpenAlex and arXiv). The first found nothing further, the second found
+the two log g items, the third found Loyd et al. 2020 and the TOI-815 entry.
+None found a prior statement of the density problem for the four references.
 
 Not found in the searches described: violation rates for the identities
-other than log g, or any statement that Fulton & Petigura 2018 densities are in
-solar units in the paper or the archive. Hence `partially-known`: the
-Kepler's-law check on archive rows and a log g consistency rate exist; the
-rates for the other identities and the density unit finding were not found. The search was short and
-the archive's helpdesk history is not public, so the maintainers may already
+other than log g, or any statement that the densities of the four references
+are in solar units in the archive. Hence `partially-known`: the Kepler's-law
+check, an insolation check (Loyd et al. 2020), a log g consistency rate, and
+individual unit slips at ingestion (Loyd et al. 2020; the TOI-815 entry)
+exist; the per-identity rates other than log g and the density finding for
+these four references were not found. The searches were short and the
+archive's helpdesk history is not public, so the maintainers may already
 know.
 
 ## Limitations and open questions
@@ -411,3 +440,4 @@ know.
 |------|--------------------------|-------|---------|
 | 2026-11-23 | Fresh agent session launched by the author's session, given the repository and the review rules but not the author's conclusions (model ID unknown: the agent did not report it) | Clean clone; reran all commands (checksum and all result files identical); read `src/` line by line and recomputed key numbers with separate code; fetched Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2022, Decocq et al. 2026 and the archive documentation; repeated the prior-art search with other terms. Not checked: MacDonald et al. 2016, Mann et al. 2017, journal versions, other outlier rows | Changes needed, none overturning a headline claim: 17 points (outlier entries miscounted as rows; a rate range that omitted DEPTH; undisclosed concentration of violations in catalogue stellar parameters and in Stassun et al. 2017; Torres et al. error is the archive's, not the paper's; denominator of the 18%; KOI-column and TOI-1227 claims labelled weaker than checkable; smaller wording and code points). All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a second fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all result files identical); recomputed the main counts with separate code; read `src/`; fetched Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2017 and 2022, MacDonald et al. 2016, Decocq et al. 2026 and the archive documentation; new prior-art search. Not checked: journal versions, the ten further density references, other outlier rows | Changes needed, headline items stand: 12 points. A bug made the density "control window" identical to the test window, reversing a stated conclusion; references were grouped by short name, which merged two "Mann et al. 2017" papers and hid a fourth affected reference; TICv8 rows diluted the stellar rates; a prior log g consistency rate (arXiv:2505.22205) was missed; claims with two labels; missing checksums. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a third fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all three download checksums and all result files identical); recomputed the main counts with separate code and added robustness checks (per stellar solution instead of per row; rounding); read `src/`; fetched all five papers, Decocq et al., arXiv:2505.22205, arXiv:2611.00856 and the archive documentation; new prior-art search. Not checked: journal versions (publisher and CDS unreachable), the ten further density references, other outlier rows | Changes needed, no headline claim or table number affected: 8 points. A wrong host count for the archive's discrepancy page (removed); the unit documentation page not cited; three correct numbers not printed by any script; Loyd et al. 2020 and the TOI-815 entry missing from prior work; "5% in log g" ambiguous; two citation markers; stale prior-work sentences; HTML entities in result files. All addressed in the following commit. Status stays `result` |
