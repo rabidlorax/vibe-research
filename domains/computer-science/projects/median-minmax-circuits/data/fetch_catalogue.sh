@@ -7,7 +7,7 @@ set -e
 cd "$(dirname "$0")"
 mkdir -p raw
 for n in 4 5; do
-  curl -sS -A "vibe-research (research script)" -o raw/MonoCatFileA${n}var.txt \
+  curl -sS -A "research-script/1.0" -o raw/MonoCatFileA${n}var.txt \
     https://sites.math.rutgers.edu/~bas312/Research/slp/MonoCatFileA${n}var.txt
 done
 sha256sum -c catalogue.sha256

@@ -6,7 +6,7 @@ evidence: external-data
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Fewest min/max operations to compute a median of 5, 7 or 9 values
@@ -53,8 +53,12 @@ the number of operations. "Gate" means the same thing in circuit language
   catalogue of "minimal" monotone circuits for the 210 classes of monotone
   5-variable functions lists 13 gates for 5-input majority; the true minimum
   is 10. In total 19 of the 210 entries are larger than the minimum (table
-  below). Every program in the catalogue is correct; the error is only in the
-  claim of minimality. With the corrected values no 5-variable monotone
+  below). Every program in the catalogue is correct; only minimality fails.
+  The manuscript itself warns that a pruning step in its search is
+  "technically invalid" when an optimal circuit shares a gate between both
+  sides of its output (quoted below), while expecting this not to matter at
+  these sizes. It does matter: that is the likely cause, though we did not
+  confirm it by running the author's code. With the corrected values no 5-variable monotone
   function needs more than 10 gates, and 7 classes need exactly 10, so
   majority is not the unique hardest function as the paper states. The
   4-variable catalogue (30 classes) is confirmed minimal.
@@ -68,13 +72,15 @@ the number of operations. "Gate" means the same thing in circuit language
 
 | # | Claim | Evidence | How to check |
 |---|-------|----------|--------------|
-| 1 | The program in `results/median5_10.txt` (10 operations) computes the median of 5 values | computed | `python src/verify.py results/median5_10.txt` (all 32 0/1 inputs, all 120 orderings, random inputs with ties) |
-| 2 | No min/max program with 9 or fewer operations computes the median of 5 values | computed | `results/lower_bounds_5.log` (sizes 1 to 9 UNSAT); regenerate with `python src/lower_bounds.py 5 10`. Confirmed without any symmetry breaking (`results/median5_nosym_sizes1to8.log`, `results/median5_size9_nosym.log`); other cross-checks in Method |
-| 3 | The programs obtained by pruning the classical exchange networks compute the medians of 5, 7, 9 values in 10, 20, 30 operations | computed | `python src/baseline.py`, then `python src/verify.py results/baseline_median*.txt` |
-| 4 | No program with 11 or fewer operations computes the median of 7 values; none with 13 or fewer computes the median of 9 | computed | `results/lower_bounds_7.log`, `results/lower_bounds_9.log`; regenerate with `python src/lower_bounds.py 7 11` and `python src/lower_bounds.py 9 13`. Relies on the symmetry argument in Method |
-| 5 | Of the 210 entries in Seidler's 5-variable monotone catalogue (as fetched 2026-11-23), all 210 listed programs compute the listed function, and exactly 19 use more gates than the minimum; the majority entry lists 13 and the minimum is 10 | external-data | `results/catalogue_check.csv`; regenerate with `./data/fetch_catalogue.sh` and `python src/catalogue_check.py data/raw/MonoCatFileA5var.txt out.csv`. The upper-bound half (a smaller circuit exists for each of the 19) needs no trust in the SAT solver: the circuits are in the CSV and are re-evaluated on all 32 inputs |
-| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV. `external-data` only because the list of class representatives is taken from the catalogue rather than regenerated here |
-| 7 | All 30 entries of Seidler's 4-variable monotone catalogue are minimal | external-data | `results/catalogue_check_4var.csv`, and independently `python src/cross_check.py` (brute force, no SAT solver) |
+| 1 | The program in `results/median5_10.txt` (10 operations) computes the median of 5 values | computed | `python verify.py ../results/median5_10.txt` (all 32 0/1 inputs, all 120 orderings, random inputs with ties) |
+| 2 | No min/max program with 9 or fewer operations computes the median of 5 values | computed | `results/lower_bounds_5.log` (sizes 1 to 9 UNSAT); regenerate with `python lower_bounds.py 5 10`. Confirmed without any symmetry breaking (`results/median5_nosym_sizes1to8.log`, `results/median5_size9_nosym.log`); other cross-checks in Method |
+| 3 | The programs obtained by pruning the classical exchange networks compute the medians of 5, 7, 9 values in 10, 20, 30 operations | computed | `python baseline.py`, then `python verify.py ../results/baseline_median*.txt` |
+| 4 | No program with 11 or fewer operations computes the median of 7 values; none with 13 or fewer computes the median of 9 | computed | `results/lower_bounds_7.log`, `results/lower_bounds_9.log`; regenerate with `python lower_bounds.py 7 11` and `python lower_bounds.py 9 13`. Relies on the symmetry argument in Method |
+| 5 | Of the 210 entries in Seidler's 5-variable monotone catalogue (as fetched 2026-11-23), all 210 listed programs compute the listed function, and exactly 19 use more gates than the minimum; the majority entry lists 13 and the minimum is 10 | external-data | `results/catalogue_check.csv`; regenerate with `../data/fetch_catalogue.sh` and `python catalogue_check.py ../data/raw/MonoCatFileA5var.txt out.csv`. The upper-bound half (a smaller circuit exists for each of the 19) needs no trust in the SAT solver: the circuits are in the CSV and are re-evaluated on all 32 inputs |
+| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV. The list of class representatives is taken from the catalogue rather than regenerated here. For classes with minimum 6 or more, the lower-bound half rests on SAT UNSAT answers under `sym=1` with no certificate (the brute-force check stops at 5 gates) |
+| 7 | All 30 entries of Seidler's 4-variable monotone catalogue are minimal | external-data | `results/catalogue_check_4var.csv`, and independently `python cross_check.py` (brute force, no SAT solver) |
+
+Commands in the table are run from the project's `src/` folder.
 
 The entries of the 5-variable catalogue that are not minimal (catalogue
 number is the catalogue's own identifier for the class representative):
@@ -138,26 +144,37 @@ machine-checked one, and the lower-bound claims depend on it.
 
 Take a circuit of the smallest possible size s. Every gate has a path to the
 output (otherwise delete it), so the output is the only gate nobody uses and
-comes last in any valid numbering. Among all ways to (i) number the gates in
-an order where operands precede users and (ii) rename the input variables,
-pick one whose sequence of operand pairs (b, a) with a < b, listed gate by
-gate, is lexicographically smallest, comparing pairs by b first.
+comes last in any valid numbering. No two gates have the same operands and
+type (otherwise merge them). Describe each gate by the triple (b, a, type)
+with operands a < b, and order triples by b, then a, then type with
+AND < OR. Consider every *presentation* of the circuit: a numbering of the
+gates in which operands precede users, together with a renaming of the input
+variables and, when the function is its own dual, optionally the exchange of
+AND and OR throughout (which computes the dual function, hence the same
+function). Pick a presentation whose sequence of triples, listed gate by
+gate, is lexicographically smallest. Each constraint below holds for it,
+because otherwise a single change would give a presentation with a strictly
+smaller sequence.
 
-1. *Consecutive gates are in non-decreasing pair order.* If gate g+1 had a
-   smaller pair than gate g, its larger operand would be below g, so it does
-   not use g; swapping the two is a valid numbering with a smaller sequence.
-   Two consecutive gates with the same pair can be swapped freely, so AND can
-   be put first; two gates with the same pair and type would be duplicates,
-   impossible in a smallest circuit. (Constraint level `sym=1`; valid for any
-   function.)
+1. *Triples strictly increase from each gate to the next.* If gate g+1 had a
+   smaller triple than gate g, its larger operand would be at most that of g,
+   hence below g, so it does not use g. Exchanging the two gates' numbers is
+   a valid numbering; both gates keep their triples (their operands are below
+   g), so position g now holds the smaller triple and earlier positions are
+   unchanged. Equal triples are excluded above. In terms of the code: pairs
+   (b, a) are non-decreasing, and two consecutive gates with the same pair
+   are AND then OR. (Constraint level `sym=1`; valid for any function, with
+   no dualisation and no renaming needed.)
 2. *The first gate is AND(x0, x1)* (majority only). The first gate's operands
-   are inputs, and the smallest pair is (1, 0). If it is OR, swap AND and OR
-   throughout: the result computes the dual function, and majority of an odd
-   number of inputs is its own dual. Pairs are unchanged. (`sym=2`.)
+   are inputs. Renaming them to 0 and 1 and, if the gate is OR, exchanging
+   AND and OR (majority of an odd number of inputs is its own dual) gives a
+   presentation whose first triple is (1, 0, AND), the smallest triple there
+   is; so the minimal presentation starts with it. (`sym=2`.)
 3. *Input i+1 is not used before input i* (symmetric functions only). If gate
    g is the first to use i+1, and i is used neither earlier nor as g's smaller
-   operand, then exchanging the names i and i+1 leaves earlier gates unchanged
-   and makes g's pair smaller. (`sym=3`.)
+   operand, then g does not use i at all (its larger operand cannot be i when
+   it uses i+1 as the smaller one). Exchanging the names i and i+1 leaves
+   earlier gates unchanged and makes g's triple smaller. (`sym=3`.)
 
 Because the constraints assume a smallest circuit, UNSAT at size s excludes
 only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
@@ -174,7 +191,7 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
 - `src/brute_force.py` enumerates all circuits without any SAT solver or
   encoding: every 4-variable class (up to 7 gates) and every 5-variable class
   with minimum at most 5 gates agrees exactly, and no 5-variable class with a
-  larger SAT minimum is reachable in 5 gates (`python src/cross_check.py`:
+  larger SAT minimum is reachable in 5 gates (`python cross_check.py`:
   28 + 59 classes agree, 149 correctly unreachable).
 - In all 210 + 30 catalogue classes the SAT minimum is at most the size of
   the catalogue's own circuit, as it must be if the encoding does not
@@ -212,7 +229,9 @@ pip install -r requirements.txt     # python-sat 1.9.dev24; Python 3.13 used
 
 `run_all.sh` lists each step with its approximate runtime (4 cores, Intel
 Xeon 2.10 GHz, 15 GB). Totals: everything except the last three steps takes
-about 45 minutes, most of it the 5-variable catalogue. The last sizes of the
+about an hour, most of it the 5-variable catalogue (about 40 minutes) and
+the size-9 run without symmetry breaking (18 minutes); the last three steps
+add about 50 minutes. The last sizes of the
 lower-bound runs took 60 s (n=7, size 11) and 1146 s (n=9, size 13).
 Network is needed only by `data/fetch_catalogue.sh`. Solver runs are
 deterministic; `local_improve.py` takes its random seed on the command line
@@ -252,8 +271,21 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   variables". The paper's Table 5 row for 5 variables (3, 2, 4, 10, 26, 16,
   42, 35, 44, 18, 3, 6, 0, 1 classes at 0 to 13 gates) matches a count of the
   gates in the fetched file, so the file is the one the paper describes.
-- Known problems: the discrepancy reported here. We do not know its cause;
-  the paper's description of its search was not analysed. The author has not
+- Known problems, disclosed by the source itself. Section 2.1 (pages 7-8)
+  describes a pruning that keeps one sub-program per function and then says:
+  "After completing this catalog, we realized that there is a potential issue
+  with this last pruning in the case that the optimal circuit for computing a
+  function f uses some gate G in each subcircuit of its output gate. [...]
+  Unfortunately, this means that the last pruning we did is technically
+  invalid. [...] The circuits are still small enough that we have reason to
+  believe that gate reuse is not an issue, but it likely will be for larger
+  numbers of variables." Section 3.2 says the monotone method is "nearly
+  identical". The 10-gate majority circuit above does share gates between the
+  two operands of its output, so this caveat is the probable cause of the 19
+  non-minimal entries. That is a hypothesis: we did not run or analyse the
+  Maple code. So the manuscript's abstract and its Table 5 claim minimality,
+  its method section warns that minimality is not guaranteed, and this
+  project shows that for 5 variables it in fact fails. The author has not
   been contacted. This is a documented inconsistency in a manuscript, not a
   comment on its author.
 - The classical exchange networks in `src/baseline.py` (7, 13 and 19
@@ -288,8 +320,9 @@ Searched on 2026-11-23, before the work, with a general web search engine
   selection (adaptive comparisons, a different model).
 - Not found in this search: a statement that 10 is the exact monotone circuit
   size of 5-input majority; exact values or SAT lower bounds for 7 or 9
-  inputs in the {AND, OR} basis; any note that the Seidler catalogue is not
-  minimal. Knuth's *The Art of Computer Programming* 7.1.1 and 7.1.2 are an
+  inputs in the {AND, OR} basis; any statement that specific entries of the
+  Seidler catalogue are not minimal (the manuscript's own general caveat is
+  quoted in the previous section). Knuth's *The Art of Computer Programming* 7.1.1 and 7.1.2 are an
   obvious place for the 5-input value and could not be read here (not openly
   accessible), so it may well be recorded there.
 
@@ -307,8 +340,8 @@ specialist's survey.
   the math repository, would remove both. Not done.
 - Sizes for 7 and 9 inputs are open: 12 to 20 and 14 to 30. The lower bounds
   are far from the upper bounds and say little. Each extra size costs roughly
-  ten to twenty times more solver time (n=9: 10 s, 68 s, 1146 s for sizes 11,
-  12, 13). Size 12 for n=7 and size 14 for n=9 were started and did not
+  6 to 17 times more solver time (n=9: 10 s, 68 s, 1146 s for sizes 11, 12,
+  13; n=7: 6 s, 60 s for sizes 10, 11). Size 12 for n=7 and size 14 for n=9 were started and did not
   finish: the n=7 size-12 run was stopped after more than 30 minutes on a
   shared machine, the n=9 size-14 run after a few minutes.
 - The failed local search is not evidence of optimality of 20: it only
@@ -322,9 +355,10 @@ specialist's survey.
   catalogue.
 - No source fetched for this project contained instructions addressed to an
   AI or other manipulation attempts.
-- "Claim on `main`": the session could push only to its own branch while
-  working, so the claim commit reached `main` together with the result, by
-  permission of the repository owner.
+- The claim commit was made before the research but was pushed to the
+  session branch, not directly to `main`; it reached `main` in a later merge
+  while the work was under way. No competing claim on this question existed
+  on `main` at any point checked (start of work and final merge).
 
 ## Review log
 

@@ -1,4 +1,4 @@
-function,catalogue_gates,minimum_gates,catalogue_program_correct,"minimum_circuit(inputs 0-4, gates numbered from 5; min=AND, max=OR)"
+function,catalogue_gates,minimum_gates,catalogue_program_correct,"minimum_circuit(inputs 0..n-1, gates numbered from n; min=AND, max=OR)"
 0,0,0,True,
 1,3,3,True,"min(0,1) min(2,4) min(3,5)"
 3,2,2,True,"min(0,1) min(2,4)"

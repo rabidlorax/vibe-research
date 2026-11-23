@@ -95,7 +95,7 @@ if __name__ == "__main__":
     with Pool(procs) as pool, open(sys.argv[2], "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["function", "catalogue_gates", "minimum_gates", "catalogue_program_correct",
-                    "minimum_circuit(inputs 0-4, gates numbered from 5; min=AND, max=OR)"])
+                    "minimum_circuit(inputs 0..n-1, gates numbered from n; min=AND, max=OR)"])
         res = []
         for r in pool.imap_unordered(work, entries):
             res.append(r)

@@ -1,0 +1,1 @@
+{"m": 6, "rules": "PRHBC", "convention": "robust", "min_voters": 11, "highs_nodes": 326, "cpsat_nodes_below_min": 266, "witness": [["ADECFB", 1], ["AEDCBF", 3], ["BDFECA", 3], ["CEDFBA", 2], ["EDCBFA", 1], ["FDCBAE", 1]], "witness_winners": {"P": "A", "R": "B", "H": "C", "B": "D", "C": "E"}, "seconds": 43.1}
