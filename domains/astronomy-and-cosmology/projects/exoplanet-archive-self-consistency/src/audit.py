@@ -31,6 +31,9 @@ AU, DAY, TEFF_SUN = 1.495978707e11, 86400.0, 5772.0
 LOGG_SUN = np.log10(GM_SUN / R_SUN**2 * 100)                      # cgs
 RHO_SUN = GM_SUN / G / (4 / 3 * np.pi * R_SUN**3) / 1000          # g/cm^3
 RHO_EARTH = GM_EARTH / G / (4 / 3 * np.pi * R_EARTH**3) / 1000    # g/cm^3
+R_JUP_MEAN = 6.9911e7                                             # volumetric mean radius, m
+JUP_CONV = (R_JUP / R_JUP_MEAN) ** 3
+RHO_JUP_EQ = GM_JUP / G / (4 / 3 * np.pi * R_JUP**3) / 1000       # g/cm^3
 LN10 = np.log(10)
 
 
@@ -220,6 +223,19 @@ def main():
                     r[f"top{i + 1}_ref_gt5pct"] = vc.index[i]
                     r[f"top{i + 1}_ref_n_gt5pct"] = int(vc.iloc[i])
                     r[f"top{i + 1}_ref_rows_in_stratum"] = int((refcol == vc.index[i]).sum())
+                if cid == "RHOP" and sname == "published":
+                    # A Jupiter density defined with the volumetric mean radius
+                    # (69,911 km) instead of the equatorial one used here
+                    # shifts the ratio by JUP_CONV = 1.069: a convention, not
+                    # an inconsistency. Count rows in a window around it and
+                    # in the mirror window.
+                    rr = np.exp(x)
+                    pk = (rr > 1.055) & (rr < 1.085)
+                    mir = (rr < 1 / 1.055) & (rr > 1 / 1.085)
+                    n5 = int((x.abs() > np.log(1.05)).sum())
+                    rhop_conv = (int(pk.sum()), int(mir.sum()), n5 - int(pk.sum()), len(x) - int(pk.sum()),
+                                 float((d.loc[x.index, "pl_dens"] / (d.loc[x.index, "pl_massj"]
+                                        / d.loc[x.index, "pl_radj"] ** 3))[pk].median()))
                 if cid == "K3" and sname == "published, same ref":
                     # pl_orbsmax is a projected separation, not a semi-major
                     # axis, for imaging and microlensing planets.
@@ -283,6 +299,11 @@ def main():
         lines.append(f"- {cid}: " + "; ".join(f"{k} ({v})" for k, v in vc.items()))
     lines += ["", "K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%): "
               + "; ".join(f"{k} {r.n} / {r.gt5} / {r.gt20}" for k, r in k3_method.sort_values("n", ascending=False).iterrows())]
+    lines += ["", f"RHOP, published: rows with ratio 1.055-1.085 (Jupiter mean-radius density convention, "
+              f"factor {JUP_CONV:.4f}): {rhop_conv[0]}; mirror window: {rhop_conv[1]}; off by > 5% outside that window: "
+              f"{rhop_conv[2]} of {rhop_conv[3]} ({100 * rhop_conv[2] / rhop_conv[3]:.1f}%); median pl_dens / "
+              f"(M/R^3 in Jupiter units) in the window: {rhop_conv[4]:.3f} g/cm^3 "
+              f"(equatorial-radius Jupiter density {RHO_JUP_EQ:.3f}, mean-radius {RHO_JUP_EQ * JUP_CONV:.3f})"]
     lines += ["", "Published rows with TICv8 stellar parameters (rows / rows off by > 5%): "
               + "; ".join(f"{k} {a} / {b}" for k, (a, b) in tic_viol.items())]
     bib = d.st_refname.str.extract(r"/abs/([^/\s]+)/abstract")[0]

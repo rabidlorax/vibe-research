@@ -73,6 +73,8 @@ Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
 
 K3, published, same ref, by discovery method (rows / off by > 5% / off by > 20%): Transit 4730 / 222 / 58; Radial Velocity 2298 / 165 / 29; Imaging 40 / 5 / 3; Transit Timing Variations 27 / 0 / 0; Microlensing 19 / 6 / 2; Astrometry 7 / 1 / 0; Pulsar Timing 6 / 0 / 0; Orbital Brightness Modulation 4 / 0 / 0; Pulsation Timing Variations 1 / 0 / 0
 
+RHOP, published: rows with ratio 1.055-1.085 (Jupiter mean-radius density convention, factor 1.0694): 277; mirror window: 31; off by > 5% outside that window: 267 of 2247 (11.9%); median pl_dens / (M/R^3 in Jupiter units) in the window: 1.328 g/cm^3 (equatorial-radius Jupiter density 1.240, mean-radius 1.326)
+
 Published rows with TICv8 stellar parameters (rows / rows off by > 5%): LOGG 4386 / 0; RHOS 4386 / 0; LUM 4382 / 0
 Short reference names in st_refname (published rows) standing for more than one bibcode: 247
 

@@ -74,7 +74,8 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
 
    The 1,460 counts whole references and is, to within the few rows of
    those references that do not fit (98 are not within 10% of the
-   solar-unit value), a lower bound. Among the remaining 3,045 literature rows, 43
+   solar-unit value; most of them, by a reviewer's count, are still within
+   20%), a lower bound. Among the remaining 3,045 literature rows, 43
    lie within 3% of the solar-unit value, against 5 to 10 in control windows
    of the same width; ten further references have all of their rows (2 to 4
    each) there. None of those was read, so they are leads only. Evidence:
@@ -93,21 +94,26 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    Method. Counting only rows that differ by more than 5% *and* by more than
    3σ of their own stated uncertainties, the rate for the exact identities is
    0.1% to 1.9% (same-reference strata for planet-star identities;
-   literature-only strata for the stellar ones). Rates above 5% are
-   highest for surface gravity and planet density. In rows whose stellar
-   parameters come from a paper, not from TICv8 or a KOI table, the surface
-   gravity g implied by `st_logg` differs from G M★/R★² by more than 5%
-   (0.021 dex in log g) in 21.7% of 7,935 rows, stellar density in 13.4% of
-   3,045 (item 1 references removed) and luminosity in 11.5% of 2,827.
-   Planet density differs in 21.6% of 2,524 published rows, insolation in
-   13.7% of 766 and a/R★ in 12.6% of 2,143 same-reference rows. Evidence:
-   `external-data`.
+   literature-only strata for the stellar ones). The rate above 5% is
+   highest for surface gravity. In rows whose stellar parameters come from
+   a paper, not from TICv8 or a KOI table, the surface gravity g implied by
+   `st_logg` differs from G M★/R★² by more than 5% (0.021 dex in log g) in
+   21.7% of 7,935 rows, stellar density in 13.4% of 3,045 (item 1
+   references removed) and luminosity in 11.5% of 2,827. Insolation differs
+   in 13.7% of 766 and a/R★ in 12.6% of 2,143 same-reference rows. Planet
+   density differs in 21.6% of 2,524 published rows, but 277 of those 544
+   rows sit in a narrow peak at ratio 1.07 (31 in the mirror window). That
+   is the factor (71,492/69,911)³ = 1.069 between a Jupiter density defined
+   with the equatorial radius and with the volumetric mean radius; in those
+   rows `pl_dens` is 1.33 g/cm³ × M/R³ in Jupiter units. It is a unit
+   convention, not an inconsistent solution. Outside that window the rate
+   is 267 of 2,247, or 11.9%. Evidence: `external-data`.
 
 3. **In rows whose stellar parameters cite a Kepler KOI table (Q1-Q12,
    Q1-Q16, DR24, DR25), `st_dens` is a transit-fitted quantity, not the
    mass-radius density; and in the rows of the Q1-Q8 to DR25 KOI tables,
-   `pl_ratdor` is the fitted a/R★, not `pl_orbsmax`/`st_rad`.** In those
-   10,816 rows the stellar density differs from 3M★/4πR★³ by a median of 89%
+   `pl_ratdor` is the fitted a/R★, not `pl_orbsmax`/`st_rad`.** In the
+   10,816 such rows of the KOI tables themselves the stellar density differs from 3M★/4πR★³ by a median of 89%
    (95.4% of rows by more than 5%). a/R★ differs from `pl_orbsmax`/`st_rad`
    by a median of 25% (13,124 rows), while Kepler's third law, log g and
    Rp/R★ hold to within 5% in over 99.9% of the same rows. In every row
@@ -171,7 +177,7 @@ twelve identities:
 | LOGG | `st_logg` | log(G M★ / R★²) | exact |
 | RHOS | `st_dens` | 3 M★ / 4π R★³ | exact |
 | LUM | `st_lum` | log(R★² Teff⁴) in solar units | exact |
-| RHOP | `pl_dens` | 3 Mp / 4π Rp³ (true masses only) | exact |
+| RHOP | `pl_dens` | 3 Mp / 4π Rp³ (true masses only) | exact up to the Jupiter-radius convention (6.9% in density) |
 | URAD, UMASS, UMSINI | Earth-unit column | Jupiter-unit column × conversion | exact up to rounding |
 | RATROR | `pl_ratror` | Rp / R★ | exact |
 | RATDOR | `pl_ratdor` | a / R★ | exact for circular orbits |
@@ -234,6 +240,9 @@ Reading the table:
   lines to use for the stellar identities. The plain "RHOS published" line
   is dominated by the item 1 references (1,453 of its 1,968 rows above 20%)
   and KOI-table stars (324).
+- RHOP: half of the rows above 5% (277 of 544) are the Jupiter-radius
+  convention described in summary item 2, not inconsistencies. They do not
+  reach the 20% threshold, so `results/outliers.csv` is unaffected.
 - The plain "RHOS Kepler KOI" line mixes two populations: rows whose star
   cites a KOI table (fitted density) and 2,547 rows whose star cites TICv8
   (mass-radius density); TICv8 is the stellar reference of every DR25
@@ -308,9 +317,13 @@ committed results are for the snapshot whose checksum and query are in
   Exact queries are in `src/fetch.py` and `src/density_units.py`. Dataset DOIs
   10.26133/NEA12 (`ps`) and 10.26133/NEA13 (`pscomppars`), from the archive's
   `docs/doi.html`. Five KOI tables (`q1_q8_koi` to
-  `q1_q17_dr25_koi`) are queried by `src/koi_columns.py`. Licence: no licence statement was found; the
-  archive's data are, as far as is known here, public and free to use with
-  acknowledgement `[from memory, unverified]`. Only
+  `q1_q17_dr25_koi`) are queried by `src/koi_columns.py`. Licence: no licence statement was found on the
+  archive's pages. Its `docs/acknowledge.html` (fetched 2026-11-23) asks for
+  this acknowledgement, given here as requested: "This research has made use
+  of the NASA Exoplanet Archive, which is operated by the California
+  Institute of Technology, under contract with the National Aeronautics and
+  Space Administration under the Exoplanet Exploration Program", and for a
+  citation of Christiansen et al. 2025 (arXiv:2506.03299). Only
   derived ratios and the identifying values of outlier rows are committed.
 - **Published papers** read for claims 3, 4 and 8: Fulton & Petigura 2018
   (arXiv:1805.01453), Torres et al. 2017 (arXiv:1711.01267), Mann et al. 2017
@@ -324,8 +337,8 @@ committed results are for the snapshot whose checksum and query are in
   of the other papers could differ.
 - **Archive documentation** quoted: `docs/pscp_about.html`,
   `docs/API_PS_columns.html`, `docs/API_kepcandidate_columns.html`,
-  `docs/lit_discrepancies.html`,
-  `docs/doi.html`, all fetched 2026-11-23.
+  `docs/lit_discrepancies.html`, `docs/doi.html`, `docs/acknowledge.html`,
+  all fetched 2026-11-23.
 
 None of the underlying measurements were made here and none can be
 reproduced here. Every claim depends on the archive snapshot. Claims 1 and 2
@@ -418,6 +431,13 @@ Found:
   off by more than a factor of 2. This is the INSOL identity and the same
   ingestion mechanism as in summary item 1, for another column. No rates.
   Found by the third reviewer; passage read here.
+- Howe, Becker & Stark, "Architecture Classification for Extrasolar
+  Planetary Systems", arXiv:2501.08191, section II.2: "several dozen entries
+  in the Exoplanet Archive have mass and radius measurements that result in
+  unphysically high (or in one case low) densities". This is a plausibility
+  check on mass and radius, not a test of one column against others. Found
+  by the seventh reviewer; passage read here (title and authors as the
+  reviewer gave them).
 - The archive's discrepancy page already records one stellar-density unit
   slip, of a different kind: TOI-815, Psaridi et al. 2024, literature value
   "2431 +122 −125 ρ⊙" against archive value "2.431 +0.122 -0.125 g/cm^3",
@@ -430,8 +450,8 @@ inconsistent with mass and radius, sanity or plausibility checks of
 exoplanet databases, typos and transcription errors in the archive, the
 archive's 2025 description paper arXiv:2506.03299 and its release notes;
 web, OpenAlex and arXiv). The second found the two log g items, the third
-found Loyd et al. 2020 and the TOI-815 entry, and the others found nothing
-further. None found a prior statement of the density problem for the four
+found Loyd et al. 2020 and the TOI-815 entry, the seventh found Howe et al.,
+and the others found nothing further. None found a prior statement of the density problem for the four
 references.
 
 Not found in the searches described: violation rates for the identities
@@ -474,10 +494,21 @@ know.
   routes (spectroscopic gravity, transit-derived density, limb darkening),
   not mistakes.
 - Propagated σ assumes independent errors and symmetrises asymmetric ones.
-- Rounding of the printed values is not modelled. Two reviewers bounded it
-  with their own code (not part of this repository): it can account for at
-  most about 5% of the K3 rows and 12% of the LOGG rows above 5%, so it
-  does not explain the rates.
+- Rounding of the printed values is not modelled, and the printed precision
+  cannot be recovered exactly because the TAP output zero-pads values.
+  Reviewers' estimates with their own code (not part of this repository)
+  range from about 5% to 16% of the K3 rows and 12% to 26% of the LOGG rows
+  above 5%, the upper figures being a worst case (half a unit in the last
+  non-zero digit of every input, added linearly). Rounding therefore does
+  not explain most of either rate.
+- RHOP uses Jupiter's equatorial radius, as the archive's own radius
+  conversion does. Rows whose density was converted from Jupiter units with
+  a mean-radius Jupiter density (1.33 g/cm³) appear 6.9% off. Who applied
+  that conversion in each of those rows, the archive or the authors, was
+  not traced.
+- K3 and RATDOR discrepancies in transit papers can also come from
+  different measurement routes (a from the fitted a/R★ and R★, against a
+  mass from isochrones), as with LOGG, RHOS and DEPTH below.
 - `pl_refname == st_refname` is taken as "single reference". Whether the
   archive ever fills individual cells of such a row from elsewhere was not
   checked.
@@ -495,3 +526,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a fourth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (checksums and result files identical); recomputed the table and claim numbers with separate code; read `src/`; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), papers marked from memory, the ten further density references, other outlier rows | Changes needed, no headline claim overturned: 6 points. The KOI density median (56%) was diluted by TICv8-star rows of the DR25 Supplemental table (89% for KOI-table stars); MacDonald et al.'s own Table 2 carries the g cm⁻³ label, so that case is the paper's, not the archive's; a misplaced line in a results file; the order of the prior-art searches misstated; two archive values not printed by any script; a section number. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a fifth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums and all result files identical); recomputed the claim and table numbers with separate code; read `src/`; fetched and checked every quotation and every statement about a paper's tables; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 4 wording points (a stale count of reviewers, a stale count of downloads, 7 composite densities that cite the DR25 Supplemental table described as fitted, and the outlier file's omission of mixed-reference rows not stated). No claim, table number, script or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a sixth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed every line of the excerpt table and the claim numbers with separate code and regexes; read `src/`; fetched and checked every quotation; fetched the journal table of Fulton & Petigura 2018 from VizieR; new prior-art search (nothing further found). Not checked: journal versions of the other papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. One summary sentence ("the three stellar identities are the least well obeyed") was contradicted by the project's own table and is replaced; K3 did not disclose that `pl_orbsmax` is a projected separation for 59 imaging and microlensing rows; an inaccurate table caption. No claim, table number or label affected. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a seventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts and medians with separate code; read `src/`; fetched and checked every quotation, including the VizieR table; new prior-art search (found Howe, Becker & Stark, arXiv:2501.08191, which notes "several dozen entries" with unphysical densities from mass and radius: a plausibility check, not a row-identity test). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed: 3 points. Half of the planet-density rows above 5% are a Jupiter-radius unit convention (ratio 1.069), so the sentence added after the sixth review ("highest for surface gravity and planet density") overstated; the reviewer-attributed rounding figures were not a bound; the archive's acknowledgement text was retrievable and missing. No bold headline, claim number or label affected. All addressed in the following commit. Status stays `result` |
