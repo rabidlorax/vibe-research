@@ -102,7 +102,7 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
 
 3. **In rows whose stellar parameters cite a Kepler KOI table (Q1-Q12,
    Q1-Q16, DR24, DR25), `st_dens` is a transit-fitted quantity, not the
-   mass-radius density; and in all rows of the Q1-Q8 to DR25 KOI tables,
+   mass-radius density; and in the rows of the Q1-Q8 to DR25 KOI tables,
    `pl_ratdor` is the fitted a/R★, not `pl_orbsmax`/`st_rad`.** In those
    10,816 rows the stellar density differs from 3M★/4πR★³ by a median of 89%
    (95.4% of rows by more than 5%). a/R★ differs from `pl_orbsmax`/`st_rad`
@@ -118,8 +118,9 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    fitted-versus-catalogue density difference is a known effect; the point
    for users is that the `ps` column name does not distinguish the two, and
    that 370 "published" planet rows also carry KOI-table stellar values. In
-   the composite table, 1,347 of the 5,859 stellar densities cite a KOI
-   table (1,340 of them DR24 or DR25). Evidence: `external-data`; the column
+   the composite table, 1,340 of the 5,859 stellar densities cite the DR24
+   or DR25 KOI table and are therefore fitted values; 7 more cite the DR25
+   Supplemental table. Evidence: `external-data`; the column
    definition is supporting `literature`.
 
 4. `results/outliers.csv` lists 3,276 row-identity entries (3,100 distinct
@@ -127,7 +128,9 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    by more than 20%. Of the entries, 1,453 are the item 1 densities, 324 are
    KOI-table fitted densities (item 3), 156 belong to the approximate DEPTH
    identity and 2 are rounding. The remaining 1,341 entries (1,192 rows, 941
-   planets) are candidate inconsistencies. Only the cases named in this
+   planets) are candidate inconsistencies. For the planet-star identities
+   (K3, RATROR, RATDOR, INSOL) only same-reference rows are listed; 6
+   mixed-reference entries above 20% (1 K3, 5 RATROR) are not. Only the cases named in this
    README were traced to their papers. The rest are leads, not confirmed
    errors.
 
@@ -277,7 +280,7 @@ matplotlib 3.11.2 (the versions used):
 cd domains/astronomy-and-cosmology/projects/exoplanet-archive-self-consistency
 python src/fetch.py           # ~31 MB from exoplanetarchive.ipac.caltech.edu, about 1 minute
 python src/audit.py           # about 5 seconds; writes results/summary.*, outliers.csv, by_reference.csv, PNG
-python src/density_units.py   # one more small TAP query (pscomppars); --offline skips it
+python src/density_units.py   # two more small TAP queries (pscomppars); --offline skips them
 python src/koi_columns.py     # five more TAP queries (the KOI tables)
 python src/toi1227_luminosity.py   # no input, no network
 ```
@@ -285,9 +288,10 @@ python src/toi1227_luminosity.py   # no input, no network
 The archive changes continuously. A later download may not match
 `data/ps.sha256` (later downloads on the same day did), and counts will
 move as rows are added or corrected. `fetch.py` keeps the committed
-`data/fetch_meta.json` when the checksum matches. The two smaller downloads
-have their checksums and queries in `data/pscomppars_dens.sha256` and
-`data/koi_tables.sha256`. The queries have no `ORDER BY`, so a checksum can
+`data/fetch_meta.json` when the checksum matches. The six smaller downloads
+(the `pscomppars` density columns and five KOI tables) have their checksums
+and queries in `data/pscomppars_dens.sha256` and `data/koi_tables.sha256`;
+the `pscomppars` row count is a second, unchecksummed query. The queries have no `ORDER BY`, so a checksum can
 also change if the server returns rows in another order. The
 committed results are for the snapshot whose checksum and query are in
 `data/fetch_meta.json`. The raw file is not committed.
@@ -411,12 +415,16 @@ Found:
   "2431 +122 −125 ρ⊙" against archive value "2.431 +0.122 -0.125 g/cm^3",
   "Typo in stellar density in Table E.1."
 
-Three reviewers repeated the search on 2026-11-23 with other terms (density
-mislabel or erratum, physically inconsistent rows, unit mistakes in curated
-catalogues, `st_dens` unit error, log g inconsistent with mass and radius;
-web, OpenAlex and arXiv). The first found nothing further, the second found
-the two log g items, the third found Loyd et al. 2020 and the TOI-815 entry.
-None found a prior statement of the density problem for the four references.
+Each reviewer in the review log repeated the search on 2026-11-23 with
+other terms (density mislabel or erratum, physically inconsistent rows, unit
+mistakes in curated catalogues, `st_dens` unit error or solar units, log g
+inconsistent with mass and radius, sanity or plausibility checks of
+exoplanet databases, typos and transcription errors in the archive, the
+archive's 2025 description paper arXiv:2506.03299 and its release notes;
+web, OpenAlex and arXiv). The second found the two log g items, the third
+found Loyd et al. 2020 and the TOI-815 entry, and the others found nothing
+further. None found a prior statement of the density problem for the four
+references.
 
 Not found in the searches described: violation rates for the identities
 other than log g, or any statement that the densities of the four references
@@ -451,6 +459,10 @@ know.
   routes (spectroscopic gravity, transit-derived density, limb darkening),
   not mistakes.
 - Propagated σ assumes independent errors and symmetrises asymmetric ones.
+- Rounding of the printed values is not modelled. Two reviewers bounded it
+  with their own code (not part of this repository): it can account for at
+  most about 5% of the K3 rows and 12% of the LOGG rows above 5%, so it
+  does not explain the rates.
 - `pl_refname == st_refname` is taken as "single reference". Whether the
   archive ever fills individual cells of such a row from elsewhere was not
   checked.
@@ -466,3 +478,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a second fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all result files identical); recomputed the main counts with separate code; read `src/`; fetched Fulton & Petigura 2018, Torres et al. 2017, Mann et al. 2017 and 2022, MacDonald et al. 2016, Decocq et al. 2026 and the archive documentation; new prior-art search. Not checked: journal versions, the ten further density references, other outlier rows | Changes needed, headline items stand: 12 points. A bug made the density "control window" identical to the test window, reversing a stated conclusion; references were grouped by short name, which merged two "Mann et al. 2017" papers and hid a fourth affected reference; TICv8 rows diluted the stellar rates; a prior log g consistency rate (arXiv:2505.22205) was missed; claims with two labels; missing checksums. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a third fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all three download checksums and all result files identical); recomputed the main counts with separate code and added robustness checks (per stellar solution instead of per row; rounding); read `src/`; fetched all five papers, Decocq et al., arXiv:2505.22205, arXiv:2611.00856 and the archive documentation; new prior-art search. Not checked: journal versions (publisher and CDS unreachable), the ten further density references, other outlier rows | Changes needed, no headline claim or table number affected: 8 points. A wrong host count for the archive's discrepancy page (removed); the unit documentation page not cited; three correct numbers not printed by any script; Loyd et al. 2020 and the TOI-815 entry missing from prior work; "5% in log g" ambiguous; two citation markers; stale prior-work sentences; HTML entities in result files. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a fourth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (checksums and result files identical); recomputed the table and claim numbers with separate code; read `src/`; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), papers marked from memory, the ten further density references, other outlier rows | Changes needed, no headline claim overturned: 6 points. The KOI density median (56%) was diluted by TICv8-star rows of the DR25 Supplemental table (89% for KOI-table stars); MacDonald et al.'s own Table 2 carries the g cm⁻³ label, so that case is the paper's, not the archive's; a misplaced line in a results file; the order of the prior-art searches misstated; two archive values not printed by any script; a section number. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, a fifth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums and all result files identical); recomputed the claim and table numbers with separate code; read `src/`; fetched and checked every quotation and every statement about a paper's tables; new prior-art search (nothing further found). Not checked: journal versions (CDS unreachable), items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 4 wording points (a stale count of reviewers, a stale count of downloads, 7 composite densities that cite the DR25 Supplemental table described as fitted, and the outlier file's omission of mixed-reference rows not stated). No claim, table number, script or label affected. All addressed in the following commit. Status stays `result` |

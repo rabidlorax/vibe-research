@@ -314,7 +314,8 @@ def main():
         ax.set_yscale("log")
         ax.set_title(f"{cid}: {desc}", fontsize=8)
         ax.set_xlabel("log10(obs/pred), clipped to ±1.5", fontsize=8)
-    fig.suptitle("Published rows of the NASA Exoplanet Archive ps table: tabulated value over value implied by the same row")
+    fig.suptitle("Published rows of the NASA Exoplanet Archive ps table (same-reference rows for K3, RATROR, RATDOR, INSOL):\n"
+                 "tabulated value over value implied by the same row")
     fig.tight_layout()
     fig.savefig(res / "discrepancy_histograms.png", dpi=110)
 
