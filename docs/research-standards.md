@@ -44,7 +44,8 @@ points to it. That keeps one place where all proofs are built and audited.
 A pointer in the Claims table gives three things:
 
 - the **Lean declaration name** of the theorem (for example
-  `MathInfra.lucasRank_dvd_iff`). Names are stable; file paths in the math
+  `lucasU_eq_zero_iff_lucasRank_dvd`; declarations there are in the root
+  namespace, with no library prefix). Names are stable; file paths in the math
   repository are not, because topics move between its folders
 - the **commit hash** of the math repository at which it was checked
 - the **axioms** the theorem depends on, as reported by the math repository's
