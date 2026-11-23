@@ -6,7 +6,7 @@ evidence: external-data
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-24
+updated: 2026-11-23
 ---
 
 # Fewest min/max operations to compute a median of 5, 7 or 9 values
