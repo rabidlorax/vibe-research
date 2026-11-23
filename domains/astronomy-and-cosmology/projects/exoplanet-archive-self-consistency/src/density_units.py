@@ -27,6 +27,7 @@ REF = r">\s*([^<]+?)\s*</a>"
 def main():
     d = pd.read_csv(HERE / "data" / "raw" / "ps.csv", low_memory=False)
     d = d[d.soltype.str.startswith("Published") & (d.st_denslim.fillna(0) == 0)]
+    d = d[(d.st_masslim.fillna(0) == 0) & (d.st_radlim.fillna(0) == 0)]
     d = d[(d.st_mass > 0) & (d.st_rad > 0) & (d.st_dens > 0)].copy()
     d["ref"] = d.st_refname.str.extract(REF)[0].str.replace("&amp;", "&")
     d["r_cgs"] = d.st_dens / (RHO_SUN * d.st_mass / d.st_rad**3)
@@ -49,6 +50,16 @@ def main():
     aff = d[d.ref.isin(bad)]
     out += [f"Affected ps rows: {len(aff)} ({aff.pl_name.nunique()} planets, {aff.hostname.nunique()} host stars); "
             f"of these, default_flag=1 rows: {int((aff.default_flag == 1).sum())}", ""]
+    # Row-level leads in other references: st_dens within 3% of the solar-unit
+    # value. Control: the mirror-image window (ratio 1/rho_sun too high
+    # instead of too low), which a unit slip in this direction cannot produce.
+    rest = d[~d.ref.isin(bad) & ~d.ref.str.contains("KOI Table", na=False)]
+    lead = rest[np.abs(np.log(rest.r_solar)) < np.log(1.03)]
+    ctrl = rest[np.abs(np.log(rest.r_cgs * RHO_SUN)) < np.log(1.03)]
+    out += [f"Other published rows (KOI-table stars excluded) with st_dens within 3% of M*/R*^3 in solar units: "
+            f"{len(lead)} rows, {lead.pl_name.nunique()} planets; control window (same width, opposite side): {len(ctrl)} rows.",
+            "By reference (rows matching / rows tested): " + "; ".join(
+                f"{k} ({v}/{int((rest.ref == k).sum())})" for k, v in lead.ref.value_counts().head(8).items()), ""]
     if "--offline" not in sys.argv:
         q = "select pl_name,st_dens,st_dens_reflink,st_mass,st_rad from pscomppars where st_dens is not null"
         url = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=" + urllib.parse.quote(q) + "&format=csv"

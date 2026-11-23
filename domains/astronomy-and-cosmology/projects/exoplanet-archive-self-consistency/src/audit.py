@@ -32,7 +32,7 @@ LN10 = np.log(10)
 
 
 def val(d, c):
-    """Column c with limit-flagged and non-positive values removed."""
+    """Column c with limit-flagged values removed (positivity is enforced by pos())."""
     v = d[c].where(d[c + "lim"].fillna(0) == 0)
     return v
 
@@ -143,6 +143,8 @@ def refshort(col):
 
 
 STELLAR = ("LOGG", "RHOS", "LUM")
+# References whose st_dens values are in solar units (see density_units.py).
+SOLAR_UNIT_REFS = ("Fulton & Petigura 2018", "Torres et al. 2017", "MacDonald et al. 2016")
 THR = [("gt1pct", np.log(1.01)), ("gt5pct", np.log(1.05)), ("gt20pct", np.log(1.20)), ("gt2x", np.log(2.0))]
 
 
@@ -153,7 +155,7 @@ def main():
     d = pd.concat([d, pd.DataFrame({
         "cls": d.soltype.map(source_class), "pl_ref": refshort(d.pl_refname),
         "st_ref": refshort(d.st_refname), "same_ref": d.pl_refname == d.st_refname})], axis=1)
-    rows, outl, byref, hist = [], [], [], {}
+    rows, outl, byref, hist, comp = [], [], [], {}, {}
     with np.errstate(all="ignore"):
         for cid, desc, obscol, m, dd, sig, cross, exact in checks(d):
             dd = pd.Series(np.asarray(dd, float), index=d.index)
@@ -165,6 +167,12 @@ def main():
             if cross:
                 strata = [("published, same ref", (d.cls == "published") & d.same_ref),
                           ("published, mixed refs", (d.cls == "published") & ~d.same_ref)]
+            if cid == "RHOS":
+                # Published planet rows can carry stellar values from a Kepler
+                # KOI table; those densities are transit-fitted (koi_srho).
+                strata.append(("published, excl. KOI-table stars and solar-unit refs",
+                               (d.cls == "published") & ~d.st_ref.isin(SOLAR_UNIT_REFS)
+                               & ~d.st_ref.str.contains("KOI Table", na=False)))
             strata += [("kepler-koi", d.cls == "kepler-koi"), ("tess-exofop", d.cls == "tess-exofop")]
             for sname, sm in strata:
                 sel = m & sm.to_numpy()
@@ -181,8 +189,17 @@ def main():
                 sig3 = zok & (zz.abs() > 3) & (x.abs() > np.log(1.05))
                 r["n_gt3sigma_and_gt5pct"] = int(sig3.sum())
                 r["pct_gt3sigma_and_gt5pct"] = round(100 * sig3.sum() / max(zok.sum(), 1), 2)
+                # Which reference contributes most of the > 5% rows.
+                refcol = d.loc[x.index, "st_ref" if cid in STELLAR else "pl_ref"]
+                vc = refcol[x.abs() > np.log(1.05)].value_counts()
+                if len(vc):
+                    r["top_ref_gt5pct"] = vc.index[0]
+                    r["top_ref_n_gt5pct"] = int(vc.iloc[0])
+                    r["top_ref_rows_in_stratum"] = int((refcol == vc.index[0]).sum())
+                if cid in STELLAR and sname == "published":
+                    comp[cid] = refcol.value_counts().head(4)
                 rows.append(r)
-                if sname.startswith("published") and "mixed" not in sname:
+                if sname in ("published", "published, same ref"):
                     hist[cid] = (x.to_numpy(), desc)
                     o = d.loc[x.index, ["pl_name", "default_flag", "pl_ref", "st_ref", "pl_pubdate"]].copy()
                     o.insert(0, "check", cid)
@@ -203,6 +220,7 @@ def main():
     summ = pd.DataFrame(rows)
     summ.to_csv(res / "summary.csv", index=False)
     out = pd.concat(outl)
+    n_distinct_rows = out.index.nunique()
     out["absln"] = np.log(out.ratio_obs_over_pred).abs()
     out = out.sort_values(["check", "absln", "pl_name"], ascending=[True, False, True]).drop(columns="absln")
     out.to_csv(res / "outliers.csv", index=False)
@@ -215,8 +233,20 @@ def main():
     lines = [f"Input: {CSV.name}, sha256 {sha}, {len(d)} rows, {d.pl_name.nunique()} planets.", "",
              "| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
     for _, r in summ.iterrows():
-        lines.append("| " + " | ".join(str(r[c]) for c in cols) + " |")
-    lines += ["", f"Outlier rows (published, |d| > 20%): {len(out)} rows, "
+        v = [str(r[c]) for c in cols]
+        if r.n_with_errors == 0:  # no z statistic without errors
+            v[-2:] = ["n/a", "n/a"]
+        lines.append("| " + " | ".join(v) + " |")
+    lines += ["", "Reference contributing most rows off by > 5%, per stratum (count / that reference's rows in the stratum):", ""]
+    for _, r in summ.iterrows():
+        if isinstance(r.get("top_ref_gt5pct"), str):
+            lines.append(f"- {r.check}, {r.stratum}: {r.top_ref_gt5pct} "
+                         f"({int(r.top_ref_n_gt5pct)} of {r.n_gt5pct} / {int(r.top_ref_rows_in_stratum)})")
+    lines += ["", "Stellar-parameter references of the 'published' stellar strata (top 4 by rows):", ""]
+    for cid, vc in comp.items():
+        lines.append(f"- {cid}: " + "; ".join(f"{k} ({v})" for k, v in vc.items()))
+    lines += ["", f"Outlier entries (published, |d| > 20%): {len(out)} row-identity entries, "
+              f"{n_distinct_rows} distinct rows, "
               f"{out.pl_name.nunique()} planets, {out.groupby('check').size().to_dict()}"]
     # Clustering of factor-2 outliers by reference.
     big = out[np.abs(np.log(out.ratio_obs_over_pred)) > np.log(2)]

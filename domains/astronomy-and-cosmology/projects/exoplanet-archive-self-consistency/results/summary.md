@@ -4,31 +4,63 @@ Input: ps.csv, sha256 f7f15dabf8bbae042698ab40c2f5188f9d20b08f79974348f7f2b679da
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | K3 | published, same ref | 7132 | 0.063 | 13.59 | 5.59 | 1.29 | 92 | 5 | 6205 | 58 | 0.93 |
 | K3 | published, mixed refs | 356 | 0.509 | 38.76 | 6.18 | 0.28 | 1 | 1 | 315 | 2 | 0.63 |
-| K3 | kepler-koi | 13124 | 0.088 | 1.23 | 0.0 | 0.0 | 0 | 0 | 0 | 0 | 0.0 |
+| K3 | kepler-koi | 13124 | 0.088 | 1.23 | 0.0 | 0.0 | 0 | 0 | 0 | n/a | n/a |
 | LOGG | published | 12691 | 0.233 | 31.03 | 13.58 | 6.07 | 770 | 90 | 9668 | 56 | 0.58 |
 | LOGG | kepler-koi | 15671 | 0.088 | 5.6 | 0.08 | 0.0 | 0 | 0 | 13707 | 0 | 0.0 |
 | RHOS | published | 9261 | 0.042 | 30.89 | 23.99 | 21.25 | 1968 | 252 | 6441 | 994 | 15.43 |
+| RHOS | published, excl. KOI-table stars and solar-unit refs | 7444 | 0.004 | 14.04 | 5.64 | 2.74 | 204 | 37 | 4637 | 57 | 1.23 |
 | RHOS | kepler-koi | 13363 | 56.294 | 80.18 | 77.21 | 67.48 | 9018 | 5076 | 11440 | 703 | 6.15 |
 | LUM | published | 7209 | 0.001 | 14.15 | 4.51 | 1.15 | 83 | 24 | 4141 | 14 | 0.34 |
 | LUM | kepler-koi | 2547 | 0.001 | 0.0 | 0.0 | 0.0 | 0 | 0 | 642 | 0 | 0.0 |
 | RHOP | published | 2524 | 0.633 | 40.57 | 21.55 | 3.01 | 76 | 16 | 2501 | 6 | 0.24 |
-| URAD | published | 13203 | 0.0 | 0.82 | 0.05 | 0.0 | 0 | 0 | 0 | 0 | 0.0 |
-| URAD | kepler-koi | 13124 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 0 | 0 | 0 | 0.0 |
-| URAD | tess-exofop | 1563 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 0 | 0 | 0 | 0.0 |
-| UMASS | published | 4839 | 0.0 | 3.06 | 0.25 | 0.04 | 2 | 0 | 0 | 0 | 0.0 |
-| UMSINI | published | 2760 | 0.001 | 1.12 | 0.11 | 0.0 | 0 | 0 | 0 | 0 | 0.0 |
+| URAD | published | 13203 | 0.0 | 0.82 | 0.05 | 0.0 | 0 | 0 | 0 | n/a | n/a |
+| URAD | kepler-koi | 13124 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 0 | 0 | n/a | n/a |
+| URAD | tess-exofop | 1563 | 0.0 | 0.0 | 0.0 | 0.0 | 0 | 0 | 0 | n/a | n/a |
+| UMASS | published | 4839 | 0.0 | 3.06 | 0.25 | 0.04 | 2 | 0 | 0 | n/a | n/a |
+| UMSINI | published | 2760 | 0.001 | 1.12 | 0.11 | 0.0 | 0 | 0 | 0 | n/a | n/a |
 | RATROR | published, same ref | 7470 | 0.233 | 25.41 | 3.24 | 0.28 | 21 | 2 | 6951 | 10 | 0.14 |
 | RATROR | published, mixed refs | 236 | 0.059 | 16.1 | 7.2 | 2.12 | 5 | 4 | 224 | 6 | 2.68 |
 | RATROR | kepler-koi | 13124 | 0.154 | 2.67 | 0.05 | 0.0 | 0 | 0 | 13062 | 0 | 0.0 |
 | RATDOR | published, same ref | 2143 | 0.192 | 25.24 | 12.65 | 3.92 | 84 | 6 | 2092 | 22 | 1.05 |
 | RATDOR | published, mixed refs | 33 | 0.277 | 36.36 | 9.09 | 0.0 | 0 | 0 | 30 | 0 | 0.0 |
-| RATDOR | kepler-koi | 13124 | 24.563 | 97.12 | 86.91 | 56.39 | 7401 | 1562 | 0 | 0 | 0.0 |
+| RATDOR | kepler-koi | 13124 | 24.563 | 97.12 | 86.91 | 56.39 | 7401 | 1562 | 0 | n/a | n/a |
 | DEPTH | published | 1225 | 5.089 | 57.63 | 50.12 | 12.73 | 156 | 15 | 914 | 82 | 8.97 |
 | DEPTH | kepler-koi | 13124 | 18.511 | 98.32 | 90.25 | 37.97 | 4983 | 121 | 10813 | 2927 | 27.07 |
 | INSOL | published, same ref | 766 | 0.494 | 35.9 | 13.71 | 3.13 | 24 | 9 | 743 | 11 | 1.48 |
 | INSOL | published, mixed refs | 9 | 0.448 | 11.11 | 11.11 | 0.0 | 0 | 0 | 9 | 0 | 0.0 |
 
-Outlier rows (published, |d| > 20%): 3276 rows, 2595 planets, {'DEPTH': 156, 'INSOL': 24, 'K3': 92, 'LOGG': 770, 'LUM': 83, 'RATDOR': 84, 'RATROR': 21, 'RHOP': 76, 'RHOS': 1968, 'UMASS': 2}
+Reference contributing most rows off by > 5%, per stratum (count / that reference's rows in the stratum):
+
+- K3, published, same ref: Stassun et al. 2017 (118 of 399 / 204)
+- K3, published, mixed refs: Butler et al. 2006 (5 of 22 / 19)
+- LOGG, published: Mayo et al. 2018 (148 of 1724 / 167)
+- LOGG, kepler-koi: Q1-Q8 KOI Table (12 of 12 / 2308)
+- RHOS, published: Fulton & Petigura 2018 (1414 of 2222 / 1414)
+- RHOS, published, excl. KOI-table stars and solar-unit refs: Livingston et al. 2018 (57 of 420 / 59)
+- RHOS, kepler-koi: Q1-Q16 KOI Table (2596 of 10318 / 2720)
+- LUM, published: Naef et al. 2010 (7 of 325 / 7)
+- RHOP, published: Howard et al. 2025 (39 of 544 / 63)
+- URAD, published: Yu et al. 2018 (3 of 6 / 22)
+- UMASS, published: Marois et al. 2008 (3 of 12 / 3)
+- UMSINI, published: Anglada-Escude et al. 2013 (2 of 3 / 5)
+- RATROR, published, same ref: Vanderburg et al. 2016 (90 of 242 / 114)
+- RATROR, published, mixed refs: Morton et al. 2016 (10 of 17 / 15)
+- RATROR, kepler-koi: Q1-Q8 KOI Table (5 of 7 / 2308)
+- RATDOR, published, same ref: Livingston et al. 2018 (98 of 271 / 124)
+- RATDOR, published, mixed refs: Greklek-McKeon et al. 2025 (1 of 3 / 1)
+- RATDOR, kepler-koi: Q1-Q16 KOI Table (2361 of 11406 / 2720)
+- DEPTH, published: Kruse et al. 2019 (265 of 614 / 301)
+- DEPTH, kepler-koi: Q1-Q16 KOI Table (2540 of 11845 / 2720)
+- INSOL, published, same ref: Torres et al. 2017 (9 of 105 / 22)
+- INSOL, published, mixed refs: Dressing et al. 2017 (1 of 1 / 1)
+
+Stellar-parameter references of the 'published' stellar strata (top 4 by rows):
+
+- LOGG: TICv8 (4386); Morton et al. 2016 (2242); Q1-Q17 DR25 KOI Table (370); Stassun et al. 2017 (355)
+- RHOS: TICv8 (4386); Fulton & Petigura 2018 (1414); Q1-Q17 DR25 KOI Table (370); Stassun et al. 2017 (151)
+- LUM: TICv8 (4382); MacDougall et al. 2023 (112); Mann et al. 2013 (85); Ment et al. 2018 (54)
+
+Outlier entries (published, |d| > 20%): 3276 row-identity entries, 3100 distinct rows, 2595 planets, {'DEPTH': 156, 'INSOL': 24, 'K3': 92, 'LOGG': 770, 'LUM': 83, 'RATDOR': 84, 'RATROR': 21, 'RHOP': 76, 'RHOS': 1968, 'UMASS': 2}
 
 Factor-of-2 outliers by check and reference (top 5 references per check):
 
