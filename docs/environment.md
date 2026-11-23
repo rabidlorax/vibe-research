@@ -5,9 +5,15 @@ quirks found while testing it. Everything here was tested on 2026-11-23 unless
 marked otherwise. Re-test before relying on it, and update this file when
 something changes.
 
-A session started on any other environment (including Default) has none of
-this access. If a host below is refused, check which environment the session
-is on before anything else.
+**Network access is unrestricted** (set by the owner on 2026-11-23): a session
+on this environment can reach any public site. The tables below record what
+has actually been tested, not the limit of what is reachable. Because access
+is open, the "Untrusted content" rules in `CLAUDE.md` apply to everything
+fetched.
+
+A session started on another environment (including Default) has restricted
+access and none of the saved keys. If a host is refused, check which
+environment the session is on before anything else.
 
 ## Sources that need no key
 
@@ -59,9 +65,9 @@ client library refuses to run without one, give it a placeholder such as
   email in requests without asking.
 - **Paywalled journals**: not accessible. Use open-access copies and preprints,
   and say so in the project when a key paper could not be read.
-- **Not reachable at all**: anything not listed here, including the Internet
-  Archive, NOAA, Eurostat, GBIF and Hugging Face. A project that needs one must
-  ask the owner to allow the host.
+- **Untested sources**: anything not listed here is reachable in principle but
+  has not been tried. The Internet Archive, NOAA and Hugging Face answered a
+  basic request on 2026-11-23; nothing more was checked.
 
 ## Client behaviour
 
