@@ -158,10 +158,11 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    errors.
 
 The front-matter `evidence: external-data` is the label of headline items 1
-to 3, which rest on claims 1, 2, 5 and 6. The `literature` claims (3, 4, 7,
-8) support the interpretation of who introduced an error and are not
-headline; claims 8 to 10 are a side result, and claim 10 is already in the
-literature.
+to 3, which rest on claims 1, 2, 5 and 6. The `literature` claims (3, 4, 7, 8,
+10) are not headline: claims 3 and 4 support the interpretation of who
+introduced the density error, claim 7 is the column definition behind item
+3, and claims 8 to 10 are a side result (claim 10 is already in the
+literature).
 
 ## Claims
 
@@ -310,7 +311,7 @@ matplotlib 3.11.2 (the versions used):
 
 ```bash
 cd domains/astronomy-and-cosmology/projects/exoplanet-archive-self-consistency
-python src/fetch.py           # ~31 MB from exoplanetarchive.ipac.caltech.edu, about 1 minute
+python src/fetch.py           # ~31 MB from exoplanetarchive.ipac.caltech.edu, 10 s to 1 minute
 python src/audit.py           # about 5 seconds; writes results/summary.*, outliers.csv, by_reference.csv, PNG
 python src/density_units.py   # two more small TAP queries (pscomppars); --offline skips them
 python src/koi_columns.py     # five more TAP queries (the KOI tables)
@@ -344,11 +345,12 @@ committed results are for the snapshot whose checksum and query are in
   Space Administration under the Exoplanet Exploration Program", and for a
   citation of Christiansen et al. 2025 (arXiv:2506.03299). Only
   derived ratios and the identifying values of outlier rows are committed.
-- **Published papers** read for claims 3, 4 and 8: Fulton & Petigura 2018
+- **Published papers** read for claims 3, 4, 8 and 10: Fulton & Petigura 2018
   (arXiv:1805.01453), Torres et al. 2017 (arXiv:1711.01267), Mann et al. 2017
   (arXiv:1705.01545) and MacDonald et al. 2016 (arXiv:1607.07540), through
   the ar5iv HTML rendering, and Mann et al. 2022 (arXiv:2110.09531v2, arXiv
-  HTML). Only the arXiv versions were read, with one exception: the journal
+  HTML), and Varga et al. 2025 (arXiv:2506.04440v1, arXiv HTML) for claim
+  10. Only the arXiv versions were read, with one exception: the journal
   table of Fulton & Petigura 2018 as served by VizieR (J/AJ/156/264, table2,
   Harvard mirror; found by the sixth reviewer and fetched here on
   2026-11-23) gives
@@ -399,7 +401,10 @@ Found:
   all rows and for the default parameters. They highlight five outliers
   among the default rows (TOI-6130, TOI-3714, EPIC 201757695, K2-216,
   TOI-2266) and conclude: "it is therefore prudent to check for Keplerian
-  consistency when selecting exoplanet system parameters." They give no
+  consistency when selecting exoplanet system parameters." They also state
+  the qualitative content of summary item 2 for Kepler's law: "even when the
+  planet system parameters are taken from the same publication, they do not
+  necessarily comply with Kepler's laws". They give no
   rates and no numerical threshold for the archive comparison, and test no
   identity other than Kepler's third law and an equilibrium-temperature
   relation. Read here through a summarising tool; the quoted sentence, the
@@ -437,7 +442,8 @@ Found:
   indicative. It also flags 278 cases where a recomputed planet mass or
   radius differs from the tabulated one by more than 10%. The LOGG rates here are
   therefore a replication.
-- Lanzafame et al., "Tracking the evolution of sub-Neptunes. I.",
+- Lanzafame et al., "Tracking the evolution of sub-Neptunes. I.
+  Gyrochronology of planet hosting stars",
   arXiv:2611.00856, Appendix A.8.3 ("Cross-parameter coherence"): "If the
   selected log g differs from log g_M,R by more than 0.3 dex, all the gravity
   measurements available for that star are reconsidered". The check is
@@ -479,7 +485,8 @@ Found:
   units or in Jupiter units." No rates and no attribution to references.
   Found by the tenth reviewer; notebook read here as data, not run.
 - Tang, "Self-Consistency Rupture in Stellar Atmosphere Models: The Second
-  Astronomical Empirical Case for the Factor Hierarchy Law", Research Square
+  Astronomical Empirical Case for the Factor Hierarchy Law…" (title
+  shortened), Research Square
   preprint, DOI 10.21203/rs.3.rs-10341037/v1 (posted 2026-07-14, not peer
   reviewed). It compares `st_mass`/`st_rad`³ with `st_dens` for archive host
   records ("records where st_mass, st_rad, and st_dens are simultaneously
@@ -535,9 +542,12 @@ know.
 - The "published" strata mix literature solutions with catalogue stellar
   parameters (TICv8, KOI tables) and with re-analyses such as Stassun et al.
   2017, so their rates are not rates of error in individual papers. The
-  rates are row-weighted and move by a few points when a single bulk
-  reference is removed, in either direction (`results/summary.md` gives the
-  rate without each stratum's largest reference).
+  rates are row-weighted and move when a single bulk reference is removed,
+  in either direction: by less than 3 points for K3, RHOS, LUM, RHOP,
+  RATROR, RATDOR and INSOL, but by 8.5 points for LOGG (21.7% to 30.3%
+  without Morton et al. 2016) and by 12 points for the approximate DEPTH
+  identity (50.1% to 37.8% without Kruse et al. 2019). `results/summary.md`
+  gives the rate without each stratum's largest reference.
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
   RATDOR and INSOL assume circular orbits.
@@ -592,3 +602,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, an eighth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; tested every identity for systematic non-error explanations (narrow peaks in the ratio, per-reference and per-method concentration, planet mass in K3, eccentricity in RATDOR and INSOL, SI-for-cgs and linear-for-log slips) and found none beyond those already disclosed; fetched and checked every quotation; new prior-art search (nothing further found). Not checked: journal versions of four papers, items marked from memory, the ten further density references, other outlier rows | Changes needed, all minor: 3 points (a missing author in a citation; a stale "below"; four DEPTH outliers at ratios of exactly 0.01 and 10 are unit candidates and were lumped with limb-darkening effects). No claim, table number, script result or label affected. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a ninth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation and, through the arXiv API, every title and author list; new prior-art search. Not checked: journal versions of four papers, items marked from memory, the DEPTH unit candidates, the ten further density references and other outlier rows against their papers | One minor point: a July 2026 preprint (Tang, Research Square) that compares `st_dens` with M★/R★³ assuming solar units was missing from prior work. No number, claim, label, script or headline affected. Addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a tenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search. Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, no headline number, table entry or script result wrong: 4 points. The TOI-1227 luminosity typo is already stated by Varga et al. 2025, so claim 10 becomes `literature`; the exoatlas notebook, which plots two of the identities on these tables, was missing from prior work; the K3 rate was adjusted for the reference that inflates it but not for the one that dilutes it, and the LOGG rate not at all; two quoted raw values were not printed by any script. All addressed in the following commit. Status stays `result` |
+| 2026-11-23 | claude-fable-5-2, an eleventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, plus robustness checks (default rows only; per stellar solution); read `src/`; fetched and checked every quotation, title and author list, including the pinned exoatlas notebook and the Tang preprint; new prior-art search (nothing further that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, all minor text: 4 points (a limitation saying rates move "by a few points" although LOGG and DEPTH move by 8.5 and 12; a stale list of literature claims; Varga et al. missing from the external-data section; two truncated titles). No claim, number, table entry, script result or label wrong. All addressed in the following commit. Status stays `result` |

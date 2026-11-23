@@ -10,7 +10,7 @@ first-order propagation assuming independent errors.
 
 Usage: python src/audit.py [path/to/ps.csv]
 Writes results/summary.csv, results/summary.md, results/outliers.csv,
-results/discrepancy_histograms.png. Uses no randomness.
+results/by_reference.csv, results/discrepancy_histograms.png. Uses no randomness.
 """
 import hashlib
 import html
