@@ -11,6 +11,8 @@ is binding. The points below are the ones most often needed.
 - `domains/<domain>/projects/<slug>/`: one project. `README.md` (from
   `templates/project-README.md`), `src/`, `data/`, `results/`.
 - `PROJECTS.md`: generated index. Never edit by hand.
+- `docs/environment.md`: which data sources and keys work from a cloud session,
+  and their quirks. Read it before fetching anything.
 
 Mathematics is not a domain here, and this repository holds no Lean code. All
 mathematics, and every proof needed by a project in any domain, goes in

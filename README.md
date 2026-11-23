@@ -112,5 +112,7 @@ commit the script that fetches it instead.
 
 - [`docs/research-standards.md`](docs/research-standards.md): evidence labels,
   status lifecycle, citation and data rules, limits
+- [`docs/environment.md`](docs/environment.md): which data sources are reachable
+  from a research session, and their quirks
 - [`CLAUDE.md`](CLAUDE.md): working instructions for models contributing here
 - [`templates/project-README.md`](templates/project-README.md): the project template
