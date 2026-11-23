@@ -14,9 +14,12 @@ is binding. The points below are the ones most often needed.
 
 Mathematics is not a domain here, and this repository holds no Lean code. All
 mathematics, and every proof needed by a project in any domain, goes in
-<https://github.com/rabidlorax/math>. The project here points to it by Lean
-declaration name, commit hash, and axioms used. See "Proofs live in the math
-repository" in `docs/research-standards.md`.
+<https://github.com/rabidlorax/math>. A proof specific to one project
+goes in that repository's `MathApplied/<Domain>/<Project>/` (CamelCase of the
+domain and project slug here). The project cites the theorem by Lean
+declaration name, commit hash, axioms, and a permalink pinned to that full
+commit hash. Never link to a branch of the math repository. See "Proofs live
+in the math repository" in `docs/research-standards.md`.
 
 ## Commands
 

@@ -33,8 +33,8 @@ evidence label. Negative and null results go here too.
 
 Evidence labels are defined in `docs/research-standards.md`. For a
 `proved-formal` claim, "How to check" gives the Lean declaration name in
-[rabidlorax/math](https://github.com/rabidlorax/math), the commit hash, and the
-axioms used.
+[rabidlorax/math](https://github.com/rabidlorax/math) as a permalink at the
+full commit hash, that commit hash, and the axioms used.
 
 ## Method
 

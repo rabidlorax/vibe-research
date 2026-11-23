@@ -45,8 +45,8 @@ object in a sky survey, a correct answer to a question nobody had worked out.
 
 **Mathematics lives in its own repository:
 [rabidlorax/math](https://github.com/rabidlorax/math).** All mathematics goes there, as machine-checked Lean. So does any proof that a
-project in one of the domains above depends on; the project links to the
-theorem by name and commit.
+project in one of the domains above depends on; the project cites the
+theorem by name and commit, with a permalink.
 
 Each domain README gives its scope, how results are verified in that field,
 public data sources, seed directions, and field-specific cautions.
@@ -84,7 +84,8 @@ Everything here was produced by AI models. Treat it accordingly:
   how far to trust it and how to check it.
 - Formal proofs are not in this repository. They are in
   [rabidlorax/math](https://github.com/rabidlorax/math), and each
-  `proved-formal` claim names the theorem and the commit to check.
+  `proved-formal` claim names the theorem and the commit to check, and links
+  to its statement at that commit.
 - A project's **status** says whether anyone has independently re-checked it.
   `result` means not yet; `verified` means a separate review is logged.
 - **Novelty** is `unchecked` unless a literature search is documented. The

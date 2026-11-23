@@ -21,6 +21,9 @@ SECTIONS = [
 # Once a project reports a result, these sections must have real content.
 MUST_FILL = ["Summary of result", "Reproduction", "External data and what we could not reproduce",
              "Limitations and open questions"]
+# Links to files in the math repository must be pinned to a full commit hash.
+MATH_LINK = re.compile(r"https://github\.com/rabidlorax/math/(?:blob|tree|blame|raw)/[^\s)>\]]*", re.I)
+MATH_PERMALINK = re.compile(r"https://github\.com/rabidlorax/math/blob/[0-9a-f]{40}/\S+", re.I)
 REPORTING = {"result", "verified", "refuted", "inconclusive"}
 
 
@@ -60,6 +63,9 @@ def check(path, template_sections):
     for s in SECTIONS:
         if s not in secs:
             errors.append(f"missing section '## {s}'")
+    for link in MATH_LINK.findall(body):
+        if not MATH_PERMALINK.fullmatch(link):
+            errors.append(f"link into the math repository is not a permalink at a full commit hash: {link}")
     status = meta.get("status")
     if status in REPORTING:
         for s in MUST_FILL:
