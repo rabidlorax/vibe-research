@@ -1,0 +1,17 @@
+variant,outcome,n_results,pct_2010_2013,pct_2023_2026,odds_ratio_per_year,or_lo,or_hi,p
+primary (one-tailed forgiven when article mentions it),inconsistent,188597,10.34673,9.91518,0.99177,0.98331,1.00030,0.05857
+primary (one-tailed forgiven when article mentions it),decision,188597,1.21355,1.34721,1.01175,0.99655,1.02718,0.13041
+no one-tailed allowance,inconsistent,188597,11.17415,10.36425,0.98856,0.98031,0.99688,0.00713
+no one-tailed allowance,decision,188597,1.56028,1.42087,0.99625,0.98184,1.01088,0.61369
+p = .000 counted as inconsistent,inconsistent,188597,10.70922,10.99865,0.99816,0.98989,1.00650,0.66517
+p = .000 counted as inconsistent,decision,188597,1.21355,1.34721,1.01175,0.99655,1.02718,0.13041
+exactly reported p only (p = ...),inconsistent,100976,16.55079,15.37064,0.99359,0.98336,1.00393,0.22349
+exactly reported p only (p = ...),decision,100976,1.76361,1.73690,1.01406,0.99639,1.03204,0.11957
+inequality p only (p < or >),inconsistent,87621,4.96099,3.60693,0.96829,0.95516,0.98160,0.00000
+inequality p only (p < or >),decision,87621,0.73605,0.89661,1.00289,0.97547,1.03107,0.83849
+article-type research-article only,inconsistent,181074,10.33500,9.60514,0.98958,0.98090,0.99833,0.01976
+article-type research-article only,decision,181074,1.20377,1.30418,1.00879,0.99316,1.02467,0.27190
+t and F tests only,inconsistent,154331,10.07040,9.57905,0.98916,0.97984,0.99857,0.02410
+t and F tests only,decision,154331,1.15041,1.22607,1.00068,0.98259,1.01909,0.94203
+excluding 2026 (incomplete year),inconsistent,175989,10.34673,11.08586,1.00400,0.99438,1.01371,0.41655
+excluding 2026 (incomplete year),decision,175989,1.21355,1.55026,1.02950,1.01137,1.04795,0.00134

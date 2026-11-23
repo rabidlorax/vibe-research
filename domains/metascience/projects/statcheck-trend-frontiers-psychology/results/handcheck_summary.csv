@@ -1,0 +1,12 @@
+stratum,period,correctly_extracted,explained_by_stated_correction,extraction_error,inconsistent_as_printed,probably_one_tailed
+decision,2010-2015,0,0,0,16,4
+decision,2016-2021,0,0,0,18,2
+decision,2022-2026,0,1,2,14,3
+inconsistent,2010-2015,0,1,0,39,0
+inconsistent,2016-2021,0,3,0,36,1
+inconsistent,2022-2026,0,0,0,38,2
+inconsistent,2026H2,0,0,0,18,2
+not_flagged,2010-2015,10,0,0,0,0
+not_flagged,2016-2021,10,0,0,0,0
+not_flagged,2022-2026,10,0,0,0,0
+not_flagged,2026H2,20,0,0,0,0

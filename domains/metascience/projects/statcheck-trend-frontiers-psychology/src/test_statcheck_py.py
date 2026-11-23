@@ -51,5 +51,6 @@ r = one("t(50) = 2.00, p = .000"); assert r["error"]
 # things that must not be extracted
 none("Yt(28) = 2.20, p = .03"); none("t(28) = 2.20, d = 0.4, p = .03"); none("t(28) < 1, p = .5")
 none("t(28) = 2.20, p = 3.1 × 10-5"); none("t(28) = 2.20, p = .03.4"); none("r(48) = 3.0, p = .03")
+none("t(76) = -3.99, p = 1.00E-04"); none("t(18) = 7.04, p = 1.00 * 10-6")
 none("Wald z-score: Wz = 2.0, p = .04"); none("t(28) = 2.20, ns")
 print("all tests passed")

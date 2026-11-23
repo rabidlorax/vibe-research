@@ -137,6 +137,52 @@ def main():
     (OUT / "trend.txt").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
 
+    # ---- Added after the yearly table was first seen (post hoc; see README) ----
+    # (a) the same table without the one-tailed allowance
+    y2 = yearly(res, arts, "error", "decision_error")
+    y2.to_csv(OUT / "yearly_no_one_tailed_allowance.csv", index=False, float_format="%.3f")
+    # (b) half-years from 2023 by electronic publication date
+    m = res.merge(arts[["pmcid", "epub_year", "epub_month", "one_tail_text"]], on="pmcid")
+    m["half"] = m.epub_year.astype(int).astype(str) + "H" + np.where(m.epub_month <= 6, "1", "2")
+    am = arts.assign(half=arts.epub_year.astype(int).astype(str) + "H" + np.where(arts.epub_month <= 6, "1", "2"))
+    rng = np.random.default_rng(SEED + 1)
+    hrows = []
+    for h, d in m[m.epub_year >= 2023].groupby("half"):
+        lo, hi = cluster_boot(d, "error_1t", rng)
+        lo2, hi2 = cluster_boot(d, "error", rng)
+        hrows.append({"half_year": h, "articles": int((am.half == h).sum()), "articles_with_results": d.pmcid.nunique(),
+                      "results": len(d), "pct_inconsistent": 100 * d.error_1t.mean(), "ci_lo": 100 * lo,
+                      "ci_hi": 100 * hi, "pct_inconsistent_no_allowance": 100 * d.error.mean(),
+                      "na_ci_lo": 100 * lo2, "na_ci_hi": 100 * hi2, "pct_decision": 100 * d.decision_error_1t.mean(),
+                      "pct_articles_mentioning_one_tailed_words": 100 * am[am.half == h].one_tail_text.mean()})
+    hy = pd.DataFrame(hrows)
+    hy.to_csv(OUT / "half_years_2023_2026.csv", index=False, float_format="%.3f")
+    print(hy.round(2).to_string(index=False))
+    # (c) 2026 against 2023-2025, and the 2010-2025 trend, clustered on article
+    post = []
+    late = res[res.year >= 2023]
+    for col in ("error_1t", "error", "decision_error_1t", "decision_error"):
+        X = pd.DataFrame({"const": 1.0, "y2026": (late.year == 2026).astype(float)})
+        g = sm.GLM(late[col], X, family=sm.families.Binomial()).fit(
+            cov_type="cluster", cov_kwds={"groups": late.pmcid.astype("category").cat.codes})
+        b, se = g.params["y2026"], g.bse["y2026"]
+        post.append(f"2026 vs 2023-2025, {col}: {100 * late[late.year == 2026][col].mean():.2f}% vs "
+                    f"{100 * late[late.year < 2026][col].mean():.2f}%, odds ratio {np.exp(b):.3f} "
+                    f"[{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}] p={g.pvalues['y2026']:.2g}")
+        orr, lo, hi, pv = gee_trend(res[res.year <= 2025], col)
+        post.append(f"trend 2010-2025, {col}: OR/yr {orr:.4f} [{lo:.4f}, {hi:.4f}] p={pv:.2g}")
+    # (d) is the 2026 drop confined to one kind of test or one way of writing p?
+    late = late.assign(group=np.where(late.year == 2026, "2026", "2023-2025"),
+                       p_form=np.where(late.p_cmp == "=", "p = x", "p < x or p > x"))
+    for key in ("kind", "p_form"):
+        t = late.pivot_table(index=key, columns="group", values="error_1t", aggfunc=["size", "mean"])
+        for k, row in t.iterrows():
+            post.append(f"2026 drop by {key} = {k}: 2023-2025 {100 * row[('mean', '2023-2025')]:.2f}% of "
+                        f"{int(row[('size', '2023-2025')])}; 2026 {100 * row[('mean', '2026')]:.2f}% of "
+                        f"{int(row[('size', '2026')])}")
+    (OUT / "post_hoc.txt").write_text("\n".join(post) + "\n")
+    print("\n".join(post))
+
     bk = res.groupby(["kind"]).agg(results=("error_1t", "size"), pct_inconsistent=("error_1t", "mean"),
                                    pct_decision=("decision_error_1t", "mean")).reset_index()
     bk[["pct_inconsistent", "pct_decision"]] *= 100

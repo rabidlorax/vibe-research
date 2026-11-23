@@ -1,0 +1,68 @@
+articles=54015 with_body=54015 results=188597 articles_with_results=17210
+ year  articles  articles_with_results  results  pct_results_inconsistent  ci_lo  ci_hi  pct_results_decision  dec_ci_lo  dec_ci_hi  pct_articles_any_inconsistent  pct_articles_any_decision
+ 2010       142                     54      581                     11.53   6.93  17.09                  1.55       0.59       2.75                          50.00                      12.96
+ 2011       397                    173     2387                     12.82  10.24  15.69                  1.97       1.29       2.75                          54.34                      16.76
+ 2012       621                    282     3693                     10.15   8.40  12.06                  1.08       0.67       1.54                          43.26                       8.87
+ 2013       996                    461     6029                      9.37   8.02  10.74                  0.96       0.67       1.34                          46.85                       9.33
+ 2014      1607                    723     9644                     11.22   9.92  12.62                  1.47       1.13       1.85                          48.41                      13.55
+ 2015      2045                    990    12810                     10.59   9.38  11.79                  1.16       0.93       1.39                          45.45                      10.51
+ 2016      2074                    947    11844                     10.64   9.45  11.99                  1.05       0.83       1.27                          45.20                      10.03
+ 2017      2366                   1051    13430                     11.67  10.06  13.50                  1.30       0.99       1.67                          44.05                       9.90
+ 2018      2783                   1242    15043                     10.12   9.14  11.09                  1.10       0.90       1.31                          43.64                       9.58
+ 2019      3075                   1248    15359                     10.14   9.18  11.13                  1.18       0.97       1.42                          42.55                      10.26
+ 2020      4088                   1421    15593                     11.34  10.10  12.62                  1.74       1.34       2.22                          41.94                      11.05
+ 2021      6675                   1997    20969                     10.95   9.72  12.22                  1.62       1.30       1.98                          36.35                       9.21
+ 2022      8500                   1876    19128                     11.28  10.09  12.62                  1.64       1.35       1.94                          39.71                       9.81
+ 2023      4634                   1179    12124                     11.47  10.15  12.85                  1.70       1.25       2.30                          39.53                      10.43
+ 2024      3477                    831     8330                     10.88   9.54  12.24                  1.50       1.13       1.95                          39.23                       9.87
+ 2025      4525                   1075     9025                     10.76   9.36  12.27                  1.40       1.09       1.74                          32.09                       8.37
+ 2026      6010                   1660    12608                      7.18   6.06   8.46                  0.87       0.60       1.15                          18.92                       3.61
+primary (one-tailed forgiven when article mentions it)  inconsistent n= 188597  2010-13 10.35%  2023-26  9.92%  OR/yr 0.9918 [0.9833, 1.0003]  p=0.059
+primary (one-tailed forgiven when article mentions it)  decision     n= 188597  2010-13  1.21%  2023-26  1.35%  OR/yr 1.0117 [0.9965, 1.0272]  p=0.13
+no one-tailed allowance                                 inconsistent n= 188597  2010-13 11.17%  2023-26 10.36%  OR/yr 0.9886 [0.9803, 0.9969]  p=0.0071
+no one-tailed allowance                                 decision     n= 188597  2010-13  1.56%  2023-26  1.42%  OR/yr 0.9963 [0.9818, 1.0109]  p=0.61
+p = .000 counted as inconsistent                        inconsistent n= 188597  2010-13 10.71%  2023-26 11.00%  OR/yr 0.9982 [0.9899, 1.0065]  p=0.67
+p = .000 counted as inconsistent                        decision     n= 188597  2010-13  1.21%  2023-26  1.35%  OR/yr 1.0117 [0.9965, 1.0272]  p=0.13
+exactly reported p only (p = ...)                       inconsistent n= 100976  2010-13 16.55%  2023-26 15.37%  OR/yr 0.9936 [0.9834, 1.0039]  p=0.22
+exactly reported p only (p = ...)                       decision     n= 100976  2010-13  1.76%  2023-26  1.74%  OR/yr 1.0141 [0.9964, 1.0320]  p=0.12
+inequality p only (p < or >)                            inconsistent n=  87621  2010-13  4.96%  2023-26  3.61%  OR/yr 0.9683 [0.9552, 0.9816]  p=3.7e-06
+inequality p only (p < or >)                            decision     n=  87621  2010-13  0.74%  2023-26  0.90%  OR/yr 1.0029 [0.9755, 1.0311]  p=0.84
+article-type research-article only                      inconsistent n= 181074  2010-13 10.33%  2023-26  9.61%  OR/yr 0.9896 [0.9809, 0.9983]  p=0.02
+article-type research-article only                      decision     n= 181074  2010-13  1.20%  2023-26  1.30%  OR/yr 1.0088 [0.9932, 1.0247]  p=0.27
+t and F tests only                                      inconsistent n= 154331  2010-13 10.07%  2023-26  9.58%  OR/yr 0.9892 [0.9798, 0.9986]  p=0.024
+t and F tests only                                      decision     n= 154331  2010-13  1.15%  2023-26  1.23%  OR/yr 1.0007 [0.9826, 1.0191]  p=0.94
+excluding 2026 (incomplete year)                        inconsistent n= 175989  2010-13 10.35%  2023-26 11.09%  OR/yr 1.0040 [0.9944, 1.0137]  p=0.42
+excluding 2026 (incomplete year)                        decision     n= 175989  2010-13  1.21%  2023-26  1.55%  OR/yr 1.0295 [1.0114, 1.0480]  p=0.0013
+article level, any inconsistency, adjusted for log(number of results): OR/yr 0.9625 [0.9541, 0.9709] p=9.8e-18  (n articles = 17210)
+article level, any decision inconsistency, adjusted for log(number of results): OR/yr 0.9877 [0.9744, 1.0012] p=0.075  (n articles = 17210)
+benchmark 2010-2013: articles=2156 with results=970 results=12690 mean per-article % inconsistent: 11.42 (p=.000 wrong, statcheck-2016 convention), 10.91 (primary)
+half_year  articles  articles_with_results  results  pct_inconsistent  ci_lo  ci_hi  pct_inconsistent_no_allowance  na_ci_lo  na_ci_hi  pct_decision  pct_articles_mentioning_one_tailed_words
+   2023H1      2925                    731     7441             12.26  10.00  15.00                          12.57     10.29     15.08          1.96                                     11.73
+   2023H2      2049                    511     5387             11.56   9.68  13.79                          12.03     10.04     14.23          1.47                                     15.03
+   2024H1      1923                    484     4946             10.39   8.78  12.01                          10.94      9.36     12.72          1.78                                     13.16
+   2024H2      1620                    373     3672             11.03   9.10  13.25                          11.33      9.16     13.65          1.31                                     14.51
+   2025H1      1899                    450     3762             13.18  10.90  15.73                          13.66     11.28     16.27          1.91                                     17.17
+   2025H2      2368                    556     5017              9.19   7.59  10.96                           9.69      8.04     11.31          1.06                                     21.71
+   2026H1      3509                    880     6668              9.10   7.34  11.02                           9.82      8.10     11.74          0.90                                     30.52
+   2026H2      3042                    916     6936              5.74   4.32   7.29                           5.94      4.52      7.49          0.87                                     35.93
+2026 vs 2023-2025, error_1t: 7.18% vs 11.09%, odds ratio 0.620 [0.510, 0.754] p=1.7e-06
+trend 2010-2025, error_1t: OR/yr 1.0040 [0.9944, 1.0137] p=0.42
+2026 vs 2023-2025, error: 7.61% vs 11.54%, odds ratio 0.632 [0.523, 0.764] p=2.1e-06
+trend 2010-2025, error: OR/yr 0.9999 [0.9905, 1.0093] p=0.98
+2026 vs 2023-2025, decision_error_1t: 0.87% vs 1.55%, odds ratio 0.559 [0.388, 0.805] p=0.0018
+trend 2010-2025, decision_error_1t: OR/yr 1.0295 [1.0114, 1.0480] p=0.0013
+2026 vs 2023-2025, decision_error: 0.94% vs 1.63%, odds ratio 0.571 [0.403, 0.808] p=0.0016
+trend 2010-2025, decision_error: OR/yr 1.0108 [0.9938, 1.0280] p=0.22
+2026 drop by kind = F: 2023-2025 9.57% of 15900; 2026 5.87% of 6248
+2026 drop by kind = chi2: 2023-2025 10.40% of 2903; 2026 4.84% of 2129
+2026 drop by kind = r: 2023-2025 22.00% of 600; 2026 11.64% of 232
+2026 drop by kind = t: 2023-2025 12.71% of 7060; 2026 10.03% of 2601
+2026 drop by kind = z: 2023-2025 13.76% of 3016; 2026 10.52% of 1398
+2026 drop by p_form = p < x or p > x: 2023-2025 4.38% of 13731; 2026 1.78% of 5787
+2026 drop by p_form = p = x: 2023-2025 16.94% of 15748; 2026 11.76% of 6821
+kind  results  pct_inconsistent  pct_decision
+   F   108389              9.87          1.13
+chi2    16358              9.92          1.65
+   r     4055             17.71          1.97
+   t    45942             10.51          1.43
+   z    13853             15.79          2.50

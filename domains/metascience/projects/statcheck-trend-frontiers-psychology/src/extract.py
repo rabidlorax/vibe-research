@@ -29,7 +29,7 @@ INLINE = {"italic", "bold", "sub", "sup", "sc", "underline", "monospace", "roman
 DROP = {"tex-math", "graphic", "inline-graphic", "media", "object-id"}
 CELL = {"td", "th"}
 
-ART_COLS = ["pmcid", "doi", "year", "epub_year", "article_type", "section", "has_body",
+ART_COLS = ["pmcid", "doi", "year", "epub_year", "epub_month", "new_date_markup", "article_type", "section", "has_body",
             "body_chars", "one_tail_text", "n_results"]
 RES_COLS = ["pmcid", "year", "kind", "df1", "df2", "stat", "p_cmp", "p_rep", "p_min", "p_max",
             "error", "decision_error", "error_1t", "decision_error_1t", "p_zero"]
@@ -76,7 +76,11 @@ def process(path):
         ids = {e.get("pub-id-type"): (e.text or "").strip() for e in meta.findall("article-id")}
         pmcid = ids.get("pmcid") or ("PMC" + ids.get("pmcaid", ""))
         subjects = [s.text or "" for s in meta.findall(".//article-categories//subject")]
-        epub = meta.find("pub-date[@pub-type='epub']/year")
+        epub = meta.find("pub-date[@pub-type='epub']")  # JATS as deposited up to 2025
+        if epub is None:  # newer deposits use date-type / publication-format instead
+            epub = meta.find("pub-date[@date-type='pub']")
+        ey, em = (first(epub, "year"), first(epub, "month")) if epub is not None else ("", "")
+        new_format = int(meta.find("pub-date[@pub-type='epub']") is None)
         body = a.find("body")
         text = ""
         if body is not None:
@@ -94,7 +98,7 @@ def process(path):
             ress.append([row[c] for c in RES_COLS])
             ctxs.append([pmcid, year, r["kind"], r["raw"], int(r["error"]), int(r["decision_error"]),
                          int(r["error_1t"]), text[max(0, r["start"] - 150):r["end"] + 150]])
-        arts.append([pmcid, ids.get("doi", ""), year, epub.text if epub is not None else "",
+        arts.append([pmcid, ids.get("doi", ""), year, ey, em, new_format,
                      a.get("article-type", ""), subjects[-1] if subjects else "",
                      int(body is not None), len(text), int(bool(ONE_TAIL.search(text))), len(found)])
     return arts, ress, ctxs

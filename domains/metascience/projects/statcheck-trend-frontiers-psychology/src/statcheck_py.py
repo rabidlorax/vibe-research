@@ -14,7 +14,7 @@ from scipy import stats
 
 ALPHA = 0.05
 NUM = r"-?\s?\d*\.?\d+"
-PVAL = r"\s?[,;]\s?[pP]\s?(?P<pc>[<>=])\s?(?P<p>\d?\.\d+)(?![\d.]|\s?[×x*]\s?10|e-?\d)"
+PVAL = r"\s?[,;]\s?[pP]\s?(?P<pc>[<>=])\s?(?P<p>\d?\.\d+)(?![\d.]|\s?[×x*]\s?\d|\s?[eE]\s?-?\d)"
 NB = r"(?<![A-Za-z0-9])"  # statistic letter must not be the tail of a word
 
 PATTERNS = {
