@@ -39,7 +39,7 @@ if __name__ == "__main__":
     ap.add_argument("--solver", default="cadical153")
     ap.add_argument("--out")
     ap.add_argument("--comparators", type=int, default=0,
-                    help="fix the first gates to be this many comparators on inputs (0,1),(2,3),...; forces sym=0")
+                    help="fix the first gates to be this many comparators on inputs (0,1),(2,3),...; limits sym to at most 1")
     a = ap.parse_args()
     prefix = []
     for c in range(a.comparators):
