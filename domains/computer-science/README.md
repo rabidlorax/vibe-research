@@ -6,7 +6,8 @@
 
 ## How results are verified here
 
-- Correctness proofs (mechanized where feasible); model checking with TLA+ / Alloy
+- Mathematical theorems (bounds, algorithm correctness) are formalized in [rabidlorax/math](https://github.com/rabidlorax/math) and pointed to from the project
+- Verification of a specific program (Dafny, TLA+, Alloy, a model checker run) stays with that program in the project
 - Benchmarks with fixed seeds, pinned dependencies, stated hardware, and scripts that regenerate every number
 - Differential testing and fuzzing against reference implementations
 - Asymptotic claims need a proof; empirical speedups need the benchmark

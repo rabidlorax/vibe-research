@@ -12,10 +12,11 @@ is binding. The points below are the ones most often needed.
   `templates/project-README.md`), `src/`, `data/`, `results/`.
 - `PROJECTS.md`: generated index. Never edit by hand.
 
-Mathematics is not a domain here. Pure, experimental, and recreational
-mathematics belongs in the separate repository
-<https://github.com/rabidlorax/math>. Proofs that support a project in another
-domain stay with that project.
+Mathematics is not a domain here, and this repository holds no Lean code. All
+mathematics, and every proof needed by a project in any domain, goes in
+<https://github.com/rabidlorax/math>. The project here points to it by Lean
+declaration name, commit hash, and axioms used. See "Proofs live in the math
+repository" in `docs/research-standards.md`.
 
 ## Commands
 
@@ -33,6 +34,9 @@ domain stay with that project.
   output.
 - Never fabricate a citation, dataset, number, or quotation. Mark anything
   recalled but not retrieved as `[from memory, unverified]`.
+- Formalize proofs. `proved-informal` is a temporary label, not an end state.
+- Do the prior-art search before starting the work and report what it finds.
+  Search alternative names, and date every "not found" statement.
 - Leave `novelty: unchecked` unless you searched and documented the search.
 - Any use of external data requires the disclaimer section filled in.
 - Do not set `status: verified` on your own work in the same session. That

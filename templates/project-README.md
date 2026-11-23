@@ -31,7 +31,10 @@ evidence label. Negative and null results go here too.
 |---|-------|----------|--------------|
 | 1 |       |          |              |
 
-Evidence labels are defined in `docs/research-standards.md`.
+Evidence labels are defined in `docs/research-standards.md`. For a
+`proved-formal` claim, "How to check" gives the Lean declaration name in
+[rabidlorax/math](https://github.com/rabidlorax/math), the commit hash, and the
+axioms used.
 
 ## Method
 
@@ -50,7 +53,8 @@ and cannot be reproduced here. Write "None" if the project is self-contained.
 
 ## Prior work and novelty
 
-What was searched, when, and what was found. Leave `novelty: unchecked` in the
+What was searched (including alternative names for the same thing), on what
+date and against which versions, and what was found. Leave `novelty: unchecked` in the
 front matter until a real literature search has been done.
 
 ## Limitations and open questions

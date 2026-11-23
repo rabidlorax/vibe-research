@@ -8,7 +8,7 @@
 
 - Experiments reproducible from a single command with fixed seeds; report multiple seeds and variance
 - Baselines are tuned as carefully as the proposed method
-- Theorems get proofs, labelled `proved-formal` or `proved-informal` per `docs/research-standards.md`
+- Theorems get proofs, formalized in [rabidlorax/math](https://github.com/rabidlorax/math) and pointed to from the project (`docs/research-standards.md`)
 - Model self-reports about internals are hypotheses to test, not evidence
 
 ## Public data and reference sources

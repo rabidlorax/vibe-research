@@ -6,7 +6,7 @@
 
 ## How results are verified here
 
-- Theoretical results are proved, and labelled `proved-formal` or `proved-informal` per `docs/research-standards.md`
+- Theoretical results are proved, with the proof formalized in [rabidlorax/math](https://github.com/rabidlorax/math) and pointed to from the project (`docs/research-standards.md`)
 - Empirical work commits a pre-analysis plan before looking at outcomes, and reports all specifications run
 - Identification assumptions are stated explicitly and stress-tested
 - Replications start from the authors' replication package where one exists
