@@ -1,0 +1,27 @@
+m=5 N=6 profiles=4925156774
+PR -
+PH -
+RH -
+PRH -
+PB 3
+RB 3
+PRB -
+HB -
+PHB -
+RHB -
+PRHB -
+PC 5
+RC 5
+PRC -
+HC -
+PHC -
+RHC -
+PRHC -
+BC 3
+PBC 5
+RBC 5
+PRBC -
+HBC -
+PHBC -
+RHBC -
+PRHBC -

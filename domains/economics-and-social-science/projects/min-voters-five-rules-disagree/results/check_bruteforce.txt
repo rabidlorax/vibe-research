@@ -1,0 +1,6 @@
+bruteforce_m3_N40.txt: 20 rule sets agree (m=3, all profiles up to 40 voters, strict)
+bruteforce_m3_N40_robust.txt: 4 rule sets agree (m=3, all profiles up to 40 voters, robust)
+bruteforce_m4_N11_robust.txt: 7 rule sets agree (m=4, all profiles up to 11 voters, robust)
+bruteforce_m4_N12.txt: 25 rule sets agree (m=4, all profiles up to 12 voters, strict)
+bruteforce_m5_N6.txt: 26 rule sets agree (m=5, all profiles up to 6 voters, strict)
+total comparisons: 82
