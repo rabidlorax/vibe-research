@@ -8,7 +8,7 @@
 
 - Experiments reproducible from a single command with fixed seeds; report multiple seeds and variance
 - Baselines are tuned as carefully as the proposed method
-- Theorems get proofs under the Mathematics standard
+- Theorems get proofs, labelled `proved-formal` or `proved-informal` per `docs/research-standards.md`
 - Model self-reports about internals are hypotheses to test, not evidence
 
 ## Public data and reference sources

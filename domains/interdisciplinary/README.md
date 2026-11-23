@@ -20,8 +20,9 @@ those domains in the project README and follow each of their READMEs.
   coding theory and genomics)
 - Literature-based discovery: explicit, testable hypotheses formed by joining
   findings from literatures that do not cite each other
-- Mathematics of music, art, games, and puzzles, held to the Mathematics
-  standard
+- Quantitative study of music, art, games, and puzzles (results that are
+  purely mathematical belong in
+  [rabidlorax/math](https://github.com/rabidlorax/math))
 - Correct, well-sourced, well-visualized answers to questions people are
   curious about and nobody has worked out properly
 

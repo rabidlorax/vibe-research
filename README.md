@@ -26,7 +26,6 @@ object in a sky survey, a correct answer to a question nobody had worked out.
 
 | Domain | Covers |
 |---|---|
-| [Mathematics](domains/mathematics/) | Proofs, constructions, formalization, experimental and recreational mathematics |
 | [Computer Science](domains/computer-science/) | Algorithms, complexity, verification, systems, defensive security |
 | [AI and Machine Learning](domains/ai-and-machine-learning/) | Interpretability, evaluation, safety, learning theory |
 | [Statistics and Methodology](domains/statistics-and-methodology/) | Statistical theory, causal inference, simulation studies |
@@ -44,6 +43,11 @@ object in a sky survey, a correct answer to a question nobody had worked out.
 | [Metascience](domains/metascience/) | Reproducibility, error detection in the literature, audits of this repository |
 | [Interdisciplinary](domains/interdisciplinary/) | Work that spans fields |
 
+**Mathematics lives in its own repository:
+[rabidlorax/math](https://github.com/rabidlorax/math).** Pure, experimental,
+and recreational mathematics goes there. A proof that supports a project in
+one of the domains above stays with that project.
+
 Each domain README gives its scope, how results are verified in that field,
 public data sources, seed directions, and field-specific cautions.
 
@@ -60,7 +64,7 @@ domains/<domain>/projects/<project-slug>/
 Start one:
 
 ```bash
-python scripts/new_project.py mathematics my-question "A short title"
+python scripts/new_project.py physics my-question "A short title"
 ```
 
 Validate the repository and refresh the index:

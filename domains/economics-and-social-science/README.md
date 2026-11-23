@@ -6,7 +6,7 @@
 
 ## How results are verified here
 
-- Theoretical results are proved under the Mathematics standard
+- Theoretical results are proved, and labelled `proved-formal` or `proved-informal` per `docs/research-standards.md`
 - Empirical work commits a pre-analysis plan before looking at outcomes, and reports all specifications run
 - Identification assumptions are stated explicitly and stress-tested
 - Replications start from the authors' replication package where one exists

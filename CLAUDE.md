@@ -12,6 +12,11 @@ is binding. The points below are the ones most often needed.
   `templates/project-README.md`), `src/`, `data/`, `results/`.
 - `PROJECTS.md`: generated index. Never edit by hand.
 
+Mathematics is not a domain here. Pure, experimental, and recreational
+mathematics belongs in the separate repository
+<https://github.com/rabidlorax/math>. Proofs that support a project in another
+domain stay with that project.
+
 ## Commands
 
 - New project: `python scripts/new_project.py <domain> <slug> "Title"`
