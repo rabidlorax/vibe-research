@@ -48,12 +48,22 @@ class Builder:
                     self.gt(self.first(t, allc), self.first(c, allc))
         self.gt(self.above(w, l), self.above(l, w))
 
-    def hare(self, order):
-        """order[0] is eliminated first, ..., order[-1] wins."""
-        for k in range(self.m - 1):
+    def hare(self, order, stop=None):
+        """order[0] is eliminated first, ..., order[-1] wins.
+
+        stop=None: a unique candidate has fewest first places in every round.
+        stop=k ("majority stop"): that holds in rounds 0..k-1 only, and in
+        round k the winner has more than half of all first places, so the
+        count ends there and later rounds are unconstrained.
+        """
+        rounds = self.m - 1 if stop is None else stop
+        for k in range(rounds):
             alive = order[k:]
             for c in alive[1:]:
                 self.gt(self.first(c, alive), self.first(alive[0], alive))
+        if stop is not None:
+            one = np.ones(len(self.rankings), dtype=np.int64)
+            self.gt(2 * self.first(order[-1], order[stop:]), one)
 
     def borda(self, w):
         score = lambda c: (self.m - 1 - self.pos[:, c]).astype(np.int64)
@@ -70,8 +80,15 @@ class Builder:
         return np.array(self.rows, dtype=np.int64)
 
 
-def cases(m, rules="PRHBC", reduce=True):
-    """Yield (description, A): profiles x >= 0 integer with A x >= 1."""
+def cases(m, rules="PRHBC", reduce=True, majority_stop=False):
+    """Yield (description, A, rankings): profiles x >= 0 integer with A x >= 1.
+
+    majority_stop=True replaces the Hare convention by "the count stops as
+    soon as a candidate has a majority; no tie for fewest first places
+    before that": one case per stopping round. (Only the first `stop`
+    eliminated candidates are then distinguished, so with reduce=True some
+    cases are equivalent to each other; that costs time, not correctness.)
+    """
     rules = [k for k in "PRHBC" if k in rules]
     k = len(rules)
     assert m >= k
@@ -91,7 +108,8 @@ def cases(m, rules="PRHBC", reduce=True):
                     opps = [c for c in range(m) if c != w["R"]]
             else:
                 opps = [None]
-            for opp in opps:
+            stops = list(range(m - 1)) if (majority_stop and "H" in rules) else [None]
+            for opp, stop in ((o, s) for o in opps for s in stops):
                 if reduce and "H" not in rules:
                     # rename candidates: winners become 0..k-1 in rule order,
                     # a non-winning runoff opponent becomes k
@@ -107,12 +125,12 @@ def cases(m, rules="PRHBC", reduce=True):
                 if "R" in rules:
                     b.runoff(w["R"], opp)
                 if "H" in rules:
-                    b.hare(order)
+                    b.hare(order, stop)
                 if "B" in rules:
                     b.borda(w["B"])
                 if "C" in rules:
                     b.condorcet(w["C"])
-                desc = dict(winners=w, hare_order=order, runoff_loser=opp)
+                desc = dict(winners=w, hare_order=order, runoff_loser=opp, hare_stop=stop)
                 key = repr(desc)
                 assert key not in seen
                 seen.add(key)

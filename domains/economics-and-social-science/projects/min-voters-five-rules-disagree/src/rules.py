@@ -58,6 +58,22 @@ def hare(profile, m):
     return alive.pop()
 
 
+def hare_majority_stop(profile, m):
+    """Hare, stopping as soon as someone has more than half of the first places."""
+    n = sum(profile.values())
+    alive = set(range(m))
+    while True:
+        f = first_places(profile, alive)
+        for c in alive:
+            if 2 * f[c] > n:
+                return c
+        low = min(f.values())
+        losers = [c for c in alive if f[c] == low]
+        if len(losers) != 1:
+            return None
+        alive.remove(losers[0])
+
+
 def borda(profile, m):
     s = {c: 0 for c in range(m)}
     for r, k in profile.items():
@@ -76,8 +92,9 @@ def condorcet(profile, m):
 RULES = {"P": plurality, "R": runoff, "H": hare, "B": borda, "C": condorcet}
 
 
-def winners(profile, m, rules="PRHBC"):
-    return {k: RULES[k](profile, m) for k in rules}
+def winners(profile, m, rules="PRHBC", majority_stop=False):
+    table = dict(RULES, H=hare_majority_stop) if majority_stop else RULES
+    return {k: table[k](profile, m) for k in rules}
 
 
 def all_different(profile, m, rules="PRHBC"):

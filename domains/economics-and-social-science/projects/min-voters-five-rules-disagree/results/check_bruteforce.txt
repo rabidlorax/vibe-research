@@ -1,6 +1,6 @@
-bruteforce_m3_N40.txt: 20 rule sets agree (m=3, all profiles up to 40 voters, strict)
-bruteforce_m3_N40_robust.txt: 4 rule sets agree (m=3, all profiles up to 40 voters, robust)
-bruteforce_m4_N11_robust.txt: 7 rule sets agree (m=4, all profiles up to 11 voters, robust)
-bruteforce_m4_N12.txt: 25 rule sets agree (m=4, all profiles up to 12 voters, strict)
-bruteforce_m5_N6.txt: 26 rule sets agree (m=5, all profiles up to 6 voters, strict)
-total comparisons: 82
+bruteforce_m3_N40.txt (m=3, all profiles up to 40 voters, strict): 14 minima equal, 6 with nothing up to 40 voters and solver minimum above 40 or none
+bruteforce_m3_N40_robust.txt (m=3, all profiles up to 40 voters, robust): 3 minima equal, 1 with nothing up to 40 voters and solver minimum above 40 or none
+bruteforce_m4_N14.txt (m=4, all profiles up to 14 voters, strict): 24 minima equal, 1 with nothing up to 14 voters and solver minimum above 14 or none
+bruteforce_m4_N14_robust.txt (m=4, all profiles up to 14 voters, robust): 7 minima equal, 0 with nothing up to 14 voters and solver minimum above 14 or none
+bruteforce_m5_N6.txt (m=5, all profiles up to 6 voters, strict): 7 minima equal, 19 with nothing up to 6 voters and solver minimum above 6 or none
+total: 55 minima equal, 27 consistent non-existence up to the bound

@@ -1,4 +1,4 @@
-m=3 N=40 profiles=9366818
+m=3 N=40 convention=strict profiles=9366818
 PR 9
 PH 9
 RH -

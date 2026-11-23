@@ -3,11 +3,14 @@
   python src/solve.py M RULES [--full] [--solver highs|cpsat|both]
 
 HiGHS (via scipy.optimize.milp, floating point branch and bound) minimises
-the number of voters in every case. CP-SAT (exact integer arithmetic)
-then (a) proves that no case has a solution with fewer voters than the
-HiGHS optimum and (b) re-derives the optimum itself. Every witness is
+the number of voters in every case. CP-SAT (exact integer arithmetic) then
+computes the overall minimum on its own: it goes through the cases keeping
+the best profile found so far, and for each case either finds a profile
+with fewer voters or proves there is none (so it does not report a minimum
+for every case, only the global one). Every witness is
 checked with the independent rule implementations in rules.py.
 --full enumerates all labelled cases instead of one per renaming class.
+--majority-stop uses the other Hare convention (see model.cases).
 """
 import argparse, json, sys, time
 import numpy as np
@@ -56,11 +59,12 @@ def profile_of(x, rankings):
     return {rankings[i]: int(k) for i, k in enumerate(x) if k}
 
 
-def solve(m, rules, full=False, solver="both"):
+def solve(m, rules, full=False, solver="both", majority_stop=False):
     a = argparse.Namespace(m=m, rules=rules, full=full, solver=solver)
+    ms = majority_stop
     t0 = time.time()
-    allc = list(cases(a.m, a.rules, reduce=not a.full))
-    out = dict(m=a.m, rules=a.rules, cases=len(allc), full=a.full)
+    allc = list(cases(a.m, a.rules, reduce=not a.full, majority_stop=ms))
+    out = dict(m=a.m, rules=a.rules, cases=len(allc), full=a.full, majority_stop=ms)
     best = None
     if a.solver in ("highs", "both"):
         opt = []
@@ -92,8 +96,8 @@ def solve(m, rules, full=False, solver="both"):
     if best:
         n, x, desc, rk = best
         prof = profile_of(x, rk)
-        w = winners(prof, a.m, a.rules)
-        assert all_different(prof, a.m, a.rules), w
+        w = winners(prof, a.m, a.rules, majority_stop=ms)
+        assert None not in w.values() and len(set(w.values())) == len(w), w
         assert w == desc["winners"]
         out["min_voters"] = n
         out["witness"] = [["".join("ABCDEFGH"[c] for c in r), k] for r, k in sorted(prof.items())]
@@ -109,9 +113,10 @@ def main():
     ap.add_argument("rules")
     ap.add_argument("--full", action="store_true")
     ap.add_argument("--solver", default="both")
+    ap.add_argument("--majority-stop", action="store_true")
     ap.add_argument("--out")
     a = ap.parse_args()
-    out = solve(a.m, a.rules, a.full, a.solver)
+    out = solve(a.m, a.rules, a.full, a.solver, a.majority_stop)
     s = json.dumps(out)
     print(s)
     if a.out:

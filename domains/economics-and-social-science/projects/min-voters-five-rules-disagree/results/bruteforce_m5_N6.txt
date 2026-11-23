@@ -1,4 +1,4 @@
-m=5 N=6 profiles=4925156774
+m=5 N=6 convention=strict profiles=4925156774
 PR -
 PH -
 RH -

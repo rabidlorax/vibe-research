@@ -1,6 +1,7 @@
 """Secondary computations for m = 5 and all five rules (strict convention).
 
   python src/extras.py > results/extras.json
+  python src/extras.py --majority-stop > results/extras_majority_stop.json
 
 1. Re-evaluates four published profiles with rules.py.
 2. Fewest ballot types: overall, and with exactly 12 voters (CP-SAT).
@@ -21,14 +22,15 @@ PUBLISHED = {
     "Brandt-Matthaus-Saile Table 4, 14": ([("ACBDE", 5), ("EBCDA", 4), ("DCBEA", 3), ("BDECA", 2)], "PRHBC"),
     "Wiseman 11": ([("ADECB", 4), ("BEDCA", 3), ("CEDBA", 2), ("DCBEA", 1), ("EDCBA", 1)], "PRHBC"),
 }
-out = {"published": {}}
+out = {"majority_stop": "--majority-stop" in sys.argv, "published": {}}
 for name, (spec, rules) in PUBLISHED.items():
     p = prof(spec)
     name_of = lambda w: {k: (L[v] if v is not None else None) for k, v in w.items()}
     out["published"][name] = dict(voters=sum(p.values()), strict=name_of(winners(p, 5, rules)),
                                   robust=name_of(winners_robust(p, 5, rules)))
 
-allc = list(cases(5, "PRHBC"))
+MS = "--majority-stop" in sys.argv   # the other Hare convention, see model.cases
+allc = list(cases(5, "PRHBC", majority_stop=MS))
 
 WITNESS = {}
 
@@ -70,7 +72,7 @@ def over_cases(**kw):
         if v is not None and (best is None or v < best[0]):
             x = WITNESS[(kw.get("total_eq"), kw.get("types", False))]
             p = {rk[i]: k for i, k in enumerate(x) if k}
-            w = winners(p, 5)
+            w = winners(p, 5, majority_stop=MS)
             assert None not in w.values() and len(set(w.values())) == 5
             best = (v, [["".join(L[c] for c in r), k] for r, k in sorted(p.items())],
                     {k: L[c] for k, c in w.items()})
@@ -86,7 +88,13 @@ out["min_types_with_12_voters"] = dict(types=r[0], profile=r[1], winners=r[2])
 print("types done", file=sys.stderr, flush=True)
 feas = []
 for n in range(1, 141):
-    if any(cp(A, total_eq=n) for _, A, _ in allc):
-        feas.append(n)
+    for _, A, rk in allc:
+        if cp(A, total_eq=n):
+            x = WITNESS[(n, False)]
+            p = {rk[i]: k for i, k in enumerate(x) if k}
+            w = winners(p, 5, majority_stop=MS)   # referee every witness
+            assert sum(p.values()) == n and None not in w.values() and len(set(w.values())) == 5
+            feas.append(n)
+            break
 out["feasible_n_1_to_140"] = feas
 json.dump(out, sys.stdout, indent=1)

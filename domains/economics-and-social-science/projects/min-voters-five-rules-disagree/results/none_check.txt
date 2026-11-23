@@ -1,0 +1,6 @@
+m=3 RH: all 24 labelled cases have an exactly verified Farkas certificate
+m=3 PRH: all 12 labelled cases have an exactly verified Farkas certificate
+m=3 RHB: all 24 labelled cases have an exactly verified Farkas certificate
+m=3 RHC: all 12 labelled cases have an exactly verified Farkas certificate
+m=3 RBC: all 6 labelled cases have an exactly verified Farkas certificate
+m=3 HBC: all 12 labelled cases have an exactly verified Farkas certificate

@@ -1,4 +1,5 @@
 {
+ "majority_stop": false,
  "published": {
   "Malkevitch 55": {
    "voters": 55,
