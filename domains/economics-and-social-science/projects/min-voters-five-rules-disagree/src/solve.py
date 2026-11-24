@@ -1,6 +1,7 @@
 """Minimum number of voters, by two independent solvers.
 
-  python src/solve.py M RULES [--full] [--solver highs|cpsat|both]
+  python src/solve.py M RULES [--full] [--majority-stop]
+                      [--solver highs|cpsat|both] [--out FILE]
 
 HiGHS (via scipy.optimize.milp, floating point branch and bound) minimises
 the number of voters in every case. CP-SAT (exact integer arithmetic) then

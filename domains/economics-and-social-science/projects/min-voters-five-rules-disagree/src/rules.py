@@ -1,10 +1,16 @@
 """Direct implementations of the five rules on a profile.
 
 A profile is a dict {ranking: count}; a ranking is a tuple of candidate
-indices, best first. Every function in the first part returns the winner, or
-None when a tie occurs at any step of the rule (the "strict" convention of
-the README; hare() continues until one candidate is left). This file is deliberately independent of model.py: it is the
-referee that checks witnesses produced by the solvers.
+indices, best first. The functions in the first part follow the README's
+"strict" convention and return the winner, or None when the rule is not
+free of ties: plurality() and borda() need a unique top score; runoff()
+needs a determined pair (a tie between the two leaders is harmless) and a
+strict contest; hare() needs a unique candidate with fewest first places in
+every round until one candidate is left; hare_majority_stop() needs that
+only until someone has a majority; condorcet() needs a candidate who beats
+every other strictly. The second part implements the "robust" convention.
+This file is deliberately independent of model.py: it is the referee that
+checks witnesses produced by the solvers.
 """
 
 

@@ -1,4 +1,5 @@
-"""Secondary computations for m = 5 and all five rules (strict convention).
+"""Secondary computations for m = 5 and all five rules, under the strict
+convention or, with --majority-stop, the majority-stop convention.
 
   python src/extras.py > results/extras.json
   python src/extras.py --majority-stop > results/extras_majority_stop.json
@@ -7,7 +8,8 @@
    README, with rules.py. The first result key is "strict" or
    "majority_stop" according to the command line; "robust" is always given.
 2. Fewest ballot types: overall, and with exactly 12 voters (CP-SAT).
-3. For which n from 1 to 140 a strict profile with exactly n voters exists.
+3. For which n from 1 to 140 a profile with exactly n voters exists (same
+   convention).
 """
 import json, sys
 import numpy as np
