@@ -1,212 +1,296 @@
 {
  "float32_exp": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1108,
+  "disagree": 0
  },
  "float32_exp2": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1432,
+  "disagree": 0
  },
  "float32_expm1": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1030,
+  "disagree": 0
  },
  "float32_log": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 997252,
+  "both_nan": 1002760,
+  "hard_inputs_compared": 1405,
+  "disagree": 0
  },
  "float32_log2": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 2000012,
+  "compared_non_nan": 997252,
+  "both_nan": 1002760,
+  "hard_inputs_compared": 1653,
+  "disagree": 0
  },
  "float32_log10": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 997252,
+  "both_nan": 1002760,
+  "hard_inputs_compared": 1529,
+  "disagree": 0
  },
  "float32_log1p": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1287033,
+  "both_nan": 712979,
+  "hard_inputs_compared": 1189,
+  "disagree": 0
  },
  "float32_sin": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996111,
+  "both_nan": 3901,
+  "hard_inputs_compared": 1809,
+  "disagree": 0
  },
  "float32_cos": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996111,
+  "both_nan": 3901,
+  "hard_inputs_compared": 1696,
+  "disagree": 0
  },
  "float32_tan": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996111,
+  "both_nan": 3901,
+  "hard_inputs_compared": 1535,
+  "disagree": 0
  },
  "float32_arcsin": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 579846,
+  "both_nan": 1420166,
+  "hard_inputs_compared": 466,
+  "disagree": 0
  },
  "float32_arccos": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 579846,
+  "both_nan": 1420166,
+  "hard_inputs_compared": 412,
+  "disagree": 0
  },
  "float32_arctan": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1553,
+  "disagree": 0
  },
  "float32_sinh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1260,
+  "disagree": 0
  },
  "float32_cosh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1171,
+  "disagree": 0
  },
  "float32_tanh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 865,
+  "disagree": 0
  },
  "float32_arcsinh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 1772,
+  "disagree": 0
  },
  "float32_arccosh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 707188,
+  "both_nan": 1292824,
+  "hard_inputs_compared": 876,
+  "disagree": 0
  },
  "float32_arctanh": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 2000012,
+  "compared_non_nan": 579846,
+  "both_nan": 1420166,
+  "hard_inputs_compared": 314,
+  "disagree": 0
  },
  "float32_cbrt": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 1996113,
+  "both_nan": 3899,
+  "hard_inputs_compared": 2095,
+  "disagree": 0
  },
  "float32_sqrt": {
-  "checked": 40012,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 2000012,
+  "compared_non_nan": 997252,
+  "both_nan": 1002760,
+  "hard_inputs_compared": 1492,
+  "disagree": 0
  },
  "float16_exp": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 1,
+  "disagree": 0
  },
  "float16_exp2": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 2,
+  "disagree": 0
  },
  "float16_expm1": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 1,
+  "disagree": 0
  },
  "float16_log": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 31746,
+  "both_nan": 33790,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_log2": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 31746,
+  "both_nan": 33790,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_log10": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 65536,
+  "compared_non_nan": 31746,
+  "both_nan": 33790,
+  "hard_inputs_in_sample": 1,
+  "disagree": 0
  },
  "float16_log1p": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 65536,
+  "compared_non_nan": 47106,
+  "both_nan": 18430,
+  "hard_inputs_in_sample": 2,
+  "disagree": 0
  },
  "float16_sin": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 63488,
+  "both_nan": 2048,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_cos": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 65536,
+  "compared_non_nan": 63488,
+  "both_nan": 2048,
+  "hard_inputs_in_sample": 2,
+  "disagree": 0
  },
  "float16_tan": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 4
+  "sampled": 65536,
+  "compared_non_nan": 63488,
+  "both_nan": 2048,
+  "hard_inputs_in_sample": 4,
+  "disagree": 0
  },
  "float16_arcsin": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 30722,
+  "both_nan": 34814,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_arccos": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 1
+  "sampled": 65536,
+  "compared_non_nan": 30722,
+  "both_nan": 34814,
+  "hard_inputs_in_sample": 1,
+  "disagree": 0
  },
  "float16_arctan": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 2,
+  "disagree": 0
  },
  "float16_sinh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_cosh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 2
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 2,
+  "disagree": 0
  },
  "float16_tanh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_arcsinh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 4
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 4,
+  "disagree": 0
  },
  "float16_arccosh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 16385,
+  "both_nan": 49151,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_arctanh": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 30722,
+  "both_nan": 34814,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  },
  "float16_cbrt": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 20
+  "sampled": 65536,
+  "compared_non_nan": 63490,
+  "both_nan": 2046,
+  "hard_inputs_in_sample": 20,
+  "disagree": 0
  },
  "float16_sqrt": {
-  "checked": 65536,
-  "disagree": 0,
-  "hard": 0
+  "sampled": 65536,
+  "compared_non_nan": 31746,
+  "both_nan": 33790,
+  "hard_inputs_in_sample": 0,
+  "disagree": 0
  }
 }

@@ -37,6 +37,14 @@
   26,
   0
  ],
+ "steps_ge_1_to_5": [
+  13403884,
+  834828,
+  4728,
+  0,
+  0
+ ],
+ "max_steps": 3,
  "mean_err_ulp": 0.028232533772473797,
  "mono_checked": true,
  "mono_examples_hex": [
@@ -117,5 +125,5 @@
   }
  ],
  "max_err_ulp": 3.1195650871274383,
- "seconds": 267.9
+ "seconds": 284.5
 }

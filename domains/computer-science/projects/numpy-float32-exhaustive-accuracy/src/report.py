@@ -38,18 +38,24 @@ def main():
         if not rows:
             continue
         out += [f"## {dtype} ({rows[0]['inputs']:,} inputs per function, NumPy {rows[0]['numpy']})", "",
-                "| function | max error (ULP) | worst input (hex) | not correctly rounded | % of non-NaN | >1 ULP | >2 ULP | NumPy test tolerance (ULP) | monotonicity violations | \\|y\\|>1 |",
-                "|---|---|---|---|---|---|---|---|---|---|"]
+                "| function | max error (ULP) | worst input (hex) | not correctly rounded | % of inputs with non-NaN result | >1 ULP | >2 ULP | max steps | tolerance in wheel's CSV test data (steps) | inputs beyond that tolerance | monotonicity violations | \\|y\\|>1 |",
+                "|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for r in rows:
             w = max(r["worst"], key=lambda z: z["err_ulp_mpmath"]) if r["worst"] else None
             tol = numpy_test_tolerance(r["function"], dtype)
             mono = r["mono_viol"] if r["mono_checked"] else "n/a"
-            out.append("| {f} | {e:.4f} | {x} | {m:,} | {pc:.3f} | {g1:,} | {g2:,} | {tol} | {mono} | {gt1} |".format(
+            beyond = "n/a" if tol is None else f"{r['steps_ge_1_to_5'][tol]:,}" if tol <= 4 else "?"
+            out.append("| {f} | {e:.4f} | {x} | {m:,} | {pc:.3f} | {g1:,} | {g2:,} | {ms} | {tol} | {beyond} | {mono} | {gt1} |".format(
+                ms=r["max_steps"], beyond=beyond,
                 f=r["function"], e=r["max_err_ulp"], x=w["x_hex"] if w else "-",
                 m=r["misrounded"], pc=100 * r["misrounded"] / max(r["n_valid"], 1),
                 g1=r["hist_err_gt"][1], g2=r["hist_err_gt"][3],
-                tol=tol if tol is not None else "none", mono=mono, gt1=r.get("abs_gt_1", "n/a")))
-        out += ["", "### Special values and layout dependence", "",
+                tol=tol if tol is not None else "no entry", mono=mono, gt1=r.get("abs_gt_1", "n/a")))
+        out += ["", "\"max error\" is measured from the exact value. \"steps\" is the number of representable",
+                "values between the result and the correctly rounded value, the measure used by",
+                "`numpy.testing.assert_array_max_ulp`. The tolerance column is the largest `ulperror`",
+                "entry for this dtype in the wheel's `umath-validation-set-<func>.csv`.",
+                "", "### Special values and layout dependence", "",
                 "Counts of inputs. `layout_*` = result differs from the contiguous whole-array result.",
                 "",
                 "| function | NaN mismatch | zero-sign mismatch | inf mismatch | stride 2 | offset 1 | rows of 3 | reversed |",

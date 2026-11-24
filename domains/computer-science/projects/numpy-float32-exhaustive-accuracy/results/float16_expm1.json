@@ -37,6 +37,14 @@
   0,
   0
  ],
+ "steps_ge_1_to_5": [
+  2,
+  0,
+  0,
+  0,
+  0
+ ],
+ "max_steps": 1,
  "mean_err_ulp": 0.16889123897085273,
  "mono_checked": true,
  "mono_examples_hex": [],

@@ -45,7 +45,7 @@ with np.errstate(all="ignore"):
     for name in sweep.NAMES:
         f = getattr(np, name)
         y = f(x)
-        ref, _, _ = sweep.reference(name, x, fmt)
+        ref, _, _, _ = sweep.reference(name, x, fmt)
         r = {"sample": N}
         # views of a buffer that place x at the given stride
         def strided(step):

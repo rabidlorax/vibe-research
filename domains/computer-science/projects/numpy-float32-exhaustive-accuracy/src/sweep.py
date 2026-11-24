@@ -92,7 +92,7 @@ def libm(fid, xd):
 
 def is_exact(name, xf):
     """True when mp_exact returns the exact real value: exp2 at an integer."""
-    return name == "exp2" and xf == int(xf)
+    return name == "exp2" and math.isfinite(xf) and xf == int(xf)
 
 
 def mp_exact(name, xf):
@@ -165,6 +165,13 @@ def bits_of(a, fmt):
     return np.ascontiguousarray(a).view(fmt["u"])
 
 
+def ordinal(a, fmt):
+    """Map each non-NaN value to an integer so that adjacent floats differ by 1."""
+    b = bits_of(a, fmt).astype(np.int64)
+    mag = b & ((1 << (fmt["bits"] - 1)) - 1)
+    return np.where(b >> (fmt["bits"] - 1), -mag, mag)
+
+
 def same(a, b, fmt):
     """Bitwise equality, with any NaN equal to any NaN."""
     return (bits_of(a, fmt) == bits_of(b, fmt)) | (np.isnan(a) & np.isnan(b))
@@ -173,7 +180,8 @@ def same(a, b, fmt):
 @np.errstate(all="ignore")
 def reference(name, x, fmt):
     """Correctly rounded f(x) in the target type, for an array x of that type.
-    Returns (ref, float64 reference A, statistics about the construction)."""
+    Returns (ref, float64 reference A, statistics about the construction,
+    indices of the hard inputs)."""
     t = fmt["t"]
     fid = NAMES.index(name)
     f = getattr(np, name)
@@ -208,7 +216,7 @@ def reference(name, x, fmt):
         ref[i] = c
     st["hard"] = int(hidx.size)
     st["hard_changed"] = changed
-    return ref, ya, st
+    return ref, ya, st, hidx
 
 
 def chunk(args):
@@ -224,7 +232,7 @@ def chunk(args):
         x = bits.view(t)
         y = f(x)                                   # the result under test
         assert y.dtype == t
-        ref, ya, rstats = reference(name, x, fmt)
+        ref, ya, rstats, _ = reference(name, x, fmt)
         out.update(rstats)
 
         # --- comparison of y with the correctly rounded ref ---
@@ -240,6 +248,12 @@ def chunk(args):
         wrong = diff & ~zs
         out["misrounded"] = int(np.count_nonzero(wrong))
         out["n_valid"] = int(np.count_nonzero(both))
+        # distance from the correctly rounded value in representable steps
+        # (the measure NumPy's assert_array_max_ulp uses; inf counts as the
+        # value after the largest finite one, +0 and -0 as the same point)
+        steps = np.where(both, np.abs(ordinal(y, fmt) - ordinal(ref, fmt)), 0)
+        out["steps_ge"] = [int(np.count_nonzero(steps >= k)) for k in (1, 2, 3, 4, 5)]
+        out["max_steps"] = int(steps.max())
         ex = np.flatnonzero(zs | infm | (ynan != rnan))[:3]
         out["special_examples"] = [[int(bits[i]), int(bits_of(y, fmt)[i]), int(bits_of(ref, fmt)[i])] for i in ex]
 
@@ -327,6 +341,8 @@ def main():
     agg["ref_max_ulp64"] = max(r["ref_max_ulp64"] for r in res)
     agg["hist_thresholds"] = [0.5, 1, 1.5, 2, 3, 4]
     agg["hist_err_gt"] = [sum(r["hist"][i] for r in res) for i in range(6)]
+    agg["steps_ge_1_to_5"] = [sum(r["steps_ge"][i] for r in res) for i in range(5)]
+    agg["max_steps"] = max(r["max_steps"] for r in res)
     agg["mean_err_ulp"] = S("sum_err") / max(S("n_err"), 1)
     # monotonicity across chunk boundaries: evaluate a 64-element window that
     # straddles each boundary inside one sign half
@@ -343,7 +359,7 @@ def main():
             wy = fn(wb.view(fmt["t"])).astype(np.float64)
         if not (wy[31] == wy[31] and wy[32] == wy[32]):
             continue
-        if (wy[32] - wy[31]) * dirn < 0:
+        if (wy[32] < wy[31]) if dirn > 0 else (wy[32] > wy[31]):
             cross_ex.append([int(wb[31]), int(wb[32])])
     agg["mono_viol"] += len(cross_ex)
     agg["mono_checked"] = bool(FUNCS[NAMES.index(a.func)][1] or FUNCS[NAMES.index(a.func)][2])
