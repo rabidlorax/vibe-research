@@ -374,9 +374,12 @@ Sergeev abstract below, were done after the results, during write-up.
   the same idea as `local_improve.py` here. Its threshold results are
   asymptotic upper bounds ("size(THR_k^n) <= (4.5 - 2^(2-ceil(log2 k))) n +
   o(n) for 4 <= k = O(1)") and its constructions use XOR gates, so they are
-  not monotone circuits; its only monotone
-  statement found by the text search is a citation of Sergeev for the
-  2-threshold. No exact monotone value for small majority.
+  not monotone circuits. It also reports concrete small circuits found by
+  its program for 4-threshold functions on 5 to 8 inputs (a table of size
+  improvements such as "23 -> 10"); these are in the unrestricted basis and
+  none is a majority function. Its only monotone statement found by the text
+  search is a citation of Sergeev for the 2-threshold. No exact monotone
+  value for small majority.
 - Read (abstract and a text search of the full paper for exact small cases):
   N. Dobrokhotova-Maikova, A. Kozachinskiy, V. Podolskii, "Towards Simpler
   Sorting Networks and Monotone Circuits for Majority", arXiv:2310.12270v1.
@@ -458,10 +461,14 @@ the baseline network already contradicts), and nothing for 7 or 9.
   the math repository, would remove both. Not done.
 - Claim 8, the symmetry lemma, is a written proof and only claim 4 (the
   lower bounds for 7 and 9 inputs) relies on it. The standards expect written
-  proofs to be formalized. That was not done: this session had no write
-  access to the math repository, and formalizing the lemma alone would still
-  leave the solver's UNSAT answers uncertified. The formal statement worth
-  having is a Lean-checked UNSAT certificate, which was not attempted. Until
+  proofs to be formalized. That was not attempted in this session, by choice
+  of where to spend the time: the route in `docs/environment.md` (write the
+  Lean proof on a local branch of the math repository, build it, hand the
+  patch to the owner) was open and was not taken. Formalizing the lemma alone
+  would still leave the solver's UNSAT answers uncertified; the formal
+  statement worth having is a Lean-checked UNSAT certificate, also not
+  attempted. Formalizing claim 8 is the first follow-up task for this
+  project. Until
   then claim 4's conclusion about medians of 7 and 9 values should be read as
   a computation plus an unformalized lemma. For 5 inputs the lemma is
   corroborated, not proved, by the fact that every symmetry level gives the
@@ -497,3 +504,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-23 | claude-fable-5-2, second fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief. In addition found UNSAT without symmetry breaking at minimum-1 for all 142 catalogue classes with minimum 6 to 9 (its own scratch run, not committed here) | No number found wrong. Twelve issues, fixed: unread search hits described without being read (now read or dropped); claim 4's dependence on the unformalized argument made explicit; this log; smaller wording and command fixes. Not fixable without rewriting history: commit 2198bee combines a merge of `main` with project edits |
 | 2026-11-24 | claude-fable-5-2, third fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief. In addition wrote an independent SAT formulation (pair selectors, full truth table, no symmetry breaking) and confirmed minimum-1 UNSAT for the 186 classes with minimum 1 to 8 and 13 of the 14 with minimum 9; confirmed the 210 catalogue entries are 210 distinct classes out of 7581 monotone functions (scratch runs, not committed here) | No number found wrong. Seven issues, fixed: the author's 2023 dissertation had been missed (now read and quoted); catalogue lower bounds leaned on the symmetry argument (now rerun without it, `results/nosym_check.log`); the lemma is now its own `proved-informal` claim; wording and memory figures |
 | 2026-11-24 | claude-fable-5-2, fourth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reran all steps under 5 minutes, own catalogue parser, replayed the local search's random stream, re-fetched and checked all quoted sources | No number found wrong. Six issues, fixed: the 60 local-search trials are 23 distinct problems; `updated` date; topical arXiv and OpenAlex searches added and the search outcome stated; access dates; `results/cross_check.log` now saved |
+| 2026-11-24 | claude-fable-5-2, fifth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all 7581 monotone 5-variable functions into 210 classes, all quoted sources re-fetched | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: the description of arXiv:2102.12579 and the stated reason for not formalizing claim 8 |
