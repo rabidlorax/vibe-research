@@ -58,8 +58,8 @@ the number of operations. "Gate" means the same thing in circuit language
   minimum (table below). Every program in the catalogue is correct; only
   minimality fails. The author's own text warns that a pruning step in the
   search can discard an optimal circuit that shares a gate between both sides
-  of its output, and the dissertation concedes that this probably makes some
-  entries of the *general* 4-variable catalogue non-minimal; neither version
+  of its output, and the dissertation says that this may make some entries
+  of the *general* 4-variable catalogue non-minimal; neither version
   flags the monotone 5-variable table (details and quotations below). That
   pruning is the likely cause here too, though we did not confirm it by
   running the author's code.
@@ -335,7 +335,8 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   circuits for all monotone Boolean functions of up to 5 variables", with the
   same 5-variable row ending in one class at 13 gates. The sentence singling
   out majority at 13 gates is not in the dissertation. So the author has
-  identified the flaw and its effect on the general 4-variable catalogue;
+  identified the flaw and its possible effect on the general 4-variable
+  catalogue;
   what this project adds is that the monotone 5-variable catalogue is
   affected too, in 19 named entries, with the correct values. The catalogue
   file fetched on 2026-11-23 still has the gate counts of the 2022
@@ -522,3 +523,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, sixth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all presentations of three programs against the lemma, sources re-fetched | No number found wrong. Four points, fixed: arXiv:2102.12579's table includes 7-input majority at 17 gates in the unrestricted basis (previously misdescribed); two statements about where brute force stops; one quotation |
 | 2026-11-24 | claude-fable-5-2, seventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sentence-by-sentence comparison of quotations with re-fetched sources | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: one limitation was unqualified; a quotation from the dissertation had lost its condition; two imprecise sentences |
 | 2026-11-24 | claude-fable-5-2, eighth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, all sources re-fetched and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: "every symmetry level" narrowed to the levels with committed logs; a second on-topic search hit now listed as seen and not read. It also noted, for the owner, that claim 8 remains `proved-informal` at `status: result` |
+| 2026-11-24 | claude-fable-5-2, ninth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: two paraphrases of the dissertation were firmer than its conditional wording; a docstring in `src/encode.py` |

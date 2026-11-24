@@ -14,10 +14,13 @@ one direction of the gate semantics:
   * on a weight-k row ("1-row") we need: value variable true  => node is truly 1
   * on a weight-(k-1) row ("0-row") we need: value variable false => node is truly 0
 
+At every level, including sym=0, a gate's operands are ordered a < b (a gate
+with two equal operands would be a copy of its operand).
+
 Symmetry breaking (each `sym` level includes the previous ones; all are
 "without loss of generality", argued in the README):
 
-  1  operands ordered a < b; gates listed in non-decreasing colexicographic
+  1  gates listed in non-decreasing colexicographic
      order of (b, a); two gates with identical operands are AND then OR;
      every non-output gate is used by a later gate.
   2  (majority only, k = (n+1)/2) the first gate is AND(x0, x1).
