@@ -1,9 +1,9 @@
 """Direct implementations of the five rules on a profile.
 
 A profile is a dict {ranking: count}; a ranking is a tuple of candidate
-indices, best first. Every function returns the winner, or None when a tie
-occurs at a step that decides the outcome (the "strict" convention of the
-README). This file is deliberately independent of model.py: it is the
+indices, best first. Every function in the first part returns the winner, or
+None when a tie occurs at any step of the rule (the "strict" convention of
+the README; hare() continues until one candidate is left). This file is deliberately independent of model.py: it is the
 referee that checks witnesses produced by the solvers.
 """
 

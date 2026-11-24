@@ -6,7 +6,7 @@ evidence: computed
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Fewest voters for which five textbook voting rules elect five different winners
@@ -112,11 +112,11 @@ profile found in the search has 14.
 | 4 | Over all strict profiles with at most 100 voters, the fewest different ballots is 4, and with 4 ballots the fewest voters is 14 | computed | `python src/extras.py`; agrees with the caption of Table 4 in Brandt et al. |
 | 5 | A strict profile with exactly `n` voters exists for every `n` in 12..140 and for no `n` in 1..11 | computed | `python src/extras.py`, key `feasible_n_1_to_140` |
 | 6 | With 6 candidates the minima are 12 (strict) and 11 (robust) | computed | `python src/table6.py`, `python src/robust.py 6 PRHBC` |
-| 7 | The minima for every set of two or more of the five rules, 3 to 6 candidates, are as in the table under Method | computed | `python src/table.py 5`, `python src/table6.py`, `python src/robust_table.py 5` |
+| 7 | The minima for every set of two or more of the five rules, 3 to 6 candidates, are as in the table under Method (numeric entries only; "none" is claim 11, "none found" is not claimed) | computed | `python src/table.py 5`, `python src/table6.py`, `python src/robust_table.py 5` |
 | 8 | The published profiles of Malkevitch (55 voters) and Brandt et al. (14 voters) give five different winners under both conventions; Wiseman's 11-voter profile does not under either, because its elimination winner is C or D depending on a tie-break | computed | `python src/extras.py`, key `published` |
-| 10 | Under the majority-stop convention: minimum 12 voters for 5 and for 6 candidates; with 12 voters the fewest ballots is 5; fewest ballots overall (at most 100 voters) is 4, needing 14 voters; a profile exists for exactly the `n` in 12..140 among 1..140 | computed | `python src/solve.py 5 PRHBC --majority-stop`, same with `6`, `python src/extras.py --majority-stop` |
-| 11 | No profile of any size exists for the six strict entries marked "none" in the table (all with 3 candidates) | computed | `python src/none_check.py`: an exactly verified Farkas certificate for every labelled case |
 | 9 | Brandt, Matthäus and Saile state that 12 voters suffice (with 7 ballot types) and print a 14-voter, 4-type profile; Wiseman states "as few as 11 voters" with a tie | literature | Sources and quotations under Prior work |
+| 10 | Under the majority-stop convention: minimum 12 voters for 5 and for 6 candidates; with 12 voters the fewest ballots is 5; fewest ballots overall (at most 100 voters) is 4, needing 14 voters; a profile exists for exactly the `n` in 12..140 among 1..140 | computed | `python src/solve.py 5 PRHBC --majority-stop`, same with `6`, `python src/extras.py --majority-stop` |
+| 11 | No profile of any size exists for the six strict entries marked "none" in the table (all with 3 candidates) | computed | `python src/none_check.py`: an exactly verified Farkas certificate for every labelled case (cases in which the Condorcet winner would lose the runoff are contradictory and are not generated) |
 
 ## Method
 
@@ -129,8 +129,10 @@ inequality between integer quantities, written as `a.x >= 1`
 the answer. Because candidates can be renamed, it is enough to take the
 elimination order A, B, ..., and try every assignment of the other winners
 (24 cases for the main problem). `--full` drops this shortcut and solves all
-2880 labelled cases: 240 have minimum 12, 240 have 17, 360 have 27, 360
-have 47 and 1680 are infeasible, which is 120 times the reduced counts.
+2880 labelled cases: according to HiGHS 240 have minimum 12, 240 have 17,
+360 have 27, 360 have 47 and 1680 are infeasible, which is 120 times the
+reduced counts. (These per-case figures come from HiGHS alone; CP-SAT only
+establishes that no case has a profile with fewer than 12 voters.)
 
 **Two solvers.** HiGHS (through `scipy.optimize.milp`, floating-point branch
 and bound) minimises each case. CP-SAT (OR-Tools, exact integer arithmetic)
@@ -175,26 +177,29 @@ bruteforce_m5_N6.txt (m=5, all profiles up to 6 voters, strict): 7 minima equal,
 total: 55 minima equal, 27 consistent non-existence up to the bound
 ```
 
-With 4 candidates every strict minimum in the table is matched, including
-all rule sets containing both R and H (14 or 15 voters). For 5 candidates
+With 4 candidates 24 of the 25 strict minima in the table are matched,
+including the rule sets RH, PRH, RHB, RHC, PRHB and PRHC at 14 voters. The
+exception is RHBC, where the solver minimum is 15 and brute force only
+confirms that nothing exists up to 14. For 5 candidates
 full enumeration is only feasible up to 6 voters (about 4.9 billion
 profiles), which matches only the seven rule sets with minimum at most 6;
 claims 1 to 6 and 10 therefore rest on the two solvers and not on
 enumeration.
 
 **Table for all rule sets** (P plurality, R runoff, H elimination, B Borda,
-C Condorcet; `m` candidates). "none" means no profile of any size exists.
-For the strict entries this is proved exactly by `src/none_check.py` (claim
-11). The one robust "none", PRH with 3 candidates, is what the search
-reports (every branch infeasible for HiGHS, and brute force finds nothing up
-to 40 voters); it has no exact certificate, but the reason is simple: the
-plurality winner is unique and, as argued above, so is the runner-up; the
-third candidate therefore has strictly the fewest first places and is
-eliminated first, and the last elimination round is the same contest as the
-runoff, so the two rules cannot elect different candidates.
-Blank in a strict column means more rules than candidates, which is
-impossible. Blank in a robust column means not computed: the robust search
-covers only sets containing P and H. When a set
+C Condorcet; `m` candidates). In the strict columns "none" means no profile
+of any size exists, proved exactly by `src/none_check.py` (claim 11); a
+blank there means more rules than candidates, which is impossible. In the
+robust columns a blank means not computed by the solver, which covers only
+sets containing P and H. "none found" (robust PRH, 3 candidates) is not a
+claim of non-existence: HiGHS reports every branch infeasible and brute
+force finds nothing up to 40 voters, but there is no exact certificate. The
+expected reason is that the plurality winner and, as argued above, the
+runner-up are unique, so the third candidate is eliminated first and the
+last elimination round is the runoff itself. Robust minima for sets without
+plurality appear, for 3 and 4 candidates only, in
+`results/bruteforce_*_robust.txt`; they come from the brute-force program
+alone and are not claimed here. When a set
 does not contain P, the strict convention for R requires only that the
 runoff pair is determined.
 
@@ -210,7 +215,7 @@ runoff pair is determined.
 | HB | 5 | 5 | 8 | 11 |  |  |  |
 | HC | 5 | 5 | 8 | 11 |  |  |  |
 | BC | 5 | 3 | 3 | 3 |  |  |  |
-| PRH | none | 14 | 12 | 12 | none | 14 | 11 |
+| PRH | none | 14 | 12 | 12 | none found | 14 | 11 |
 | PRB | 9 | 7 | 7 | 7 |  |  |  |
 | PRC | 9 | 7 | 7 | 7 |  |  |  |
 | PHB | 9 | 8 | 8 | 12 | 9 | 7 | 7 |
@@ -247,7 +252,7 @@ python src/table.py 5 > results/table_m3to5.json                    # 10 s
 python src/table6.py > results/table_m6.json                        # 2 min
 python src/robust_table.py 5 > results/robust_table_m3to5.json      # 20 s
 python src/solve.py 5 PRHBC --majority-stop --out results/m5_PRHBC_majority_stop.json  # 2 s
-python src/solve.py 6 PRHBC --majority-stop --out results/m6_PRHBC_majority_stop.json  # 2 min
+python src/solve.py 6 PRHBC --majority-stop --out results/m6_PRHBC_majority_stop.json  # 4 min
 python src/extras.py --majority-stop > results/extras_majority_stop.json               # 6 min
 python src/none_check.py > results/none_check.txt                   # 1 s
 gcc -O2 -o /tmp/bruteforce src/bruteforce.c
@@ -292,13 +297,16 @@ Found:
   Theoretical Politics* 34(4), 2022, doi:10.1177/09516298221122104. Read in
   the authors' preprint
   (<https://pub.dss.in.tum.de/brandt-research/minpara.pdf>); the publisher's
-  version was not accessible. Same five rules. Their tie convention is close
-  to the majority-stop convention here, not identical to strict: they
-  consider only profiles with a unique winner, and of instant runoff, which
-  in their definition stops when a candidate has a majority, they write "we
-  only consider preference profiles in which no ties of this kind occur at
-  any iteration". Claim 10 shows the numbers compared here are the same
-  under strict and majority-stop. Table 4 is a 14-voter, 4-ballot profile, with the caption "No
+  version was not accessible. Same five rules. As far as the preprint
+  describes it, their tie convention coincides with the majority-stop
+  convention here rather than with strict: they consider only profiles with
+  a unique winner; for the runoff, "we only consider preference profiles
+  where there are exactly two candidates which are ranked more often than
+  any other candidate"; and of instant runoff, which in their definition
+  ends when a candidate has an absolute majority, "we only consider
+  preference profiles in which no ties of this kind occur at any
+  iteration". Claim 10 shows the numbers compared here are the same under
+  strict and majority-stop. Table 4 is a 14-voter, 4-ballot profile, with the caption "No
   preference profile of this kind requires fewer types of voters and no
   profile of this kind with 4 types of voters requires fewer voters."
   Footnote 15: "The same phenomenon can be achieved with only 12 voters, but
@@ -350,15 +358,25 @@ which returned nothing from them.
 - The model and the two solvers share `src/model.py`. A wrong constraint
   there that makes a case too restrictive would raise the reported minimum
   without any witness failing. The brute-force comparison guards against
-  this only as far as it reaches: minima are matched for 3 and 4 candidates
-  and, with 5 candidates, only for the seven rule sets whose minimum is at
-  most 6. Rule sets containing both R and H, which drive the headline, are
-  matched only at 4 candidates (minimum 14 or 15). The majority-stop model
-  has no brute-force counterpart.
+  this only as far as it reaches: minima are matched for 3 candidates, for
+  4 candidates except RHBC (solver 15, brute-force bound 14) and, with 5
+  candidates, only for the seven rule sets whose minimum is at most 6. Rule
+  sets containing both R and H, which drive the headline, are matched only
+  at 4 candidates (minimum 14). The majority-stop model has no brute-force
+  counterpart.
+- The robust results for 5 and 6 candidates (claims 2 and 6) have no
+  brute-force check and no run without the renaming shortcut. Their lower
+  bounds also depend on the argument in Method that, when plurality is in
+  the rule set, the robust runoff is the same as the strict one;
+  `src/robust.py` builds that in. The argument is written out but not
+  formalized.
 - Claim 4 holds for profiles of at most 100 voters. In `solve.py` CP-SAT
-  considers at most 400 voters, while HiGHS has no cap; a case that HiGHS
-  reports infeasible is therefore confirmed exactly only up to 400 voters,
-  except for the "none" entries covered by claim 11.
+  establishes the overall minimum `n*` exactly: once it holds a profile it
+  asks of each further case only whether a smaller one exists. So for a
+  case that HiGHS reports infeasible, or gives a minimum above `n*`, the
+  exact confirmation is "nothing below `n*`", not infeasibility. When no
+  profile is found at all, CP-SAT confirms that up to 400 voters; the
+  strict "none" entries are settled without a cap by claim 11.
 - Claim 5 stops at 140. Adding one voter of each of the 120 rankings to a
   profile leaves every strict comparison unchanged, which with claim 5 would
   give "every n >= 12"; this argument is written here only as a remark and

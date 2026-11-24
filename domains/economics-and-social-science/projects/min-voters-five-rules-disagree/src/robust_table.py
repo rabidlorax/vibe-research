@@ -1,6 +1,6 @@
 """Robust-convention minima for every rule set containing P and H, m = 3..MAXM.
 
-  python src/robust_table.py MAXM > results/robust_table.json
+  python src/robust_table.py 5 > results/robust_table_m3to5.json
 """
 import json, subprocess, sys
 from itertools import combinations

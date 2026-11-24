@@ -44,4 +44,5 @@ for f in sorted(glob.glob(R + "/bruteforce_*.txt")):
     npos += pos
     print(f"{os.path.basename(f)} (m={m}, all profiles up to {N} voters, {conv}): "
           f"{pos} minima equal, {k - pos} with nothing up to {N} voters and solver minimum above {N} or none")
+assert n, "nothing compared: results/table_*.json or results/bruteforce_*.txt missing"
 print(f"total: {npos} minima equal, {n - npos} consistent non-existence up to the bound")

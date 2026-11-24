@@ -3,7 +3,8 @@
   python src/extras.py > results/extras.json
   python src/extras.py --majority-stop > results/extras_majority_stop.json
 
-1. Re-evaluates four published profiles with rules.py.
+1. Re-evaluates three published profiles with rules.py (key "strict" uses
+   the convention selected on the command line).
 2. Fewest ballot types: overall, and with exactly 12 voters (CP-SAT).
 3. For which n from 1 to 140 a strict profile with exactly n voters exists.
 """
@@ -13,6 +14,7 @@ from ortools.sat.python import cp_model
 from model import cases
 from rules import winners, winners_robust
 
+MS = "--majority-stop" in sys.argv   # the other Hare convention, see model.cases
 L = "ABCDE"
 def prof(spec):
     return {tuple(L.index(ch) for ch in b): k for b, k in spec}
@@ -26,10 +28,9 @@ out = {"majority_stop": "--majority-stop" in sys.argv, "published": {}}
 for name, (spec, rules) in PUBLISHED.items():
     p = prof(spec)
     name_of = lambda w: {k: (L[v] if v is not None else None) for k, v in w.items()}
-    out["published"][name] = dict(voters=sum(p.values()), strict=name_of(winners(p, 5, rules)),
+    out["published"][name] = dict(voters=sum(p.values()), strict=name_of(winners(p, 5, rules, majority_stop=MS)),
                                   robust=name_of(winners_robust(p, 5, rules)))
 
-MS = "--majority-stop" in sys.argv   # the other Hare convention, see model.cases
 allc = list(cases(5, "PRHBC", majority_stop=MS))
 
 WITNESS = {}

@@ -1,6 +1,6 @@
 """Minimum voters for every set of >= 2 rules and m = 3..MAXM candidates.
 
-  python src/table.py MAXM > results/table.json
+  python src/table.py 5 > results/table_m3to5.json
 """
 import json, sys
 from itertools import combinations
