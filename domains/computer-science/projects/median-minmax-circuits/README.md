@@ -454,6 +454,18 @@ Sergeev abstract below, were done after the results, during write-up.
   3-input majority gates (the second with inverters), not {AND, OR} gates,
   so they give no value for the question here; they show exact synthesis of
   7-input majority has been done in that basis.
+- Three further titles in the same OpenAlex results, seen and not read, so
+  nothing is claimed about their content: "The Exact Complexity of Majority
+  in Depth-Three Circuits with Bottom Fan-in Three" (2026,
+  doi:10.48550/arxiv.2601.04072) and "Depth-Three Circuits for Inner Product
+  and Majority Functions" (2023, OpenAlex W4295177978), both by title about
+  depth-3 circuits, a different model; and "The complexity of monotone
+  Boolean functions and an algorithm for finding shortest paths on a graph"
+  (1980, OpenAlex W2474705870), a general title that could contain small
+  exact values and is a lead not followed. Every other result among the
+  first 8 of the four OpenAlex queries was off this question by title (for
+  example Bayesian network learning, k-median coresets, extended
+  formulations, network meta-analyses).
 - Another on-topic title in the OpenAlex results, seen and not read:
   "Selection Networks" (1991, doi:10.1137/0220054). From the title it is
   about comparator selection networks, the same different cost model as the
@@ -545,3 +557,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, tenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: unsourced statements about practice in "Why it matters" now marked as from memory; a docstring in `src/local_improve.py` |
 | 2026-11-24 | claude-fable-5-2, eleventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, extended to docstrings and introductory sections; wrote its own SAT formulation for majority of 3 and 5 (two-sided semantics, full truth table) and reproduced 4 and 10 | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: padding does not cover size 0 (covered by a direct test); one sentence stated the hypothesised cause as fact; an unsourced "well-known"; two usage lines in docstrings |
 | 2026-11-24 | claude-fable-5-2, twelfth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sources re-fetched, arXiv and OpenAlex queries replayed | No number found wrong. Two points, fixed: an on-topic OpenAlex hit (majority-of-3 basis) had not been named or looked into, now read at abstract level with a second one; a comment in `src/catalogue_check.py` |
+| 2026-11-24 | claude-fable-5-2, thirteenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, plus replay of the documented arXiv and OpenAlex queries against the README's account of them | No number, label, quotation or command found wrong. One point, fixed: three OpenAlex result titles were not accounted for; they are now listed as seen and not read, with the disposition of the rest |
