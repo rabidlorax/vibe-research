@@ -346,9 +346,10 @@ def main():
     c3 = sub[sub.error == 0]
     cm = c3.received_year * 12 + c3.received_month
     share, flagrate = {}, {}
+    rng_n = np.random.default_rng(SEED + 3)  # own stream, so this block cannot shift intervals elsewhere
     for name, a, b in periods:
         d = c3[(cm >= a) & (cm <= b)]
-        lo, hi = cluster_boot(d, "exact", rng)
+        lo, hi = cluster_boot(d, "exact", rng_n)
         share[name] = d.exact.mean()
         flagrate[name] = sub[(sm_ >= a) & (sm_ <= b)].error.mean()
         post.append(f"{name}: consistent three-decimal 'p =' results that match the face-value p exactly: "
@@ -362,12 +363,13 @@ def main():
         bb, se = g.params["x"], g.bse["x"]
         post.append(f"exact-match share, received Jun 2026 on vs {name}: odds ratio {np.exp(bb):.2f} "
                     f"[{np.exp(bb - 1.96 * se):.2f}, {np.exp(bb + 1.96 * se):.2f}]")
-    f0, f1 = flagrate[periods[1][0]], flagrate[periods[3][0]]
-    expected = ((1 - f0) * share[periods[1][0]] + (f0 - f1)) / (1 - f1)
-    post.append(f"exact-match share expected for Jun 2026 on if every result that stopped being flagged since "
-                f"2025Q1-2026Q1 had been replaced by an exact recomputation: {100 * expected:.1f}%; "
-                f"expected with no such replacement: {100 * share[periods[1][0]]:.1f}%; observed "
-                f"{100 * share[periods[3][0]]:.1f}%")
+    f1 = flagrate[periods[3][0]]
+    for base in (periods[1][0], periods[0][0]):
+        f0 = flagrate[base]
+        expected = ((1 - f0) * share[base] + (f0 - f1)) / (1 - f1)
+        post.append(f"exact-match share for Jun 2026 on, baseline {base}: expected {100 * expected:.1f}% if every "
+                    f"result that stopped being flagged had been replaced by an exact recomputation, "
+                    f"{100 * share[base]:.1f}% with no such replacement; observed {100 * share[periods[3][0]]:.1f}%")
     # (o) how far off are flagged "p = x" results?
     fl = res[(res.error == 1) & (res.p_cmp == "=")]
     dec = fl.p_rep.str.split(".").str[1].str.len()
