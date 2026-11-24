@@ -1,0 +1,112 @@
+{
+ "function": "expm1",
+ "dtype": "float16",
+ "inputs": 65536,
+ "numpy": "2.5.3",
+ "mp_prec": 1200,
+ "margin": 1.52587890625e-05,
+ "n_valid": 63490,
+ "n_nan_ref": 2046,
+ "misrounded": 2,
+ "nan_mismatch": 0,
+ "zero_sign_mismatch": 0,
+ "inf_mismatch": 0,
+ "hard": 1,
+ "hard_changed": 0,
+ "ref_nan_disagree": 0,
+ "ref_inf_disagree": 0,
+ "mono_viol": 0,
+ "layout_stride2": 1,
+ "layout_offset1": 0,
+ "layout_len3": 0,
+ "layout_reversed": 1,
+ "ref_max_ulp64": 1.0,
+ "hist_thresholds": [
+  0.5,
+  1,
+  1.5,
+  2,
+  3,
+  4
+ ],
+ "hist_err_gt": [
+  2,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "mean_err_ulp": 0.16889123897085273,
+ "mono_checked": true,
+ "mono_examples_hex": [],
+ "special_examples_hex": [],
+ "worst": [
+  {
+   "x_hex": "0x2864",
+   "x": 0.0343017578125,
+   "y": 0.034912109375,
+   "err_ulp_float64ref": 0.5000904993648874,
+   "err_ulp_mpmath": 0.5000904993648615,
+   "correct": 0.034881591796875
+  },
+  {
+   "x_hex": "0x11a8",
+   "x": 0.000690460205078125,
+   "y": 0.000690460205078125,
+   "err_ulp_float64ref": 0.5000082604567524,
+   "err_ulp_mpmath": 0.5000082604568434,
+   "correct": 0.0006909370422363281
+  },
+  {
+   "x_hex": "0xbdd3",
+   "x": -1.4560546875,
+   "y": -0.7666015625,
+   "err_ulp_float64ref": 0.49993375230747006,
+   "err_ulp_mpmath": 0.49993375230747467,
+   "correct": -0.7666015625
+  },
+  {
+   "x_hex": "0x9000",
+   "x": -0.00048828125,
+   "y": -0.00048828125,
+   "err_ulp_float64ref": 0.49991862972478884,
+   "err_ulp_mpmath": 0.49991862972480405,
+   "correct": -0.00048828125
+  },
+  {
+   "x_hex": "0xa871",
+   "x": -0.034698486328125,
+   "y": -0.03411865234375,
+   "err_ulp_float64ref": 0.49989983270347693,
+   "err_ulp_mpmath": 0.4998998327035623,
+   "correct": -0.03411865234375
+  },
+  {
+   "x_hex": "0xb94e",
+   "x": -0.6630859375,
+   "y": -0.484619140625,
+   "err_ulp_float64ref": 0.4998649347699029,
+   "err_ulp_mpmath": 0.49986493476980304,
+   "correct": -0.484619140625
+  },
+  {
+   "x_hex": "0x1c78",
+   "x": 0.004364013671875,
+   "y": 0.00437164306640625,
+   "err_ulp_float64ref": 0.49985095871784324,
+   "err_ulp_mpmath": 0.49985095871783575,
+   "correct": 0.00437164306640625
+  },
+  {
+   "x_hex": "0x1400",
+   "x": 0.0009765625,
+   "y": 0.0009775161743164062,
+   "err_ulp_float64ref": 0.49983719983924857,
+   "err_ulp_mpmath": 0.4998371998391412,
+   "correct": 0.0009775161743164062
+  }
+ ],
+ "max_err_ulp": 0.5000904993648615,
+ "seconds": 0.0
+}

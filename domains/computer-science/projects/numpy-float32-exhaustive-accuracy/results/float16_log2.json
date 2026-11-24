@@ -1,0 +1,80 @@
+{
+ "function": "log2",
+ "dtype": "float16",
+ "inputs": 65536,
+ "numpy": "2.5.3",
+ "mp_prec": 1200,
+ "margin": 1.52587890625e-05,
+ "n_valid": 31746,
+ "n_nan_ref": 33790,
+ "misrounded": 0,
+ "nan_mismatch": 0,
+ "zero_sign_mismatch": 0,
+ "inf_mismatch": 0,
+ "hard": 0,
+ "hard_changed": 0,
+ "ref_nan_disagree": 0,
+ "ref_inf_disagree": 0,
+ "mono_viol": 0,
+ "layout_stride2": 0,
+ "layout_offset1": 0,
+ "layout_len3": 0,
+ "layout_reversed": 0,
+ "ref_max_ulp64": 1.0,
+ "hist_thresholds": [
+  0.5,
+  1,
+  1.5,
+  2,
+  3,
+  4
+ ],
+ "hist_err_gt": [
+  0,
+  0,
+  0,
+  0,
+  0,
+  0
+ ],
+ "mean_err_ulp": 0.24951530878396908,
+ "mono_checked": true,
+ "mono_examples_hex": [],
+ "special_examples_hex": [],
+ "worst": [
+  {
+   "x_hex": "0x4089",
+   "x": 2.267578125,
+   "y": 1.1806640625,
+   "err_ulp_float64ref": 0.49991103034017215,
+   "err_ulp_mpmath": 0.49991103034007883,
+   "correct": 1.1806640625
+  },
+  {
+   "x_hex": "0x3489",
+   "x": 0.283447265625,
+   "y": -1.8193359375,
+   "err_ulp_float64ref": 0.49991103034017215,
+   "err_ulp_mpmath": 0.49991103034007883,
+   "correct": -1.8193359375
+  },
+  {
+   "x_hex": "0x62a3",
+   "x": 849.5,
+   "y": 9.734375,
+   "err_ulp_float64ref": 0.49982244041984814,
+   "err_ulp_mpmath": 0.49982244041977186,
+   "correct": 9.734375
+  },
+  {
+   "x_hex": "0x1aa3",
+   "x": 0.0032405853271484375,
+   "y": -8.265625,
+   "err_ulp_float64ref": 0.49982244041984814,
+   "err_ulp_mpmath": 0.49982244041977186,
+   "correct": -8.265625
+  }
+ ],
+ "max_err_ulp": 0.49991103034007883,
+ "seconds": 0.0
+}
