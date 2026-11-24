@@ -59,16 +59,16 @@ every rule elects the same candidate however they are broken.
 
 - **Strict convention: the minimum is 12 voters** (`computed`). That 12
   voters suffice was already known: Brandt, Matthäus and Saile (2022) say
-  so in a footnote without a profile, and a web page by Wiseman has printed,
-  since November 2008,
+  so in a footnote without a profile, and a web page by Wiseman prints
   a 12-voter profile with six candidates which, as checked here, still
   works when its unused candidate is deleted. What was not found in the
   search is any demonstration that 11 or fewer voters are impossible. With
   12 voters the fewest different ballots is **5** (the footnote mentions 7;
-  Wiseman's profile also has 5). One such profile, found by an earlier run
-  of `src/extras.py` and re-evaluated by it under the key
-  `README strict 12` (the solver may return a different optimal profile on
-  another run):
+  Wiseman's profile also has 5). One such profile is printed below. It came
+  from an earlier solver run and is now hard-coded in `src/extras.py`, which
+  re-evaluates it under the key `README strict 12`; the profile currently
+  stored under `min_types_with_12_voters` in `results/extras.json` is a
+  different, equally valid one:
 
   | Voters | Ballot (best to worst) |
   |---|---|
@@ -106,8 +106,10 @@ every rule elects the same candidate however they are broken.
   (strict) and 11 (robust) (`computed`). Wiseman's 12-voter, 6-candidate
   profile already attains the strict value; the lower bounds were not found
   in the search.
-- The majority-stop convention gives the same numbers as strict: 12 voters
-  for `m = 5` and `m = 6`, and 5 ballots at 12 voters (`computed`).
+- For the five rules together the majority-stop convention gives the same
+  numbers as strict: 12 voters for `m = 5` and `m = 6`, and 5 ballots at 12
+  voters (`computed`). This is not true of smaller rule sets (see
+  Limitations).
 - Under the strict convention a profile exists for every `n` from 12 to 140
   (`computed`).
 
@@ -125,11 +127,11 @@ and 12 voters (6 candidates, Wiseman).
 | 4 | Over all strict profiles with at most 100 voters, the fewest different ballots is 4, and with 4 ballots the fewest voters is 14 | computed | `python src/extras.py`; agrees with the caption of the five-rule table in Brandt et al. (Table 3 in the journal, Table 4 in the preprint) |
 | 5 | A strict profile with exactly `n` voters exists for every `n` in 12..140 and for no `n` in 1..11 | computed | `python src/extras.py`, key `feasible_n_1_to_140` |
 | 6 | With 6 candidates the minima are 12 (strict) and 11 (robust) | computed | `python src/table6.py`, `python src/robust.py 6 PRHBC`; same reliance on written arguments as claims 1 and 2 |
-| 7 | The minima for every set of two or more of the five rules, 3 to 6 candidates, are as in the table under Method (numeric entries only; "none" is claim 11, "none found" is not claimed). Some 3-candidate entries for two rules were already published (Prior work) | computed | `python src/table.py 5`, `python src/table6.py`, `python src/robust_table.py 5` |
+| 7 | The minima for every set of two or more of the five rules, 3 to 6 candidates, are as in the table under Method (numeric entries only; "none" is claim 11, "none found" is not claimed). Several 3-candidate entries for two and for three rules were already published (Prior work) | computed | `python src/table.py 5`, `python src/table6.py`, `python src/robust_table.py 5` |
 | 8 | The published profiles of Malkevitch (55 voters, 5 candidates), Brandt et al. (14 voters, 5 candidates) and Wiseman (12 voters, 6 candidates) give five different winners under the strict, majority-stop and robust conventions, and so does Wiseman's 12-voter profile with its candidate E deleted (5 candidates, 5 ballots); Wiseman's 11-voter profile does not under any of the three, because its elimination winner is C or D depending on a tie-break | computed | `python src/extras.py` and `python src/extras.py --majority-stop`, key `published` |
 | 9 | Brandt, Matthäus and Saile state that 12 voters suffice (with 7 ballot types) and print a 14-voter, 4-type profile; Wiseman prints a 12-voter, 6-candidate profile and states "as few as 11 voters" with a tie | literature | Sources and quotations under Prior work |
 | 10 | Under the majority-stop convention: minimum 12 voters for 5 and for 6 candidates; with 12 voters the fewest ballots is 5; fewest ballots overall (at most 100 voters) is 4, needing 14 voters; a profile exists for exactly the `n` in 12..140 among 1..140 | computed | `python src/solve.py 5 PRHBC --majority-stop`, same with `6`, `python src/extras.py --majority-stop` |
-| 11 | No profile of any size exists for the six strict entries marked "none" in the table (all with 3 candidates) | computed | `python src/none_check.py`: an exactly verified Farkas certificate for every labelled case that the model generates. Two kinds of labelled case are left out as contradictory by the arguments under Method: the Condorcet winner losing the runoff, and, when plurality is in the set, a runoff loser other than the plurality winner. The step from "no rational solution" to "no profile" (scaling by a common denominator) is also a written argument |
+| 11 | No profile of any size exists for the six strict entries marked "none" in the table (all with 3 candidates). Four of them (RH, PRH, RHB, RHC) simply reflect that runoff and elimination coincide with 3 candidates, as Heilmaier notes; RBC and HBC are the others | computed | `python src/none_check.py`: an exactly verified Farkas certificate for every labelled case that the model generates. Two kinds of labelled case are left out as contradictory by the arguments under Method: the Condorcet winner losing the runoff, and, when plurality is in the set, a runoff loser other than the plurality winner. The step from "no rational solution" to "no profile" (scaling by a common denominator) is also a written argument |
 
 ## Method
 
@@ -142,9 +144,10 @@ inequality between integer quantities, written as `a.x >= 1`
 the answer. Two kinds of case are never generated because they are
 contradictory: a Condorcet winner cannot lose a runoff; and when plurality
 is among the rules, its winner is one of the two runoff candidates and must
-be the one who loses, since the runoff winner has to be someone else. Because candidates can be renamed, it is enough to take the
-elimination order A, B, ..., and try every assignment of the other winners
-(24 cases for the main problem). `--full` drops this shortcut and solves all
+be the one who loses, since the runoff winner has to be someone else.
+Because candidates can be renamed, it is enough to take the elimination
+order A, B, ..., and try every assignment of the other winners (24 cases
+for the main problem). `--full` drops this shortcut and solves all
 2880 labelled cases: according to HiGHS 240 have minimum 12, 240 have 17,
 360 have 27, 360 have 47 and 1680 are infeasible, which is 120 times the
 reduced counts. (These per-case figures come from HiGHS alone; CP-SAT only
@@ -218,9 +221,8 @@ unique, so the third candidate is eliminated first and the last elimination
 round is the runoff itself. Robust minima for sets without
 plurality appear, for 3 and 4 candidates only, in
 `results/bruteforce_*_robust.txt`; they come from the brute-force program
-alone and are not claimed here. When a set
-does not contain P, the strict convention for R requires only that the
-runoff pair is determined.
+alone and are not claimed here. When a set does not contain P, the strict
+convention for R requires only that the runoff pair is determined.
 
 | Rules | strict m=3 | m=4 | m=5 | m=6 | robust m=3 | m=4 | m=5 |
 |---|---|---|---|---|---|---|---|
@@ -274,6 +276,8 @@ python src/solve.py 5 PRHBC --majority-stop --out results/m5_PRHBC_majority_stop
 python src/solve.py 6 PRHBC --majority-stop --out results/m6_PRHBC_majority_stop.json  # 4 min
 python src/extras.py --majority-stop > results/extras_majority_stop.json               # 6 min
 python src/solve.py 4 PHBC --majority-stop --out results/m4_PHBC_majority_stop.json   # 1 s
+python src/solve.py 5 HB --majority-stop --out results/m5_HB_majority_stop.json       # 1 s
+python src/solve.py 6 HB --majority-stop --out results/m6_HB_majority_stop.json       # 5 s
 python src/none_check.py > results/none_check.txt                   # 1 s
 gcc -O2 -o /tmp/bruteforce src/bruteforce.c
 /tmp/bruteforce 3 40 > results/bruteforce_m3_N40.txt
@@ -284,7 +288,9 @@ gcc -O2 -o /tmp/bruteforce src/bruteforce.c
 python src/check_bruteforce.py > results/check_bruteforce.txt
 ```
 
-No network access is needed after installing the packages. Runtimes are
+`none_check.py` and `check_bruteforce.py` read the files that the earlier
+commands wrote into `results/`. No network access is needed after installing
+the packages. Runtimes are
 approximate. The solvers may return a different optimal profile on another
 run or version; the minima should not change.
 
@@ -333,7 +339,12 @@ Found:
   profile of this kind with 4 types of voters requires fewer voters."
   Footnote 15: "The same phenomenon can be achieved with only 12 voters, but
   7 different types of voters." No 12-voter profile is printed, the footnote
-  does not say that 12 is the minimum, and no code was found. (The preprint
+  does not say that 12 is the minimum, and no code was found. The text says
+  "We have shown that the minimal preference profile of this kind requires
+  14 voters and 4 types of voters (see Table 3)"; given the footnote and
+  the caption, "minimal" there means fewest types first, then fewest
+  voters. Elsewhere the paper says of its method "we can guarantee to find
+  the minimal n for a fixed m". (The preprint
   text says "14 voters and 5 types of voters" where the journal version and
   both captions say 4.)
 - J. Wiseman, "Non-Intuitive Features of Electoral Systems",
@@ -341,7 +352,9 @@ Found:
   example has 12 voters, 6 candidates and 5 ballot types (4 ADEFBC, 3 BFEDCA,
   2 CFDBAE, 1 DCEBAF, 2 FDECBA). It was built to make six rules disagree,
   the sixth being approval voting ("In November 2008 approval voting was
-  added to the list, without the STV draw"); on the five rules studied here
+  added to the list, without the STV draw", which suggests but does not
+  establish that the example dates from then; no archived copy was
+  checked); on the five rules studied here
   it elects A, B, C, D and F with no tie (claim 8). Deleting candidate E,
   who wins only under approval, leaves a 5-candidate, 12-voter, 5-ballot
   profile that also works (claim 8); that derived profile is not printed on
@@ -368,8 +381,13 @@ Found:
   differ, found by integer programming and "without ties": for example
   plurality against the Condorcet winner with 7 voters, Borda against the
   Condorcet winner with 5, runoff against the Condorcet winner with 5, and
-  plurality against Borda with 4. These equal the PC, BC, RC and PB entries
-  for 3 candidates in the table below. The thesis attributes several of
+  plurality against Borda with 4, plurality against runoff with 9, and (from
+  the same example as runoff against Condorcet) Borda against runoff with 5.
+  These equal the PC, BC, RC, PB, PR and RB entries for 3 candidates in the
+  table below. It also notes: "It is immediately clear from the definitions
+  that for three alternatives these rules are equivalent", of runoff and
+  instant runoff; that is why RH, PRH, RHB and RHC are "none" with 3
+  candidates. The thesis attributes several of
   them, and "Minimal examples - in the number of candidates and voters -
   for pairs of voting rules and paradoxes", to M. Schmidt, "Using
   optimization software to find minimal voting paradoxes", Master's thesis,
@@ -381,9 +399,14 @@ Found:
   "we exhaustively searched through all possible elections, starting from
   the smallest possible. This way we found the smallest election for which
   two or three voting rules all elect a different winner." Searched by
-  keyword, not read in full; its rules include plurality, STV, Borda and
-  Condorcet-type rules on 3 candidates, so some 3-candidate entries of the
-  table for two rules, and possibly for three, are in it.
+  keyword and read in chapter 6 only. With 3 candidates it prints, among
+  others, a 9-voter profile on which plurality, STV and "Copeland/Borda"
+  elect three different candidates, and a 19-voter profile for "Borda vs.
+  STV/Plurality vs. Copeland"; these are profiles of the sizes found here
+  for PHB and PHC (9) and for PBC (19) with 3 candidates. Its two-rule
+  examples include sizes equal to the PH, PB and BC entries. Its tie
+  handling and its use of Copeland's rule differ from the conventions
+  here, so not all of its figures are comparable.
 - Brandt et al. credit the five-rule example to Balinski (2002, 100 voters)
   and mention Nurmi (1987); neither was retrieved.
 
@@ -394,8 +417,8 @@ with 12 voters (one follows from Wiseman's by deleting a candidate); the
 statement that 5 is the fewest ballot types at 12 voters; the minimum under
 a tie-robust convention, or an 11-voter profile that does not depend on a
 tie-break; the table entries for 4 to 6 candidates and for four or five
-rules. The 3-candidate entries for pairs of rules are at least partly in
-the theses above and are not claimed as new. Brandt et al. minimise by
+rules. The 3-candidate entries for pairs of rules, and for PHB, PHC and PBC,
+are at least partly in the theses above and are not claimed as new. Brandt et al. minimise by
 integer programming, and their footnote may well report the optimum of a
 voter-minimising run, in which case the lower bound of 12 was computed
 there (or in Schmidt's thesis, not retrieved) without being stated or
@@ -437,6 +460,14 @@ which returned nothing from them.
   exact confirmation is "nothing below `n*`", not infeasibility. When no
   profile is found at all, CP-SAT confirms that up to 400 voters; the
   strict "none" entries are settled without a cap by claim 11.
+- The table's strict columns depend on the strict convention wherever
+  elimination (H) is among the rules. Majority-stop was computed only for
+  the five rules together (5 and 6 candidates), for PHBC with 4 candidates
+  (9, same as strict) and for HB: there it gives 3 voters with 5 and with 6
+  candidates (`results/m5_HB_majority_stop.json`,
+  `results/m6_HB_majority_stop.json`), against 8 and 11 under strict. So
+  strict entries containing H should not be compared with literature that
+  stops elimination at a majority, apart from the cases just listed.
 - Claim 5 stops at 140. Adding one voter of each of the 120 rankings to a
   profile leaves every strict comparison unchanged, which with claim 5 would
   give "every n >= 12"; this argument is written here only as a remark and
@@ -456,4 +487,4 @@ which returned nothing from them.
 
 | Date | Reviewer (model / human) | Scope | Outcome |
 |------|--------------------------|-------|---------|
-| 2026-11-23 to 2026-11-24 | claude-fable-5-2 subagents, commissioned by the author | Four rounds of pre-review quality control. Each reviewer worked from the repository, reran the commands (long brute-force runs excepted), re-derived the printed profiles and re-checked the 5-candidate lower bounds with its own formulation. They found no wrong number; they found one false sentence about the unreduced run, mislabelled or overstated statements, and two gaps in Prior work (Wiseman's 12-voter profile; the contents of two theses). All were corrected (see the commit history). | Not an independent review under `docs/research-standards.md`: commissioned by the author within the author's session. Status stays `result`. |
+| 2026-11-23 to 2026-11-24 | claude-fable-5-2 subagents, commissioned by the author | Five rounds of pre-review quality control. Each reviewer worked from the repository, reran the commands (long brute-force runs excepted), re-derived the printed profiles and re-checked the 5-candidate lower bounds with its own formulation. They found no wrong number; they found one false sentence about the unreduced run, mislabelled or overstated statements, and gaps in Prior work (Wiseman's 12-voter profile; the contents of two theses). All were corrected (see the commit history). | Not an independent review under `docs/research-standards.md`: commissioned by the author within the author's session. Status stays `result`. |

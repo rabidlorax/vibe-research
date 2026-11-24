@@ -55,6 +55,8 @@ def highs(ge, eq, n):
         return None, None
     assert res.status == 0, res.message
     x = np.rint(res.x).astype(int)
+    assert (x >= 0).all() and (np.array(ge) @ x >= 1).all()
+    assert not eq or (np.array(eq) @ x == 0).all()
     return int(x.sum()), x
 
 

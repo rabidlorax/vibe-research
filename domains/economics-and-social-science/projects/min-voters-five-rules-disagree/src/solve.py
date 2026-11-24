@@ -1,4 +1,4 @@
-"""Minimum number of voters, by two independent solvers.
+"""Minimum number of voters, by two different solvers on the same model (model.py).
 
   python src/solve.py M RULES [--full] [--majority-stop]
                       [--solver highs|cpsat|both] [--out FILE]
