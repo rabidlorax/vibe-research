@@ -449,6 +449,11 @@ def main():
         desc.append(f"hand-check, {st}: {len(d)} items, {int((d.label == 'inconsistent_as_printed').sum())} labelled "
                     f"inconsistent as printed, {int(other[d.index].sum())} with a label or note pointing to something "
                     f"other than a wrong number")
+    a20 = arts[arts.year <= 2020]
+    desc.append(f"PUB_YEAR 2010-2020: {len(a20)} articles, {int((a20.n_results > 0).sum())} with results "
+                f"({100 * (a20.n_results > 0).mean():.0f}%), {int((res.year <= 2020).sum())} results")
+    desc.append(f"flagged z results: {int(res[res.kind == 'z'].error.sum())} without the one-tailed allowance, "
+                f"{int(res[res.kind == 'z'].error_1t.sum())} with it, of {int((res.kind == 'z').sum())}")
     ex = (res.p_cmp == "=").groupby(res.year).mean()
     desc.append("share of results with exactly reported p (p = x), by year: "
                 + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in ex.items()))

@@ -52,7 +52,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 51,2010-2015,flagged_decision,PMC4245895,t,"t(7) = 1.94, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
 52,2010-2015,flagged_decision,PMC4162385,F,"F(2, 14) = 3.83, p = 0.071",1,inconsistent_as_printed,
 53,2010-2015,flagged_decision,PMC3689145,F,"F(1, 18) = 4.14, p = 0.05",1,inconsistent_as_printed,
-54,2010-2015,flagged_decision,PMC4187611,F,"F(1, 1) = 6.18, p < 0.05",1,inconsistent_as_printed,
+54,2010-2015,flagged_decision,PMC4187611,F,"F(1, 1) = 6.18, p < 0.05",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
 55,2010-2015,flagged_decision,PMC4493770,F,"F(1, 4) = 4.74, p = 0.008",1,inconsistent_as_printed,
 56,2010-2015,flagged_decision,PMC4237035,F,"F(1,1944) = 3.71, p < 0.05",1,inconsistent_as_printed,
 57,2010-2015,flagged_decision,PMC4516813,F,"F(1,36) = 2.43, p = 0.011",1,inconsistent_as_printed,
@@ -101,7 +101,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 100,2016-2021,flagged,PMC5920021,chi2,"χ2(1) = 1.96, p = 0.18",0,inconsistent_as_printed,
 101,2016-2021,flagged,PMC8044417,z,"z = -2.632, p < 0.001",0,inconsistent_as_printed,
 102,2016-2021,flagged,PMC7947322,F,"F(5,115) = 3.083, P = 0.047",0,inconsistent_as_printed,
-103,2016-2021,flagged,PMC5487446,F,"F(1,1) = 0.43, p = 0.52",0,inconsistent_as_printed,
+103,2016-2021,flagged,PMC5487446,F,"F(1,1) = 0.43, p = 0.52",0,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
 104,2016-2021,flagged,PMC8925987,z,"z = 4.39, p = 0.006",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 105,2016-2021,flagged,PMC5600996,F,"F(1,39) = 12.00, p = 0.002",0,inconsistent_as_printed,
 106,2016-2021,flagged,PMC6610464,F,"F(3,868) = 1.33, p = 0.268",0,inconsistent_as_printed,
@@ -224,7 +224,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 223,2026H2,flagged,PMC13752103,chi2,"χ2(3) = 15.84, p = 0.01",0,inconsistent_as_printed,
 224,2026H2,flagged,PMC13623748,F,"F (1,30) = 7.24, p = 0.049",0,inconsistent_as_printed,
 225,2026H2,flagged,PMC13481498,t,"t(782) = 1.68, p=.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
-226,2026H2,flagged,PMC13372592,t,"t(2) = 22.71, p < 0.001",0,inconsistent_as_printed,
+226,2026H2,flagged,PMC13372592,t,"t(2) = 22.71, p < 0.001",0,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
 227,2026H2,flagged,PMC13588754,F,"F(5, 135) = 1.88, p = 0.100",0,inconsistent_as_printed,
 228,2026H2,flagged,PMC13588754,r,"r (137) = 0.19, p = 0.020",0,inconsistent_as_printed,
 229,2026H2,flagged,PMC13601251,z,"z = 0.056, p = 0.014",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"

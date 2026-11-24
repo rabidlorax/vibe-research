@@ -6,7 +6,7 @@ evidence: external-data
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Trend in statistical reporting inconsistencies in an open-access psychology journal, 2010 to 2026
@@ -52,11 +52,16 @@ PMC and PubMed Central on 2026-11-23 was analysed: 54,015 articles, of which
 17,746 contain at least one test result in the form the extractor reads, for
 205,835 results in total.
 
-1. **No trend was detected across publication years 2010 to 2025.** In each
+1. **No trend was detected in the pooled rate per result across publication
+   years 2010 to 2025.** In each
    of those sixteen years between 9.3% and 12.5% of extracted results had a
    p-value that does not match the reported statistic and degrees of freedom.
    A logistic trend over 2010-2025 gives an odds ratio of 1.002 per year (95%
-   interval 0.993 to 1.011). That is the pooled rate. Inside it, results
+   interval 0.993 to 1.011). That is the pooled rate per result. At article
+   level, allowing for the falling number of results per article, the chance
+   that an article has at least one inconsistency declined slightly (odds
+   ratio 0.986 per year, 0.977 to 0.996; post hoc). Inside the pooled rate,
+   results
    reported as an inequality (`p < x`) became less often inconsistent (odds
    ratio 0.963 per year, 0.950 to 0.977, without the one-tailed allowance)
    while exactly reported p-values, which are flagged several times as often,
@@ -77,8 +82,9 @@ PMC and PubMed Central on 2026-11-23 was analysed: 54,015 articles, of which
    receipt from 2023Q1 to 2025Q1 and 8.9% to 10.3% for 2025Q2 to 2026Q1
    (pooled 9.4% against 11.7% before; odds ratio 0.79, 0.67 to 0.93).
    Manuscripts received in April-May 2026 are at 6.3%, which is not clearly
-   different from the preceding year (odds ratio 0.64, 0.39 to 1.06) and is
-   low only among articles with a first affiliation in China. Manuscripts
+   different from the preceding year (odds ratio 0.64, 0.39 to 1.06); the
+   rate is low among articles with a first affiliation in China (3.4%) but
+   not in the bulk of other countries (9.4%). Manuscripts
    received from June 2026 are at 2.7% (odds ratio 0.26, 0.18 to 0.38), in
    China and elsewhere and in each test type with enough results to tell. By publication year this shows up as
    6.8% in 2026 against 10.7% in 2023-2025, which mixes older and newer
@@ -161,12 +167,12 @@ results, 35 results. Monthly figures are in `results/received_months.csv`.
 | 5 | By quarter of manuscript receipt, the rate without the one-tailed allowance is 11.9, 10.9, 12.5, 9.5% for 2023Q1-Q4; 12.9, 10.8, 12.2, 12.5% for 2024Q1-Q4; 12.3, 10.3, 9.3, 8.9% for 2025Q1-Q4; 9.5% for 2026Q1; 5.2% (3.5 to 7.3) for 2026Q2; 2.2% (1.2 to 3.4) for 2026Q3. Receipts of 2025Q2-2026Q1 pooled are at 9.45% against 11.70% for 2023Q1-2025Q1 (odds ratio 0.787, 0.666 to 0.931). By month of receipt in 2026: January 6.7%, February 13.7%, March 8.2%, April 5.3%, May 7.0%, June 3.2%, July 1.7%, August 2.4% (monthly intervals are wide; November 2025 was at 6.1%). Against receipts of 2025Q2-2026Q1, April-May 2026 receipts are at 6.27% (odds ratio 0.641, 0.387 to 1.062) and receipts from June 2026 at 2.68% (odds ratio 0.264, 0.182 to 0.383). The 2026Q2 figure mixes the two. Post hoc. | external-data | `results/received_quarters.csv`, `results/received_months.csv`, `results/post_hoc.txt`. Receipt dates are the `received` dates in each article's XML. |
 | 6 | The low rate in the newest cohorts is not produced by their containing only fast-published manuscripts. Restricting every receipt quarter from 2022Q1 to articles published within 3 months of receipt gives 6.3% to 14.8% for each quarter to 2026Q1 (53 to 256 articles each), then 4.3% (2.9 to 5.8; 344 articles) for 2026Q2 and 2.4% (1.3 to 3.7; 231 articles) for 2026Q3. Also, for articles published 2018-2021 the rate by receipt-to-publication interval (0-3, 4-5, 6-8, 9+ months) is 11.2, 10.7, 11.5, 11.1%, and for 2022-2024 it is 11.1, 10.5, 12.2, 12.0%. Post hoc. | external-data | `results/received_quarters_fast.csv`, `results/post_hoc.txt`. |
 | 7 | The decline does not depend on the article's generative-AI statement (97% of articles published in 2026 carry one). Received 2026Q1: 8.6% where the authors declare generative AI was not used, 11.4% where they declare it was. 2026Q2: 5.2% and 5.2%. 2026Q3: 2.2% and 2.3%. Over the same cohorts the share of articles (with results) declaring use rose: 9.7% for receipts of 2025Q1, 19.8% for 2025Q4, 28.4% for 2026Q1, 31.5% for 2026Q2, 43.1% for 2026Q3. Post hoc. | external-data | `results/post_hoc.txt`; `ai_statement` in `data/articles.csv.gz`. The statement is the authors' own declaration and was not verified. |
-| 8 | The fall for receipts from June 2026 is not produced by a change in the mix of authors' countries or of test types. The share of articles whose first affiliation is in China rose from 29% (received 2023-2024) to 48% (2025Q1-2026Q1), 53% (April-May 2026) and 58% (from June 2026). Within China the rate goes 10.2%, 9.4%, 3.4%, 2.8% over those four periods; within all countries other than China and the United States 12.5%, 10.2%, 9.4%, 2.4%; United States 9.3%, 11.2%, then 4.2% and 6.2% on 14 and 12 articles. Chi-square results rose from 10% to 27% of results and strings repeated within an article from 1.7% to 6.8%; excluding repeats the rate goes 11.7%, 10.1%, 6.4%, 2.9%. By test type, receipts from June 2026 against receipts of 2023-2024: F 2.6% against 9.7% (odds ratio 0.25, 0.14 to 0.46), chi-square 1.8% against 10.2% (0.16, 0.08 to 0.34), t 3.4% against 14.7% (0.21, 0.10 to 0.43), z 3.9% against 13.5% (0.26, 0.13 to 0.52); r has 27 results in the new cohort, none flagged. In April-May 2026 the rate is low only for China (3.4%); other countries are at 9.4%. Post hoc. | external-data | `results/post_hoc.txt`; `country` in `data/articles.csv.gz` (first affiliation only). |
+| 8 | The fall for receipts from June 2026 is not produced by a change in the mix of authors' countries or of test types. The share of articles whose first affiliation is in China rose from 29% (received 2023-2024) to 48% (2025Q1-2026Q1), 53% (April-May 2026) and 58% (from June 2026). Within China the rate goes 10.2%, 9.4%, 3.4%, 2.8% over those four periods; within all countries other than China and the United States 12.5%, 10.2%, 9.4%, 2.4%; United States 9.3%, 11.2%, then 4.2% and 6.2% on 14 and 12 articles. Chi-square results rose from 10% to 27% of results and strings repeated within an article from 1.7% to 6.8%; excluding repeats the rate goes 11.7%, 10.1%, 6.4%, 2.9%. By test type, receipts from June 2026 against receipts of 2023-2024: F 2.6% against 9.7% (odds ratio 0.25, 0.14 to 0.46), chi-square 1.8% against 10.2% (0.16, 0.08 to 0.34), t 3.4% against 14.7% (0.21, 0.10 to 0.43), z 3.9% against 13.5% (0.26, 0.13 to 0.52); r has 27 results in the new cohort, none flagged. In April-May 2026 the rate is low for China (3.4%) and, on 14 articles, the United States (4.2%); all other countries are at 9.4%. Post hoc. | external-data | `results/post_hoc.txt`; `country` in `data/articles.csv.gz` (first affiliation only). |
 | 9 | Consistent p-values in the newest cohorts are not more often exact recomputations of the printed statistic. Among consistent three-decimal `p = x` results whose rounding range spans more than one value, the share equal to the p computed from the statistic exactly as printed is 49.2% (received 2023-2024), 45.8% (2025Q1-2026Q1), 42.1% (April-May 2026) and 51.2% (from June 2026). Post hoc. | external-data | `results/post_hoc.txt`. This argues against p-values being regenerated mechanically from the printed statistics; it does not separate other explanations. |
-| 10 | Hand-check. Of 140 flagged results drawn at random, 131 (94%) were labelled inconsistent as printed; 4 carry a stated correction and 5 are probably one-tailed tests the keyword rule did not credit. Of 60 flagged decision inconsistencies, 48 (80%) were labelled inconsistent as printed, 8 probably one-tailed, 1 stated correction and 3 extraction errors (two fixed since). All 50 unflagged results checked were correctly extracted. The split is similar in each period, including July-November 2026 (18 of 20). Among those labelled inconsistent as printed, notes mark a further 14 of the 140 and 12 of the 60 as possibly explained by something other than a wrong number. | external-data | `results/handcheck.csv` lists every item with its label and note; `python src/sample_handcheck.py` rebuilds the text snippets from the downloaded articles for re-reading. The labels are one model's reading of short snippets, made in the session that wrote the extractor. |
+| 10 | Hand-check. Of 140 flagged results drawn at random, 131 (94%) were labelled inconsistent as printed; 4 carry a stated correction and 5 are probably one-tailed tests the keyword rule did not credit. Of 60 flagged decision inconsistencies, 48 (80%) were labelled inconsistent as printed, 8 probably one-tailed, 1 stated correction and 3 extraction errors (two fixed since). All 50 unflagged results checked were correctly extracted. In the flagged stratum the split is similar in each period (39, 36 and 38 of 40, and 18 of 20 for July-November 2026); in the decision stratum it is 17, 18 and 13 of 20, the last being 2022-2026. Among those labelled inconsistent as printed, notes mark a further 16 of the 140 and 13 of the 60 as possibly explained by something other than a wrong number. | external-data | `results/handcheck.csv` lists every item with its label and note; `python src/sample_handcheck.py` rebuilds the text snippets from the downloaded articles for re-reading. The labels are one model's reading of short snippets, made in the session that wrote the extractor. |
 | 11 | Conjecture: the fall for manuscripts received from June 2026 reflects a change in how manuscripts are prepared or screened around the time of submission. At least two explanations remain open and are not separated here: a check applied by the journal or publisher at or after submission, and a change on the authors' side that took hold at the same time (for example drafting or checking of results with tools, declared or not). Several things shift together in that cohort: the chi-square share of results doubles, repeated strings rise, and the median article body reaches 54 thousand characters. The extractor, publication-speed selection, author country, declared AI use and test mix are argued against by claims 6 to 9 and the hand-check; claim 9 cannot see errors that were corrected, only whether consistent values look machine-generated. | conjecture | A statement from the journal on whether and when it introduced statistical checks; the same analysis on other journals of the same publisher and of other publishers for 2026; rerunning this analysis in 2027 when the 2026 cohorts are complete. |
-| 12 | The publisher describes an automated screening system (AIRA) applied to every submission, running "more than 40" checks (posts of 16 September 2025 and 5 March 2026), and announced on 7 July 2025 that two external tools "have been integrated" into it, one of them Paperpal Preflight, whose vendor page lists a "methodology/statistics" assessment domain. None of these pages says that p-values are checked against test statistics, and the announced integration predates the June 2026 fall by eleven months, during which the rate stayed at 9-10%. So nothing read here documents a check that would explain the fall. | literature | Pages fetched and read on 2026-11-23: frontiersin.org/news/2025/07/07/frontiers-broadens-ai-driven-integrity-checks-with-integration-of-cactus ("have been integrated into its own Artificial Intelligence Review Assistant (AIRA) submission-screening system"); frontiersin.org/news/2026/03/05/how-do-you-know-you-can-trust-the-science-you-read ("AIRA runs more than 40 AI-powered quality checks, flagging potential issues for human review on issues ranging from ethical compliance and plagiarism to signs of image manipulation"); frontiersin.org/news/2025/09/16/getting-to-know-aira-our-digital-teammate-and-detective ("AIRA performs over 40 rapid quality control checks on every submission"); paperpal.com/preflight ("Four-domain assessment: critical overview, literature review, methodology/statistics, and reporting compliance"). These are the publisher's and a vendor's own descriptions. |
-| 13 | Article level: among articles with at least one extracted result, the share with at least one flagged inconsistency went from 52.5% and 59.4% in 2010 and 2011 to 39.9% in 2024, 32.9% in 2025 and 19.3% in 2026. Much of the decline before 2026 is arithmetic: the median number of extracted results per such article fell from 8-11 before 2021 to 5 in 2025 and 4 in 2026. Adjusted for the logarithm of the number of results, the odds ratio per year is 0.9861 (0.9765 to 0.9958) over 2010-2025 and 0.9607 (0.9525 to 0.9691) over 2010-2026. | external-data | `results/yearly.csv`, `results/trend.txt`, `results/descriptives.txt`. |
+| 12 | The publisher describes an automated screening system (AIRA) applied to every submission, running "more than 40" checks (posts of 16 September 2025 and 5 March 2026), and announced on 7 July 2025 that two external tools "have been integrated" into it, one of them Paperpal Preflight. The vendor's page lists a "methodology/statistics" assessment domain under one of Preflight's modules (PeerPilot); the announcement does not say which modules were integrated. None of these pages says that p-values are checked against test statistics. On timing: the announcement falls in the same period as the smaller decline for receipts from 2025Q2 (claim 5), which is neither attributed to it nor excluded here; receipts of 2025Q3 to 2026Q1 then stay at about 9%, and nothing read here documents a change that coincides with the June 2026 fall. | literature | Pages fetched and read on 2026-11-23: frontiersin.org/news/2025/07/07/frontiers-broadens-ai-driven-integrity-checks-with-integration-of-cactus ("have been integrated into its own Artificial Intelligence Review Assistant (AIRA) submission-screening system"); frontiersin.org/news/2026/03/05/how-do-you-know-you-can-trust-the-science-you-read ("AIRA runs more than 40 AI-powered quality checks, flagging potential issues for human review on issues ranging from ethical compliance and plagiarism to signs of image manipulation"); frontiersin.org/news/2025/09/16/getting-to-know-aira-our-digital-teammate-and-detective ("AIRA performs over 40 rapid quality control checks on every submission"); paperpal.com/preflight ("Four-domain assessment: critical overview, literature review, methodology/statistics, and reporting compliance"). These are the publisher's and a vendor's own descriptions. |
+| 13 | Article level: among articles with at least one extracted result, the share with at least one flagged inconsistency went from 52.5% and 59.4% in 2010 and 2011 to 39.9% in 2024, 32.9% in 2025 and 19.3% in 2026. Much of the decline before 2026 is arithmetic: the median number of extracted results per such article fell from 8-11 before 2021 to 5 in 2025 and 4 in 2026. Adjusted for the logarithm of the number of results, the odds ratio per year is 0.9861 (0.9765 to 0.9958) over 2010-2025 (post hoc) and 0.9607 (0.9525 to 0.9691) over 2010-2026 (planned). | external-data | `results/yearly.csv`, `results/trend.txt`, `results/descriptives.txt`. |
 | 14 | Benchmarks. For 2010-2013 this pipeline finds 2,156 articles (1,537 of type `research-article`), 991 with results, 14,407 results, and a mean per-article inconsistency rate of 11.8% with the one-tailed allowance and `p = .000` counted as wrong, 12.9% without the allowance. For `research-article` items published to April 2015, split by receipt before or from March 2014, it finds 2,078 and 1,032 articles, 1,320 and 616 with results, 19,622 and 8,564 results, and rates of 11.9% and 11.7% with the one-tailed allowance and `p = .000` counted wrong, 13.0% and 12.5% without the allowance. | external-data | `results/trend.txt`, lines starting "benchmark". |
 | 15 | Nuijten et al. (2016) report for this journal in 2010-2013, with the original `statcheck`, one-tailed detection on and `p = .000` counted wrong: 2,139 articles, 702 with results, 10,149 results, mean per-article rate 12.8%. Nuijten et al. (2017) report for research, clinical case and methods articles in this journal published March 2010 to April 2015, with `statcheck` 1.0.2: 1,819 articles received before March 2014 (804 with results, 11,079 results, 13.1%) and 873 received after (304 with results, 2,432 results, 16.2%). | literature | Passages quoted under Prior work. |
 
@@ -188,7 +194,8 @@ retracted articles are analysed like any other.
 that returned the article (`PUB_YEAR`). It differs from the year of
 electronic publication in the XML for 1% to 12% of articles in each year
 before 2026 (the article appeared online late in one year and is assigned to
-the next year's volume, or the reverse). The half-year table uses the
+the next year's volume, or the reverse). The half-year breakdown
+(`results/half_years_2023_2026.csv`, not shown as a table here) uses the
 electronic publication date, which is why it counts 6,551 articles in 2026
 where the yearly table counts 6,010: 541 articles published online in 2026
 have `PUB_YEAR` 2025. The quarter table uses the `received` date in the XML
@@ -199,8 +206,9 @@ markup (italic, superscript, subscript) disappears so that
 `<italic>t</italic>(23)` becomes `t(23)`, block elements and cross-reference
 markers become spaces, table cells are separated by ` | `, MathML keeps its
 characters, TeX duplicates and display formulas are dropped, and typographic
-minus signs and spaces are mapped to ASCII. Abstracts and reference lists are
-not read.
+minus signs and spaces are mapped to ASCII. Only the `<body>` is read:
+abstracts, reference lists, appendices and footnotes placed after the body
+are not.
 
 **Extraction and checking.** `src/statcheck_py.py` is an independent Python
 re-implementation of the core of the `statcheck` method, written from the
@@ -248,7 +256,8 @@ full yearly table had been seen and is post hoc: the yearly table without the
 one-tailed allowance (the corresponding trend variant was planned), the
 half-year, received-quarter and received-month tables, the 2026 contrasts,
 the use of 2010-2025 as the headline trend (the "excluding 2026" variant was
-planned) and its split by p form, the breakdowns by test type,
+planned), its split by p form and the article-level model restricted to
+2010-2025, the breakdowns by test type,
 p form, receipt-to-publication interval, AI statement and country, the
 exact-match diagnostic, and the extra hand-check stratum for July-November
 2026. Several of these were suggested by reviewing agents (see Review log).
@@ -283,9 +292,11 @@ coordinates written `z = ...` were mishandled. The first committed results
 drew, per period (2010-2015, 2016-2021, 2022-2026), 20 flagged decision
 inconsistencies, then 40 flagged results of any kind from those remaining,
 and 10 unflagged results; plus (post hoc) 20 flagged and 20 unflagged from
-July-November 2026: 250 items. The "flagged" stratum is therefore close to a
-random sample of all flagged results, and 24 of its 140 items are themselves
-decision inconsistencies. Each item was read once, with 150 characters of
+July-November 2026: 250 items. The "flagged" stratum is therefore a
+random sample of flagged results within each period, with equal numbers per
+period although the periods differ greatly in size and with July-November
+2026 over-represented, so pooled counts are unweighted; 24 of its 140 items
+are themselves decision inconsistencies. Each item was read once, with 150 characters of
 context either side, by the model that wrote the extractor, in the same
 session; there was no separate prompt, and the only record is the label and
 note per item. Labels: `inconsistent_as_printed`,
@@ -317,16 +328,19 @@ p; 7 where the printed value may be a different quantity from the one its
 letter suggests (Wilks' lambda or another multivariate statistic printed
 after `F`, Mauchly's W after a chi-square symbol, a Kolmogorov-Smirnov or
 publication-bias statistic after `z`), so that the article's numbers may all
-be right and the flag is the extractor's misreading; and 4 with unusual
-degrees of freedom, one of them next to a stated Greenhouse-Geisser
-correction. Counting every item whose label or note points to something other
+be right and the flag is the extractor's misreading; and 7 with unusual
+degrees of freedom (for example `F(1, 1)` or `t(2)`), one of them next to a
+stated Greenhouse-Geisser correction. The notes were applied by judgement,
+and a reviewing agent found three more items that deserved the last note
+after the first count. Counting every item whose label or note points to something other
 than a wrong number (stated corrections, probable one-tailed tests,
 extraction errors, suspected adjustments, possibly different quantities,
-unusual degrees of freedom), the totals are 23 of 140 flagged results (16%)
-and 24 of 60 flagged decision inconsistencies (40%). A second reader
+unusual degrees of freedom), the totals are 25 of 140 flagged results (18%)
+and 25 of 60 flagged decision inconsistencies (42%). A second reader
 (a reviewing agent) recomputed all 250 items, confirmed every flag
 arithmetically, and disagreed with the label or note on 4 items, which were
-changed as it proposed.
+changed as it proposed; a later one proposed the 3 further notes mentioned
+above.
 
 No author was contacted about any item: the flags are automatic, a large
 share have innocent explanations, and the project's subject is the rate, not
@@ -397,8 +411,8 @@ download may differ in a few results.
   generative-AI statement is self-declared and its wording changed during
   2025.
 - Claim 15 rests on Nuijten et al. (2016, 2017) as published, and claim 12 on
-  web pages of the publisher and a vendor that were seen only as search
-  summaries.
+  web pages of the publisher and a vendor, fetched and read on 2026-11-23;
+  they are the companies' own descriptions.
 
 A flag against a PMCID, whether in `results/handcheck.csv` or among the
 roughly 22,000 automatically flagged results in `data/results.csv.gz`, says
@@ -453,8 +467,9 @@ series for this journal and no study of 2025-2026 articles. Full texts were open
   more articles in both periods (2,078 against 1,819, and 1,032 against 873)
   but far more results in the second (8,564 from 616 articles, against their
   2,432 from 304; in the first period 19,622 against 11,079). The two
-  extractors therefore diverge much more for 2014-2015 than for 2010-2013,
-  for a reason not identified. Running the R package on the same articles
+  extractors therefore diverge much more for 2014-2015 than for 2010-2013.
+  A documented candidate reason is that `statcheck`'s HTML reader
+  under-extracts from this journal's markup: see Böschen (2021) below. Running the R package on the same articles
   would settle it and was not done (R was not available in the session).
 - Nuijten & Wicherts (2024), "Implementing statcheck during peer review is
   related to a steep decline in statistical-reporting inconsistencies",
@@ -477,7 +492,13 @@ series for this journal and no study of 2025-2026 articles. Full texts were open
   the start of 2021, the second for 2010-2021. The yearly tables in the
   second cover alpha levels, confidence intervals, multiple-testing
   corrections, one-tailed tests and sample sizes; no yearly p-value
-  inconsistency rate was found in either.
+  inconsistency rate was found in either. The first gives an external check
+  on how much there is to extract: in 18,744 XML files of this journal
+  (Tables 3 and 4), `statcheck`'s `checkHTML()` on the XML found 37,555
+  checkable results in 4,465 articles (24%), while `statcheck()` on text
+  cleaned by JATSdecoder found 98,842 in 7,734 articles (41%). This pipeline
+  finds 116,696 results in 8,803 of the 20,194 articles with `PUB_YEAR`
+  2010-2020 (44%; `results/descriptives.txt`), a somewhat larger corpus.
 - Böschen (2024), arXiv:2408.07948 (abstract only), argues `statcheck`'s
   strict pattern misses many results; Nuijten (2025), "Statcheck does what it
   is designed to do: a reply to Böschen (2024)", doi:10.31234/osf.io/xyfjz
@@ -530,8 +551,8 @@ the 2026 decline by date of receipt were not found elsewhere.
   results, the extracted set is not representative, and a change in
   formatting habits over time could move the rate without any change in
   accuracy.
-- **A flag is not an error in the study.** See the hand-check: 16% of flagged
-  results and 40% of flagged decision inconsistencies had a known, probable
+- **A flag is not an error in the study.** See the hand-check: 18% of flagged
+  results and 42% of flagged decision inconsistencies had a known, probable
   or suspected explanation other than a wrong number, and more may have one
   outside the 150 characters read (corrections described in a Methods
   section, for example). The hand-check was a single quick pass by the model
@@ -541,11 +562,12 @@ the 2026 decline by date of receipt were not found elsewhere.
   had been truncated instead of rounded.
 - **Known sources of false flags that remain.** Any `z =` or `Z =` is read as
   a standard normal statistic. z results have a 15.1% flag rate against about
-  10% for t and F; statistics of other kinds printed with that letter are one
+  10% for t and F (primary definition; 16.6% without the allowance); statistics of other kinds printed with that letter are one
   cause, but a small one where it can be counted
   (`results/descriptives_from_text.txt`: 63 z results have
   "Kolmogorov", "Shapiro" or "normality" within 150 characters, 25 of them
-  flagged, out of 2,435 flagged z results), so most of the excess is
+  flagged, out of 2,435 z results flagged without the allowance), so most of
+  the excess is
   unexplained. Correlations written `r(df)` have a 17.0% flag rate. 270 F
   results have a first degree of freedom larger than the second and 74% of
   them are flagged; 86 t results have fewer than 3 degrees of freedom and 80%
@@ -556,7 +578,8 @@ the 2026 decline by date of receipt were not found elsewhere.
   and a one-decimal `p = .0`.
 - **The one-tailed keyword rule is crude and its input drifted.** The share
   of articles containing one of the three trigger words rose from 12-15% in
-  2023-2024 to 36% in the second half of 2026, and almost all of the rise is
+  2023-2024 to 36% in the second half of 2026
+  (`results/half_years_2023_2026.csv`), and almost all of the rise is
   the word "directional" (which also matches "bidirectional" and
   "directionality"); "one-tailed" or "one-sided" stayed at 2-3% of articles.
   That makes the primary definition more forgiving in 2026. The results are
@@ -577,15 +600,18 @@ the 2026 decline by date of receipt were not found elsewhere.
   three decimals rose from 73-78% of results in 2023-2025 to 87% in 2026,
   monthly article counts rose, and the share of authors declaring AI use and
   the share based in China both rose. Nothing here measures the use of any
-  tool by authors or by the journal, and the publisher's pages were not read
-  in full. The word "statcheck" was not searched for in the articles.
+  tool by authors or by the journal, and the publisher's pages that were read
+  (claim 12) do not describe a statistical check. The word "statcheck" was not searched for in the articles.
 - **Not `statcheck` itself.** The extractor is a re-implementation and was
   not run side by side with the R package. On 2010-2013 it extracts 42% more
   results from 41% more articles than Nuijten et al. (2016) report, and its
   per-article rate under their settings is 11.8% against their 12.8% (12.9%
   with no one-tailed allowance). It accepts semicolons and capital `Z` and
   reads chi-square inside MathML, which probably accounts for some of the
-  extra results, but that was not verified. For manuscripts received from
+  extra results, but that was not verified; Böschen (2021) reports that
+  `statcheck` reading this journal's XML directly finds far fewer results
+  than it does on cleaned text (see Prior work), and the volume extracted
+  here is close to the latter. For manuscripts received from
   March 2014 it extracts 3.5 times as many results as Nuijten et al. (2017)
   and does not reproduce the rise they report (see Prior work).
 - **Decision inconsistencies are rare events.** Yearly counts in 2010-2025
@@ -599,3 +625,4 @@ the 2026 decline by date of receipt were not found elsewhere.
 | 2026-11-23 | Quality-control agent 1 (claude-fable-5-2; started by the author with the repository path and a brief to find faults, without the author's notes or conclusions). This is the author's own quality control, not the independent review the standards require. | Reran tests, extraction and analysis; recomputed all 250 hand-check items; re-searched prior work. | Reproduced the numbers. Found a missed prior paper (Nuijten et al. 2017), an extractor fault that dropped 8% of results, smaller extractor faults, mislabelled hand-check strata, overstatements, and that the 2026 fall is sharper by date of manuscript receipt. All addressed. |
 | 2026-11-23 | Quality-control agent 2 (same model and terms, fresh context) | As above on the revised project; recomputed all results independently; lag-matched cohorts, country, AI-statement share, exact-match diagnostic; publisher pages. | Reproduced every file byte for byte. Nothing blocking. Found one wrong number (three-decimal share), numbers with no generating command, "step" overstating a ramp that begins in mid-2025, an unsupported explanation of the mismatch with Nuijten et al. (2017), four hand-check labels or notes, untested extractor edge cases. All addressed in this version. Status stays `result`. |
 | 2026-11-23 | Quality-control agent 3 (same model and terms, fresh context) | As above on the second revision; read the publisher pages; half-month receipt series; within-form trends; receipt-period rates by test type. | Reproduced every file byte for byte and all 205,835 flags. Found a wrong date and unread sources in claim 12, a hand-check table row that disagreed with its data, "steeply from April 2026" overstating an ambiguous April-May, opposite within-form trends hidden in the pooled 2010-2025 rate, a benchmark compared under unmatched settings, a "not found" statement contradicted by a cited preprint, and smaller inconsistencies. All addressed in this version. Status stays `result`. |
+| 2026-11-24 | Quality-control agent 4 (same model and terms, fresh context) | As above on the third revision; placebo breakpoints for the mid-2025 contrast; extraction inside and outside tables; all sources re-fetched. | Reproduced every file byte for byte and all flags; no blocking defect and no wrong headline number. Found two stale sentences contradicting claim 12, an imprecise interval in claim 12, an article-level trend missing from the summary and not marked post hoc, three hand-check items missing a note, a sentence mixing two definitions, an unused external benchmark in a cited paper, and wording imprecisions. All addressed in this version. Status stays `result`. |
