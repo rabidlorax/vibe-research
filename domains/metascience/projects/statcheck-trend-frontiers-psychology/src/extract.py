@@ -4,6 +4,7 @@ article, run the statcheck-style extractor on it, and write
 
   data/articles.csv.gz       one row per article
   data/results.csv.gz        one row per extracted test result (no article text)
+  data/raw_xml_sha256.txt    SHA-256 of each downloaded batch (uncompressed), to detect later changes
   data/raw/contexts.csv.gz   the same results with their position and 150 characters of context
                              either side (CC BY article text; not committed)
 
@@ -32,7 +33,7 @@ INLINE = {"italic", "bold", "sub", "sup", "sc", "underline", "monospace", "roman
 DROP = {"tex-math", "graphic", "inline-graphic", "media", "object-id"}
 CELL = {"td", "th"}
 
-ART_COLS = ["pmcid", "doi", "year", "epub_year", "epub_month", "received_year", "received_month",
+ART_COLS = ["pmcid", "pmcid_ver", "doi", "year", "epub_year", "epub_month", "received_year", "received_month",
             "new_date_markup", "article_type", "section", "ai_statement", "country", "has_body", "body_chars",
             "one_tail_text", "one_tail_strict", "n_results"]
 FLAGS = ["error", "decision_error", "error_1t", "decision_error_1t", "error_1t_strict",
@@ -43,14 +44,17 @@ AI_NOT = re.compile(r"Gen(erative)? AI was not used|no Gen(erative)? AI was used
 
 
 def ai_statement(article):
-    """'' if the article has no generative-AI statement section, else what it declares."""
+    """'' if the article has no generative-AI statement section, else what its opening
+    declaration says. A statement can declare use and later add that AI was "not used for
+    any other purpose", so the earliest declaration in the text decides."""
     sec = article.find(".//sec[@sec-type='ai-statement']")
     if sec is None:
         return ""
     text = " ".join("".join(sec.itertext()).split())
-    if AI_NOT.search(text):
+    no, yes = AI_NOT.search(text), AI_USED.search(text)
+    if no and (not yes or no.start() <= yes.start()):
         return "not_used"
-    return "used" if AI_USED.search(text) else "other"
+    return "used" if yes else "other"
 
 
 COUNTRY = {"usa": "United States", "united states of america": "United States", "u.s.a.": "United States",
@@ -154,7 +158,7 @@ def process(path):
             ress.append([row[c] for c in RES_COLS])
             ctxs.append([pmcid, year, r["kind"], r["raw"], r["start"], int(r["error"]), int(r["decision_error"]),
                          int(r["error_1t"]), text[max(0, r["start"] - 150):r["end"] + 150]])
-        arts.append([pmcid, ids.get("doi", ""), year, ey, em, ry, rm, new_format,
+        arts.append([pmcid, ids.get("pmcid-ver", ""), ids.get("doi", ""), year, ey, em, ry, rm, new_format,
                      a.get("article-type", ""), subjects[-1] if subjects else "", ai_statement(a), first_country(meta),
                      int(body is not None), len(text), int(bool(ONE_TAIL.search(text))),
                      int(bool(ONE_TAIL_STRICT.search(text))), len(found)])
@@ -177,7 +181,7 @@ def main():
             seen |= keep
             wa.writerows(a for a in arts if a[0] in keep)
             # a PMCID listed under two years is kept under the first only
-            first_year = {a[0]: a[2] for a in arts if a[0] in keep}
+            first_year = {a[0]: a[3] for a in arts if a[0] in keep}
             wr.writerows(r for r in ress if first_year.get(r[0]) == r[1])
             wc.writerows(c for c in ctxs if first_year.get(c[0]) == c[1])
             n_res += sum(1 for r in ress if first_year.get(r[0]) == r[1])
@@ -186,6 +190,9 @@ def main():
         requested |= set(f.read_text().split())
     print(f"files={len(files)} articles={len(seen)} results={n_res} "
           f"requested_ids={len(requested)} not_returned={len(requested - seen)}")
+    with open(ROOT / "data" / "raw_xml_sha256.txt", "w") as fh:
+        for f in files:
+            fh.write(f"{hashlib.sha256(gzip.open(f).read()).hexdigest()}  {f.name[:-3]}\n")
     print(f"sha256 of uncompressed articles.csv: {fa.close()}")
     print(f"sha256 of uncompressed results.csv:  {fr.close()}")
 

@@ -28,9 +28,13 @@ OUT = ROOT / "results"
 SEED, BOOT = 20261123, 2000
 
 
-def cluster_boot(df, col, rng):
-    """95% percentile interval for the pooled share sum(col)/n, resampling articles."""
+def cluster_boot(df, col, rng=None):
+    """95% percentile interval for the pooled share sum(col)/n, resampling articles.
+    The rng argument is ignored (kept so that callers need not change)."""
     g = df.groupby("pmcid")[col].agg(["sum", "size"]).to_numpy()
+    # The generator is seeded from the data it resamples, not from a shared stream, so an
+    # interval does not depend on which other intervals were computed before it.
+    rng = np.random.default_rng([SEED, len(g), int(g[:, 0].sum()), int(g[:, 1].sum())])
     idx = rng.integers(0, len(g), size=(BOOT, len(g)))
     s = g[idx]
     share = s[:, :, 0].sum(1) / s[:, :, 1].sum(1)
@@ -199,7 +203,8 @@ def main():
     # (c) 2026 against 2023-2025, and the 2010-2025 trend, clustered on article
     post = []
     late = res[res.year >= 2023]
-    for col in ("error_1t", "error", "decision_error_1t", "decision_error"):
+    for col in ("error_1t", "error", "decision_error_1t", "decision_error", "error_1t_strict",
+                "decision_error_1t_strict"):
         X = pd.DataFrame({"const": 1.0, "y2026": (late.year == 2026).astype(float)})
         g = sm.GLM(late[col], X, family=sm.families.Binomial()).fit(
             cov_type="cluster", cov_kwds={"groups": late.pmcid.astype("category").cat.codes})
@@ -361,8 +366,8 @@ def main():
         g = sm.GLM(d.exact, pd.DataFrame({"const": 1.0, "x": d.x}), family=sm.families.Binomial()).fit(
             cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
         bb, se = g.params["x"], g.bse["x"]
-        post.append(f"exact-match share, received Jun 2026 on vs {name}: odds ratio {np.exp(bb):.2f} "
-                    f"[{np.exp(bb - 1.96 * se):.2f}, {np.exp(bb + 1.96 * se):.2f}]")
+        post.append(f"exact-match share, received Jun 2026 on vs {name}: odds ratio {np.exp(bb):.3f} "
+                    f"[{np.exp(bb - 1.96 * se):.3f}, {np.exp(bb + 1.96 * se):.3f}]")
     f1 = flagrate[periods[3][0]]
     for base in (periods[1][0], periods[0][0]):
         f0 = flagrate[base]
@@ -482,6 +487,15 @@ def main():
                 f"({100 * (a20.n_results > 0).mean():.0f}%), {int((res.year <= 2020).sum())} results")
     desc.append(f"flagged z results: {int(res[res.kind == 'z'].error.sum())} without the one-tailed allowance, "
                 f"{int(res[res.kind == 'z'].error_1t.sum())} with it, of {int((res.kind == 'z').sum())}")
+    cats = (("suspected multiplicity adjustment", "neighbouring"), ("floor value", "reported p is a floor"),
+            ("possibly a different quantity", "the printed value may"), ("unusual degrees of freedom", "degrees of freedom"))
+    desc.append(f"hand-check: items with a note: {int((hc.note != '').sum())} of {len(hc)}")
+    lab = hc[hc.label == "inconsistent_as_printed"]
+    for name, prefix in cats:
+        d = lab[lab.note.str.startswith(prefix)]
+        desc.append(f"hand-check, among items labelled inconsistent as printed, note '{name}': {len(d)} "
+                    f"({int((d.stratum == 'flagged').sum())} flagged stratum, "
+                    f"{int((d.stratum == 'flagged_decision').sum())} decision stratum)")
     ex = (res.p_cmp == "=").groupby(res.year).mean()
     desc.append("share of results with exactly reported p (p = x), by year: "
                 + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in ex.items()))

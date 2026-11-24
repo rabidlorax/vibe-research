@@ -76,7 +76,10 @@ PMC and PubMed Central on 2026-11-23 was analysed: 54,015 articles, of which
    between 1.0% and 1.9% of results each year. Under the primary definition
    they drift upward (odds ratio 1.026 per year, 1.010 to 1.042), but without
    the one-tailed allowance the drift is not distinguishable from zero (1.009,
-   0.993 to 1.024), so the rise is not a finding. In the hand-check one
+   0.993 to 1.024). Under the third definition, the allowance that ignores the
+   word "directional", it is again present (1.023, 1.007 to 1.040). Two of
+   three definitions show a drift and one does not, so it is not treated as a
+   finding. In the hand-check one
    flagged decision inconsistency in five (12 of 60) was labelled as having a
    stated or probable innocent explanation or being an extraction error, and
    counting the reader's notes as well, 25 of 60 (42%) point to something
@@ -110,48 +113,48 @@ of 250 extracted results is reported below.
 
 By year of publication (`results/yearly.csv`; primary definition):
 
-| Year | Articles | With results | Results | Inconsistent % (95% interval) | Decision % (95% interval) | Articles with at least one inconsistency % |
-|---|---|---|---|---|---|---|
-| 2010 | 142 | 59 | 651 | 11.4 (7.1-16.4) | 1.38 (0.46-2.46) | 52.5 |
-| 2011 | 397 | 175 | 2,649 | 12.5 (10.0-15.2) | 1.85 (1.21-2.58) | 59.4 |
-| 2012 | 621 | 286 | 4,241 | 10.0 (8.4-11.7) | 1.11 (0.72-1.55) | 46.5 |
-| 2013 | 996 | 471 | 6,866 | 9.3 (8.1-10.7) | 1.02 (0.72-1.35) | 49.0 |
-| 2014 | 1,607 | 740 | 10,735 | 11.3 (10.0-12.7) | 1.47 (1.13-1.83) | 50.4 |
-| 2015 | 2,045 | 1,010 | 14,324 | 10.3 (9.2-11.5) | 1.17 (0.95-1.40) | 46.8 |
-| 2016 | 2,074 | 964 | 12,816 | 10.2 (9.1-11.3) | 1.04 (0.84-1.26) | 46.3 |
-| 2017 | 2,366 | 1,083 | 14,455 | 11.3 (9.8-13.2) | 1.30 (0.98-1.66) | 45.0 |
-| 2018 | 2,783 | 1,286 | 16,318 | 10.0 (9.1-10.9) | 1.08 (0.88-1.29) | 44.3 |
-| 2019 | 3,075 | 1,278 | 16,726 | 10.1 (9.1-11.0) | 1.20 (0.99-1.41) | 44.1 |
-| 2020 | 4,088 | 1,451 | 16,915 | 10.8 (9.7-12.0) | 1.71 (1.33-2.20) | 42.2 |
-| 2021 | 6,675 | 2,061 | 22,715 | 10.7 (9.6-12.0) | 1.60 (1.29-1.93) | 36.5 |
-| 2022 | 8,500 | 1,940 | 20,523 | 10.9 (9.8-12.1) | 1.64 (1.35-1.93) | 40.2 |
-| 2023 | 4,634 | 1,235 | 13,086 | 10.8 (9.7-11.9) | 1.53 (1.26-1.83) | 40.5 |
-| 2024 | 3,477 | 857 | 8,866 | 10.7 (9.5-12.1) | 1.50 (1.14-1.92) | 39.9 |
-| 2025 | 4,525 | 1,111 | 9,914 | 10.6 (9.2-12.0) | 1.36 (1.08-1.69) | 32.9 |
-| 2026 (to early November) | 6,010 | 1,739 | 14,035 | 6.8 (5.8-7.9) | 0.83 (0.60-1.12) | 19.3 |
+| Year | Articles | With results | Results | Inconsistent % (95% interval) | Decision % (95% interval) | Articles with at least one inconsistency % | Articles with at least one decision inconsistency % |
+|---|---|---|---|---|---|---|---|
+| 2010 | 142 | 59 | 651 | 11.4 (7.2-16.5) | 1.38 (0.49-2.48) | 52.5 | 11.9 |
+| 2011 | 397 | 175 | 2,649 | 12.5 (10.0-15.3) | 1.85 (1.22-2.57) | 59.4 | 17.1 |
+| 2012 | 621 | 286 | 4,241 | 10.0 (8.4-11.7) | 1.11 (0.72-1.54) | 46.5 | 10.5 |
+| 2013 | 996 | 471 | 6,866 | 9.3 (8.1-10.7) | 1.02 (0.72-1.36) | 49.0 | 11.0 |
+| 2014 | 1,607 | 740 | 10,735 | 11.3 (10.0-12.6) | 1.47 (1.16-1.85) | 50.4 | 14.3 |
+| 2015 | 2,045 | 1,010 | 14,324 | 10.3 (9.2-11.5) | 1.17 (0.94-1.40) | 46.8 | 11.3 |
+| 2016 | 2,074 | 964 | 12,816 | 10.2 (9.1-11.3) | 1.04 (0.84-1.25) | 46.3 | 10.7 |
+| 2017 | 2,366 | 1,083 | 14,455 | 11.3 (9.8-13.1) | 1.30 (0.98-1.64) | 45.0 | 10.4 |
+| 2018 | 2,783 | 1,286 | 16,318 | 10.0 (9.1-10.9) | 1.08 (0.90-1.29) | 44.3 | 10.0 |
+| 2019 | 3,075 | 1,278 | 16,726 | 10.1 (9.1-11.0) | 1.20 (0.98-1.43) | 44.1 | 11.0 |
+| 2020 | 4,088 | 1,451 | 16,915 | 10.8 (9.7-11.9) | 1.71 (1.33-2.14) | 42.2 | 11.6 |
+| 2021 | 6,675 | 2,061 | 22,715 | 10.7 (9.6-12.0) | 1.60 (1.30-1.93) | 36.5 | 9.4 |
+| 2022 | 8,500 | 1,940 | 20,523 | 10.9 (9.8-12.1) | 1.64 (1.36-1.95) | 40.2 | 10.2 |
+| 2023 | 4,634 | 1,235 | 13,086 | 10.8 (9.7-11.9) | 1.53 (1.26-1.81) | 40.5 | 11.0 |
+| 2024 | 3,477 | 857 | 8,866 | 10.7 (9.4-12.2) | 1.50 (1.13-1.91) | 39.9 | 9.8 |
+| 2025 | 4,525 | 1,111 | 9,914 | 10.6 (9.2-12.0) | 1.36 (1.06-1.70) | 32.9 | 8.5 |
+| 2026 (to early November) | 6,010 | 1,739 | 14,035 | 6.8 (5.7-8.0) | 0.83 (0.58-1.12) | 19.3 | 3.6 |
 
 Percentages in the fifth and sixth columns are of extracted results; the last
-column is of articles with at least one extracted result. Intervals resample
+two columns are of articles with at least one extracted result. Intervals resample
 whole articles.
 
 By quarter in which the manuscript was received (`results/received_quarters.csv`):
 
 | Manuscript received | Articles published so far | With results | Results | Inconsistent %, no one-tailed allowance (95% interval) | With allowance | Articles with at least one inconsistency %, no allowance |
 |---|---|---|---|---|---|---|
-| 2023Q1 | 1,259 | 346 | 3,731 | 11.9 (10.0-13.9) | 11.2 | 46.5 |
+| 2023Q1 | 1,259 | 346 | 3,731 | 11.9 (9.9-14.0) | 11.2 | 46.5 |
 | 2023Q2 | 943 | 261 | 2,680 | 10.9 (8.6-13.2) | 10.8 | 41.0 |
-| 2023Q3 | 1,075 | 266 | 2,710 | 12.5 (9.9-15.1) | 12.0 | 44.7 |
-| 2023Q4 | 975 | 231 | 2,570 | 9.5 (7.3-11.8) | 9.0 | 36.8 |
-| 2024Q1 | 918 | 223 | 1,972 | 12.9 (10.2-16.0) | 11.5 | 42.2 |
-| 2024Q2 | 944 | 219 | 2,096 | 10.8 (8.3-13.5) | 10.3 | 38.8 |
-| 2024Q3 | 821 | 197 | 1,961 | 12.2 (9.3-15.4) | 11.8 | 36.5 |
-| 2024Q4 | 915 | 222 | 2,177 | 12.5 (9.2-16.4) | 11.9 | 37.8 |
-| 2025Q1 | 963 | 267 | 2,888 | 12.3 (9.1-15.9) | 12.0 | 37.8 |
-| 2025Q2 | 1,045 | 256 | 2,258 | 10.3 (8.1-12.7) | 9.8 | 34.0 |
-| 2025Q3 | 1,328 | 332 | 2,462 | 9.3 (7.1-11.8) | 8.6 | 25.9 |
-| 2025Q4 | 1,506 | 384 | 3,409 | 8.9 (7.1-10.7) | 8.6 | 31.8 |
-| 2026Q1 | 1,763 | 476 | 3,909 | 9.5 (7.0-12.3) | 9.1 | 22.5 |
-| 2026Q2 | 1,822 | 556 | 4,271 | 5.2 (3.5-7.3) | 4.9 | 13.8 |
+| 2023Q3 | 1,075 | 266 | 2,710 | 12.5 (10.2-15.3) | 12.0 | 44.7 |
+| 2023Q4 | 975 | 231 | 2,570 | 9.5 (7.4-11.7) | 9.0 | 36.8 |
+| 2024Q1 | 918 | 223 | 1,972 | 12.9 (10.0-16.1) | 11.5 | 42.2 |
+| 2024Q2 | 944 | 219 | 2,096 | 10.8 (8.2-13.5) | 10.3 | 38.8 |
+| 2024Q3 | 821 | 197 | 1,961 | 12.2 (9.4-15.3) | 11.8 | 36.5 |
+| 2024Q4 | 915 | 222 | 2,177 | 12.5 (9.3-16.4) | 11.9 | 37.8 |
+| 2025Q1 | 963 | 267 | 2,888 | 12.3 (9.1-15.8) | 12.0 | 37.8 |
+| 2025Q2 | 1,045 | 256 | 2,258 | 10.3 (8.3-12.7) | 9.8 | 34.0 |
+| 2025Q3 | 1,328 | 332 | 2,462 | 9.3 (7.0-11.8) | 8.6 | 25.9 |
+| 2025Q4 | 1,506 | 384 | 3,409 | 8.9 (7.2-10.9) | 8.6 | 31.8 |
+| 2026Q1 | 1,763 | 476 | 3,909 | 9.5 (7.1-12.4) | 9.1 | 22.5 |
+| 2026Q2 | 1,822 | 556 | 4,271 | 5.2 (3.4-7.3) | 4.9 | 13.8 |
 | 2026Q3 | 764 | 248 | 1,888 | 2.2 (1.2-3.4) | 1.7 | 8.1 |
 
 "Articles published so far" counts every article in the corpus received in
@@ -167,13 +170,13 @@ results, 35 results. Monthly figures are in `results/received_months.csv`.
 |---|-------|----------|--------------|
 | 1 | The corpus is 54,015 articles (every PMCID returned by the Europe PMC query in Method on 2026-11-23; all were retrieved with a body), 17,746 with at least one extracted result, 205,835 extracted results. | external-data | Run the Reproduction commands; `python src/extract.py` prints the counts. The corpus grows, so a later run of the ID query returns more articles; the ID lists used are in `data/ids/`. |
 | 2 | For each publication year 2010-2025 the share of extracted results flagged inconsistent is between 9.34% (2013) and 12.53% (2011). The logistic trend over 2010-2025 is an odds ratio of 1.0020 per year (0.9927 to 1.0113; standard errors clustered on article) with the one-tailed allowance and 0.9983 (0.9893 to 1.0074) without it. | external-data | `results/yearly.csv`, `results/post_hoc.txt` (lines "trend 2010-2025"). "Excluding 2026" and "no one-tailed allowance" were among the variants committed in advance; making 2010-2025 the headline was decided after seeing 2026. The planned primary trend over all years is the first line of `results/trend.txt` (0.9895, 0.9814 to 0.9977). Split by how p is written, the 2010-2025 trend is 1.0025 (0.9914 to 1.0137) for `p = x` and 0.9631 (0.9499 to 0.9765) for inequalities without the allowance (1.0054 and 0.9697 with it); the share of `p = x` results rose from 37% in 2010 to 52-56% in each year 2014-2024 (post hoc; `results/post_hoc.txt`, `results/descriptives.txt`). |
-| 3 | Decision inconsistencies are between 1.02% (2013) and 1.85% (2011) of results in each year 2010-2025. Their 2010-2025 trend is an odds ratio of 1.0258 per year (1.0096 to 1.0422) with the one-tailed allowance and 1.0086 (0.9934 to 1.0240) without it. Of 60 flagged decision inconsistencies read by hand, 48 were labelled inconsistent as printed (claim 10). | external-data | `results/yearly.csv`, `results/yearly_no_one_tailed_allowance.csv`, `results/post_hoc.txt`, `results/handcheck.csv`. |
-| 4 | By publication year, 6.82% of 2026 results are flagged inconsistent (5.76 to 7.89) against 10.70% in 2023-2025 pooled (odds ratio 0.611, 0.506 to 0.738), and 0.83% against 1.47% for decision inconsistencies (odds ratio 0.564, 0.401 to 0.793). Without the one-tailed allowance: 7.22% against 11.18% (odds ratio 0.618, 0.515 to 0.743). Split by test type, the odds ratio is 0.58 (0.45 to 0.74) for F and 0.45 (0.30 to 0.67) for chi-square; for t (0.74, 0.49 to 1.10), z (0.77, 0.50 to 1.20) and r (0.49, 0.21 to 1.17) the interval includes no change. Post hoc. | external-data | `results/post_hoc.txt`. |
-| 5 | By quarter of manuscript receipt, the rate without the one-tailed allowance is 11.9, 10.9, 12.5, 9.5% for 2023Q1-Q4; 12.9, 10.8, 12.2, 12.5% for 2024Q1-Q4; 12.3, 10.3, 9.3, 8.9% for 2025Q1-Q4; 9.5% for 2026Q1; 5.2% (3.5 to 7.3) for 2026Q2; 2.2% (1.2 to 3.4) for 2026Q3. Receipts of 2025Q2-2026Q1 pooled are at 9.45% against 11.70% for 2023Q1-2025Q1 (odds ratio 0.787, 0.666 to 0.931). By month of receipt in 2026: January 6.7%, February 13.7%, March 8.2%, April 5.3%, May 7.0%, June 3.2%, July 1.7%, August 2.4% (monthly intervals are wide; November 2025 was at 6.1%). Against receipts of 2025Q2-2026Q1, April-May 2026 receipts are at 6.27% (odds ratio 0.641, 0.387 to 1.062) and receipts from June 2026 at 2.68% (odds ratio 0.264, 0.182 to 0.383). The 2026Q2 figure mixes the two. Post hoc. | external-data | `results/received_quarters.csv`, `results/received_months.csv`, `results/post_hoc.txt`. Receipt dates are the `received` dates in each article's XML. |
-| 6 | The low rate in the newest cohorts is not produced by their containing only fast-published manuscripts. Restricting every receipt quarter from 2022Q1 to articles published within 3 months of receipt gives 6.3% to 14.8% for each quarter to 2026Q1 (53 to 256 articles each), then 4.3% (2.9 to 5.8; 344 articles) for 2026Q2 and 2.4% (1.3 to 3.7; 231 articles) for 2026Q3. Also, for articles published 2018-2021 the rate by receipt-to-publication interval (0-3, 4-5, 6-8, 9+ months) is 11.2, 10.7, 11.5, 11.1%, and for 2022-2024 it is 11.1, 10.5, 12.2, 12.0%. Within the 2026 cohorts themselves: of manuscripts received in April-May 2026, those published within 3 months are at 4.4% (2.5 to 6.7; 200 articles) and those published later at 8.6% (3.4 to 13.5; 155 articles), so the April-May figure may rise as that cohort completes; of manuscripts received in June 2026, those published within 3 months are at 4.1% (2.3 to 6.2; 144 articles) and those published later at 1.1% (0.2 to 2.2; 57 articles). Post hoc. | external-data | `results/received_quarters_fast.csv`, `results/post_hoc.txt`. |
-| 7 | The decline does not depend on the article's generative-AI statement (97% of articles published in 2026 carry one). Received 2026Q1: 8.6% where the authors declare generative AI was not used, 11.4% where they declare it was. 2026Q2: 5.2% and 5.2%. 2026Q3: 2.2% and 2.3%. Over the same cohorts the share of articles (with results) declaring use rose: 9.7% for receipts of 2025Q1, 19.8% for 2025Q4, 28.4% for 2026Q1, 31.5% for 2026Q2, 43.1% for 2026Q3. Post hoc. | external-data | `results/post_hoc.txt`; `ai_statement` in `data/articles.csv.gz`. The statement is the authors' own declaration and was not verified. |
+| 3 | Decision inconsistencies are between 1.02% (2013) and 1.85% (2011) of results in each year 2010-2025. Their 2010-2025 trend is an odds ratio of 1.0258 per year (1.0096 to 1.0422) with the one-tailed allowance, 1.0086 (0.9934 to 1.0240) without it, and 1.0233 (1.0073 to 1.0396) with the allowance that ignores the word "directional" (post hoc). Of 60 flagged decision inconsistencies read by hand, 48 were labelled inconsistent as printed (claim 10). | external-data | `results/yearly.csv`, `results/yearly_no_one_tailed_allowance.csv`, `results/post_hoc.txt`, `results/handcheck.csv`. |
+| 4 | By publication year, 6.82% of 2026 results are flagged inconsistent (5.73 to 7.98) against 10.70% in 2023-2025 pooled (odds ratio 0.611, 0.506 to 0.738), and 0.83% against 1.47% for decision inconsistencies (odds ratio 0.564, 0.401 to 0.793). Without the one-tailed allowance: 7.22% against 11.18% (odds ratio 0.618, 0.515 to 0.743). Split by test type (primary definition), the odds ratio is 0.58 (0.45 to 0.74) for F and 0.45 (0.30 to 0.67) for chi-square; for t (0.74, 0.49 to 1.10), z (0.77, 0.50 to 1.20) and r (0.49, 0.21 to 1.17) the interval includes no change. Post hoc. | external-data | `results/post_hoc.txt`. |
+| 5 | By quarter of manuscript receipt, the rate without the one-tailed allowance is 11.9, 10.9, 12.5, 9.5% for 2023Q1-Q4; 12.9, 10.8, 12.2, 12.5% for 2024Q1-Q4; 12.3, 10.3, 9.3, 8.9% for 2025Q1-Q4; 9.5% for 2026Q1; 5.2% (3.4 to 7.3) for 2026Q2; 2.2% (1.2 to 3.4) for 2026Q3. Receipts of 2025Q2-2026Q1 pooled are at 9.45% against 11.70% for 2023Q1-2025Q1 (odds ratio 0.787, 0.666 to 0.931). By month of receipt in 2026: January 6.7%, February 13.7%, March 8.2%, April 5.3%, May 7.0%, June 3.2%, July 1.7%, August 2.4% (monthly intervals are wide; November 2025 was at 6.1%). Against receipts of 2025Q2-2026Q1, April-May 2026 receipts are at 6.27% (odds ratio 0.641, 0.387 to 1.062) and receipts from June 2026 at 2.68% (odds ratio 0.264, 0.182 to 0.383). The 2026Q2 figure mixes the two. Post hoc. | external-data | `results/received_quarters.csv`, `results/received_months.csv`, `results/post_hoc.txt`. Receipt dates are the `received` dates in each article's XML. |
+| 6 | The low rate in the newest cohorts is not produced by their containing only fast-published manuscripts. Restricting every receipt quarter from 2022Q1 to articles published within 3 months of receipt gives 6.3% to 14.8% for each quarter to 2026Q1 (53 to 256 articles each), then 4.3% (2.9 to 5.8; 344 articles) for 2026Q2 and 2.4% (1.3 to 3.6; 231 articles) for 2026Q3. Also, for articles published 2018-2021 the rate by receipt-to-publication interval (0-3, 4-5, 6-8, 9+ months) is 11.2, 10.7, 11.5, 11.1%, and for 2022-2024 it is 11.1, 10.5, 12.2, 12.0%. Within the 2026 cohorts themselves: of manuscripts received in April-May 2026, those published within 3 months are at 4.38% (2.55 to 6.72; 200 articles) and those published later at 8.61% (3.62 to 13.86; 155 articles), so the April-May figure may rise as that cohort completes; of manuscripts received in June 2026, those published within 3 months are at 4.14% (2.24 to 6.16; 144 articles) and those published later at 1.10% (0.23 to 2.10; 57 articles). Post hoc. | external-data | `results/received_quarters_fast.csv`, `results/post_hoc.txt`. |
+| 7 | The decline does not depend on the article's generative-AI statement (97% of articles published in 2026 carry one). Received 2026Q1: 8.7% where the authors declare generative AI was not used, 11.1% where they declare it was. 2026Q2: 5.24% and 5.05%. 2026Q3: 2.3% and 2.2%. Over the same cohorts the share of articles (with results) declaring use rose: 9.7% for receipts of 2025Q1, 20.3% for 2025Q4, 29.4% for 2026Q1, 33.5% for 2026Q2, 45.6% for 2026Q3. A statement is classified by its opening declaration. Post hoc. | external-data | `results/post_hoc.txt`; `ai_statement` in `data/articles.csv.gz`. The statement is the authors' own declaration and was not verified. |
 | 8 | The fall for receipts from June 2026 is not produced by a change in the mix of authors' countries or of test types. The share of articles whose first affiliation is in China rose from 29% (received 2023-2024) to 48% (2025Q1-2026Q1), 53% (April-May 2026) and 58% (from June 2026). Within China the rate goes 10.2%, 9.4%, 3.4%, 2.8% over those four periods; within all countries other than China and the United States 12.5%, 10.2%, 9.4%, 2.4%; United States 9.3%, 11.2%, then 4.2% and 6.2% on 14 and 12 articles. Chi-square results rose from 10% to 27% of results and strings repeated within an article from 1.7% to 6.8%; excluding repeats the rate goes 11.7%, 10.1%, 6.4%, 2.8%. By test type, receipts from June 2026 against receipts of 2023-2024: F 2.6% against 9.7% (odds ratio 0.25, 0.14 to 0.46), chi-square 1.8% against 10.2% (0.16, 0.08 to 0.34), t 3.4% against 14.7% (0.21, 0.10 to 0.43), z 3.9% against 13.5% (0.26, 0.13 to 0.52); r has 27 results in the new cohort, none flagged. In April-May 2026 the rate is low for China (3.4%) and, on 14 articles, the United States (4.2%); all other countries are at 9.4%. Post hoc. | external-data | `results/post_hoc.txt`; `country` in `data/articles.csv.gz` (first affiliation only). |
-| 9 | A diagnostic that turned out not to discriminate. Among consistent three-decimal `p = x` results whose rounding range spans more than one value, the share equal to the p computed from the statistic exactly as printed is 49.2% (46.8 to 51.8) for receipts of 2023-2024, 45.8% (42.6 to 49.0) for 2025Q1-2026Q1, 42.1% (37.7 to 47.2) for April-May 2026 and 51.2% (46.8 to 55.6) from June 2026. The June-on share is not different from 2023-2024 (odds ratio 1.08, 0.89 to 1.32) but is higher than in the two adjacent periods (1.24, 1.00 to 1.54; 1.44, 1.10 to 1.88). What that means depends on the baseline. Taking 2025Q1-2026Q1 as the baseline, the expected share is 51.6% if every result that stopped being flagged had been replaced by an exact recomputation from the printed statistic and 45.8% with no such replacement, and the observed 51.2% fits the first better. Taking 2023-2024 as the baseline, the two expectations are 56.6% and 49.2%, and the observed value fits the second better. The two baselines point in opposite directions, so the diagnostic does not separate selective correction from no correction. It rules out only the idea that all p-values in the new cohort are machine-regenerated (the share would then be near 100%). Post hoc. | external-data | `results/post_hoc.txt` (lines containing "exact"). |
+| 9 | A diagnostic that turned out not to discriminate. Among consistent three-decimal `p = x` results whose rounding range spans more than one value, the share equal to the p computed from the statistic exactly as printed is 49.2% (46.8 to 51.5) for receipts of 2023-2024, 45.8% (42.6 to 49.1) for 2025Q1-2026Q1, 42.1% (37.6 to 47.4) for April-May 2026 and 51.2% (46.9 to 55.7) from June 2026. The June-on share is not different from 2023-2024 (odds ratio 1.082, 0.886 to 1.322), is higher than for April-May 2026 (1.440, 1.103 to 1.880), and against 2025Q1-2026Q1 the interval just includes no difference (1.239, 0.995 to 1.543). What that means depends on the baseline. Taking 2025Q1-2026Q1 as the baseline, the expected share is 51.6% if every result that stopped being flagged had been replaced by an exact recomputation from the printed statistic and 45.8% with no such replacement, and the observed 51.2% fits the first better. Taking 2023-2024 as the baseline, the two expectations are 56.6% and 49.2%, and the observed value fits the second better. The two baselines point in opposite directions, so the diagnostic does not separate selective correction from no correction. It rules out only the idea that all p-values in the new cohort are machine-regenerated (the share would then be near 100%). Post hoc. | external-data | `results/post_hoc.txt` (lines containing "exact"). |
 | 10 | Hand-check. Of 140 flagged results drawn at random, 131 (94%) were labelled inconsistent as printed; 4 carry a stated correction and 5 are probably one-tailed tests the keyword rule did not credit. Of 60 flagged decision inconsistencies, 48 (80%) were labelled inconsistent as printed, 8 probably one-tailed, 1 stated correction and 3 extraction errors (two fixed since). All 50 unflagged results checked were correctly extracted. In the flagged stratum the split is similar in each period (39, 36 and 38 of 40, and 18 of 20 for July-November 2026); in the decision stratum it is 17, 18 and 13 of 20, the last being 2022-2026. Among those labelled inconsistent as printed, notes mark a further 16 of the 140 and 13 of the 60 as possibly explained by something other than a wrong number. | external-data | `results/handcheck.csv` lists every item with its label and note; `python src/sample_handcheck.py` rebuilds the text snippets from the downloaded articles for re-reading. The labels are one model's reading of short snippets, made in the session that wrote the extractor. |
 | 11 | Conjecture: the fall for manuscripts received from June 2026 reflects a change in how manuscripts are prepared or screened around the time of submission. At least two explanations remain open and are not separated here: a check applied by the journal or publisher at or after submission, and a change on the authors' side that took hold at the same time (for example drafting or checking of results with tools, declared or not). Several things shift together in that cohort: the chi-square share of results doubles, repeated strings rise, and the median article body reaches 54 thousand characters. The extractor, publication-speed selection, author country, declared AI use and test mix are argued against by claims 6 to 8 and the hand-check. Claim 9 does not separate the two open explanations. | conjecture | A statement from the journal on whether and when it introduced statistical checks; the same analysis on other journals of the same publisher and of other publishers for 2026; rerunning this analysis in 2027 when the 2026 cohorts are complete. |
 | 12 | The publisher describes an automated screening system (AIRA) applied to every submission, running "more than 40" checks (posts of 16 September 2025 and 5 March 2026), and announced on 7 July 2025 that products of two vendors, "Cactus Communications' Paperpal Preflight and Clear Skies' Papermill Alarm and Oversight", "have been integrated" into it; the announcement presents them as fraud-screening tools. The vendor's page lists a "methodology/statistics" assessment domain under one of Preflight's modules (PeerPilot); the announcement does not say which modules were integrated. None of these pages says that p-values are checked against test statistics. On timing: the announcement falls in the same period as the smaller decline for receipts from 2025Q2 (claim 5), which is neither attributed to it nor excluded here; receipts of 2025Q3 to 2026Q1 then stay at about 9%, and nothing read here documents a change that coincides with the June 2026 fall. | literature | Pages fetched and read on 2026-11-23: frontiersin.org/news/2025/07/07/frontiers-broadens-ai-driven-integrity-checks-with-integration-of-cactus ("have been integrated into its own Artificial Intelligence Review Assistant (AIRA) submission-screening system"); frontiersin.org/news/2026/03/05/how-do-you-know-you-can-trust-the-science-you-read ("AIRA runs more than 40 AI-powered quality checks, flagging potential issues for human review on issues ranging from ethical compliance and plagiarism to signs of image manipulation"); frontiersin.org/news/2025/09/16/getting-to-know-aira-our-digital-teammate-and-detective ("AIRA performs over 40 rapid quality control checks on every submission"); paperpal.com/preflight ("Four-domain assessment: critical overview, literature review, methodology/statistics, and reporting compliance"). These are the publisher's and a vendor's own descriptions. |
@@ -374,7 +377,7 @@ it later returns more 2026 articles. `data/articles.csv.gz` and
 download; `extract.py` prints the SHA-256 of their uncompressed content,
 which for the run reported here was
 
-- articles.csv: `84ce8ea2b75d150b16f007a15bcbb0af9d8ab8871bd0deea5e9818ac7e15c0b8`
+- articles.csv: `343522b020a55d159335605e2d29356dffa7eea995ca1c8d4b3883d3052d3cc2`
 - results.csv: `f184c2e443726bd4bf7129b1fea7882b026980cc13f5fda4d8afe6ef637da181`
 
 `results/analyze_stdout.txt` is the output of the run reported here.
@@ -382,9 +385,11 @@ which for the run reported here was
 when the downloaded text is present in `data/raw/`; everything else in
 `results/` comes from the committed data (`results/handcheck.csv` is the
 hand-made record and is an input). Network:
-`www.ebi.ac.uk` and `eutils.ncbi.nlm.nih.gov`, no key. No checksum of the raw
-XML is given: PMC can revise an article's XML after deposit, so a fresh
-download may differ in a few results.
+`www.ebi.ac.uk` and `eutils.ncbi.nlm.nih.gov`, no key. PMC can revise an
+article's XML after deposit, so a fresh download may differ in a few results.
+To show which, `data/raw_xml_sha256.txt` holds the SHA-256 of each of the 547
+downloaded batches (uncompressed) as used here, and `data/articles.csv.gz`
+records each article's PMC version identifier (`pmcid_ver`).
 
 ## External data and what we could not reproduce
 
@@ -404,7 +409,7 @@ download may differ in a few results.
 - The studies behind these articles were not run here and none of their
   statistics can be recomputed from data here. This project checks only
   whether three printed numbers agree with each other.
-- Every claim in the Claims table rests on this source. If PMC's copy of an
+- Claims 1 to 11, 13 and 14 rest on this source. If PMC's copy of an
   article differs from the publisher's version, the affected results are
   wrong in the same way.
 - Known problems: (a) the deposit format changed in November 2025 (the
@@ -413,8 +418,10 @@ download may differ in a few results.
   does not by itself produce the decline; (b) the most recent months are
   incomplete (165 articles for November 2026), and the 2026Q2 and 2026Q3
   receipt cohorts contain only manuscripts published quickly; (c) the
-  generative-AI statement is self-declared and its wording changed during
-  2025.
+  generative-AI statement is self-declared, its wording changed during 2025,
+  and it is classified here by pattern matching on its opening declaration
+  (an earlier version misfiled 70 statements that declare use and then add
+  that AI was not used for other purposes).
 - Claim 15 rests on Nuijten et al. (2016, 2017) as published, and claim 12 on
   web pages of the publisher and a vendor, fetched and read on 2026-11-23;
   they are the companies' own descriptions.
@@ -643,3 +650,4 @@ the 2026 decline by date of receipt were not found elsewhere.
 | 2026-11-24 | Quality-control agent 5 (same model and terms, fresh context) | As above on the fourth revision; adjusted and placebo versions of the cohort contrasts; all sources re-fetched and compared. | Reproduced every file byte for byte and all flags; no blocking defect and no wrong headline number. Found one stale interval in claim 4, a sentence saying every hand-check item has a note, an incomplete description of the July 2025 announcement, "the same size" overstating the AI-statement comparison, and lag evidence within the 2026 cohorts that was not reported. All addressed in this version. Status stays `result`. |
 | 2026-11-24 | Quality-control agent 6 (same model and terms, fresh context; `main` merged in) | As above on the fifth revision; intervals and a power calculation for the exact-match diagnostic. | Reproduced every file byte for byte and all flags; nothing blocking. Found that claim 9 claimed more than its diagnostic can show, a definition mix in summary point 3, a rounding slip, a footnote-fusion fix described too broadly, and an imprecise use of Böschen (2021). All addressed in this version. Status stays `result`. |
 | 2026-11-24 | Quality-control agent 7 (same model and terms, fresh context) | As above on the sixth revision; every bootstrap interval compared with the result files; placebo breakpoints; June 2026 fall within p forms and for 1-2 month publication lags. | Reproduced every file byte for byte and all flags; nothing blocking. Found three intervals in claim 6 that a later change to the analysis script had shifted (the script now isolates that block's random stream, which restores them), claim 9's "compatible with both" not holding under a second baseline, unmarked post hoc items in summary point 1, only one of two hand-check figures in summary point 2, and one sentence in Prior work contradicting the next entries. All addressed in this version. Status stays `result`. |
+| 2026-11-24 | Quality-control agent 8 (same model and terms, fresh context) | As above on the seventh revision; reparsed all 2025-2026 AI statements; receipt month by publication month; standardised p-form mix. | Reproduced every file byte for byte and all flags; nothing blocking. Found 70 AI statements misclassified (claim 7 figures moved by up to 2.5 points, conclusion unchanged), an interval in claim 9 described as excluding 1 when it does not, a third definition missing from the decision-trend discussion, an unlabelled definition in claim 4, a contradiction in the external-data section, hand-check tallies with no generating command, a table column promised in the Question, and no record of the raw download. All addressed; bootstrap intervals are now seeded from their own data, which changed some interval ends in the last digit. Status stays `result`. |

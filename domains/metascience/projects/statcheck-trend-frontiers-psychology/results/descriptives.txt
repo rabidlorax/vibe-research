@@ -16,6 +16,11 @@ hand-check, flagged: 140 items, 131 labelled inconsistent as printed, 25 with a 
 hand-check, flagged_decision: 60 items, 48 labelled inconsistent as printed, 25 with a label or note pointing to something other than a wrong number
 PUB_YEAR 2010-2020: 20194 articles, 8803 with results (44%), 116696 results
 flagged z results: 2435 without the one-tailed allowance, 2219 with it, of 14709
+hand-check: items with a note: 61 of 250
+hand-check, among items labelled inconsistent as printed, note 'suspected multiplicity adjustment': 15 (10 flagged stratum, 5 decision stratum)
+hand-check, among items labelled inconsistent as printed, note 'floor value': 10 (10 flagged stratum, 0 decision stratum)
+hand-check, among items labelled inconsistent as printed, note 'possibly a different quantity': 7 (4 flagged stratum, 3 decision stratum)
+hand-check, among items labelled inconsistent as printed, note 'unusual degrees of freedom': 7 (2 flagged stratum, 5 decision stratum)
 share of results with exactly reported p (p = x), by year: 2010: 37.0%, 2011: 43.3%, 2012: 46.8%, 2013: 49.0%, 2014: 52.1%, 2015: 53.6%, 2016: 54.3%, 2017: 53.1%, 2018: 54.9%, 2019: 56.1%, 2020: 55.9%, 2021: 56.2%, 2022: 54.2%, 2023: 55.2%, 2024: 54.6%, 2025: 51.6%, 2026: 53.8%
 rate (no allowance) for p = x: 2010 19.5%, 2025 18.5%, 2026 12.0%
 rate (no allowance) for p < x or p > x: 2010 7.3%, 2025 3.3%, 2026 1.7%
