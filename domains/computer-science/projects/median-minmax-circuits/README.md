@@ -196,8 +196,10 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
 - Two solvers (CaDiCaL 1.5.3 and Glucose 4, as shipped in PySAT) agree on
   sizes 1 to 10 for n = 5 (`results/lower_bounds_5*.log`).
 - With no symmetry breaking (`--sym 0`; the only restriction left is that a
-  gate's two operands are distinct, which loses nothing because a smaller
-  circuit can be padded to any larger size), sizes 1 to 8 for n = 5 are
+  gate's two operands are distinct, which loses nothing because a gate with
+  equal operands is a copy of its operand; and since unused gates are then
+  allowed, a smaller circuit can be padded to any larger size, so UNSAT at
+  one size excludes all smaller sizes), sizes 1 to 8 for n = 5 are
   UNSAT (`results/median5_nosym_sizes1to8.log`), and so is size 9
   (`results/median5_size9_nosym.log`, 1069 s). So claim 2 does not depend on
   the symmetry argument; claim 4 does.
@@ -322,9 +324,10 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   drops the sentence "we have reason to believe that gate reuse is not an
   issue", and says of the *general* 4-variable table that entries "marked
   with *'s for four-variable functions may be inaccurate due the gate reuse
-  issue", that compared with Saarinen's 2006 exhaustive search "the circuits
-  we produce for several BEC's are seven-gate circuits when some six-gate
-  circuit would suffice", and (Section 2.2.3) that the pruning "may
+  issue", that "If we assume that Saarinen's values are accurate, then the
+  circuits we produce for several BEC's are seven-gate circuits when some six-gate
+  circuit would suffice" (Saarinen being a 2006 exhaustive search it cites),
+  and (Section 2.2.3) that the pruning "may
   inadvertently discard this circuit. If it is the only six-gate circuit
   which computes f, the entry in our catalog for f is not minimal." Its
   monotone results (Section 2.3.3, Table 2.5) are unchanged from the
@@ -335,8 +338,9 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   identified the flaw and its effect on the general 4-variable catalogue;
   what this project adds is that the monotone 5-variable catalogue is
   affected too, in 19 named entries, with the correct values. The catalogue
-  files on the author's page were unchanged as of the fetch date. The author
-  has not been contacted.
+  file fetched on 2026-11-23 still has the gate counts of the 2022
+  manuscript's table, so the posted monotone catalogue had not been corrected
+  by then. The author has not been contacted.
 - The classical exchange networks in `src/baseline.py` (7, 13 and 19
   exchanges, usually attributed to Paeth and to Devillard's `opt_med`
   routines) were typed `[from memory, unverified]` as to source and
@@ -461,7 +465,8 @@ the baseline network already contradicts), and nothing for 7 or 9.
 ## Limitations and open questions
 
 - The lower bounds depend on SAT solvers reporting UNSAT with no certificate
-  checked, and on the written symmetry argument. Producing DRAT proofs and
+  checked and, for 7 and 9 inputs only (claim 4), on the written symmetry
+  argument. Producing DRAT proofs and
   checking them with an independent checker, or a Lean-checked certificate in
   the math repository, would remove both. Not done.
 - Claim 8, the symmetry lemma, is a written proof and only claim 4 (the
@@ -511,3 +516,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, fourth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reran all steps under 5 minutes, own catalogue parser, replayed the local search's random stream, re-fetched and checked all quoted sources | No number found wrong. Six issues, fixed: the 60 local-search trials are 23 distinct problems; `updated` date; topical arXiv and OpenAlex searches added and the search outcome stated; access dates; `results/cross_check.log` now saved |
 | 2026-11-24 | claude-fable-5-2, fifth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all 7581 monotone 5-variable functions into 210 classes, all quoted sources re-fetched | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: the description of arXiv:2102.12579 and the stated reason for not formalizing claim 8 |
 | 2026-11-24 | claude-fable-5-2, sixth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all presentations of three programs against the lemma, sources re-fetched | No number found wrong. Four points, fixed: arXiv:2102.12579's table includes 7-input majority at 17 gates in the unrestricted basis (previously misdescribed); two statements about where brute force stops; one quotation |
+| 2026-11-24 | claude-fable-5-2, seventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sentence-by-sentence comparison of quotations with re-fetched sources | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: one limitation was unqualified; a quotation from the dissertation had lost its condition; two imprecise sentences |
