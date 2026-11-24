@@ -337,16 +337,37 @@ def main():
     # (n) are consistent p-values now exact recomputations of the printed statistic? Among consistent
     #     "p = x" results with three decimals whose rounding range spans more than one three-decimal value,
     #     the share whose p equals the one computed from the printed statistic taken at face value.
-    c3 = mr[(mr.error == 0) & (mr.p_cmp == "=") & (mr.p_rep.str.split(".").str[1].str.len() == 3)
-            & (mr.p_min.round(3) != mr.p_max.round(3))].copy()
-    c3["p_face"] = [_p(k, abs(float(x)), a if a == a else None, b if b == b else None)
-                    for k, x, a, b in zip(c3.kind, c3.stat, c3.df1, c3.df2)]
-    c3["exact"] = (c3.p_face.round(3) - c3.p_rep.astype(float)).abs() < 5e-4
+    sub = mr[(mr.p_cmp == "=") & (mr.p_rep.str.split(".").str[1].str.len() == 3)
+             & (mr.p_min.round(3) != mr.p_max.round(3))].copy()
+    sub["p_face"] = [_p(k, abs(float(x)), a if a == a else None, b if b == b else None)
+                     for k, x, a, b in zip(sub.kind, sub.stat, sub.df1, sub.df2)]
+    sub["exact"] = ((sub.p_face.round(3) - sub.p_rep.astype(float)).abs() < 5e-4).astype(int)
+    sm_ = sub.received_year * 12 + sub.received_month
+    c3 = sub[sub.error == 0]
     cm = c3.received_year * 12 + c3.received_month
+    share, flagrate = {}, {}
     for name, a, b in periods:
         d = c3[(cm >= a) & (cm <= b)]
+        lo, hi = cluster_boot(d, "exact", rng)
+        share[name] = d.exact.mean()
+        flagrate[name] = sub[(sm_ >= a) & (sm_ <= b)].error.mean()
         post.append(f"{name}: consistent three-decimal 'p =' results that match the face-value p exactly: "
-                    f"{100 * d.exact.mean():.1f}% of {len(d)}")
+                    f"{100 * d.exact.mean():.1f}% [{100 * lo:.1f}, {100 * hi:.1f}] of {len(d)}; flag rate in the "
+                    f"same kind of result (consistent or not): {100 * flagrate[name]:.1f}%")
+    newc = c3[cm >= periods[3][1]]
+    for name, a, b in periods[:3]:
+        d = pd.concat([c3[(cm >= a) & (cm <= b)].assign(x=0.0), newc.assign(x=1.0)])
+        g = sm.GLM(d.exact, pd.DataFrame({"const": 1.0, "x": d.x}), family=sm.families.Binomial()).fit(
+            cov_type="cluster", cov_kwds={"groups": d.pmcid.astype("category").cat.codes})
+        bb, se = g.params["x"], g.bse["x"]
+        post.append(f"exact-match share, received Jun 2026 on vs {name}: odds ratio {np.exp(bb):.2f} "
+                    f"[{np.exp(bb - 1.96 * se):.2f}, {np.exp(bb + 1.96 * se):.2f}]")
+    f0, f1 = flagrate[periods[1][0]], flagrate[periods[3][0]]
+    expected = ((1 - f0) * share[periods[1][0]] + (f0 - f1)) / (1 - f1)
+    post.append(f"exact-match share expected for Jun 2026 on if every result that stopped being flagged since "
+                f"2025Q1-2026Q1 had been replaced by an exact recomputation: {100 * expected:.1f}%; "
+                f"expected with no such replacement: {100 * share[periods[1][0]]:.1f}%; observed "
+                f"{100 * share[periods[3][0]]:.1f}%")
     # (o) how far off are flagged "p = x" results?
     fl = res[(res.error == 1) & (res.p_cmp == "=")]
     dec = fl.p_rep.str.split(".").str[1].str.len()

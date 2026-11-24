@@ -194,10 +194,14 @@ received 2026Q1: of 476 articles with results, 28.4% declare generative AI used,
 received 2026Q2: of 556 articles with results, 31.5% declare generative AI used, 68.3% not used, 0.2% no or other statement
 received 2026Q3: of 248 articles with results, 43.1% declare generative AI used, 56.5% not used, 0.4% no or other statement
 received 2026Q4: of 3 articles with results, 66.7% declare generative AI used, 33.3% not used, 0.0% no or other statement
-received 2023-2024: consistent three-decimal 'p =' results that match the face-value p exactly: 49.2% of 2839
-received 2025Q1-2026Q1: consistent three-decimal 'p =' results that match the face-value p exactly: 45.8% of 2361
-received Apr-May 2026: consistent three-decimal 'p =' results that match the face-value p exactly: 42.1% of 648
-received Jun 2026 on: consistent three-decimal 'p =' results that match the face-value p exactly: 51.2% of 848
+received 2023-2024: consistent three-decimal 'p =' results that match the face-value p exactly: 49.2% [46.9, 51.6] of 2839; flag rate in the same kind of result (consistent or not): 17.0%
+received 2025Q1-2026Q1: consistent three-decimal 'p =' results that match the face-value p exactly: 45.8% [42.6, 48.8] of 2361; flag rate in the same kind of result (consistent or not): 13.1%
+received Apr-May 2026: consistent three-decimal 'p =' results that match the face-value p exactly: 42.1% [37.7, 47.1] of 648; flag rate in the same kind of result (consistent or not): 9.6%
+received Jun 2026 on: consistent three-decimal 'p =' results that match the face-value p exactly: 51.2% [46.7, 55.5] of 848; flag rate in the same kind of result (consistent or not): 2.8%
+exact-match share, received Jun 2026 on vs received 2023-2024: odds ratio 1.08 [0.89, 1.32]
+exact-match share, received Jun 2026 on vs received 2025Q1-2026Q1: odds ratio 1.24 [1.00, 1.54]
+exact-match share, received Jun 2026 on vs received Apr-May 2026: odds ratio 1.44 [1.10, 1.88]
+exact-match share expected for Jun 2026 on if every result that stopped being flagged since 2025Q1-2026Q1 had been replaced by an exact recomputation: 51.6%; expected with no such replacement: 45.8%; observed 51.2%
 flagged 'p =' results (18251): 31.2% are within one further unit of the last printed digit; 11.5% would be consistent if p had been truncated, not rounded
 trend 2010-2025, p = x only, error_1t: OR/yr 1.0054 [0.9941, 1.0168] p=0.35
 trend 2010-2025, p = x only, error: OR/yr 1.0025 [0.9914, 1.0137] p=0.66
@@ -210,10 +214,10 @@ kind = chi2, received Jun 2026 on vs 2023-2024, no allowance: 1.80% of 946 vs 10
 kind = r, received Jun 2026 on vs 2023-2024, no allowance: 0 flagged of 27 vs 18.40% of 538; odds ratio not estimated
 kind = t, received Jun 2026 on vs 2023-2024, no allowance: 3.44% of 726 vs 14.66% of 4891, odds ratio 0.208 [0.101, 0.426]
 kind = z, received Jun 2026 on vs 2023-2024, no allowance: 3.89% of 360 vs 13.54% of 2061, odds ratio 0.258 [0.127, 0.524]
-received Apr-May 2026, published within 3 months, no allowance: 4.38% [2.52, 6.70] (200 articles, 1507 results)
-received Apr-May 2026, published after 4 or more months, no allowance: 8.61% [3.40, 13.53] (155 articles, 1220 results)
-received Jun 2026, published within 3 months, no allowance: 4.14% [2.27, 6.18] (144 articles, 1088 results)
-received Jun 2026, published after 4 or more months, no allowance: 1.10% [0.23, 2.16] (57 articles, 456 results)
+received Apr-May 2026, published within 3 months, no allowance: 4.38% [2.51, 6.56] (200 articles, 1507 results)
+received Apr-May 2026, published after 4 or more months, no allowance: 8.61% [3.69, 14.08] (155 articles, 1220 results)
+received Jun 2026, published within 3 months, no allowance: 4.14% [2.19, 6.33] (144 articles, 1088 results)
+received Jun 2026, published after 4 or more months, no allowance: 1.10% [0.23, 2.17] (57 articles, 456 results)
 received Jun 2026 on: median body length 54162 characters (1369 articles)
 kind  results  pct_inconsistent  pct_decision
    F   115631              9.65          1.13
