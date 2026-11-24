@@ -28,10 +28,11 @@ few variables") reports that MAJ_5 needs 13 gates, while pruning the standard
 
 ## Why it matters
 
-Median-of-5, 7 and 9 kernels built from SIMD `min`/`max` instructions are the
-inner loop of median filters in image and signal processing; one operation
-saved is saved per pixel. The usual kernels are comparator networks with the
-unused half-comparators removed. General straight-line programs are a larger
+Median-of-5, 7 and 9 kernels built from SIMD `min`/`max` instructions are
+used as the inner loop of median filters in image and signal processing, so
+one operation saved is saved per pixel; the usual kernels are comparator
+networks with the unused half-comparators removed `[both statements about
+practice are from memory, unverified; no claim depends on them]`. General straight-line programs are a larger
 class (a value may feed any number of later operations, not just one
 comparator), and whether they can be smaller for these sizes is a concrete
 question with a checkable answer. The exact values are also small data points
@@ -524,3 +525,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, seventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sentence-by-sentence comparison of quotations with re-fetched sources | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: one limitation was unqualified; a quotation from the dissertation had lost its condition; two imprecise sentences |
 | 2026-11-24 | claude-fable-5-2, eighth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, all sources re-fetched and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: "every symmetry level" narrowed to the levels with committed logs; a second on-topic search hit now listed as seen and not read. It also noted, for the owner, that claim 8 remains `proved-informal` at `status: result` |
 | 2026-11-24 | claude-fable-5-2, ninth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: two paraphrases of the dissertation were firmer than its conditional wording; a docstring in `src/encode.py` |
+| 2026-11-24 | claude-fable-5-2, tenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: unsourced statements about practice in "Why it matters" now marked as from memory; a docstring in `src/local_improve.py` |

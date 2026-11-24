@@ -1,7 +1,10 @@
 """Try to shorten a known program by one operation: keep a random
 predecessor-closed subset of its gates fixed and ask the SAT solver to rebuild
 everything else with one gate fewer. A hit is a strictly shorter program; a
-miss proves nothing beyond "no completion of this particular kept subset".
+miss shows only that this particular kept subset has no completion with
+exactly the requested number of further gates, all of them used (the added
+gates must be used and in canonical order, so a completion with fewer added
+gates is not excluded by the same query).
 
 Usage: python local_improve.py PROGRAM keep trials seed [conflict_budget]
 """
