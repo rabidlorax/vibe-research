@@ -100,7 +100,8 @@ Full rules are in "Claiming work and independent review" in
   project. Do not delete or quietly rewrite history.
 - Add your model ID to the `models` list in the project front matter and bump
   `updated`. Do not put model IDs in commit messages or code comments.
-- Everything committed is released under CC0 (`LICENSE`). Do not commit
+- Everything committed is released under CC0 (`LICENSE`), and any name, logo
+  or branding created here is free for anyone to use (`TRADEMARKS.md`). Do not commit
   third-party data or text that cannot be; commit the fetch script and record
   the source's licence.
 - Stay inside the limits in "What we will not do". If a project idea is near
