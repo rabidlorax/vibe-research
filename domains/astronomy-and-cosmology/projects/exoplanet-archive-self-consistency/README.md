@@ -6,7 +6,7 @@ evidence: external-data
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Internal consistency of planet and star parameters in the NASA Exoplanet Archive
@@ -98,8 +98,8 @@ Snapshot: `ps` table downloaded 2026-11-23, 40,428 rows, 6,473 planets
    Method. Counting only rows that differ by more than 5% *and* by more than
    3σ of their own stated uncertainties, the rate for the exact identities is
    0.1% to 1.9% (same-reference strata for planet-star identities;
-   literature-only strata for the stellar ones). The rate above 5% is
-   highest for surface gravity. In rows whose stellar parameters come from
+   literature-only strata for the stellar ones). Among the exact
+   identities, the rate above 5% is highest for surface gravity. In rows whose stellar parameters come from
    a paper, not from TICv8 or a KOI table, the surface gravity g implied by
    `st_logg` differs from G M★/R★² by more than 5% (0.021 dex in log g) in
    21.7% of 7,935 rows (30.3% of 5,693 without the largest reference, Morton
@@ -363,7 +363,8 @@ committed results are for the snapshot whose checksum and query are in
   all fetched 2026-11-23.
 
 None of the underlying measurements were made here and none can be
-reproduced here. Every claim depends on the archive snapshot. Claims 1 and 2
+reproduced here. Claims 1, 2, 5, 6 and 9 depend on the archive snapshot; claims 3, 4, 7,
+8 and 10 depend on the papers and documentation pages named. Claims 1 and 2
 depend on the archive's mass, radius and density columns for those
 references; claims 3 and 4 check one to three stars per paper.
 
@@ -542,15 +543,23 @@ know.
 - The "published" strata mix literature solutions with catalogue stellar
   parameters (TICv8, KOI tables) and with re-analyses such as Stassun et al.
   2017, so their rates are not rates of error in individual papers. The
-  rates are row-weighted and move when a single bulk reference is removed,
-  in either direction: by less than 3 points for K3, RHOS, LUM, RHOP,
-  RATROR, RATDOR and INSOL, but by 8.5 points for LOGG (21.7% to 30.3%
-  without Morton et al. 2016) and by 12 points for the approximate DEPTH
-  identity (50.1% to 37.8% without Kruse et al. 2019). `results/summary.md`
-  gives the rate without each stratum's largest reference.
+  rates are row-weighted and move when a stratum's largest reference is
+  removed, in either direction. In the strata used in the summary
+  (same-reference for K3, RATROR, RATDOR and INSOL; literature star ref for
+  LOGG, RHOS and LUM; published for RHOP and DEPTH) the move is less than 3
+  points for K3, RHOS, LUM, RHOP, RATROR, RATDOR and INSOL, but 8.5 points
+  for LOGG (21.7% to 30.3% without Morton et al. 2016) and 12 points for the
+  approximate DEPTH identity (50.1% to 37.8% without Kruse et al. 2019). The
+  plain "published" stellar lines move far more when TICv8 is removed (RHOS
+  24.0% to 45.6%, LOGG 13.6% to 20.8%, LUM 4.5% to 11.5%), which is one more
+  reason not to use them. `results/summary.md` gives the rate without each
+  stratum's largest reference.
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
-  RATDOR and INSOL assume circular orbits.
+  RATDOR and INSOL assume circular orbits. K3 excludes circumbinary rows
+  but RATDOR does not: two of its six factor-of-two outliers are
+  circumbinary planets (Kepler-413 b and PH1 b; a reviewer's observation),
+  where a/R★ may refer to the binary.
 - K3 also treats `pl_orbsmax` as the semi-major axis, although the archive
   documents it as "the projected separation in the plane of the sky" for
   planets found by microlensing or direct imaging. 59 of the 7,132
@@ -603,3 +612,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a ninth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation and, through the arXiv API, every title and author list; new prior-art search. Not checked: journal versions of four papers, items marked from memory, the DEPTH unit candidates, the ten further density references and other outlier rows against their papers | One minor point: a July 2026 preprint (Tang, Research Square) that compares `st_dens` with M★/R★³ assuming solar units was missing from prior work. No number, claim, label, script or headline affected. Addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, a tenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search. Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, no headline number, table entry or script result wrong: 4 points. The TOI-1227 luminosity typo is already stated by Varga et al. 2025, so claim 10 becomes `literature`; the exoatlas notebook, which plots two of the identities on these tables, was missing from prior work; the K3 rate was adjusted for the reference that inflates it but not for the one that dilutes it, and the LOGG rate not at all; two quoted raw values were not printed by any script. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, an eleventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, plus robustness checks (default rows only; per stellar solution); read `src/`; fetched and checked every quotation, title and author list, including the pinned exoatlas notebook and the Tang preprint; new prior-art search (nothing further that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, all minor text: 4 points (a limitation saying rates move "by a few points" although LOGG and DEPTH move by 8.5 and 12; a stale list of literature claims; Varga et al. missing from the external-data section; two truncated titles). No claim, number, table entry, script result or label wrong. All addressed in the following commit. Status stays `result` |
+| 2026-11-24 | claude-fable-5-2, a twelfth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, including the largest shift from removing any single reference in each stratum; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing missed). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | One minor point: a limitation sentence about how far rates move without a bulk reference did not say which strata it covered, and was untrue for the plain "published" stellar lines. No headline, claim, table number, script, label or citation wrong. Addressed in the following commit. Status stays `result` |
