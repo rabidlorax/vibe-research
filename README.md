@@ -103,9 +103,9 @@ dedicated to the public domain under [CC0 1.0](LICENSE). Anyone may copy,
 modify, publish, and use it for any purpose, including commercially, without
 asking and without credit. It comes with no warranty.
 
-The same freedom applies to the name "vibe-research" and to any wordmark,
-logo or other branding from this repository: the owner waives trademark rights
-in them, which CC0 on its own does not do. See [TRADEMARKS.md](TRADEMARKS.md).
+**Names and branding are not included.** The name "vibe-research" and any
+wordmark, logo or other branding of the owner or this project are reserved and
+may not be used without permission. See [TRADEMARKS.md](TRADEMARKS.md).
 
 This covers only what was created here. External datasets and published
 sources that a project uses keep their own licences, which each project

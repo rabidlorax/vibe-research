@@ -1,46 +1,51 @@
-# Names, wordmarks, logos and branding
+# Names, wordmarks, logos and branding are reserved
 
-The [CC0 1.0 dedication](LICENSE) that covers this repository does not reach
-trademark rights: its section 4(a) says that no trademark or patent rights are
-waived. This statement, made by the owner of this repository, extends the same
-freedom to branding.
+The research content of this repository is dedicated to the public domain
+under [CC0 1.0](LICENSE). **That dedication does not extend to names or
+branding.** CC0 itself says so: under its section 4(a), no trademark rights
+are waived, abandoned, surrendered or licensed.
 
-## What the owner gives up
+## What is reserved
 
-The owner claims no trademark, service mark, trade dress, trade name, or
-similar right in:
+The owner of this repository reserves all rights in:
 
 - the name "vibe-research", in any spelling, capitalisation or stylisation
 - any other name, wordmark, logo, icon, slogan, visual identity or other
-  branding that originates in this repository, now or in the future
+  branding of the owner or of this project, whether it appears in this
+  repository or elsewhere, now or in the future
 
-To the fullest extent the law allows, the owner waives all such rights and
-agrees never to assert them against anyone.
+No licence to use any of these is granted by CC0, by this file, or by anything
+else in this repository. They are not free to use.
 
-Where the law does not allow such rights to be waived, the owner grants
-everyone a perpetual, worldwide, royalty-free, irrevocable, non-exclusive
-licence to use that branding, with the right to sublicense, for any purpose,
-commercial or not, in any form, modified or unmodified, without asking and
-without credit.
+## What you may not do without the owner's written permission
 
-In plain terms: you may use the name and any branding from this repository for
-anything, including on your own products and services, and nobody connected
-with this repository will object.
+- Use the name or any branding as, or in, the name of your own project,
+  product, service, organisation, domain or account
+- Use the name or branding in a way that suggests the owner or this project
+  made, sponsors, endorses or is affiliated with your work
+- Use, copy or adapt any logo or visual identity
 
-## What this does not cover
+A logo or other branding file that sits in this repository is not covered by
+CC0, even though the files around it are.
 
-- **Other people's marks.** Names and logos of third parties that appear here
-  (data providers, software, model names, institutions, journals) belong to
-  their owners. This statement gives no rights in them.
-- **Patents.** CC0 does not waive patent rights either, and this statement
-  does not change that.
-- **Other law.** Rules that exist to protect the public, such as those against
-  fraud or against falsely claiming that someone endorses you, still apply to
-  whoever uses the name. They are not the owner's to waive.
+## What remains allowed
 
-## No warranty
+You may use the content under CC0 for any purpose. You may also state
+truthfully where content came from, for example "based on results from the
+vibe-research repository", as long as it does not suggest endorsement or
+affiliation. If you modify the content, do not present your version as this
+project's.
 
-The owner makes no promise that any name or branding here is free of someone
-else's prior rights. Use it at your own risk.
+## Other parties' marks
 
-This statement covers this repository only.
+Names and logos of third parties that appear here (data providers, software,
+model names, institutions, journals) belong to their owners and are likewise
+not licensed.
+
+## Correction
+
+Between commits `fde0ea6` and the one that introduced this text, this file
+contained a statement purporting to waive the owner's trademark rights. That
+text was written in error by an AI assistant that misunderstood the owner's
+instruction. It was never reviewed or approved by the owner, did not reflect
+the owner's intent, and is withdrawn. The owner made no such waiver.
