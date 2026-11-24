@@ -5,8 +5,10 @@
  * Enumerates every profile (multiset of strict rankings of M candidates)
  * with at most N voters, evaluates the five rules directly, and prints, for
  * every set of at least two rules, the smallest number of voters at which
- * the rules in the set elect pairwise different candidates with no deciding
- * tie ("-" if none up to N). Rule bits: P=1 R=2 H=4 B=8 C=16.
+ * the rules in the set elect pairwise different candidates ("-" if none up
+ * to N). By default a rule has a winner only if no tie occurs at any of its
+ * steps (the README's strict convention; Hare runs until one candidate is
+ * left). Rule bits: P=1 R=2 H=4 B=8 C=16.
  *
  * With a third argument the "robust" convention is used for the runoff and
  * for Hare: ties are allowed, and the rule has a winner iff the same

@@ -1,0 +1,32 @@
+# classical 19-exchange median-of-9 network, pruned by baseline.py
+9 5
+min 1 2
+max 1 2
+min 4 5
+max 4 5
+min 7 8
+max 7 8
+min 0 9
+max 0 9
+min 3 11
+max 3 11
+min 6 13
+max 6 13
+min 16 10
+max 16 10
+min 18 12
+max 18 12
+min 20 14
+max 20 14
+max 15 17
+min 24 26
+min 23 25
+max 23 25
+max 27 19
+max 21 29
+min 22 28
+min 32 30
+min 34 33
+max 34 33
+max 31 35
+min 37 36

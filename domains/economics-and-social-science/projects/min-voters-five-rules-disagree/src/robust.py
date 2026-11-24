@@ -4,8 +4,9 @@
 
 Robust convention: ties are allowed, but each rule must elect the same
 candidate however ties are broken. For rule sets containing plurality this
-changes only Hare (README, Method): plurality, Borda and Condorcet need
-strict inequalities by definition, and the runoff must be between the unique
+changes only Hare (README, Method): a tie for the plurality or Borda winner
+would make that winner depend on the tie-break, the Condorcet winner is
+strict by definition, and the runoff must be between the unique
 plurality winner and a unique runner-up, decided strictly.
 
 Because every winner has a different role, candidates are named by role:

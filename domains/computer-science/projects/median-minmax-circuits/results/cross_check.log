@@ -1,0 +1,2 @@
+n=4: 28 classes agree exactly with brute force (<= 7 gates); 0 classes with SAT minimum > 7 are correctly not reachable in 7 gates
+n=5: 59 classes agree exactly with brute force (<= 5 gates); 149 classes with SAT minimum > 5 are correctly not reachable in 5 gates

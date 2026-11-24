@@ -1,0 +1,1 @@
+n=5 k=3 s=9 sym=0 comparators=0 solver=cadical153 vars=693 clauses=3344 -> UNSAT in 1069.0s
