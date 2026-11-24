@@ -85,7 +85,7 @@ the number of operations. "Gate" means the same thing in circuit language
 | 3 | The programs obtained by pruning the classical exchange networks compute the medians of 5, 7, 9 values in 10, 20, 30 operations | computed | `python baseline.py`, then `python verify.py ../results/baseline_median*.txt` |
 | 4 | Under the constraints `sym=3` of `src/encode.py`, there is no circuit of any size 1 to 11 for 7-input majority and none of any size 1 to 13 for 9-input majority. Together with claim 8 this gives: no program with 11 or fewer operations computes the median of 7 values, and none with 13 or fewer the median of 9. That conclusion is only as strong as claim 8 | computed | `results/lower_bounds_7.log`, `results/lower_bounds_9.log`; regenerate with `python lower_bounds.py 7 11` and `python lower_bounds.py 9 13` |
 | 5 | Of the 210 entries in Seidler's 5-variable monotone catalogue (as fetched 2026-11-23), all 210 listed programs compute the listed function, and exactly 19 use more gates than the minimum; the majority entry lists 13 and the minimum is 10 | external-data | `results/catalogue_check.csv`; regenerate with `../data/fetch_catalogue.sh` and `python catalogue_check.py ../data/raw/MonoCatFileA5var.txt out.csv`. The upper-bound half (a smaller circuit exists for each of the 19) needs no trust in the SAT solver: the circuits are in the CSV and are re-evaluated on all 32 inputs. The lower-bound half ("exactly 19") is confirmed with no symmetry breaking by `results/nosym_check.log` (`python nosym_check.py ../data/raw/MonoCatFileA5var.txt ../results/catalogue_check.csv out.log`, about 1 hour) |
-| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV, and `results/nosym_check.log`: for every class with minimum m of 2 or more, size m-1 is UNSAT with no symmetry breaking. The list of class representatives is taken from the catalogue rather than regenerated here. For classes with minimum 6 or more the lower bound rests on SAT UNSAT answers with no certificate (the brute-force check stops at 5 gates) |
+| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV, and `results/nosym_check.log`: for every class with minimum m of 2 or more, size m-1 is UNSAT with no symmetry breaking. The list of class representatives is taken from the catalogue rather than regenerated here. For classes with minimum 7 or more the lower bound rests on SAT UNSAT answers with no certificate (the brute-force check stops at 5 gates, which also settles minimum 6) |
 | 7 | All 30 entries of Seidler's 4-variable monotone catalogue are minimal | external-data | `results/catalogue_check_4var.csv`. Independently of any SAT solver: `python brute_force.py 4 7 > ../results/brute_force_n4_d7.txt` (about 1 minute, 3 GB of memory), then `python cross_check.py`, which compares the two files. Also `results/nosym_check_4var.log` (no symmetry breaking). All need the catalogue fetched first (`../data/fetch_catalogue.sh`) |
 | 8 | Symmetry lemma: a smallest monotone circuit for majority of an odd number of inputs has a presentation satisfying the `sym=3` constraints of `src/encode.py`, so adding them does not change satisfiability at the minimum size | proved-informal | Read the proof under "Symmetry breaking and why it loses nothing" in Method. Not formalized (see Limitations). Only claim 4 uses it |
 
@@ -219,7 +219,7 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
   over-constrain; in 221 of the 240 it is equal.
 
 No UNSAT proof certificate (DRAT) was produced or checked. The brute-force
-check does not reach 9 gates on 5 inputs, so claim 2 at size 9 rests on the
+check stops at 5 gates on 5 inputs, so claim 2 at sizes 6 to 9 rests on the
 solvers alone (two solvers with symmetry breaking, one without).
 
 **Catalogue comparison** (`src/catalogue_check.py`). For each entry: parse the
@@ -375,16 +375,21 @@ Sergeev abstract below, were done after the results, during write-up.
   asymptotic upper bounds ("size(THR_k^n) <= (4.5 - 2^(2-ceil(log2 k))) n +
   o(n) for 4 <= k = O(1)") and its constructions use XOR gates, so they are
   not monotone circuits. It also reports concrete small circuits found by
-  its program for 4-threshold functions on 5 to 8 inputs (a table of size
-  improvements such as "23 -> 10"); these are in the unrestricted basis and
-  none is a majority function. Its only monotone statement found by the text
+  its program for 4-threshold functions on 5 to 8 inputs (its Table 2:
+  "23 -> 10", "28 -> 14", "31 -> 17", "40 -> 22"). The 7-input row is 7-input
+  majority: a 17-gate circuit in the unrestricted binary basis, where gates
+  such as XOR are allowed. That does not bound the {AND, OR} count studied
+  here (monotone circuits can need more gates, and a min/max program cannot
+  use XOR), but it shows the non-monotone analogue of the 7-input question
+  has been attacked by the same method. Its only monotone statement found by the text
   search is a citation of Sergeev for the 2-threshold. No exact monotone
   value for small majority.
 - Read (abstract and a text search of the full paper for exact small cases):
   N. Dobrokhotova-Maikova, A. Kozachinskiy, V. Podolskii, "Towards Simpler
   Sorting Networks and Monotone Circuits for Majority", arXiv:2310.12270v1.
-  It concerns depth of monotone circuits for majority for large n ("an
-  explicit monotone circuit of depth O(log^{5/3} n)"), not size for small n.
+  It concerns depth of monotone circuits for majority for large n (an
+  explicit monotone circuit of depth O(log_2^{5/3} n), in the abstract's
+  words "we provide an explicit monotone circuit of depth"), not size for small n.
 - Abstract only (via Crossref and OpenAlex; the paper itself was not
   obtained): I. Sergeev, "On the complexity of monotone circuits for
   threshold symmetric Boolean functions", Diskretnaya Matematika 32 (2020),
@@ -505,3 +510,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, third fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief. In addition wrote an independent SAT formulation (pair selectors, full truth table, no symmetry breaking) and confirmed minimum-1 UNSAT for the 186 classes with minimum 1 to 8 and 13 of the 14 with minimum 9; confirmed the 210 catalogue entries are 210 distinct classes out of 7581 monotone functions (scratch runs, not committed here) | No number found wrong. Seven issues, fixed: the author's 2023 dissertation had been missed (now read and quoted); catalogue lower bounds leaned on the symmetry argument (now rerun without it, `results/nosym_check.log`); the lemma is now its own `proved-informal` claim; wording and memory figures |
 | 2026-11-24 | claude-fable-5-2, fourth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reran all steps under 5 minutes, own catalogue parser, replayed the local search's random stream, re-fetched and checked all quoted sources | No number found wrong. Six issues, fixed: the 60 local-search trials are 23 distinct problems; `updated` date; topical arXiv and OpenAlex searches added and the search outcome stated; access dates; `results/cross_check.log` now saved |
 | 2026-11-24 | claude-fable-5-2, fifth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all 7581 monotone 5-variable functions into 210 classes, all quoted sources re-fetched | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: the description of arXiv:2102.12579 and the stated reason for not formalizing claim 8 |
+| 2026-11-24 | claude-fable-5-2, sixth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all presentations of three programs against the lemma, sources re-fetched | No number found wrong. Four points, fixed: arXiv:2102.12579's table includes 7-input majority at 17 gates in the unrestricted basis (previously misdescribed); two statements about where brute force stops; one quotation |
