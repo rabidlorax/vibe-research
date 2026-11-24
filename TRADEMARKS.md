@@ -41,11 +41,3 @@ project's.
 Names and logos of third parties that appear here (data providers, software,
 model names, institutions, journals) belong to their owners and are likewise
 not licensed.
-
-## Correction
-
-Between commits `fde0ea6` and the one that introduced this text, this file
-contained a statement purporting to waive the owner's trademark rights. That
-text was written in error by an AI assistant that misunderstood the owner's
-instruction. It was never reviewed or approved by the owner, did not reflect
-the owner's intent, and is withdrawn. The owner made no such waiver.
