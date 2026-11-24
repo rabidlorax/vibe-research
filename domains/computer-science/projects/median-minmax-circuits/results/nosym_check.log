@@ -202,3 +202,5 @@ function 464767: minimum 10; size 9 with sym=0: UNSAT in 1215.7s
 function 65815: minimum 10; size 9 with sym=0: UNSAT in 1753.1s
 function 18292735: minimum 10; size 9 with sym=0: UNSAT in 959.0s
 function 18290687: minimum 10; size 9 with sym=0: UNSAT in 1197.5s
+function 394231807: minimum 10; size 9 with sym=0: UNSAT in 1856.9s
+205 classes with minimum >= 2 checked; not UNSAT: 0
