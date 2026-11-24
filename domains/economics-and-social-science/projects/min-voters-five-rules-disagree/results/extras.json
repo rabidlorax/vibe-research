@@ -3,6 +3,8 @@
  "published": {
   "Malkevitch 55": {
    "voters": 55,
+   "candidates": 5,
+   "ballot_types": 6,
    "strict": {
     "P": "A",
     "R": "B",
@@ -18,8 +20,10 @@
     "C": "E"
    }
   },
-  "Brandt-Matthaus-Saile Table 4, 14": {
+  "Brandt-Matthaus-Saile 14 (Table 3 in the journal, Table 4 in the preprint)": {
    "voters": 14,
+   "candidates": 5,
+   "ballot_types": 4,
    "strict": {
     "P": "A",
     "R": "E",
@@ -37,6 +41,8 @@
   },
   "Wiseman 11": {
    "voters": 11,
+   "candidates": 5,
+   "ballot_types": 5,
    "strict": {
     "P": "A",
     "R": "B",
@@ -48,6 +54,82 @@
     "P": "A",
     "R": "B",
     "H": null,
+    "B": "D",
+    "C": "E"
+   }
+  },
+  "Wiseman 12, six candidates": {
+   "voters": 12,
+   "candidates": 6,
+   "ballot_types": 5,
+   "strict": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   }
+  },
+  "Wiseman 12 with candidate E deleted (derived here)": {
+   "voters": 12,
+   "candidates": 5,
+   "ballot_types": 5,
+   "strict": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   }
+  },
+  "README strict 12": {
+   "voters": 12,
+   "candidates": 5,
+   "ballot_types": 5,
+   "strict": {
+    "P": "D",
+    "R": "C",
+    "H": "E",
+    "B": "A",
+    "C": "B"
+   },
+   "robust": {
+    "P": "D",
+    "R": "C",
+    "H": "E",
+    "B": "A",
+    "C": "B"
+   }
+  },
+  "README robust 11": {
+   "voters": 11,
+   "candidates": 5,
+   "ballot_types": 7,
+   "strict": {
+    "P": "A",
+    "R": "B",
+    "H": null,
+    "B": "D",
+    "C": "E"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
     "B": "D",
     "C": "E"
    }

@@ -97,12 +97,6 @@ def winners(profile, m, rules="PRHBC", majority_stop=False):
     return {k: table[k](profile, m) for k in rules}
 
 
-def all_different(profile, m, rules="PRHBC"):
-    w = winners(profile, m, rules)
-    vals = list(w.values())
-    return None not in vals and len(set(vals)) == len(vals)
-
-
 # --- "robust" convention: ties allowed, winner must not depend on tie-breaks ---
 
 def hare_winner_set(profile, m, alive=None):

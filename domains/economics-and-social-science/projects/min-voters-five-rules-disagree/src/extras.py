@@ -3,8 +3,9 @@
   python src/extras.py > results/extras.json
   python src/extras.py --majority-stop > results/extras_majority_stop.json
 
-1. Re-evaluates three published profiles with rules.py (key "strict" uses
-   the convention selected on the command line).
+1. Re-evaluates published profiles, and the two profiles printed in the
+   README, with rules.py. The first result key is "strict" or
+   "majority_stop" according to the command line; "robust" is always given.
 2. Fewest ballot types: overall, and with exactly 12 voters (CP-SAT).
 3. For which n from 1 to 140 a strict profile with exactly n voters exists.
 """
@@ -16,20 +17,29 @@ from rules import winners, winners_robust
 
 MS = "--majority-stop" in sys.argv   # the other Hare convention, see model.cases
 L = "ABCDE"
-def prof(spec):
-    return {tuple(L.index(ch) for ch in b): k for b, k in spec}
+def prof(spec, names=L):
+    return {tuple(names.index(ch) for ch in b): k for b, k in spec}
 
+W6 = [("ADEFBC", 4), ("BFEDCA", 3), ("CFDBAE", 2), ("DCEBAF", 1), ("FDECBA", 2)]
 PUBLISHED = {
-    "Malkevitch 55": ([("ADECB", 18), ("BEDCA", 12), ("CBEDA", 10), ("DCEBA", 9), ("EBDCA", 4), ("ECDBA", 2)], "PRHBC"),
-    "Brandt-Matthaus-Saile Table 4, 14": ([("ACBDE", 5), ("EBCDA", 4), ("DCBEA", 3), ("BDECA", 2)], "PRHBC"),
-    "Wiseman 11": ([("ADECB", 4), ("BEDCA", 3), ("CEDBA", 2), ("DCBEA", 1), ("EDCBA", 1)], "PRHBC"),
+    "Malkevitch 55": ([("ADECB", 18), ("BEDCA", 12), ("CBEDA", 10), ("DCEBA", 9), ("EBDCA", 4), ("ECDBA", 2)], "ABCDE"),
+    "Brandt-Matthaus-Saile 14 (Table 3 in the journal, Table 4 in the preprint)":
+        ([("ACBDE", 5), ("EBCDA", 4), ("DCBEA", 3), ("BDECA", 2)], "ABCDE"),
+    "Wiseman 11": ([("ADECB", 4), ("BEDCA", 3), ("CEDBA", 2), ("DCBEA", 1), ("EDCBA", 1)], "ABCDE"),
+    "Wiseman 12, six candidates": (W6, "ABCDEF"),
+    "Wiseman 12 with candidate E deleted (derived here)": ([(b.replace("E", ""), k) for b, k in W6], "ABCDF"),
+    "README strict 12": ([("DABCE", 4), ("CBAED", 3), ("BAECD", 2), ("EBACD", 2), ("AEDCB", 1)], "ABCDE"),
+    "README robust 11": ([("AEDBC", 3), ("BDECA", 2), ("CEDBA", 2), ("ADBCE", 1), ("BDAEC", 1), ("DCBEA", 1), ("ECDAB", 1)], "ABCDE"),
 }
-out = {"majority_stop": "--majority-stop" in sys.argv, "published": {}}
-for name, (spec, rules) in PUBLISHED.items():
-    p = prof(spec)
-    name_of = lambda w: {k: (L[v] if v is not None else None) for k, v in w.items()}
-    out["published"][name] = dict(voters=sum(p.values()), strict=name_of(winners(p, 5, rules, majority_stop=MS)),
-                                  robust=name_of(winners_robust(p, 5, rules)))
+CONV = "majority_stop" if MS else "strict"
+out = {"majority_stop": MS, "published": {}}
+for name, (spec, names) in PUBLISHED.items():
+    p = prof(spec, names)
+    m = len(names)
+    name_of = lambda w: {k: (names[v] if v is not None else None) for k, v in w.items()}
+    out["published"][name] = {"voters": sum(p.values()), "candidates": m, "ballot_types": len(p),
+                              CONV: name_of(winners(p, m, "PRHBC", majority_stop=MS)),
+                              "robust": name_of(winners_robust(p, m, "PRHBC"))}
 
 allc = list(cases(5, "PRHBC", majority_stop=MS))
 
