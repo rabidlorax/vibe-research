@@ -435,7 +435,11 @@ Sergeev abstract below, were done after the results, during write-up.
   variables"; "median min max operations optimal network lower bound";
   "optimal selection network median comparators". DBLP's search API returned
   HTTP 202 with no results and was not searched.
-- One relevant hit from OpenAlex, abstract only read (single source, a Zenodo
+- A second on-topic title in the same OpenAlex results, seen and not read:
+  "Selection Networks" (1991, doi:10.1137/0220054). From the title it is
+  about comparator selection networks, the same different cost model as the
+  next item; nothing is claimed about its content.
+- One OpenAlex hit looked into, abstract only read (single source, a Zenodo
   record, so `literature` at best): R. Martino, "Optimality of a
   25-Comparator Median Selection Network on Eleven Inputs", 2026-11-20,
   doi:10.5281/zenodo.24397283. Its abstract states that "exactly 25
@@ -481,8 +485,8 @@ the baseline network already contradicts), and nothing for 7 or 9.
   project. Until
   then claim 4's conclusion about medians of 7 and 9 values should be read as
   a computation plus an unformalized lemma. For 5 inputs the lemma is
-  corroborated, not proved, by the fact that every symmetry level gives the
-  same answers as no symmetry breaking.
+  corroborated, not proved, by the fact that symmetry levels 1 and 3 give
+  the same answers as no symmetry breaking in the committed logs.
 - Sizes for 7 and 9 inputs are open: 12 to 20 and 14 to 30. The lower bounds
   are far from the upper bounds and say little. Each extra size costs roughly
   6 to 17 times more solver time (n=9: 10 s, 68 s, 1146 s for sizes 11, 12,
@@ -517,3 +521,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, fifth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all 7581 monotone 5-variable functions into 210 classes, all quoted sources re-fetched | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: the description of arXiv:2102.12579 and the stated reason for not formalizing claim 8 |
 | 2026-11-24 | claude-fable-5-2, sixth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, enumeration of all presentations of three programs against the lemma, sources re-fetched | No number found wrong. Four points, fixed: arXiv:2102.12579's table includes 7-input majority at 17 gates in the unrestricted basis (previously misdescribed); two statements about where brute force stops; one quotation |
 | 2026-11-24 | claude-fable-5-2, seventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sentence-by-sentence comparison of quotations with re-fetched sources | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: one limitation was unqualified; a quotation from the dissertation had lost its condition; two imprecise sentences |
+| 2026-11-24 | claude-fable-5-2, eighth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, all sources re-fetched and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: "every symmetry level" narrowed to the levels with committed logs; a second on-topic search hit now listed as seen and not read. It also noted, for the owner, that claim 8 remains `proved-informal` at `status: result` |
