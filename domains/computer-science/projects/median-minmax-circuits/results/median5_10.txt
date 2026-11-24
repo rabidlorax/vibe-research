@@ -1,0 +1,12 @@
+# found by search.py n=5 s=10 sym=3 solver=cadical153
+5 3
+min 0 1
+max 0 1
+min 2 3
+max 2 3
+max 5 7
+min 6 8
+min 4 10
+max 4 10
+max 9 11
+min 12 13

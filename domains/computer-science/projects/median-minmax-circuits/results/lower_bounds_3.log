@@ -1,0 +1,4 @@
+n=3 s=1 solver=cadical153 vars=26 clauses=50 UNSAT 0.0s
+n=3 s=2 solver=cadical153 vars=54 clauses=122 UNSAT 0.0s
+n=3 s=3 solver=cadical153 vars=84 clauses=234 UNSAT 0.0s
+n=3 s=4 solver=cadical153 vars=116 clauses=402 SAT 0.0s

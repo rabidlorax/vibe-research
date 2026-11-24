@@ -1,0 +1,251 @@
+id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
+1,2010-2015,flagged,PMC3115514,F,"F(1,22) = 0.31, p = 0.40",0,inconsistent_as_printed,
+2,2010-2015,flagged,PMC3434872,t,"t(70) = -0.16, p = 0.99",0,inconsistent_as_printed,
+3,2010-2015,flagged,PMC3230907,F,"F (2,2950) = 1.75; p = 0.141",0,inconsistent_as_printed,
+4,2010-2015,flagged,PMC4568392,F,"F(1, 14) = 0.61, p < 0.4",0,inconsistent_as_printed,
+5,2010-2015,flagged,PMC3784796,r,"r(27) = -0.40, p = 0.04",0,inconsistent_as_printed,
+6,2010-2015,flagged,PMC3570981,F,"F(1,283) = 1.75, p = 0.001",1,inconsistent_as_printed,
+7,2010-2015,flagged,PMC4350398,F,"F(2,114) = 5.86, p = 0.005",0,inconsistent_as_printed,
+8,2010-2015,flagged,PMC4435236,F,"F(7,80) = 2.12, p = 0.005",1,inconsistent_as_printed,
+9,2010-2015,flagged,PMC3701856,F,"F(1, 15) = 0.043, p = 0.837",0,inconsistent_as_printed,
+10,2010-2015,flagged,PMC4658451,F,"F(1, 8) = 5.97, P = 0.046",0,inconsistent_as_printed,
+11,2010-2015,flagged,PMC4375922,F,"F(2,38) = 13.327, p = 0.002",0,inconsistent_as_printed,
+12,2010-2015,flagged,PMC3578281,t,"t(49) = -1.70, p = 0.097",0,inconsistent_as_printed,
+13,2010-2015,flagged,PMC3867122,F,"F(2, 21) = 6.14, p = 0.02",0,inconsistent_as_printed,
+14,2010-2015,flagged,PMC3208388,t,"t(14) = 1.17, p = 0.247",0,inconsistent_as_printed,
+15,2010-2015,flagged,PMC4034341,F,"F(3.507,47) = 3.60, p = 0.01",0,inconsistent_as_printed,
+16,2010-2015,flagged,PMC4416471,F,"F(1,30) = 2.32, p = 0.137",0,inconsistent_as_printed,
+17,2010-2015,flagged,PMC3438820,F,"F (4, 104) = 3.13, p = 0.036",0,inconsistent_as_printed,
+18,2010-2015,flagged,PMC4165317,F,"F(3, 42) = 1.12; p = 0.34",0,inconsistent_as_printed,
+19,2010-2015,flagged,PMC4179694,F,"F(1,23) = 0.49, p = 0.827",0,inconsistent_as_printed,
+20,2010-2015,flagged,PMC4700179,t,"t(90) = 1.24, p = 0.26",0,inconsistent_as_printed,
+21,2010-2015,flagged,PMC3975119,chi2,"χ2(1) = 4.56, p = 0.02",0,inconsistent_as_printed,
+22,2010-2015,flagged,PMC4429229,F,"F(2, 40) = 2.33, p = 0.12",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
+23,2010-2015,flagged,PMC4204449,t,t(19) = -2.53; p < 0.02,0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+24,2010-2015,flagged,PMC4256994,F,"F(1, 104) = 0.11, p = 0.92",0,inconsistent_as_printed,
+25,2010-2015,flagged,PMC4237038,t,"t(72) = 3.5, p > 0.001",0,inconsistent_as_printed,
+26,2010-2015,flagged,PMC3155092,F,"F(3, 93) = 8.701, p = 0.002",0,inconsistent_as_printed,
+27,2010-2015,flagged,PMC4290540,F,"F(1, 16) = 27.098, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+28,2010-2015,flagged,PMC4179694,t,"t(31) = 2.15, p = 0.038",0,inconsistent_as_printed,
+29,2010-2015,flagged,PMC3389808,F,"F(1,28) = 10.99, p = 0.002",0,inconsistent_as_printed,
+30,2010-2015,flagged,PMC3404551,F,"F(1, 5) = 122.2; p < 0.0001",0,inconsistent_as_printed,
+31,2010-2015,flagged,PMC4290540,F,"F(2, 28) = 17.09, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+32,2010-2015,flagged,PMC4488606,F,"F(1, 354) = 8.18, p < 0.001",0,inconsistent_as_printed,
+33,2010-2015,flagged,PMC4508494,t,"t(16) = 4.454, p < 0.0001",0,inconsistent_as_printed,
+34,2010-2015,flagged,PMC3755324,t,"t(16) = 17.87, P = 0.0001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+35,2010-2015,flagged,PMC3887320,F,"F(3,18) = 4.239, p = 0.023",0,inconsistent_as_printed,
+36,2010-2015,flagged,PMC4391228,F,"F(1,15) = 10.51, p < 0.002",0,inconsistent_as_printed,
+37,2010-2015,flagged,PMC4490215,F,"F(2,60) = 3.51, p = 0.0417",0,inconsistent_as_printed,
+38,2010-2015,flagged,PMC4294119,t,t(82) = -5.624; p = 0.0001,0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+39,2010-2015,flagged,PMC3685809,F,"F(1, 26) = 1.121, p = 0.229",0,inconsistent_as_printed,
+40,2010-2015,flagged,PMC4523701,F,"F(2,61) = 2.51, p = 0.18",0,inconsistent_as_printed,
+41,2010-2015,flagged_decision,PMC3419462,t,"t(36) = 1.842, p = 0.037",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+42,2010-2015,flagged_decision,PMC4553392,F,"F(1,84) = 3.86, p < 0.05",1,inconsistent_as_printed,
+43,2010-2015,flagged_decision,PMC4064705,t,"t(23) = -1.77, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+44,2010-2015,flagged_decision,PMC3499913,t,"t(31) = 2.54, p = 0.1",1,inconsistent_as_printed,
+45,2010-2015,flagged_decision,PMC4490215,t,"t(6) = 3.62, p = 0.064",1,inconsistent_as_printed,
+46,2010-2015,flagged_decision,PMC4628112,chi2,"χ2(28) = 37.36, p < 0.001",1,inconsistent_as_printed,
+47,2010-2015,flagged_decision,PMC3714449,chi2,"χ2(1) = 4.86, p = 0.3",1,inconsistent_as_printed,
+48,2010-2015,flagged_decision,PMC4001056,F,"F(1, 65) = 3.06, p < 0.01",1,inconsistent_as_printed,
+49,2010-2015,flagged_decision,PMC4664952,t,t(48) = 1.863; p = 0.035,1,inconsistent_as_printed,"reported p is close to, but does not round to, half the two-tailed value"
+50,2010-2015,flagged_decision,PMC3906500,F,"F(1, 22) =0.45, p = 0.009",1,inconsistent_as_printed,
+51,2010-2015,flagged_decision,PMC4245895,t,"t(7) = 1.94, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+52,2010-2015,flagged_decision,PMC4162385,F,"F(2, 14) = 3.83, p = 0.071",1,inconsistent_as_printed,
+53,2010-2015,flagged_decision,PMC3689145,F,"F(1, 18) = 4.14, p = 0.05",1,inconsistent_as_printed,
+54,2010-2015,flagged_decision,PMC4187611,F,"F(1, 1) = 6.18, p < 0.05",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+55,2010-2015,flagged_decision,PMC4493770,F,"F(1, 4) = 4.74, p = 0.008",1,inconsistent_as_printed,
+56,2010-2015,flagged_decision,PMC4237035,F,"F(1,1944) = 3.71, p < 0.05",1,inconsistent_as_printed,
+57,2010-2015,flagged_decision,PMC4516813,F,"F(1,36) = 2.43, p = 0.011",1,inconsistent_as_printed,
+58,2010-2015,flagged_decision,PMC3842028,t,"t(205) = 16.50, p = 0.053",1,inconsistent_as_printed,
+59,2010-2015,flagged_decision,PMC3985017,r,r(40) = 0.31; p = 0.057,1,inconsistent_as_printed,
+60,2010-2015,flagged_decision,PMC4598580,F,"F(3,268) = 1.79, p < 0.01",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (here a multivariate test, Pillai's trace, is named just before), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+61,2010-2015,not_flagged,PMC3888940,F,"F(1,71) = 1.74, p = 0.191",0,correctly_extracted,
+62,2010-2015,not_flagged,PMC4145714,F,"F(2, 96) = 31.78, p < 0.001",0,correctly_extracted,
+63,2010-2015,not_flagged,PMC4703753,F,"F(1, 28) = 10.59, p = 0.003",0,correctly_extracted,
+64,2010-2015,not_flagged,PMC3827540,F,"F(3, 201) = 12.791, p < 0.0001",0,correctly_extracted,
+65,2010-2015,not_flagged,PMC3941302,F,"F(3, 3.57) = 28.319, p = 0.006",0,correctly_extracted,
+66,2010-2015,not_flagged,PMC4502344,F,"F(2, 26) = 19.04, p < 0.001",0,correctly_extracted,
+67,2010-2015,not_flagged,PMC3763199,t,"t(33) = 2.15, p < 0.05",0,correctly_extracted,
+68,2010-2015,not_flagged,PMC4165223,z,"z = 1.132, p = 0.258",0,correctly_extracted,
+69,2010-2015,not_flagged,PMC4292789,F,"F(2, 76) = 4.03, p = 0.022",0,correctly_extracted,
+70,2010-2015,not_flagged,PMC3512352,F,"F(2, 52) = 8.011, p = 0.001",0,correctly_extracted,
+71,2016-2021,flagged,PMC5479916,F,"F(2,33) = 0.75; p = 0.928",0,inconsistent_as_printed,
+72,2016-2021,flagged,PMC8740466,F,"F(2,80) = 5.50, p = 0.008",0,inconsistent_as_printed,
+73,2016-2021,flagged,PMC6004412,t,"t(33) = -1.4046, p = 0.303",0,inconsistent_as_printed,
+74,2016-2021,flagged,PMC5704390,F,"F(1, 3) = 0.35, p = 0.76",0,inconsistent_as_printed,
+75,2016-2021,flagged,PMC5447762,F,"F(1,210) = 38.31, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+76,2016-2021,flagged,PMC8523891,z,"z = 3.37, p = 0.004",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
+77,2016-2021,flagged,PMC5098155,F,"F(8, 120) = 2.486, p = 0.039",0,inconsistent_as_printed,
+78,2016-2021,flagged,PMC8505693,F,"F (3, 104)=1.897, p =0.204",0,inconsistent_as_printed,
+79,2016-2021,flagged,PMC5991166,t,"t(90) = -2.42, p = 0.04",0,inconsistent_as_printed,
+80,2016-2021,flagged,PMC6281884,F,"F(3,38) = 2.73, p = 0.043",1,inconsistent_as_printed,
+81,2016-2021,flagged,PMC5985557,F,"F(1, 7) = 7.47, p = 0.026",0,inconsistent_as_printed,
+82,2016-2021,flagged,PMC6298257,F,"F(1,326) = 10.304, p < 0.001",0,inconsistent_as_printed,
+83,2016-2021,flagged,PMC7678406,F,"F(2,115) = 4.03, p = 0.021",0,inconsistent_as_printed,
+84,2016-2021,flagged,PMC4951528,F,"F(1,1276) = 3.471, p = 0.062",0,inconsistent_as_printed,
+85,2016-2021,flagged,PMC7838065,t,"t(98) = 1.66, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+86,2016-2021,flagged,PMC4836202,F,"F(1,76) = 6.16, p = 0.01",0,inconsistent_as_printed,
+87,2016-2021,flagged,PMC5682102,t,"t(33) = -2.34, p = 0.07",1,inconsistent_as_printed,
+88,2016-2021,flagged,PMC5039177,F,"F(2,124) = 5.190, p = 0.024",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
+89,2016-2021,flagged,PMC6882934,t,"t(29) = 8.256, p = 0.0001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+90,2016-2021,flagged,PMC6218570,chi2,"χ2(6) = 0.02, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+91,2016-2021,flagged,PMC6536621,F,"F (1,131) = 0.257, p = 0.663",0,inconsistent_as_printed,
+92,2016-2021,flagged,PMC8144445,t,"t(1681) = 2.96, p = 0.016",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+93,2016-2021,flagged,PMC8416160,F,"F(3.47,173.45) = 2.15, p = 0.04",1,inconsistent_as_printed,
+94,2016-2021,flagged,PMC6258781,t,"t(38) = 9.72, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+95,2016-2021,flagged,PMC8044897,t,"t(113) = -2.349, p = 0.020",0,inconsistent_as_printed,
+96,2016-2021,flagged,PMC8264060,z,"z = -1.17, p = 0.73",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+97,2016-2021,flagged,PMC6733970,t,"t(101.29) = 2.27, p = 0.02",0,inconsistent_as_printed,
+98,2016-2021,flagged,PMC5732940,F,"F(2, 54) = 3.673; p = 0.035",0,inconsistent_as_printed,
+99,2016-2021,flagged,PMC5735369,F,"F(1,60) = 2.289, p = 0.120",0,inconsistent_as_printed,
+100,2016-2021,flagged,PMC5920021,chi2,"χ2(1) = 1.96, p = 0.18",0,inconsistent_as_printed,
+101,2016-2021,flagged,PMC8044417,z,"z = -2.632, p < 0.001",0,inconsistent_as_printed,
+102,2016-2021,flagged,PMC7947322,F,"F(5,115) = 3.083, P = 0.047",0,inconsistent_as_printed,
+103,2016-2021,flagged,PMC5487446,F,"F(1,1) = 0.43, p = 0.52",0,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+104,2016-2021,flagged,PMC8925987,z,"z = 4.39, p = 0.006",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+105,2016-2021,flagged,PMC5600996,F,"F(1,39) = 12.00, p = 0.002",0,inconsistent_as_printed,
+106,2016-2021,flagged,PMC6610464,F,"F(3,868) = 1.33, p = 0.268",0,inconsistent_as_printed,
+107,2016-2021,flagged,PMC6582403,F,"F (2, 62) = 5.46, p = 0.012",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
+108,2016-2021,flagged,PMC5881138,t,"t(610) = 1.91, p = 0.051",0,inconsistent_as_printed,
+109,2016-2021,flagged,PMC6036149,F,"F(4,123) = 0.66, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+110,2016-2021,flagged,PMC7835423,z,"z = 0.374, p = 0.975",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+111,2016-2021,flagged_decision,PMC6937985,F,"F(1.54,80.5) = 452, p = 0.588",1,inconsistent_as_printed,
+112,2016-2021,flagged_decision,PMC8209257,F,"F(58,1)=11.522, p=0.001",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+113,2016-2021,flagged_decision,PMC7773727,t,"t(19) = 2.06, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+114,2016-2021,flagged_decision,PMC4845253,F,"F(8, 99) = 11.09, p = 0.212",1,inconsistent_as_printed,
+115,2016-2021,flagged_decision,PMC7366172,F,"F(3,110) = 2.514, p = 0.012",1,inconsistent_as_printed,
+116,2016-2021,flagged_decision,PMC5826309,F,"F(3, 156) = 1.11, p < 0.001",1,inconsistent_as_printed,
+117,2016-2021,flagged_decision,PMC6409495,chi2,"χ2(25) = 37.98, p > 0.05",1,inconsistent_as_printed,
+118,2016-2021,flagged_decision,PMC7835423,z,"z = 2.468, p = 0.117",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+119,2016-2021,flagged_decision,PMC5011143,F,"F(2,76) = 3.86, p = 0.057",1,inconsistent_as_printed,
+120,2016-2021,flagged_decision,PMC7431697,t,t(1) = 2.21; p = 0.030,1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+121,2016-2021,flagged_decision,PMC6742704,F,"F(1,40) = 4.839, p = 0.34",1,inconsistent_as_printed,
+122,2016-2021,flagged_decision,PMC5972315,F,"F(1, 50) = 6.37, p > 0.05",1,inconsistent_as_printed,
+123,2016-2021,flagged_decision,PMC6685415,F,"F(1, 39) = 3.425, p = 0.043",1,inconsistent_as_printed,
+124,2016-2021,flagged_decision,PMC8649631,F,"F (1, 34.965) = 4.663; p = 0.054",1,inconsistent_as_printed,
+125,2016-2021,flagged_decision,PMC5487462,F,"F(1.187, 1.039) = 10.013, p = 0.004",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed; 'Greenhouse-Geisser corrected' is stated just before
+126,2016-2021,flagged_decision,PMC6831644,t,"t(20) = 1.94, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+127,2016-2021,flagged_decision,PMC6673756,t,"t(437) = 2.32, p = 0.16",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+128,2016-2021,flagged_decision,PMC8176019,F,"F (2, 46) = 3.27, p = 0.068",1,inconsistent_as_printed,
+129,2016-2021,flagged_decision,PMC6079389,F,"F(1,28) = 1.26, p < 0.05",1,inconsistent_as_printed,
+130,2016-2021,flagged_decision,PMC7431697,t,t(1) = 2.92; p = 0.005,1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+131,2016-2021,not_flagged,PMC5011137,z,"Z = 0.03, p = 0.98",0,correctly_extracted,
+132,2016-2021,not_flagged,PMC5479883,t,"t(119) = -3.40, p < 0.001",0,correctly_extracted,
+133,2016-2021,not_flagged,PMC8525598,chi2,"X2(69) = 93.37, p = 0.03",0,correctly_extracted,
+134,2016-2021,not_flagged,PMC6896249,F,"F(8,569) = 5.99, p < 0.001",0,correctly_extracted,
+135,2016-2021,not_flagged,PMC4879865,chi2,"Chi2(1) = 2.51, p = 0.11",0,correctly_extracted,
+136,2016-2021,not_flagged,PMC6443905,F,"F(1,26) = 21.42, p < 0.001",0,correctly_extracted,
+137,2016-2021,not_flagged,PMC6275418,F,"F(1,15) = 6.046, p = 0.027",0,correctly_extracted,
+138,2016-2021,not_flagged,PMC4774648,F,"F(1,39) = 0.35, p = 0.56",0,correctly_extracted,
+139,2016-2021,not_flagged,PMC6290778,F,"F(2,94) = 30.14, p < 0.001",0,correctly_extracted,
+140,2016-2021,not_flagged,PMC8716457,F,"F(1, 436) = 4.17, p = 0.04",0,correctly_extracted,
+141,2022-2026,flagged,PMC9280626,F,"F(1, 61) = 62.88, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+142,2022-2026,flagged,PMC12061860,F,"F(2, 26) = 51.413, p = 0.26",1,inconsistent_as_printed,
+143,2022-2026,flagged,PMC13619481,chi2,"χ2(23) = 28.96, p = 0.018",1,inconsistent_as_printed,
+144,2022-2026,flagged,PMC10470034,F,"F(1,17) = 7.78, p = 0.0127",0,inconsistent_as_printed,
+145,2022-2026,flagged,PMC9752061,F,"F(1,66) = 8.48, p < 0.001",0,inconsistent_as_printed,
+146,2022-2026,flagged,PMC10693332,F,"F(1, 157) = 3.63, p < 0.050",1,inconsistent_as_printed,
+147,2022-2026,flagged,PMC12812655,F,"F(1, 71) = 11.57, p < 0.001",0,inconsistent_as_printed,
+148,2022-2026,flagged,PMC9905233,t,"t(106) = 0.41, p = 0.003",1,inconsistent_as_printed,
+149,2022-2026,flagged,PMC10808736,t,"t(106) = -2.91, p = 0.01",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+150,2022-2026,flagged,PMC12605097,t,t(200) = 2.48; p = 0.027,0,inconsistent_as_printed,
+151,2022-2026,flagged,PMC12204084,r,"r(60) = 0.298, p = 0.021",0,inconsistent_as_printed,
+152,2022-2026,flagged,PMC9035788,F,"F(1,117) = 0.50, p = 0.478",0,inconsistent_as_printed,
+153,2022-2026,flagged,PMC13752103,chi2,"χ2(6) = 12.78, p = 0.81",1,inconsistent_as_printed,
+154,2022-2026,flagged,PMC11442257,r,"r (38) = -0.51, p = 0.759",1,inconsistent_as_printed,
+155,2022-2026,flagged,PMC11221354,r,"r(59) = 0.15, p = 0.22",0,inconsistent_as_printed,
+156,2022-2026,flagged,PMC9732572,F,"F (1, 38) = 66.474, p = 0.031",0,inconsistent_as_printed,
+157,2022-2026,flagged,PMC9255644,F,"F(1, 107) = 4.58, p = 0.04",0,inconsistent_as_printed,
+158,2022-2026,flagged,PMC11879973,F,"F(1,101) = 5.39, p = 0.03",0,inconsistent_as_printed,
+159,2022-2026,flagged,PMC9399810,t,"t(56) = 2.49, p = 0.008",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+160,2022-2026,flagged,PMC8966699,z,"Z = 1.946, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+161,2022-2026,flagged,PMC10509471,t,"t (76) = -1.976, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+162,2022-2026,flagged,PMC11859578,F,"F(4, 198) = 13.20, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+163,2022-2026,flagged,PMC10098129,F,"F(1,58) = 4.198, p = 0.046",0,inconsistent_as_printed,
+164,2022-2026,flagged,PMC12308555,chi2,"χ2(16) = 16.440, p < 0.001",1,inconsistent_as_printed,
+165,2022-2026,flagged,PMC12568519,z,"z = -2.77, p = 0.017",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+166,2022-2026,flagged,PMC13454204,chi2,"χ2(48, N = 466) = 83.199, p < 0.001",0,inconsistent_as_printed,
+167,2022-2026,flagged,PMC9791124,F,"F(2,44) = 0.884, p < 0.420",0,inconsistent_as_printed,
+168,2022-2026,flagged,PMC13403326,t,"t(195) = 0.766, p = 0.45",0,inconsistent_as_printed,
+169,2022-2026,flagged,PMC9706391,F,"F (7, 196) = 0.66, p = 0.75",0,inconsistent_as_printed,
+170,2022-2026,flagged,PMC10731054,chi2,"χ2(7) = 12.812, p < 0.05",1,inconsistent_as_printed,
+171,2022-2026,flagged,PMC11528541,t,"t(104) = -0.253, p = 0.400",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+172,2022-2026,flagged,PMC8913716,t,"t(18) = -0.762, p < 0.05",1,inconsistent_as_printed,
+173,2022-2026,flagged,PMC10716249,chi2,"χ2 (198) = 179.825, p < 0.001",1,inconsistent_as_printed,
+174,2022-2026,flagged,PMC13290894,F,"F(1, 62) = 10.376, p < 0.001",0,inconsistent_as_printed,
+175,2022-2026,flagged,PMC13012994,F,"F(2,52) = 5.05, p = 0.009",0,inconsistent_as_printed,
+176,2022-2026,flagged,PMC9853910,t,"t(94) = 3.15, p = 0.014",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+177,2022-2026,flagged,PMC13101904,F,"F(1, 62) = 25.83, p = 0.0001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
+178,2022-2026,flagged,PMC9152543,t,"t(21) = 3.83, p = 0.004",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+179,2022-2026,flagged,PMC12599332,F,"F(1, 16) = 5.76, p = 0.0867",1,inconsistent_as_printed,
+180,2022-2026,flagged,PMC9012163,F,"F(1, 138) = 3.91, p < 0.049",0,inconsistent_as_printed,
+181,2022-2026,flagged_decision,PMC9302000,z,"z = -1.558, p = 0.041",1,inconsistent_as_printed,
+182,2022-2026,flagged_decision,PMC10083353,t,"t(0.097) = -2.734, p < 0.01",no longer extracted,extraction_error,"number in parentheses is a standard error, not degrees of freedom"
+183,2022-2026,flagged_decision,PMC9277475,z,"Z = -1.87, p = 0.031",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+184,2022-2026,flagged_decision,PMC9244848,t,"t(18) = -1.7, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+185,2022-2026,flagged_decision,PMC9152543,t,"t(13) = 2.28, p = 0.16",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+186,2022-2026,flagged_decision,PMC11893985,chi2,"χ2(1) = 5.13, p = 0.077",1,inconsistent_as_printed,
+187,2022-2026,flagged_decision,PMC9128483,z,"z = -2.42, p = 0.07",1,inconsistent_as_printed,
+188,2022-2026,flagged_decision,PMC12463826,t,"t(552) = 1.805, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+189,2022-2026,flagged_decision,PMC10556861,F,"F(12,46) = 2.56, p = 0.09",1,inconsistent_as_printed,
+190,2022-2026,flagged_decision,PMC11696535,t,"t(76) = -3.99, p = 1.00",no longer extracted,extraction_error,"p-value was in scientific notation (1.00E-04); extractor bug, fixed after this check"
+191,2022-2026,flagged_decision,PMC10758175,z,"Z = -2.33, p = 0.07",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+192,2022-2026,flagged_decision,PMC13190181,chi2,"χ2(3163) = 171, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+193,2022-2026,flagged_decision,PMC10361065,F,"F(2, 339) = 0.389, p = 0.021",1,inconsistent_as_printed,
+194,2022-2026,flagged_decision,PMC9020366,z,"z = 0.32, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+195,2022-2026,flagged_decision,PMC11578697,t,"t (148.74) = 1.79, p = 0.038",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+196,2022-2026,flagged_decision,PMC8969415,t,"t (78) = 1.123, p < 0.001",1,inconsistent_as_printed,
+197,2022-2026,flagged_decision,PMC12327518,F,"F (2, 192) = 7.52, p = 0.35",1,inconsistent_as_printed,
+198,2022-2026,flagged_decision,PMC9685298,t,"t(2.72) = 0.008, p < 0.001",1,extraction_error,the number in parentheses is not a degrees-of-freedom value; still extracted by the current code
+199,2022-2026,flagged_decision,PMC13719614,z,"z = -2.08, p = 0.14",1,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
+200,2022-2026,flagged_decision,PMC9681152,t,"t(32) = -2.099, p = 0.08",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+201,2022-2026,not_flagged,PMC11153775,chi2,"χ2(84, N = 280) = 323.114, p < 0.05",0,correctly_extracted,
+202,2022-2026,not_flagged,PMC12727628,chi2,"χ2(9) = 40.864, p < 0.001",0,correctly_extracted,
+203,2022-2026,not_flagged,PMC11022972,t,"t(358) = -4.164, p < 0.001",0,correctly_extracted,
+204,2022-2026,not_flagged,PMC8882644,F,"F(1, 29) = 1.68, p = 0.205",0,correctly_extracted,
+205,2022-2026,not_flagged,PMC10187036,F,"F(2,328) = 11.8, p < 0.001",0,correctly_extracted,
+206,2022-2026,not_flagged,PMC11799280,F,"F(1, 77) = 96.43, p < 0.001",0,correctly_extracted,
+207,2022-2026,not_flagged,PMC13677549,F,"F (1,68) = 4.53, p < 0.05",0,correctly_extracted,
+208,2022-2026,not_flagged,PMC10242019,F,"F(1,369) = 8.23, p = 0.004",0,correctly_extracted,
+209,2022-2026,not_flagged,PMC10369178,z,"z = 3.028, p = 0.002",0,correctly_extracted,
+210,2022-2026,not_flagged,PMC12463962,F,"F(1, 182) = 0.04, p = 0.84",0,correctly_extracted,
+211,2026H2,flagged,PMC13553237,F,"F(4, 751) = 2.99, p = 0.022",0,inconsistent_as_printed,
+212,2026H2,flagged,PMC13719614,z,"z = -0.75, p = 0.91",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+213,2026H2,flagged,PMC13526591,z,"z = -1.75, p = 0.0931",0,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (here a publication-bias test in a table), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+214,2026H2,flagged,PMC13422211,chi2,"χ2 (613) = 1126.02, p > 0.05",1,inconsistent_as_printed,
+215,2026H2,flagged,PMC13506903,F,"F(3,151) = 2.99, p = 0.04",0,inconsistent_as_printed,
+216,2026H2,flagged,PMC13553237,F,"F(4, 751) = 3.35, p = 0.012",0,inconsistent_as_printed,
+217,2026H2,flagged,PMC13617326,z,"z = 2.808, p = .002",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+218,2026H2,flagged,PMC13612568,F,"F(1, 620) = 0.97, p > 0.33",0,inconsistent_as_printed,
+219,2026H2,flagged,PMC13588754,F,"F(4, 120) = 0.65, p = 0.621",0,inconsistent_as_printed,
+220,2026H2,flagged,PMC13368345,t,"t(10) = 1.2, p = 0.78",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
+221,2026H2,flagged,PMC13582562,t,"t(594) = -3.50, p = 0.002",0,inconsistent_as_printed,
+222,2026H2,flagged,PMC13521767,F,"F(2,620) = 0.599, p = 0.54",0,inconsistent_as_printed,
+223,2026H2,flagged,PMC13752103,chi2,"χ2(3) = 15.84, p = 0.01",0,inconsistent_as_printed,
+224,2026H2,flagged,PMC13623748,F,"F (1,30) = 7.24, p = 0.049",0,inconsistent_as_printed,
+225,2026H2,flagged,PMC13481498,t,"t(782) = 1.68, p=.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+226,2026H2,flagged,PMC13372592,t,"t(2) = 22.71, p < 0.001",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+227,2026H2,flagged,PMC13588754,F,"F(5, 135) = 1.88, p = 0.100",0,inconsistent_as_printed,
+228,2026H2,flagged,PMC13588754,r,"r (137) = 0.19, p = 0.020",0,inconsistent_as_printed,
+229,2026H2,flagged,PMC13601251,z,"z = 0.056, p = 0.014",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
+230,2026H2,flagged,PMC13627041,z,"z = 3.46, p = 0.007",0,inconsistent_as_printed,
+231,2026H2,not_flagged,PMC13771028,chi2,"χ2(11) = 7.869, p = 0.725",0,correctly_extracted,
+232,2026H2,not_flagged,PMC13553221,F,"F(5, 379) = 5.33, p < 0.001",0,correctly_extracted,
+233,2026H2,not_flagged,PMC13631841,F,"F(2, 312) = 15.87, p < 0.001",0,correctly_extracted,
+234,2026H2,not_flagged,PMC13745656,chi2,"χ2 (1) = 28.57, p < 0.001",0,correctly_extracted,
+235,2026H2,not_flagged,PMC13683003,F,"F (1.38, 34.59) = 1.74, p = 0.20",0,correctly_extracted,
+236,2026H2,not_flagged,PMC13747962,F,"F (1,357) = 33.49, p < 0.001",0,correctly_extracted,
+237,2026H2,not_flagged,PMC13736633,t,"t(237.7) = 1.38, p = 0.168",0,correctly_extracted,
+238,2026H2,not_flagged,PMC13574987,F,"F(4.6, 1084.8) = 1.0, p = 0.413",0,correctly_extracted,
+239,2026H2,not_flagged,PMC13746296,t,"t(305) = 2.16, p = 0.031",0,correctly_extracted,
+240,2026H2,not_flagged,PMC13777925,t,"t(101.80)=8.851 , p<0.001",0,correctly_extracted,
+241,2026H2,not_flagged,PMC13593866,t,"t(377.7) = -1.46, p = 0.145",0,correctly_extracted,
+242,2026H2,not_flagged,PMC13677897,chi2,"χ2(5) = 49.40, p < 0.001",0,correctly_extracted,
+243,2026H2,not_flagged,PMC13683003,t,"t (13) = 12.71, p < 0.001",0,correctly_extracted,
+244,2026H2,not_flagged,PMC13727385,z,"z = 2.66, p < 0.01",0,correctly_extracted,
+245,2026H2,not_flagged,PMC13771074,F,"F(1, 179) = 0.108, p = 0.743",0,correctly_extracted,
+246,2026H2,not_flagged,PMC13581581,t,"t(653.89) = -11.51, p < 0.001",0,correctly_extracted,
+247,2026H2,not_flagged,PMC13619371,t,"t(274) = -2.498, p = 0.013",0,correctly_extracted,
+248,2026H2,not_flagged,PMC13735560,chi2,"χ2(1) = 9.696, p = 0.002",0,correctly_extracted,
+249,2026H2,not_flagged,PMC13553537,F,"F (1, 483) = 6.26, p = 0.013",0,correctly_extracted,
+250,2026H2,not_flagged,PMC13574978,t,"t(176) = 18.05, p < 0.001",0,correctly_extracted,
