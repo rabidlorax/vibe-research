@@ -18,7 +18,7 @@ straight-line program (results may be reused any number of times) that
 computes the median of n values, for n = 5, 7 and 9? By the threshold (0-1)
 principle this equals the monotone Boolean circuit complexity of the majority
 function MAJ_n over the basis {AND, OR}. An answer is, for each n, a verified
-program of size s (upper bound) and a machine-checked refutation of size s-1
+program of size s (upper bound) and a SAT-solver refutation of size s-1
 (lower bound); where the two cannot be made to meet, the best pair found.
 
 A side question raised by the prior-art search: a 2022 catalogue of minimal
@@ -50,23 +50,28 @@ the number of operations. "Gate" means the same thing in circuit language
   any size from 1 to 9. The classical 7-exchange network, with unused
   half-exchanges removed, already has size 10, so reusing values buys nothing
   for five inputs.
-- **A catalogue posted as minimal is not minimal** (`external-data`).
-  Seidler's manuscript (unrefereed, on the author's web page) and its
-  catalogue of "minimal" monotone circuits for the 210 classes of monotone
-  5-variable functions lists 13 gates for 5-input majority; the true minimum
-  is 10. In total 19 of the 210 entries are larger than the minimum (table
-  below). Every program in the catalogue is correct; only minimality fails.
-  The manuscript itself warns that a pruning step in its search is
-  "technically invalid" when an optimal circuit shares a gate between both
-  sides of its output (quoted below), while expecting this not to matter at
-  these sizes. It does matter: that is the likely cause, though we did not
-  confirm it by running the author's code. With the corrected values no 5-variable monotone
+- **A catalogue presented as minimal is not minimal** (`external-data`).
+  Seidler's catalogue of "minimal" monotone circuits for the 210 classes of
+  monotone 5-variable functions (a 2022 manuscript, and Chapter 2 of the
+  author's 2023 Rutgers dissertation) lists 13 gates for 5-input majority;
+  the true minimum is 10. In total 19 of the 210 entries are larger than the
+  minimum (table below). Every program in the catalogue is correct; only
+  minimality fails. The author's own text warns that a pruning step in the
+  search can discard an optimal circuit that shares a gate between both sides
+  of its output, and the dissertation concedes that this probably makes some
+  entries of the *general* 4-variable catalogue non-minimal; neither version
+  flags the monotone 5-variable table (details and quotations below). That
+  pruning is the likely cause here too, though we did not confirm it by
+  running the author's code.
+  With the corrected values no 5-variable monotone
   function needs more than 10 gates, and 7 classes need exactly 10, so
   majority is not the unique hardest function as the manuscript states. The
   4-variable catalogue (30 classes) is confirmed minimal.
 - **Median of 7: between 12 and 20 operations; median of 9: between 14 and 30**
   (`computed`). The upper bounds are the pruned classical networks. The lower
-  bounds are SAT refutations of all smaller sizes. The question for 7 and 9 is
+  bounds are SAT refutations of all smaller sizes under symmetry-breaking
+  constraints justified by a written, unformalized proof (claim 8,
+  `proved-informal`). The question for 7 and 9 is
   **not settled**: 60 attempts to shorten the 20-operation median-of-7 program
   by one operation all failed, which is weak evidence and proves nothing.
 
@@ -77,10 +82,11 @@ the number of operations. "Gate" means the same thing in circuit language
 | 1 | The program in `results/median5_10.txt` (10 operations) computes the median of 5 values | computed | `python verify.py ../results/median5_10.txt` (all 32 0/1 inputs, all 120 orderings, random inputs with ties) |
 | 2 | No min/max program with 9 or fewer operations computes the median of 5 values | computed | `results/lower_bounds_5.log` (sizes 1 to 9 UNSAT); regenerate with `python lower_bounds.py 5 10`. Confirmed without any symmetry breaking (`results/median5_nosym_sizes1to8.log`, `results/median5_size9_nosym.log`); other cross-checks in Method |
 | 3 | The programs obtained by pruning the classical exchange networks compute the medians of 5, 7, 9 values in 10, 20, 30 operations | computed | `python baseline.py`, then `python verify.py ../results/baseline_median*.txt` |
-| 4 | No program with 11 or fewer operations computes the median of 7 values; none with 13 or fewer computes the median of 9. This claim is a computation combined with the written symmetry argument in Method, which is not formalized; it is only as strong as both | computed | `results/lower_bounds_7.log`, `results/lower_bounds_9.log`; regenerate with `python lower_bounds.py 7 11` and `python lower_bounds.py 9 13`. Relies on the symmetry argument in Method |
-| 5 | Of the 210 entries in Seidler's 5-variable monotone catalogue (as fetched 2026-11-23), all 210 listed programs compute the listed function, and exactly 19 use more gates than the minimum; the majority entry lists 13 and the minimum is 10 | external-data | `results/catalogue_check.csv`; regenerate with `../data/fetch_catalogue.sh` and `python catalogue_check.py ../data/raw/MonoCatFileA5var.txt out.csv`. The upper-bound half (a smaller circuit exists for each of the 19) needs no trust in the SAT solver: the circuits are in the CSV and are re-evaluated on all 32 inputs |
-| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV. The list of class representatives is taken from the catalogue rather than regenerated here. For classes with minimum 6 or more, the lower-bound half rests on SAT UNSAT answers under `sym=1` with no certificate (the brute-force check stops at 5 gates) |
-| 7 | All 30 entries of Seidler's 4-variable monotone catalogue are minimal | external-data | `results/catalogue_check_4var.csv`. Independently of any SAT solver: `python brute_force.py 4 7 > ../results/brute_force_n4_d7.txt` (about 1 minute, 1 GB), then `python cross_check.py`, which compares the two files. Both need the catalogue fetched first (`../data/fetch_catalogue.sh`) |
+| 4 | Under the constraints `sym=3` of `src/encode.py`, there is no circuit of any size 1 to 11 for 7-input majority and none of any size 1 to 13 for 9-input majority. Together with claim 8 this gives: no program with 11 or fewer operations computes the median of 7 values, and none with 13 or fewer the median of 9. That conclusion is only as strong as claim 8 | computed | `results/lower_bounds_7.log`, `results/lower_bounds_9.log`; regenerate with `python lower_bounds.py 7 11` and `python lower_bounds.py 9 13` |
+| 5 | Of the 210 entries in Seidler's 5-variable monotone catalogue (as fetched 2026-11-23), all 210 listed programs compute the listed function, and exactly 19 use more gates than the minimum; the majority entry lists 13 and the minimum is 10 | external-data | `results/catalogue_check.csv`; regenerate with `../data/fetch_catalogue.sh` and `python catalogue_check.py ../data/raw/MonoCatFileA5var.txt out.csv`. The upper-bound half (a smaller circuit exists for each of the 19) needs no trust in the SAT solver: the circuits are in the CSV and are re-evaluated on all 32 inputs. The lower-bound half ("exactly 19") is confirmed with no symmetry breaking by `results/nosym_check.log` (`python nosym_check.py ../data/raw/MonoCatFileA5var.txt ../results/catalogue_check.csv out.log`, about 1 hour) |
+| 6 | Minimum monotone {AND, OR} circuit sizes of the 210 classes of 5-variable monotone functions are distributed as: 0 gates: 3 classes, 1: 2, 2: 4, 3: 10, 4: 26, 5: 16, 6: 45, 7: 32, 8: 51, 9: 14, 10: 7 | external-data | Same CSV, and `results/nosym_check.log`: for every class with minimum m of 2 or more, size m-1 is UNSAT with no symmetry breaking. The list of class representatives is taken from the catalogue rather than regenerated here. For classes with minimum 6 or more the lower bound rests on SAT UNSAT answers with no certificate (the brute-force check stops at 5 gates) |
+| 7 | All 30 entries of Seidler's 4-variable monotone catalogue are minimal | external-data | `results/catalogue_check_4var.csv`. Independently of any SAT solver: `python brute_force.py 4 7 > ../results/brute_force_n4_d7.txt` (about 1 minute, 3 GB of memory), then `python cross_check.py`, which compares the two files. Also `results/nosym_check_4var.log` (no symmetry breaking). All need the catalogue fetched first (`../data/fetch_catalogue.sh`) |
+| 8 | Symmetry lemma: a smallest monotone circuit for majority of an odd number of inputs has a presentation satisfying the `sym=3` constraints of `src/encode.py`, so adding them does not change satisfiability at the minimum size | proved-informal | Read the proof under "Symmetry breaking and why it loses nothing" in Method. Not formalized (see Limitations). Only claim 4 uses it |
 
 Commands in the table are run from the project's `src/` folder.
 
@@ -140,9 +146,10 @@ with k ones; only those rows are encoded (20 for n=5, 70 for n=7, 252 for
 n=9). For general monotone functions the rows are the minimal true points and
 maximal false points.
 
-**Symmetry breaking and why it loses nothing.** The lower bounds use extra
-constraints. They are justified as follows; this is a written argument, not a
-machine-checked one, and the lower-bound claims depend on it.
+**Symmetry breaking and why it loses nothing** (claim 8). The searches use
+extra constraints to go faster. They are justified as follows. This is a
+written proof, not a machine-checked one. Only claim 4 depends on it: every
+other lower bound here is also confirmed with the constraints switched off.
 
 Take a circuit of the smallest possible size s. Every gate has a path to the
 output (otherwise delete it), so the output is the only gate nobody uses and
@@ -193,6 +200,12 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
   (`results/median5_size9_nosym.log`, 1069 s). So claim 2 does not depend on
   the symmetry argument; claim 4 does.
 - The catalogue run uses only `sym=1` and independently gives 10 for majority.
+- `src/nosym_check.py` repeats the decisive lower bound for every catalogue
+  class with no symmetry breaking: for each class with minimum m of at least
+  2, size m-1 is UNSAT (`results/nosym_check.log`, 205 classes;
+  `results/nosym_check_4var.log`, 25 classes). Without the constraints a
+  smaller circuit could be padded to size m-1, so this excludes every
+  smaller size. The catalogue claims therefore do not depend on claim 8.
 - `src/brute_force.py` enumerates all circuits without any SAT solver or
   encoding: every 4-variable class (up to 7 gates) and every 5-variable class
   with minimum at most 5 gates agrees exactly, and no 5-variable class with a
@@ -235,9 +248,10 @@ pip install -r requirements.txt     # python-sat 1.9.dev24; Python 3.13 used
 
 `run_all.sh` lists each step with its approximate runtime (4 cores, Intel
 Xeon 2.10 GHz, 15 GB). Totals: everything except the last three steps takes
-about an hour, most of it the 5-variable catalogue (about 40 minutes) and
-the size-9 run without symmetry breaking (18 minutes); the last three steps
-add about 50 minutes. The last sizes of the
+about two hours: the 5-variable catalogue (about 40 minutes), its repeat
+without symmetry breaking (about 1 hour) and the size-9 run for majority
+without symmetry breaking (18 minutes); the last three steps add about 50
+minutes. The last sizes of the
 lower-bound runs took 60 s (n=7, size 11) and 1146 s (n=9, size 13).
 Network is needed only by `data/fetch_catalogue.sh`. Solver runs are
 deterministic; `local_improve.py` takes its random seed on the command line
@@ -257,8 +271,12 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
 
 - B. A. Seidler, "Minimal circuits for Boolean functions of few variables",
   manuscript dated March 20, 2022,
-  <https://sites.math.rutgers.edu/~bas312/Research/slp/SLP.pdf>, and its
-  catalogue files `MonoCatFileA4var.txt` and `MonoCatFileA5var.txt` in the
+  <https://sites.math.rutgers.edu/~bas312/Research/slp/SLP.pdf>; the same
+  work as Chapter 2 of B. Seidler, "Experimental Mathematics Techniques for
+  Boolean Functions and Combinatorial Games", PhD dissertation, Rutgers,
+  October 2023,
+  <https://sites.math.rutgers.edu/~bas312/Research/Seidler.pdf> (marked
+  "ALL RIGHTS RESERVED"; read, not redistributed); and the catalogue files `MonoCatFileA4var.txt` and `MonoCatFileA5var.txt` in the
   same directory. Accessed 2026-11-23. No licence is stated, so the files are
   not committed; `data/fetch_catalogue.sh` fetches them and
   `data/catalogue.sha256` records the checksums of the copies used.
@@ -268,7 +286,8 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   intended or are later changed. Claim 6 additionally trusts the catalogue's
   list of 210 class representatives to be complete (the count 210 agrees with
   the number of monotone 5-variable functions up to permutation of variables,
-  OEIS A003182, `[from memory, unverified]`).
+  OEIS A003182, retrieved 2026-11-24: "inequivalent monotone Boolean
+  functions of n or fewer variables", 2, 3, 5, 10, 30, 210, ...).
 - Quoted from the manuscript, so the comparison is exact. Abstract: "we produce
   minimum-size circuits for every Boolean function of four or fewer variables
   and every monotone Boolean function of five variables." Results: "among the
@@ -289,11 +308,27 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   identical". The 10-gate majority circuit above does share gates between the
   two operands of its output, so this caveat is the probable cause of the 19
   non-minimal entries. That is a hypothesis: we did not run or analyse the
-  Maple code. So the manuscript's abstract and its Table 5 claim minimality,
-  its method section warns that minimality is not guaranteed, and this
-  project shows that for 5 variables it in fact fails. The author has not
-  been contacted. This is a documented inconsistency in a manuscript, not a
-  comment on its author.
+  Maple code.
+- Later partial correction by the author. The 2023 dissertation (found in
+  the third quality-control round, after the results) keeps the pruning,
+  drops the sentence "we have reason to believe that gate reuse is not an
+  issue", and says of the *general* 4-variable table that entries "marked
+  with *'s for four-variable functions may be inaccurate due the gate reuse
+  issue", that compared with Saarinen's 2006 exhaustive search "the circuits
+  we produce for several BEC's are seven-gate circuits when some six-gate
+  circuit would suffice", and (Section 2.2.3) that the pruning "may
+  inadvertently discard this circuit. If it is the only six-gate circuit
+  which computes f, the entry in our catalog for f is not minimal." Its
+  monotone results (Section 2.3.3, Table 2.5) are unchanged from the
+  manuscript and carry no such mark: "we have compiled catalogs of minimal
+  circuits for all monotone Boolean functions of up to 5 variables", with the
+  same 5-variable row ending in one class at 13 gates. The sentence singling
+  out majority at 13 gates is not in the dissertation. So the author has
+  identified the flaw and its effect on the general 4-variable catalogue;
+  what this project adds is that the monotone 5-variable catalogue is
+  affected too, in 19 named entries, with the correct values. The catalogue
+  files on the author's page were unchanged as of the fetch date. The author
+  has not been contacted.
 - The classical exchange networks in `src/baseline.py` (7, 13 and 19
   exchanges, usually attributed to Paeth and to Devillard's `opt_med`
   routines) were typed `[from memory, unverified]` as to source and
@@ -320,7 +355,8 @@ Sergeev abstract below, were done after the results, during write-up.
 - arXiv API, title search for "Minimal circuits for Boolean functions of few
   variables": no entry (the Seidler manuscript is not on arXiv under that
   title). OEIS search for "monotone majority circuit gates": no results.
-- Read in full: Seidler's manuscript (above). It is the only source found
+- Read in full: Seidler's manuscript, and Chapter 2 of the dissertation
+  (above). It is the only source found
   that states an exact monotone {AND, OR} size for 5-input majority, and it
   states 13.
 - Read (abstract, statement of results, and a text search of the full paper
@@ -349,14 +385,20 @@ Sergeev abstract below, were done after the results, during write-up.
   asymptotic forms only; whether the body contains an exact value at n = 5
   was not checked. This is the most likely place, after Knuth, for prior
   knowledge of the value 10.
+- Leads not followed: P. E. Dunne's 1984 Warwick thesis "Techniques for the
+  analysis of monotone Boolean networks" and I. Wegener's 1987 book *The
+  Complexity of Boolean Functions* (Section 6.2), both cited by Kulikov et
+  al. for threshold upper bounds. Neither was obtained. Either could contain
+  exact small values.
 - Other search hits concerned different models (circuits of majority-of-3
   gates; depth-3 circuits; adaptive comparison counts for selection). They
   were not read and are not cited.
 - Not found in what was read: a statement that 10 is the exact monotone
   circuit size of 5-input majority; exact values or SAT lower bounds for 7 or
-  9 inputs in the {AND, OR} basis; any statement that specific entries of the
-  Seidler catalogue are not minimal (the manuscript's own general caveat is
-  quoted in the previous section). Knuth's *The Art of Computer Programming*
+  9 inputs in the {AND, OR} basis; any statement that entries of Seidler's
+  *monotone* catalogue are not minimal (the author's general caveat, and the
+  dissertation's concession for the general 4-variable catalogue, are quoted
+  in the previous section). Knuth's *The Art of Computer Programming*
   7.1.1 and 7.1.2 are an obvious place for the 5-input value and could not be
   read here (not openly accessible), so it may well be recorded there.
 
@@ -372,16 +414,16 @@ specialist's survey.
   checked, and on the written symmetry argument. Producing DRAT proofs and
   checking them with an independent checker, or a Lean-checked certificate in
   the math repository, would remove both. Not done.
-- The symmetry argument is a written proof that claim 4, and the lower-bound
-  half of claim 6 for the four non-threshold classes with minimum 10, rely
-  on. The standards expect written proofs to be formalized. That was not
-  done: this session had no write access to the math repository, and the
-  useful formal statement is not the symmetry lemma alone but a Lean-checked
-  UNSAT certificate for the symmetry-free encoding, which needs solver runs
-  (n=7 at size 11 without symmetry breaking) that were out of reach here.
-  Until then these lower bounds should be read as `computed` given an
-  unformalized argument. Claims 1, 2, 3 and the upper-bound halves of claims
-  5 to 7 do not depend on it.
+- Claim 8, the symmetry lemma, is a written proof and only claim 4 (the
+  lower bounds for 7 and 9 inputs) relies on it. The standards expect written
+  proofs to be formalized. That was not done: this session had no write
+  access to the math repository, and formalizing the lemma alone would still
+  leave the solver's UNSAT answers uncertified. The formal statement worth
+  having is a Lean-checked UNSAT certificate, which was not attempted. Until
+  then claim 4's conclusion about medians of 7 and 9 values should be read as
+  a computation plus an unformalized lemma. For 5 inputs the lemma is
+  corroborated, not proved, by the fact that every symmetry level gives the
+  same answers as no symmetry breaking.
 - Sizes for 7 and 9 inputs are open: 12 to 20 and 14 to 30. The lower bounds
   are far from the upper bounds and say little. Each extra size costs roughly
   6 to 17 times more solver time (n=9: 10 s, 68 s, 1146 s for sizes 11, 12,
