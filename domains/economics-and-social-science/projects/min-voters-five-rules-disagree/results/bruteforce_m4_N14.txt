@@ -1,0 +1,27 @@
+m=4 N=14 convention=strict profiles=9669554099
+PR 7
+PH 8
+RH 14
+PRH 14
+PB 3
+RB 3
+PRB 7
+HB 5
+PHB 8
+RHB 14
+PRHB 14
+PC 5
+RC 5
+PRC 7
+HC 5
+PHC 8
+RHC 14
+PRHC 14
+BC 3
+PBC 7
+RBC 7
+PRBC 11
+HBC 7
+PHBC 9
+RHBC -
+PRHBC -
