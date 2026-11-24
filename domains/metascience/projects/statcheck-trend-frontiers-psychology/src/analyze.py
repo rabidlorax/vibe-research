@@ -504,6 +504,15 @@ def main():
         desc.append(f"hand-check, among items labelled inconsistent as printed, note '{name}': {len(d)} "
                     f"({int((d.stratum == 'flagged').sum())} flagged stratum, "
                     f"{int((d.stratum == 'flagged_decision').sum())} decision stratum)")
+    h2 = hc[hc.period == "2026H2"].merge(arts[["pmcid", "received_year", "received_month"]], on="pmcid")
+    late_rec = (h2.received_year * 12 + h2.received_month) >= 2026 * 12 + 6
+    desc.append(f"hand-check, July-November 2026 stratum: {len(h2)} items, of which received from June 2026: "
+                f"{int(late_rec.sum())} ({int((late_rec & (h2.stratum == 'flagged')).sum())} flagged, "
+                f"{int((late_rec & (h2.stratum == 'not_flagged')).sum())} unflagged)")
+    rm_a = arts.received_year * 12 + arts.received_month
+    for name, lo_m, hi_m in (("received 2025Q2-2026Q1", 2025 * 12 + 4, 2026 * 12 + 3), ("received Jun 2026 on", 2026 * 12 + 6, 9e9)):
+        d = arts[(rm_a >= lo_m) & (rm_a <= hi_m)]
+        desc.append(f"{name}: {100 * (d.n_results > 0).mean():.1f}% of {len(d)} articles have at least one extracted result")
     ex = (res.p_cmp == "=").groupby(res.year).mean()
     desc.append("share of results with exactly reported p (p = x), by year: "
                 + ", ".join(f"{k}: {100 * x:.1f}%" for k, x in ex.items()))
