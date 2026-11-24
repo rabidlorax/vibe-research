@@ -18,7 +18,8 @@ from pysat.solvers import Solver
 
 from encode import encode, decode
 
-N = 5   # set from the catalogue file name (MonoCatFileA<N>var.txt) in main and workers
+N = 5   # number of variables: main sets it from the file name (MonoCatFileA<N>var.txt);
+        # each worker sets it from the length of the entry's true points
 
 
 def parse(path):

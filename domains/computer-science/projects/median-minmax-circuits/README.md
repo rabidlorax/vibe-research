@@ -441,10 +441,23 @@ Sergeev abstract below, were done after the results, during write-up.
   variables"; "median min max operations optimal network lower bound";
   "optimal selection network median comparators". DBLP's search API returned
   HTTP 202 with no results and was not searched.
-- A second on-topic title in the same OpenAlex results, seen and not read:
+- Two OpenAlex hits on small majority functions in a different gate basis,
+  abstracts read (via OpenAlex): E. Testa, W. Haaswijk, M. Soeken, G. De
+  Micheli, "The Complexity of Self-Dual Monotone 7-Input Functions" (2019,
+  OpenAlex W3210965202), which studies these functions "in terms of 3-input
+  majority operators" with "enumeration-based and SAT-based exact methods";
+  and E. Testa, M. Soeken, L. Amaru, W. Haaswijk, G. De Micheli, "Mapping
+  Monotone Boolean Functions into Majority" (2018,
+  doi:10.1109/tc.2018.2881245), on "decomposing monotone Boolean functions
+  into majority-of-three operations", which reports minimum-size
+  majority-of-three networks for majority-5 and majority-7. Both count
+  3-input majority gates (the second with inverters), not {AND, OR} gates,
+  so they give no value for the question here; they show exact synthesis of
+  7-input majority has been done in that basis.
+- Another on-topic title in the OpenAlex results, seen and not read:
   "Selection Networks" (1991, doi:10.1137/0220054). From the title it is
   about comparator selection networks, the same different cost model as the
-  next item; nothing is claimed about its content.
+  item after it; nothing is claimed about its content.
 - One OpenAlex hit looked into, abstract only read (single source, a Zenodo
   record, so `literature` at best): R. Martino, "Optimality of a
   25-Comparator Median Selection Network on Eleven Inputs", 2026-11-20,
@@ -531,3 +544,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, ninth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: two paraphrases of the dissertation were firmer than its conditional wording; a docstring in `src/encode.py` |
 | 2026-11-24 | claude-fable-5-2, tenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: unsourced statements about practice in "Why it matters" now marked as from memory; a docstring in `src/local_improve.py` |
 | 2026-11-24 | claude-fable-5-2, eleventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, extended to docstrings and introductory sections; wrote its own SAT formulation for majority of 3 and 5 (two-sided semantics, full truth table) and reproduced 4 and 10 | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: padding does not cover size 0 (covered by a direct test); one sentence stated the hypothesised cause as fact; an unsourced "well-known"; two usage lines in docstrings |
+| 2026-11-24 | claude-fable-5-2, twelfth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sources re-fetched, arXiv and OpenAlex queries replayed | No number found wrong. Two points, fixed: an on-topic OpenAlex hit (majority-of-3 basis) had not been named or looked into, now read at abstract level with a second one; a comment in `src/catalogue_check.py` |
