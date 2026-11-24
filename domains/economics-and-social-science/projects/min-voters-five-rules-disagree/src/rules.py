@@ -1,10 +1,16 @@
 """Direct implementations of the five rules on a profile.
 
 A profile is a dict {ranking: count}; a ranking is a tuple of candidate
-indices, best first. Every function returns the winner, or None when a tie
-occurs at a step that decides the outcome (the "strict" convention of the
-README). This file is deliberately independent of model.py: it is the
-referee that checks witnesses produced by the solvers.
+indices, best first. The functions in the first part follow the README's
+"strict" convention and return the winner, or None when the rule is not
+free of ties: plurality() and borda() need a unique top score; runoff()
+needs a determined pair (a tie between the two leaders is harmless) and a
+strict contest; hare() needs a unique candidate with fewest first places in
+every round until one candidate is left; hare_majority_stop() needs that
+only until someone has a majority; condorcet() needs a candidate who beats
+every other strictly. The second part implements the "robust" convention.
+This file is deliberately independent of model.py: it is the referee that
+checks witnesses produced by the solvers.
 """
 
 
@@ -58,6 +64,22 @@ def hare(profile, m):
     return alive.pop()
 
 
+def hare_majority_stop(profile, m):
+    """Hare, stopping as soon as someone has more than half of the first places."""
+    n = sum(profile.values())
+    alive = set(range(m))
+    while True:
+        f = first_places(profile, alive)
+        for c in alive:
+            if 2 * f[c] > n:
+                return c
+        low = min(f.values())
+        losers = [c for c in alive if f[c] == low]
+        if len(losers) != 1:
+            return None
+        alive.remove(losers[0])
+
+
 def borda(profile, m):
     s = {c: 0 for c in range(m)}
     for r, k in profile.items():
@@ -76,14 +98,9 @@ def condorcet(profile, m):
 RULES = {"P": plurality, "R": runoff, "H": hare, "B": borda, "C": condorcet}
 
 
-def winners(profile, m, rules="PRHBC"):
-    return {k: RULES[k](profile, m) for k in rules}
-
-
-def all_different(profile, m, rules="PRHBC"):
-    w = winners(profile, m, rules)
-    vals = list(w.values())
-    return None not in vals and len(set(vals)) == len(vals)
+def winners(profile, m, rules="PRHBC", majority_stop=False):
+    table = dict(RULES, H=hare_majority_stop) if majority_stop else RULES
+    return {k: table[k](profile, m) for k in rules}
 
 
 # --- "robust" convention: ties allowed, winner must not depend on tie-breaks ---
