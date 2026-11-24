@@ -1,0 +1,27 @@
+m=4 N=14 convention=robust profiles=9669554099
+PR 7
+PH 7
+RH 11
+PRH 14
+PB 3
+RB 3
+PRB 7
+HB 3
+PHB 7
+RHB 11
+PRHB 14
+PC 5
+RC 5
+PRC 7
+HC 5
+PHC 7
+RHC 13
+PRHC 14
+BC 3
+PBC 7
+RBC 7
+PRBC 11
+HBC 7
+PHBC 9
+RHBC -
+PRHBC -

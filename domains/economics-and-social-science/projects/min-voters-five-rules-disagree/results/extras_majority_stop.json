@@ -1,0 +1,330 @@
+{
+ "majority_stop": true,
+ "published": {
+  "Malkevitch 55": {
+   "voters": 55,
+   "candidates": 5,
+   "ballot_types": 6,
+   "majority_stop": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "E"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "E"
+   }
+  },
+  "Brandt-Matthaus-Saile 14 (Table 3 in the journal, Table 4 in the preprint)": {
+   "voters": 14,
+   "candidates": 5,
+   "ballot_types": 4,
+   "majority_stop": {
+    "P": "A",
+    "R": "E",
+    "H": "D",
+    "B": "B",
+    "C": "C"
+   },
+   "robust": {
+    "P": "A",
+    "R": "E",
+    "H": "D",
+    "B": "B",
+    "C": "C"
+   }
+  },
+  "Wiseman 11": {
+   "voters": 11,
+   "candidates": 5,
+   "ballot_types": 5,
+   "majority_stop": {
+    "P": "A",
+    "R": "B",
+    "H": null,
+    "B": "D",
+    "C": "E"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": null,
+    "B": "D",
+    "C": "E"
+   }
+  },
+  "Wiseman 12, six candidates": {
+   "voters": 12,
+   "candidates": 6,
+   "ballot_types": 5,
+   "majority_stop": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   }
+  },
+  "Wiseman 12 with candidate E deleted (derived here)": {
+   "voters": 12,
+   "candidates": 5,
+   "ballot_types": 5,
+   "majority_stop": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "F"
+   }
+  },
+  "README strict 12": {
+   "voters": 12,
+   "candidates": 5,
+   "ballot_types": 5,
+   "majority_stop": {
+    "P": "D",
+    "R": "C",
+    "H": "E",
+    "B": "A",
+    "C": "B"
+   },
+   "robust": {
+    "P": "D",
+    "R": "C",
+    "H": "E",
+    "B": "A",
+    "C": "B"
+   }
+  },
+  "README robust 11": {
+   "voters": 11,
+   "candidates": 5,
+   "ballot_types": 7,
+   "majority_stop": {
+    "P": "A",
+    "R": "B",
+    "H": null,
+    "B": "D",
+    "C": "E"
+   },
+   "robust": {
+    "P": "A",
+    "R": "B",
+    "H": "C",
+    "B": "D",
+    "C": "E"
+   }
+  }
+ },
+ "min_types_any_n_up_to_100": 4,
+ "min_voters_with_that_many_types": {
+  "voters": 14,
+  "profile": [
+   [
+    "BECAD",
+    2
+   ],
+   [
+    "CBAED",
+    4
+   ],
+   [
+    "DABEC",
+    5
+   ],
+   [
+    "EABCD",
+    3
+   ]
+  ],
+  "winners": {
+   "P": "D",
+   "R": "C",
+   "H": "E",
+   "B": "B",
+   "C": "A"
+  }
+ },
+ "min_types_with_12_voters": {
+  "types": 5,
+  "profile": [
+   [
+    "AECDB",
+    1
+   ],
+   [
+    "BAECD",
+    2
+   ],
+   [
+    "CBAED",
+    3
+   ],
+   [
+    "DABEC",
+    4
+   ],
+   [
+    "EBACD",
+    2
+   ]
+  ],
+  "winners": {
+   "P": "D",
+   "R": "C",
+   "H": "E",
+   "B": "A",
+   "C": "B"
+  }
+ },
+ "feasible_n_1_to_140": [
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119,
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134,
+  135,
+  136,
+  137,
+  138,
+  139,
+  140
+ ]
+}

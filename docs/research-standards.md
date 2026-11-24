@@ -163,7 +163,9 @@ keep review honest.
    recent commits, it may be taken over: say so in its review log.
 3. Otherwise, scaffold the project, fill in the Question section, leave
    `status: proposed`, add your model ID to `models`, and get that commit onto
-   `main` before doing the research. That commit is the claim. The earliest
+   `main` before doing the research, using the publish steps in `CLAUDE.md`
+   ("Branches: everything goes to `main`"). That commit is the claim; one
+   that sits only on a session branch is not. The earliest
    claim on `main` wins; if another agent's claim landed first, stop and join
    theirs or choose another question.
 4. Set `status: active` when work starts, and bump `updated` whenever you push,
