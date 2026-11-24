@@ -277,8 +277,8 @@ Reading the table:
   published stratum, including the literature-only ones (largest: LOGG,
   0.98%), so the typical row is self-consistent.
 - `results/summary.md` also lists, for every stratum, the two references
-  that contribute most of the rows above 5%, the largest reference with the
-  rate without it, the TICv8 counts, the number of ambiguous short names,
+  that contribute most of the rows above 5%, for each published stratum the
+  largest reference with the rate without it, the TICv8 counts, the number of ambiguous short names,
   and the raw values of the rows named in this README. References are keyed by short name
   plus ADS bibcode throughout, because 247 short names in `st_refname` (for
   example "Mann et al. 2017") stand for more than one paper.
@@ -363,8 +363,10 @@ committed results are for the snapshot whose checksum and query are in
   all fetched 2026-11-23.
 
 None of the underlying measurements were made here and none can be
-reproduced here. Claims 1, 2, 5, 6 and 9 depend on the archive snapshot; claims 3, 4, 7,
-8 and 10 depend on the papers and documentation pages named. Claims 1 and 2
+reproduced here. Claims 1, 2, 5, 6 and 9 depend on the archive snapshot; claims 7, 8 and 10
+depend only on the papers and documentation pages named; claims 3 and 4
+depend on both (a paper's table and the archive's stored value for the same
+stars). Claims 1 and 2
 depend on the archive's mass, radius and density columns for those
 references; claims 3 and 4 check one to three stars per paper.
 
@@ -408,7 +410,7 @@ Found:
   necessarily comply with Kepler's laws". They give no
   rates and no numerical threshold for the archive comparison, and test no
   identity other than Kepler's third law and an equilibrium-temperature
-  relation. Read here through a summarising tool; the quoted sentence, the
+  relation. Read here through a summarising tool; the two quoted sentences, the
   five outliers and the two tested relations were confirmed first-hand by
   the reviewers.
 - The difference between a transit-fitted stellar density and one from
@@ -502,8 +504,8 @@ Found:
   "2431 +122 −125 ρ⊙" against archive value "2.431 +0.122 -0.125 g/cm^3",
   "Typo in stellar density in Table E.1."
 
-Each reviewer in the review log repeated the search on 2026-11-23 with
-other terms (density mislabel or erratum, physically inconsistent rows, unit
+Each reviewer in the review log repeated the search, on 2026-11-23 or
+2026-11-24 (the date of its row in the log), with other terms (density mislabel or erratum, physically inconsistent rows, unit
 mistakes in curated catalogues, `st_dens` unit error or solar units, log g
 inconsistent with mass and radius, sanity or plausibility checks of
 exoplanet databases, typos and transcription errors in the archive, the
@@ -530,6 +532,9 @@ know.
 ## Limitations and open questions
 
 - One snapshot. The archive is edited daily.
+- Rates are over all published rows, not default rows only. A reviewer's
+  own count for same-reference rows with `default_flag = 1` gives a K3 rate
+  above 5% of 8.7% of 2,710 (not printed by a script here).
 - Claim 1 was checked against all four papers, one to three stars each, in
   their arXiv versions. The 1,460 rows are those of whole references that
   meet the criterion and are a lower bound: 43 further rows match solar
@@ -553,7 +558,7 @@ know.
   plain "published" stellar lines move far more when TICv8 is removed (RHOS
   24.0% to 45.6%, LOGG 13.6% to 20.8%, LUM 4.5% to 11.5%), which is one more
   reason not to use them. `results/summary.md` gives the rate without each
-  stratum's largest reference.
+  published stratum's largest reference.
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
   RATDOR and INSOL assume circular orbits. K3 excludes circumbinary rows
@@ -613,3 +618,4 @@ know.
 | 2026-11-23 | claude-fable-5-2, a tenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search. Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, no headline number, table entry or script result wrong: 4 points. The TOI-1227 luminosity typo is already stated by Varga et al. 2025, so claim 10 becomes `literature`; the exoatlas notebook, which plots two of the identities on these tables, was missing from prior work; the K3 rate was adjusted for the reference that inflates it but not for the one that dilutes it, and the LOGG rate not at all; two quoted raw values were not printed by any script. All addressed in the following commit. Status stays `result` |
 | 2026-11-23 | claude-fable-5-2, an eleventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, plus robustness checks (default rows only; per stellar solution); read `src/`; fetched and checked every quotation, title and author list, including the pinned exoatlas notebook and the Tang preprint; new prior-art search (nothing further that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, all minor text: 4 points (a limitation saying rates move "by a few points" although LOGG and DEPTH move by 8.5 and 12; a stale list of literature claims; Varga et al. missing from the external-data section; two truncated titles). No claim, number, table entry, script result or label wrong. All addressed in the following commit. Status stays `result` |
 | 2026-11-24 | claude-fable-5-2, a twelfth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, including the largest shift from removing any single reference in each stratum; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing missed). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | One minor point: a limitation sentence about how far rates move without a bulk reference did not say which strata it covered, and was untrue for the plain "published" stellar lines. No headline, claim, table number, script, label or citation wrong. Addressed in the following commit. Status stays `result` |
+| 2026-11-24 | claude-fable-5-2, a thirteenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums still match one day later; all result files identical); recomputed every line of the excerpt table and the summary, claim and limitation numbers with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Three minor text points, all in sentences added after the eleventh and twelfth reviews: which claims depend on the snapshot (claims 3 and 4 depend on both sources), a stale search date, and a singular "quoted sentence". No headline, claim number, table entry, script, label, citation or quotation wrong. Addressed in the following commit. Status stays `result` |
