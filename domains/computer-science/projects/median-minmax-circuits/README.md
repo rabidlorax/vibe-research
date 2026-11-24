@@ -462,9 +462,11 @@ Sergeev abstract below, were done after the results, during write-up.
   depth-3 circuits, a different model; and "The complexity of monotone
   Boolean functions and an algorithm for finding shortest paths on a graph"
   (1980, OpenAlex W2474705870), a general title that could contain small
-  exact values and is a lead not followed. Every other result among the
-  first 8 of the four OpenAlex queries was off this question by title (for
-  example Bayesian network learning, k-median coresets, extended
+  exact values and is a lead not followed. One more title was seen and not read: "A Well-Organized VLSI
+  Structure of Median Filter Using 8 Bit Data Comparator" (2019), by title
+  about comparator hardware for median filters. Every other result among
+  the first 8 of the four OpenAlex queries was off this question by title
+  (for example Bayesian network learning, k-median coresets, extended
   formulations, network meta-analyses).
 - Another on-topic title in the OpenAlex results, seen and not read:
   "Selection Networks" (1991, doi:10.1137/0220054). From the title it is
@@ -501,9 +503,11 @@ the baseline network already contradicts), and nothing for 7 or 9.
 
 - The lower bounds depend on SAT solvers reporting UNSAT with no certificate
   checked and, for 7 and 9 inputs only (claim 4), on the written symmetry
-  argument. Producing DRAT proofs and
-  checking them with an independent checker, or a Lean-checked certificate in
-  the math repository, would remove both. Not done.
+  argument. Producing DRAT proofs and checking them with an
+  independent checker would remove the dependence on the solvers only: for
+  7 and 9 inputs a checked proof of the constrained instances would still
+  rest on claim 8. Removing both needs a certificate for the instances
+  without symmetry breaking, or the lemma formalized as well. Not done.
 - Claim 8, the symmetry lemma, is a written proof and only claim 4 (the
   lower bounds for 7 and 9 inputs) relies on it. The standards expect written
   proofs to be formalized. That was not attempted in this session, by choice
@@ -558,3 +562,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, eleventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, extended to docstrings and introductory sections; wrote its own SAT formulation for majority of 3 and 5 (two-sided semantics, full truth table) and reproduced 4 and 10 | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: padding does not cover size 0 (covered by a direct test); one sentence stated the hypothesised cause as fact; an unsourced "well-known"; two usage lines in docstrings |
 | 2026-11-24 | claude-fable-5-2, twelfth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, sources re-fetched, arXiv and OpenAlex queries replayed | No number found wrong. Two points, fixed: an on-topic OpenAlex hit (majority-of-3 basis) had not been named or looked into, now read at abstract level with a second one; a comment in `src/catalogue_check.py` |
 | 2026-11-24 | claude-fable-5-2, thirteenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, plus replay of the documented arXiv and OpenAlex queries against the README's account of them | No number, label, quotation or command found wrong. One point, fixed: three OpenAlex result titles were not accounted for; they are now listed as seen and not read, with the disposition of the rest |
+| 2026-11-24 | claude-fable-5-2, fourteenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reran from a clean archive of the commit; second solver (Glucose 4) on n=7 sizes 1 to 11, all UNSAT; coded the three symmetry constraints independently and matched the encoder's model sets on four small instances (scratch runs, not committed here) | No number, label, quotation or command found wrong. One wording point in Limitations, fixed: a checked DRAT proof would remove the solver dependence but not the dependence on claim 8. Quality control stopped here at the owner's instruction, the remaining point being wording only |
