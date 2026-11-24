@@ -3,8 +3,10 @@
 For each class with SAT minimum m >= 2 (read from the CSV written by
 catalogue_check.py), ask for a circuit of size m-1 with sym=0. With sym=0 the
 only restriction is that a gate's operands are distinct, and any smaller
-circuit can be padded with extra gates to size m-1, so UNSAT here excludes
-every size below m without relying on the symmetry argument.
+circuit with at least one gate can be padded with extra gates to size m-1, so
+UNSAT here excludes every size from 1 to m-1 without relying on the symmetry
+argument. Size 0 (a constant or a single variable) is excluded separately, by
+the direct truth-table test in catalogue_check.py.
 
 Usage: python nosym_check.py CATALOGUE.txt RESULT.csv OUT.log [processes]
 """

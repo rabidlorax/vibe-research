@@ -46,7 +46,8 @@ the number of operations. "Gate" means the same thing in circuit language
 (AND = min, OR = max).
 
 - **Median of 5: exactly 10 operations** (`computed`). (For 3 values the
-  same method gives the well-known 4; `results/lower_bounds_3.log`.) A 10-operation program
+  same method gives 4, the value Seidler's manuscript also lists for 3-input
+  majority in its 3-variable catalogue; `results/lower_bounds_3.log`.) A 10-operation program
   is verified on every input ordering, and a SAT solver finds no program of
   any size from 1 to 9. The classical 7-exchange network, with unused
   half-exchanges removed, already has size 10, so reusing values buys nothing
@@ -209,8 +210,10 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
   class with no symmetry breaking: for each class with minimum m of at least
   2, size m-1 is UNSAT (`results/nosym_check.log`, 205 classes;
   `results/nosym_check_4var.log`, 25 classes). Without the constraints a
-  smaller circuit could be padded to size m-1, so this excludes every
-  smaller size. The catalogue claims therefore do not depend on claim 8.
+  smaller circuit with at least one gate could be padded to size m-1, so
+  this excludes every smaller size from 1 up; size 0 (a constant or a single
+  variable) is excluded by a direct truth-table test in
+  `catalogue_check.py`. The catalogue claims therefore do not depend on claim 8.
 - `src/brute_force.py` enumerates all circuits without any SAT solver or
   encoding: every 4-variable class (up to 7 gates) and every 5-variable class
   with minimum at most 5 gates agrees exactly, and no 5-variable class with a
@@ -338,8 +341,9 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   out majority at 13 gates is not in the dissertation. So the author has
   identified the flaw and its possible effect on the general 4-variable
   catalogue;
-  what this project adds is that the monotone 5-variable catalogue is
-  affected too, in 19 named entries, with the correct values. The catalogue
+  what this project adds is that the monotone 5-variable catalogue also has
+  non-minimal entries, 19 of them, named, with the correct values (whether
+  this flaw is what produced them remains the hypothesis stated above). The catalogue
   file fetched on 2026-11-23 still has the gate counts of the 2022
   manuscript's table, so the posted monotone catalogue had not been corrected
   by then. The author has not been contacted.
@@ -526,3 +530,4 @@ the baseline network already contradicts), and nothing for 7 or 9.
 | 2026-11-24 | claude-fable-5-2, eighth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser, all sources re-fetched and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: "every symmetry level" narrowed to the levels with committed logs; a second on-topic search hit now listed as seen and not read. It also noted, for the owner, that claim 8 remains `proved-informal` at `status: result` |
 | 2026-11-24 | claude-fable-5-2, ninth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: two paraphrases of the dissertation were firmer than its conditional wording; a docstring in `src/encode.py` |
 | 2026-11-24 | claude-fable-5-2, tenth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reruns, own parser on a fresh fetch, sources and search queries replayed | No number found wrong; no blocking or should-fix issue. Two wording points, fixed: unsourced statements about practice in "Why it matters" now marked as from memory; a docstring in `src/local_improve.py` |
+| 2026-11-24 | claude-fable-5-2, eleventh fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief, extended to docstrings and introductory sections; wrote its own SAT formulation for majority of 3 and 5 (two-sided semantics, full truth table) and reproduced 4 and 10 | No number found wrong; no blocking or should-fix issue. Four wording points, fixed: padding does not cover size 0 (covered by a direct test); one sentence stated the hypothesised cause as fact; an unsourced "well-known"; two usage lines in docstrings |

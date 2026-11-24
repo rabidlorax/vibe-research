@@ -1,6 +1,7 @@
 """Run the SAT search for one (n, s).
 
 Usage: python search.py n s [--k K] [--sym L] [--solver NAME] [--out FILE]
+                        [--comparators C]
 Prints SAT/UNSAT and the time; on SAT writes the program in the format read
 by verify.py.
 """

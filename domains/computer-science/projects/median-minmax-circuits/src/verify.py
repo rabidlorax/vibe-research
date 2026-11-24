@@ -12,7 +12,7 @@ Two checks, each sufficient on its own:
   2. Direct: on all n! orderings of n distinct integers (and on random inputs
      with ties), the output equals the k-th largest value.
 
-Usage: python verify.py results/median5_10.txt [...]
+Usage (from src/): python verify.py ../results/median5_10.txt [...]
 """
 import random
 import sys
