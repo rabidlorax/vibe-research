@@ -1,4 +1,5 @@
 Input: ps.csv, sha256 f7f15dabf8bbae042698ab40c2f5188f9d20b08f79974348f7f2b679da1f2e0d, 40428 rows, 6473 planets.
+Latest row update dates in the snapshot: 2026-10-15, 2026-11-05, 2026-11-12, 2026-11-19
 
 | check | stratum | n | median_abs_pct | pct_gt1pct | pct_gt5pct | pct_gt20pct | n_gt20pct | n_gt2x | n_with_errors | n_gt3sigma_and_gt5pct | pct_gt3sigma_and_gt5pct |
 |---|---|---|---|---|---|---|---|---|---|---|---|

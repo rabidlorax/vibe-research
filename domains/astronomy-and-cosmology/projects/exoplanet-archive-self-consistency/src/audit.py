@@ -291,7 +291,8 @@ def main():
 
     cols = ["check", "stratum", "n", "median_abs_pct", "pct_gt1pct", "pct_gt5pct", "pct_gt20pct", "n_gt20pct",
             "n_gt2x", "n_with_errors", "n_gt3sigma_and_gt5pct", "pct_gt3sigma_and_gt5pct"]
-    lines = [f"Input: {CSV.name}, sha256 {sha}, {len(d)} rows, {d.pl_name.nunique()} planets.", "",
+    lines = [f"Input: {CSV.name}, sha256 {sha}, {len(d)} rows, {d.pl_name.nunique()} planets.",
+             "Latest row update dates in the snapshot: " + ", ".join(sorted(d.rowupdate.dropna().unique())[-4:]), "",
              "| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
     for _, r in summ.iterrows():
         v = [str(r[c]) for c in cols]

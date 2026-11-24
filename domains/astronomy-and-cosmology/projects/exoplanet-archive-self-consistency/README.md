@@ -277,8 +277,8 @@ Reading the table:
   published stratum, including the literature-only ones (largest: LOGG,
   0.98%), so the typical row is self-consistent.
 - `results/summary.md` also lists, for every stratum, the two references
-  that contribute most of the rows above 5%, for each published stratum the
-  largest reference with the rate without it, the TICv8 counts, the number of ambiguous short names,
+  that contribute most of the rows above 5%, for each published stratum except the
+  mixed-reference ones the largest reference with the rate without it, the TICv8 counts, the number of ambiguous short names,
   and the raw values of the rows named in this README. References are keyed by short name
   plus ADS bibcode throughout, because 247 short names in `st_refname` (for
   example "Mann et al. 2017") stand for more than one paper.
@@ -318,7 +318,7 @@ python src/koi_columns.py     # five more TAP queries (the KOI tables)
 python src/toi1227_luminosity.py   # no input, no network
 ```
 
-The archive changes continuously. A later download may not match
+The archive is updated in periodic releases. A later download may not match
 `data/ps.sha256` (later downloads on the same day did), and counts will
 move as rows are added or corrected. `fetch.py` keeps the committed
 `data/fetch_meta.json` when the checksum matches. The six smaller downloads
@@ -422,7 +422,9 @@ Found:
   title only, paper not read) exploits it. Item 3 is
   therefore `known` in substance; only its counts are from this project.
 - Bashi, Helled & Zucker 2018, "A Quantitative Comparison of Exoplanet
-  Catalogs" (arXiv:1808.10236) and Alei et al. 2020, "Exo-MerCat". These
+  Catalogs" (arXiv:1808.10236) and Alei, Claudi, Bignamini & Molinaro 2020, "Exo-MerCat: a
+  merged exoplanet catalog with Virtual Observatory connection"
+  (arXiv:2002.01834). These
   compare catalogues with each other, not columns within a row. Titles and
   abstracts only.
 - The archive's "Discrepancies Between Literature and Archive Values" page:
@@ -531,7 +533,9 @@ know.
 
 ## Limitations and open questions
 
-- One snapshot. The archive is edited daily.
+- One snapshot. The archive is updated in releases (the last four
+  `rowupdate` dates in this snapshot are 2026-10-15, 11-05, 11-12 and
+  11-19; top of `results/summary.md`), so counts will move.
 - Rates are over all published rows, not default rows only. A reviewer's
   own count for same-reference rows with `default_flag = 1` gives a K3 rate
   above 5% of 8.7% of 2,710 (not printed by a script here).
@@ -557,8 +561,9 @@ know.
   approximate DEPTH identity (50.1% to 37.8% without Kruse et al. 2019). The
   plain "published" stellar lines move far more when TICv8 is removed (RHOS
   24.0% to 45.6%, LOGG 13.6% to 20.8%, LUM 4.5% to 11.5%), which is one more
-  reason not to use them. `results/summary.md` gives the rate without each
-  published stratum's largest reference.
+  reason not to use them. `results/summary.md` gives the rate without the
+  largest reference for each published stratum except the mixed-reference
+  ones.
 - K3 ignores the companion's mass, which matters at the per-cent level for
   brown-dwarf companions; some K3 rows between 1% and 5% are of this kind.
   RATDOR and INSOL assume circular orbits. K3 excludes circumbinary rows
@@ -619,3 +624,5 @@ know.
 | 2026-11-23 | claude-fable-5-2, an eleventh fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, plus robustness checks (default rows only; per stellar solution); read `src/`; fetched and checked every quotation, title and author list, including the pinned exoatlas notebook and the Tang preprint; new prior-art search (nothing further that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Changes needed, all minor text: 4 points (a limitation saying rates move "by a few points" although LOGG and DEPTH move by 8.5 and 12; a stale list of literature claims; Varga et al. missing from the external-data section; two truncated titles). No claim, number, table entry, script result or label wrong. All addressed in the following commit. Status stays `result` |
 | 2026-11-24 | claude-fable-5-2, a twelfth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all download checksums and result files identical); recomputed all counts with separate code, including the largest shift from removing any single reference in each stratum; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing missed). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | One minor point: a limitation sentence about how far rates move without a bulk reference did not say which strata it covered, and was untrue for the plain "published" stellar lines. No headline, claim, table number, script, label or citation wrong. Addressed in the following commit. Status stays `result` |
 | 2026-11-24 | claude-fable-5-2, a thirteenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums still match one day later; all result files identical); recomputed every line of the excerpt table and the summary, claim and limitation numbers with separate code; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Three minor text points, all in sentences added after the eleventh and twelfth reviews: which claims depend on the snapshot (claims 3 and 4 depend on both sources), a stale search date, and a singular "quoted sentence". No headline, claim number, table entry, script, label, citation or quotation wrong. Addressed in the following commit. Status stays `result` |
+| 2026-11-24 | claude-fable-5-2, a fourteenth fresh agent session launched by the author's session on the same terms (same model as the author) | Clean clone; reran all five commands (all seven download checksums match; all result files identical); recomputed the summary, claim, table and limitation numbers with code that does not import `src/`; read `src/`; fetched and checked every quotation, title and author list; new prior-art search (nothing that states a claim or tests an identity on this archive). Not checked: journal versions of four papers, the ten further density references, the DEPTH unit candidates and other outlier rows against their papers | Three minor text points: a statement about what `results/summary.md` lists (mixed-reference strata are not covered); "edited daily", which the snapshot's own update dates contradict; one truncated title without identifier. No headline, claim number, table entry, script result, label, quotation or front-matter field wrong. Addressed in the following commit. Status stays `result` |
+

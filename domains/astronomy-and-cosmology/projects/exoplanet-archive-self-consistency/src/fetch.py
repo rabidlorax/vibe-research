@@ -3,7 +3,7 @@
 Planetary Systems (ps) table via its TAP service.
 
 Writes data/raw/ps.csv (not committed) and data/ps.sha256 + data/fetch_meta.json.
-The archive is updated continuously, so a later download will differ; the
+The archive is updated in periodic releases, so a later download may differ; the
 checksum identifies the snapshot the committed results were computed from.
 """
 import datetime
