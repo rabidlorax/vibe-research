@@ -392,6 +392,11 @@ def main():
         post.append(f"kind = {k}, received Jun 2026 on vs 2023-2024, no allowance: {100 * d[x == 1].error.mean():.2f}% "
                     f"of {int(x.sum())} vs {100 * d[x == 0].error.mean():.2f}% of {int((1 - x).sum())}, odds ratio "
                     f"{np.exp(b):.3f} [{np.exp(b - 1.96 * se):.3f}, {np.exp(b + 1.96 * se):.3f}]")
+    # (s) within the 2026 cohorts, do manuscripts published fast differ from slower ones?
+    for name, lo_m, hi_m in (("received Apr-May 2026", 2026 * 12 + 4, 2026 * 12 + 5), ("received Jun 2026", 2026 * 12 + 6, 2026 * 12 + 6)):
+        d = mr[(rmon_all >= lo_m) & (rmon_all <= hi_m)]
+        post.append(f"{name}, published within 3 months, no allowance: {rate(d[d.lag <= 3])}")
+        post.append(f"{name}, published after 4 or more months, no allowance: {rate(d[d.lag >= 4])}")
     late_a = ar[(arm >= 2026 * 12 + 6)]
     post.append(f"received Jun 2026 on: median body length {late_a.body_chars.median():.0f} characters "
                 f"({len(late_a)} articles)")

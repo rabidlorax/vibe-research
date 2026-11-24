@@ -97,4 +97,8 @@ kind = chi2, received Jun 2026 on vs 2023-2024, no allowance: 1.80% of 946 vs 10
 kind = r, received Jun 2026 on vs 2023-2024, no allowance: 0 flagged of 27 vs 18.40% of 538; odds ratio not estimated
 kind = t, received Jun 2026 on vs 2023-2024, no allowance: 3.44% of 726 vs 14.66% of 4891, odds ratio 0.208 [0.101, 0.426]
 kind = z, received Jun 2026 on vs 2023-2024, no allowance: 3.89% of 360 vs 13.54% of 2061, odds ratio 0.258 [0.127, 0.524]
+received Apr-May 2026, published within 3 months, no allowance: 4.38% [2.52, 6.70] (200 articles, 1507 results)
+received Apr-May 2026, published after 4 or more months, no allowance: 8.61% [3.40, 13.53] (155 articles, 1220 results)
+received Jun 2026, published within 3 months, no allowance: 4.14% [2.27, 6.18] (144 articles, 1088 results)
+received Jun 2026, published after 4 or more months, no allowance: 1.10% [0.23, 2.16] (57 articles, 456 results)
 received Jun 2026 on: median body length 54162 characters (1369 articles)
