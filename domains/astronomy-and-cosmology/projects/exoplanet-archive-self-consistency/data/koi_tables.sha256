@@ -1,0 +1,5 @@
+f5a667d47cd485d905a1b7260ba8188f1c1da5dd2ac91de799bd482de1440f41  q1_q8_koi.csv  query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q8_koi where kepler_name is not null
+8c022448377ca9b68164cf4beb9a2e1637068de2d4d98acb07061ed0d4421a83  q1_q12_koi.csv  query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q12_koi where kepler_name is not null
+17755440d85e01c67449c854b4195f01384f38b813a6dbb5dc4688f657848f6d  q1_q16_koi.csv  query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q16_koi where kepler_name is not null
+01f4a06dd03360db5bf015544b4f4eb633fed6b995ff57e9a3479f2f2f822f54  q1_q17_dr24_koi.csv  query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q17_dr24_koi where kepler_name is not null
+dfb500b2c86a83238121bc5a6837b6fd9f50b6feea01322bd9f3b0a223bef896  q1_q17_dr25_koi.csv  query: select kepoi_name,kepler_name,koi_srho,koi_dor from q1_q17_dr25_koi where kepler_name is not null

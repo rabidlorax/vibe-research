@@ -1,0 +1,2 @@
+52641b302c83851aa6732947be3de370ce02619770da99308ba1dadc0a77c828  pscomppars_dens.csv
+query: select pl_name,st_dens,st_dens_reflink,st_mass,st_rad from pscomppars where st_dens is not null
