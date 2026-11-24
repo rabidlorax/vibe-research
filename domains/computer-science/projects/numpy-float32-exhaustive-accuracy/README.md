@@ -1,12 +1,12 @@
 ---
 title: Exhaustive accuracy of NumPy float32 math functions over all 2^32 inputs
 domain: computer-science
-status: active
+status: result
 evidence: computed
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Exhaustive accuracy of NumPy float32 math functions over all 2^32 inputs
@@ -176,10 +176,16 @@ float functions through `ctypes`.
 exact-rounding code skipped hard cases where mpmath returned a complex number
 (`cbrt` of a negative) and failed on infinite values; `validate.py` caught
 both before the `cbrt` sweep ran, and they were fixed. The first `exp2` sweep
-aborted on the exact tie at -150, which led to the tie handling above. `exp`,
-`exp2` and `tanh` were rerun with the final code; `sin` was not, because none
-of the fixes can affect it (see Limitations). The `seconds` field for `sin`
-(708) is inflated because two sweeps were running at once.
+aborted on the exact tie at -150, which led to the tie handling above. Because
+of these fixes, every sweep was then run a second time with the final code.
+All 42 sweep result files, `validate.json` and `layout_probe.json` of the
+second run were identical to the first in every field except the run time,
+so the numbers are deterministic on this machine.
+The committed files are from the second run. The machine was restarted
+between the 17th and 18th float32 function of that run; the remaining four
+were started by hand with the same commands. `results/environment.json` was
+written after the restart; only the kernel build string changed (CPU model,
+flags and all software versions are the same as before it).
 
 ## Reproduction
 
@@ -192,11 +198,10 @@ pip install -r src/requirements.txt     # numpy==2.5.3 mpmath==1.3.0 gmpy2==2.2.
 sh src/run_all.sh                       # everything in results/
 ```
 
-`run_all.sh` records the environment, runs `validate.py` (about 4 minutes),
+`run_all.sh` records the environment, runs `validate.py` (a few minutes),
 the 21 float16 sweeps (seconds), the 21 float32 sweeps, `layout_probe.py`
-(about 3 minutes) and `report.py`. The float32 sweeps took 103 minutes in
-total on 4 cores and 15 GB of memory, about 4 to 6 minutes per function; peak
-memory was about 2 GB. A single function is `python src/sweep.py tanh`.
+(a few minutes) and `report.py`. The float32 sweeps took 96 minutes in
+total on 4 cores and 15 GB of memory, about 4 to 6 minutes per function. A single function is `python src/sweep.py tanh`.
 
 No random numbers are used by `sweep.py`. `validate.py` and
 `layout_probe.py` use `numpy.random.default_rng(20261123)`.
@@ -262,7 +267,9 @@ What was found:
 - **NumPy's own statements.** M. Picus, numpy-discussion, 2021-10-11, on
   merging SVML: "The accuracy is now defined as up to 4 ULP in the worst case
   for tan, cos, sin, asin, atan, expm1, but typically the error is up to 2
-  ULP." The NumPy 2.5 reference pages for `numpy.tanh` and for ufunc basics
+  ULP." (This message, the issue and the pull request below were retrieved
+  through a page-fetching subagent of this session, which returned the quoted
+  text.) The NumPy 2.5 reference pages for `numpy.tanh` and for ufunc basics
   give no accuracy guarantee. NumPy's test-suite checks sampled inputs against
   per-function tolerances of 2 to 4 ULP (data files in the wheel).
 - **float16.** numpy/numpy issue 30821 (opened 2026-02-11) reported
@@ -297,10 +304,6 @@ published. Claims 2 to 8 were not found in the search described.
 - **The tie argument is informal.** Apart from `exp2` at integers, we rely on
   the code raising an error if any value sits within 2^-300 of a midpoint. No
   error was raised, so no such case occurred among hard inputs.
-- **`sin` was not rerun after the last code changes.** The changes concern
-  complex or infinite exact values, the exact `exp2` tie, the overflow test in
-  `mp_round`, and the recording of examples for monotonicity, none of which
-  `sin` reaches. A reviewer who wants strict uniformity should rerun it.
 - **Monotonicity counts adjacent pairs only.** A function with zero adjacent
   violations is monotone on each sign half, among non-NaN results. The count
   does not measure how large the reversals are.
