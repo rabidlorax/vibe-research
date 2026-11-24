@@ -35,13 +35,13 @@ published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [10.
 published 2022-2024, received-to-published 4-5 months, no allowance: 10.48% [9.51, 11.55] (1551 articles, 16847 results)
 published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.10, 14.51] (784 articles, 8214 results)
 published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.39, 14.62] (277 articles, 3150 results)
-published 2025H1, AI statement 'none', no allowance: 10.93% [8.09, 14.38] (165 articles, 1363 results)
-published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.55, 17.16] (265 articles, 2349 results)
-published 2025H1, AI statement 'used', no allowance: 14.08% [7.08, 21.82] (31 articles, 355 results)
-published 2025H2, AI statement 'none', no allowance: 18.64% [8.52, 29.24] (34 articles, 279 results)
-published 2025H2, AI statement 'not_used', no allowance: 9.63% [7.94, 11.33] (475 articles, 4546 results)
+published 2025H1, AI statement 'none', no allowance: 11.34% [8.31, 14.99] (155 articles, 1288 results)
+published 2025H1, AI statement 'not_used', no allowance: 13.47% [10.42, 16.77] (274 articles, 2413 results)
+published 2025H1, AI statement 'used', no allowance: 13.93% [7.44, 21.34] (32 articles, 366 results)
+published 2025H2, AI statement 'none', no allowance: 25.58% [12.80, 38.26] (20 articles, 172 results)
+published 2025H2, AI statement 'not_used', no allowance: 9.60% [7.86, 11.35] (487 articles, 4646 results)
 published 2025H2, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2025H2, AI statement 'used', no allowance: 6.74% [3.70, 10.71] (68 articles, 653 results)
+published 2025H2, AI statement 'used', no allowance: 6.67% [3.74, 10.79] (70 articles, 660 results)
 published 2026H1, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 11 results)
 published 2026H1, AI statement 'not_used', no allowance: 8.88% [6.89, 11.12] (690 articles, 5540 results)
 published 2026H1, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
@@ -77,9 +77,9 @@ received Jun 2026 on: articles 1369, first affiliation in China 58.0%; of result
 received Jun 2026 on, China, no allowance: 2.78% [1.53, 4.24] (255 articles, 1832 results)
 received Jun 2026 on, United States, no allowance: 6.17% [0.00, 9.57] (12 articles, 81 results)
 received Jun 2026 on, all other countries, no allowance: 2.38% [1.31, 3.63] (185 articles, 1554 results)
-received 2025Q1: of 267 articles with results, 9.7% declare generative AI used, 86.9% not used, 3.4% no or other statement
-received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 82.4% not used, 2.3% no or other statement
-received 2025Q3: of 332 articles with results, 18.1% declare generative AI used, 79.8% not used, 2.1% no or other statement
+received 2025Q1: of 267 articles with results, 10.5% declare generative AI used, 88.8% not used, 0.7% no or other statement
+received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 84.0% not used, 0.8% no or other statement
+received 2025Q3: of 332 articles with results, 18.4% declare generative AI used, 80.4% not used, 1.2% no or other statement
 received 2025Q4: of 384 articles with results, 20.3% declare generative AI used, 79.2% not used, 0.5% no or other statement
 received 2026Q1: of 476 articles with results, 29.4% declare generative AI used, 70.6% not used, 0.0% no or other statement
 received 2026Q2: of 556 articles with results, 33.5% declare generative AI used, 66.4% not used, 0.2% no or other statement

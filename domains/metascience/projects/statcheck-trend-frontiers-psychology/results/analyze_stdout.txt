@@ -102,17 +102,17 @@ decision inconsistencies per year 2010-2025 (primary): min 9, max 363
 median body length in characters by year: 2010: 36420, 2011: 41219, 2012: 40307, 2013: 40970, 2014: 39951, 2015: 39657, 2016: 41006, 2017: 40978, 2018: 42515, 2019: 43532, 2020: 43466, 2021: 43739, 2022: 44120, 2023: 43827, 2024: 42971, 2025: 44413, 2026: 50966
 share of results whose p is printed with exactly three decimals, by year: 2010: 34.7%, 2011: 52.4%, 2012: 55.9%, 2013: 53.7%, 2014: 58.0%, 2015: 61.0%, 2016: 63.1%, 2017: 62.7%, 2018: 66.2%, 2019: 66.7%, 2020: 69.8%, 2021: 70.4%, 2022: 73.8%, 2023: 73.3%, 2024: 73.4%, 2025: 78.0%, 2026: 86.9%
 median extracted results per article with results, by year: 2010: 8, 2011: 11, 2012: 11, 2013: 11, 2014: 10, 2015: 10, 2016: 9, 2017: 9, 2018: 8, 2019: 9, 2020: 8, 2021: 7, 2022: 6, 2023: 7, 2024: 6, 2025: 5, 2026: 4
-hand-check: 250 items; by stratum and label: {'flagged': {'correctly_extracted': 0, 'explained_by_stated_correction': 4, 'extraction_error': 0, 'inconsistent_as_printed': 131, 'probably_one_tailed': 5}, 'flagged_decision': {'correctly_extracted': 0, 'explained_by_stated_correction': 1, 'extraction_error': 3, 'inconsistent_as_printed': 48, 'probably_one_tailed': 8}, 'not_flagged': {'correctly_extracted': 50, 'explained_by_stated_correction': 0, 'extraction_error': 0, 'inconsistent_as_printed': 0, 'probably_one_tailed': 0}}
+hand-check: 250 items; by stratum and label: {'flagged': {'consistent_if_one_tailed': 9, 'correctly_extracted': 0, 'explained_by_stated_correction': 4, 'extraction_error': 0, 'inconsistent_as_printed': 127}, 'flagged_decision': {'consistent_if_one_tailed': 9, 'correctly_extracted': 0, 'explained_by_stated_correction': 1, 'extraction_error': 3, 'inconsistent_as_printed': 47}, 'not_flagged': {'consistent_if_one_tailed': 0, 'correctly_extracted': 50, 'explained_by_stated_correction': 0, 'extraction_error': 0, 'inconsistent_as_printed': 0}}
 hand-check: items in the 'flagged' stratum that are decision inconsistencies: 24 of 140; distinct non-empty notes: 13
-hand-check, flagged: 140 items, 131 labelled inconsistent as printed, 25 with a label or note pointing to something other than a wrong number
-hand-check, flagged_decision: 60 items, 48 labelled inconsistent as printed, 25 with a label or note pointing to something other than a wrong number
+hand-check, flagged: 140 items, 127 labelled inconsistent as printed, 28 with a label or note pointing to something other than a wrong number
+hand-check, flagged_decision: 60 items, 47 labelled inconsistent as printed, 26 with a label or note pointing to something other than a wrong number
 PUB_YEAR 2010-2020: 20194 articles, 8803 with results (44%), 116696 results
 flagged z results: 2435 without the one-tailed allowance, 2219 with it, of 14709
-hand-check: items with a note: 61 of 250
+hand-check: items with a note: 65 of 250
 hand-check, among items labelled inconsistent as printed, note 'suspected multiplicity adjustment': 15 (10 flagged stratum, 5 decision stratum)
 hand-check, among items labelled inconsistent as printed, note 'floor value': 10 (10 flagged stratum, 0 decision stratum)
 hand-check, among items labelled inconsistent as printed, note 'possibly a different quantity': 7 (4 flagged stratum, 3 decision stratum)
-hand-check, among items labelled inconsistent as printed, note 'unusual degrees of freedom': 7 (2 flagged stratum, 5 decision stratum)
+hand-check, among items labelled inconsistent as printed, note 'unusual degrees of freedom': 6 (1 flagged stratum, 5 decision stratum)
 share of results with exactly reported p (p = x), by year: 2010: 37.0%, 2011: 43.3%, 2012: 46.8%, 2013: 49.0%, 2014: 52.1%, 2015: 53.6%, 2016: 54.3%, 2017: 53.1%, 2018: 54.9%, 2019: 56.1%, 2020: 55.9%, 2021: 56.2%, 2022: 54.2%, 2023: 55.2%, 2024: 54.6%, 2025: 51.6%, 2026: 53.8%
 rate (no allowance) for p = x: 2010 19.5%, 2025 18.5%, 2026 12.0%
 rate (no allowance) for p < x or p > x: 2010 7.3%, 2025 3.3%, 2026 1.7%
@@ -153,13 +153,13 @@ published 2022-2024, received-to-published 0-3 months, no allowance: 11.06% [10.
 published 2022-2024, received-to-published 4-5 months, no allowance: 10.48% [9.51, 11.55] (1551 articles, 16847 results)
 published 2022-2024, received-to-published 6-8 months, no allowance: 12.15% [10.10, 14.51] (784 articles, 8214 results)
 published 2022-2024, received-to-published 9+ months, no allowance: 11.97% [9.39, 14.62] (277 articles, 3150 results)
-published 2025H1, AI statement 'none', no allowance: 10.93% [8.09, 14.38] (165 articles, 1363 results)
-published 2025H1, AI statement 'not_used', no allowance: 13.75% [10.55, 17.16] (265 articles, 2349 results)
-published 2025H1, AI statement 'used', no allowance: 14.08% [7.08, 21.82] (31 articles, 355 results)
-published 2025H2, AI statement 'none', no allowance: 18.64% [8.52, 29.24] (34 articles, 279 results)
-published 2025H2, AI statement 'not_used', no allowance: 9.63% [7.94, 11.33] (475 articles, 4546 results)
+published 2025H1, AI statement 'none', no allowance: 11.34% [8.31, 14.99] (155 articles, 1288 results)
+published 2025H1, AI statement 'not_used', no allowance: 13.47% [10.42, 16.77] (274 articles, 2413 results)
+published 2025H1, AI statement 'used', no allowance: 13.93% [7.44, 21.34] (32 articles, 366 results)
+published 2025H2, AI statement 'none', no allowance: 25.58% [12.80, 38.26] (20 articles, 172 results)
+published 2025H2, AI statement 'not_used', no allowance: 9.60% [7.86, 11.35] (487 articles, 4646 results)
 published 2025H2, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
-published 2025H2, AI statement 'used', no allowance: 6.74% [3.70, 10.71] (68 articles, 653 results)
+published 2025H2, AI statement 'used', no allowance: 6.67% [3.74, 10.79] (70 articles, 660 results)
 published 2026H1, AI statement 'none', no allowance: 0.00% [0.00, 0.00] (2 articles, 11 results)
 published 2026H1, AI statement 'not_used', no allowance: 8.88% [6.89, 11.12] (690 articles, 5540 results)
 published 2026H1, AI statement 'other', no allowance: 0.00% [0.00, 0.00] (1 articles, 4 results)
@@ -195,9 +195,9 @@ received Jun 2026 on: articles 1369, first affiliation in China 58.0%; of result
 received Jun 2026 on, China, no allowance: 2.78% [1.53, 4.24] (255 articles, 1832 results)
 received Jun 2026 on, United States, no allowance: 6.17% [0.00, 9.57] (12 articles, 81 results)
 received Jun 2026 on, all other countries, no allowance: 2.38% [1.31, 3.63] (185 articles, 1554 results)
-received 2025Q1: of 267 articles with results, 9.7% declare generative AI used, 86.9% not used, 3.4% no or other statement
-received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 82.4% not used, 2.3% no or other statement
-received 2025Q3: of 332 articles with results, 18.1% declare generative AI used, 79.8% not used, 2.1% no or other statement
+received 2025Q1: of 267 articles with results, 10.5% declare generative AI used, 88.8% not used, 0.7% no or other statement
+received 2025Q2: of 256 articles with results, 15.2% declare generative AI used, 84.0% not used, 0.8% no or other statement
+received 2025Q3: of 332 articles with results, 18.4% declare generative AI used, 80.4% not used, 1.2% no or other statement
 received 2025Q4: of 384 articles with results, 20.3% declare generative AI used, 79.2% not used, 0.5% no or other statement
 received 2026Q1: of 476 articles with results, 29.4% declare generative AI used, 70.6% not used, 0.0% no or other statement
 received 2026Q2: of 556 articles with results, 33.5% declare generative AI used, 66.4% not used, 0.2% no or other statement

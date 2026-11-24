@@ -50,6 +50,12 @@ def ai_statement(article):
     declaration says. A statement can declare use and later add that AI was "not used for
     any other purpose", so the earliest declaration in the text decides."""
     sec = article.find(".//sec[@sec-type='ai-statement']")
+    if sec is None:  # some deposits carry the section without the attribute; find it by its title
+        for cand in article.iter("sec"):
+            title = cand.find("title")
+            if title is not None and "generative ai statement" in "".join(title.itertext()).lower():
+                sec = cand
+                break
     if sec is None:
         return ""
     text = " ".join("".join(sec.itertext()).split())

@@ -21,7 +21,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 20,2010-2015,flagged,PMC4700179,t,"t(90) = 1.24, p = 0.26",0,inconsistent_as_printed,
 21,2010-2015,flagged,PMC3975119,chi2,"χ2(1) = 4.56, p = 0.02",0,inconsistent_as_printed,
 22,2010-2015,flagged,PMC4429229,F,"F(2, 40) = 2.33, p = 0.12",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
-23,2010-2015,flagged,PMC4204449,t,t(19) = -2.53; p < 0.02,0,inconsistent_as_printed,
+23,2010-2015,flagged,PMC4204449,t,t(19) = -2.53; p < 0.02,0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 24,2010-2015,flagged,PMC4256994,F,"F(1, 104) = 0.11, p = 0.92",0,inconsistent_as_printed,
 25,2010-2015,flagged,PMC4237038,t,"t(72) = 3.5, p > 0.001",0,inconsistent_as_printed,
 26,2010-2015,flagged,PMC3155092,F,"F(3, 93) = 8.701, p = 0.002",0,inconsistent_as_printed,
@@ -39,9 +39,9 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 38,2010-2015,flagged,PMC4294119,t,t(82) = -5.624; p = 0.0001,0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
 39,2010-2015,flagged,PMC3685809,F,"F(1, 26) = 1.121, p = 0.229",0,inconsistent_as_printed,
 40,2010-2015,flagged,PMC4523701,F,"F(2,61) = 2.51, p = 0.18",0,inconsistent_as_printed,
-41,2010-2015,flagged_decision,PMC3419462,t,"t(36) = 1.842, p = 0.037",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+41,2010-2015,flagged_decision,PMC3419462,t,"t(36) = 1.842, p = 0.037",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 42,2010-2015,flagged_decision,PMC4553392,F,"F(1,84) = 3.86, p < 0.05",1,inconsistent_as_printed,
-43,2010-2015,flagged_decision,PMC4064705,t,"t(23) = -1.77, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+43,2010-2015,flagged_decision,PMC4064705,t,"t(23) = -1.77, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 44,2010-2015,flagged_decision,PMC3499913,t,"t(31) = 2.54, p = 0.1",1,inconsistent_as_printed,
 45,2010-2015,flagged_decision,PMC4490215,t,"t(6) = 3.62, p = 0.064",1,inconsistent_as_printed,
 46,2010-2015,flagged_decision,PMC4628112,chi2,"χ2(28) = 37.36, p < 0.001",1,inconsistent_as_printed,
@@ -49,7 +49,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 48,2010-2015,flagged_decision,PMC4001056,F,"F(1, 65) = 3.06, p < 0.01",1,inconsistent_as_printed,
 49,2010-2015,flagged_decision,PMC4664952,t,t(48) = 1.863; p = 0.035,1,inconsistent_as_printed,"reported p is close to, but does not round to, half the two-tailed value"
 50,2010-2015,flagged_decision,PMC3906500,F,"F(1, 22) =0.45, p = 0.009",1,inconsistent_as_printed,
-51,2010-2015,flagged_decision,PMC4245895,t,"t(7) = 1.94, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+51,2010-2015,flagged_decision,PMC4245895,t,"t(7) = 1.94, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 52,2010-2015,flagged_decision,PMC4162385,F,"F(2, 14) = 3.83, p = 0.071",1,inconsistent_as_printed,
 53,2010-2015,flagged_decision,PMC3689145,F,"F(1, 18) = 4.14, p = 0.05",1,inconsistent_as_printed,
 54,2010-2015,flagged_decision,PMC4187611,F,"F(1, 1) = 6.18, p < 0.05",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
@@ -83,7 +83,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 82,2016-2021,flagged,PMC6298257,F,"F(1,326) = 10.304, p < 0.001",0,inconsistent_as_printed,
 83,2016-2021,flagged,PMC7678406,F,"F(2,115) = 4.03, p = 0.021",0,inconsistent_as_printed,
 84,2016-2021,flagged,PMC4951528,F,"F(1,1276) = 3.471, p = 0.062",0,inconsistent_as_printed,
-85,2016-2021,flagged,PMC7838065,t,"t(98) = 1.66, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+85,2016-2021,flagged,PMC7838065,t,"t(98) = 1.66, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 86,2016-2021,flagged,PMC4836202,F,"F(1,76) = 6.16, p = 0.01",0,inconsistent_as_printed,
 87,2016-2021,flagged,PMC5682102,t,"t(33) = -2.34, p = 0.07",1,inconsistent_as_printed,
 88,2016-2021,flagged,PMC5039177,F,"F(2,124) = 5.190, p = 0.024",0,explained_by_stated_correction,"correction stated next to the result (sphericity epsilon, Bonferroni, Tukey, or 'adjusted for multiple comparisons')"
@@ -111,7 +111,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 110,2016-2021,flagged,PMC7835423,z,"z = 0.374, p = 0.975",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 111,2016-2021,flagged_decision,PMC6937985,F,"F(1.54,80.5) = 452, p = 0.588",1,inconsistent_as_printed,
 112,2016-2021,flagged_decision,PMC8209257,F,"F(58,1)=11.522, p=0.001",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
-113,2016-2021,flagged_decision,PMC7773727,t,"t(19) = 2.06, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+113,2016-2021,flagged_decision,PMC7773727,t,"t(19) = 2.06, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 114,2016-2021,flagged_decision,PMC4845253,F,"F(8, 99) = 11.09, p = 0.212",1,inconsistent_as_printed,
 115,2016-2021,flagged_decision,PMC7366172,F,"F(3,110) = 2.514, p = 0.012",1,inconsistent_as_printed,
 116,2016-2021,flagged_decision,PMC5826309,F,"F(3, 156) = 1.11, p < 0.001",1,inconsistent_as_printed,
@@ -124,7 +124,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 123,2016-2021,flagged_decision,PMC6685415,F,"F(1, 39) = 3.425, p = 0.043",1,inconsistent_as_printed,
 124,2016-2021,flagged_decision,PMC8649631,F,"F (1, 34.965) = 4.663; p = 0.054",1,inconsistent_as_printed,
 125,2016-2021,flagged_decision,PMC5487462,F,"F(1.187, 1.039) = 10.013, p = 0.004",1,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed; 'Greenhouse-Geisser corrected' is stated just before
-126,2016-2021,flagged_decision,PMC6831644,t,"t(20) = 1.94, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+126,2016-2021,flagged_decision,PMC6831644,t,"t(20) = 1.94, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 127,2016-2021,flagged_decision,PMC6673756,t,"t(437) = 2.32, p = 0.16",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 128,2016-2021,flagged_decision,PMC8176019,F,"F (2, 46) = 3.27, p = 0.068",1,inconsistent_as_printed,
 129,2016-2021,flagged_decision,PMC6079389,F,"F(1,28) = 1.26, p < 0.05",1,inconsistent_as_printed,
@@ -157,9 +157,9 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 156,2022-2026,flagged,PMC9732572,F,"F (1, 38) = 66.474, p = 0.031",0,inconsistent_as_printed,
 157,2022-2026,flagged,PMC9255644,F,"F(1, 107) = 4.58, p = 0.04",0,inconsistent_as_printed,
 158,2022-2026,flagged,PMC11879973,F,"F(1,101) = 5.39, p = 0.03",0,inconsistent_as_printed,
-159,2022-2026,flagged,PMC9399810,t,"t(56) = 2.49, p = 0.008",0,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
-160,2022-2026,flagged,PMC8966699,z,"Z = 1.946, p < 0.05",1,inconsistent_as_printed,
-161,2022-2026,flagged,PMC10509471,t,"t (76) = -1.976, p < 0.05",1,inconsistent_as_printed,
+159,2022-2026,flagged,PMC9399810,t,"t(56) = 2.49, p = 0.008",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+160,2022-2026,flagged,PMC8966699,z,"Z = 1.946, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+161,2022-2026,flagged,PMC10509471,t,"t (76) = -1.976, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 162,2022-2026,flagged,PMC11859578,F,"F(4, 198) = 13.20, p = 0.001",0,inconsistent_as_printed,reported p is a floor value (e.g. p = .001) far above the recomputed p
 163,2022-2026,flagged,PMC10098129,F,"F(1,58) = 4.198, p = 0.046",0,inconsistent_as_printed,
 164,2022-2026,flagged,PMC12308555,chi2,"χ2(16) = 16.440, p < 0.001",1,inconsistent_as_printed,
@@ -169,7 +169,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 168,2022-2026,flagged,PMC13403326,t,"t(195) = 0.766, p = 0.45",0,inconsistent_as_printed,
 169,2022-2026,flagged,PMC9706391,F,"F (7, 196) = 0.66, p = 0.75",0,inconsistent_as_printed,
 170,2022-2026,flagged,PMC10731054,chi2,"χ2(7) = 12.812, p < 0.05",1,inconsistent_as_printed,
-171,2022-2026,flagged,PMC11528541,t,"t(104) = -0.253, p = 0.400",0,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+171,2022-2026,flagged,PMC11528541,t,"t(104) = -0.253, p = 0.400",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 172,2022-2026,flagged,PMC8913716,t,"t(18) = -0.762, p < 0.05",1,inconsistent_as_printed,
 173,2022-2026,flagged,PMC10716249,chi2,"χ2 (198) = 179.825, p < 0.001",1,inconsistent_as_printed,
 174,2022-2026,flagged,PMC13290894,F,"F(1, 62) = 10.376, p < 0.001",0,inconsistent_as_printed,
@@ -181,19 +181,19 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 180,2022-2026,flagged,PMC9012163,F,"F(1, 138) = 3.91, p < 0.049",0,inconsistent_as_printed,
 181,2022-2026,flagged_decision,PMC9302000,z,"z = -1.558, p = 0.041",1,inconsistent_as_printed,
 182,2022-2026,flagged_decision,PMC10083353,t,"t(0.097) = -2.734, p < 0.01",no longer extracted,extraction_error,"number in parentheses is a standard error, not degrees of freedom"
-183,2022-2026,flagged_decision,PMC9277475,z,"Z = -1.87, p = 0.031",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
-184,2022-2026,flagged_decision,PMC9244848,t,"t(18) = -1.7, p < 0.05",1,inconsistent_as_printed,
+183,2022-2026,flagged_decision,PMC9277475,z,"Z = -1.87, p = 0.031",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+184,2022-2026,flagged_decision,PMC9244848,t,"t(18) = -1.7, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 185,2022-2026,flagged_decision,PMC9152543,t,"t(13) = 2.28, p = 0.16",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 186,2022-2026,flagged_decision,PMC11893985,chi2,"χ2(1) = 5.13, p = 0.077",1,inconsistent_as_printed,
 187,2022-2026,flagged_decision,PMC9128483,z,"z = -2.42, p = 0.07",1,inconsistent_as_printed,
-188,2022-2026,flagged_decision,PMC12463826,t,"t(552) = 1.805, p < 0.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+188,2022-2026,flagged_decision,PMC12463826,t,"t(552) = 1.805, p < 0.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 189,2022-2026,flagged_decision,PMC10556861,F,"F(12,46) = 2.56, p = 0.09",1,inconsistent_as_printed,
 190,2022-2026,flagged_decision,PMC11696535,t,"t(76) = -3.99, p = 1.00",no longer extracted,extraction_error,"p-value was in scientific notation (1.00E-04); extractor bug, fixed after this check"
 191,2022-2026,flagged_decision,PMC10758175,z,"Z = -2.33, p = 0.07",1,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
 192,2022-2026,flagged_decision,PMC13190181,chi2,"χ2(3163) = 171, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
 193,2022-2026,flagged_decision,PMC10361065,F,"F(2, 339) = 0.389, p = 0.021",1,inconsistent_as_printed,
 194,2022-2026,flagged_decision,PMC9020366,z,"z = 0.32, p < 0.001",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
-195,2022-2026,flagged_decision,PMC11578697,t,"t (148.74) = 1.79, p = 0.038",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+195,2022-2026,flagged_decision,PMC11578697,t,"t (148.74) = 1.79, p = 0.038",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 196,2022-2026,flagged_decision,PMC8969415,t,"t (78) = 1.123, p < 0.001",1,inconsistent_as_printed,
 197,2022-2026,flagged_decision,PMC12327518,F,"F (2, 192) = 7.52, p = 0.35",1,inconsistent_as_printed,
 198,2022-2026,flagged_decision,PMC9685298,t,"t(2.72) = 0.008, p < 0.001",1,extraction_error,the number in parentheses is not a degrees-of-freedom value; still extracted by the current code
@@ -215,7 +215,7 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 214,2026H2,flagged,PMC13422211,chi2,"χ2 (613) = 1126.02, p > 0.05",1,inconsistent_as_printed,
 215,2026H2,flagged,PMC13506903,F,"F(3,151) = 2.99, p = 0.04",0,inconsistent_as_printed,
 216,2026H2,flagged,PMC13553237,F,"F(4, 751) = 3.35, p = 0.012",0,inconsistent_as_printed,
-217,2026H2,flagged,PMC13617326,z,"z = 2.808, p = .002",0,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
+217,2026H2,flagged,PMC13617326,z,"z = 2.808, p = .002",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 218,2026H2,flagged,PMC13612568,F,"F(1, 620) = 0.97, p > 0.33",0,inconsistent_as_printed,
 219,2026H2,flagged,PMC13588754,F,"F(4, 120) = 0.65, p = 0.621",0,inconsistent_as_printed,
 220,2026H2,flagged,PMC13368345,t,"t(10) = 1.2, p = 0.78",0,inconsistent_as_printed,"neighbouring results suggest an adjusted p-value, but no adjustment is stated within the 150 characters read"
@@ -223,8 +223,8 @@ id,period,stratum,pmcid,kind,extracted,decision_flag,label,note
 222,2026H2,flagged,PMC13521767,F,"F(2,620) = 0.599, p = 0.54",0,inconsistent_as_printed,
 223,2026H2,flagged,PMC13752103,chi2,"χ2(3) = 15.84, p = 0.01",0,inconsistent_as_printed,
 224,2026H2,flagged,PMC13623748,F,"F (1,30) = 7.24, p = 0.049",0,inconsistent_as_printed,
-225,2026H2,flagged,PMC13481498,t,"t(782) = 1.68, p=.05",1,probably_one_tailed,reported p is about half the two-tailed value; probably a one-tailed test that the keyword rule did not credit
-226,2026H2,flagged,PMC13372592,t,"t(2) = 22.71, p < 0.001",0,inconsistent_as_printed,degrees of freedom as printed are unusual (possibly swapped or another quantity); inconsistent as printed
+225,2026H2,flagged,PMC13481498,t,"t(782) = 1.68, p=.05",1,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
+226,2026H2,flagged,PMC13372592,t,"t(2) = 22.71, p < 0.001",0,consistent_if_one_tailed,"would be consistent as a one-tailed test (mechanical rule); the article contains none of the trigger words, and whether the test was one-tailed is not known"
 227,2026H2,flagged,PMC13588754,F,"F(5, 135) = 1.88, p = 0.100",0,inconsistent_as_printed,
 228,2026H2,flagged,PMC13588754,r,"r (137) = 0.19, p = 0.020",0,inconsistent_as_printed,
 229,2026H2,flagged,PMC13601251,z,"z = 0.056, p = 0.014",1,inconsistent_as_printed,"the printed value may be a different quantity from the one the letter suggests (for example Wilks' lambda, Mauchly's W or a Kolmogorov-Smirnov statistic), in which case the article's numbers can all be right and the flag is the extractor's misreading"
