@@ -24,7 +24,8 @@ sits in the array?
 
 An answer is a table per function (worst error, worst input, count of
 misrounded inputs) that anyone can regenerate with one command, with the
-reference values proved correct by a rounding test rather than assumed.
+reference values checked by an independent rounding oracle (exhaustively for
+float16, on a sample for float32).
 
 ## Why it matters
 
@@ -32,9 +33,9 @@ NumPy's reference documentation gives no accuracy guarantee for these
 functions. What exists is a 2021 mailing-list announcement ("up to 4 ULP in
 the worst case" for some functions) and sampled tests with tolerances of 2 to
 4 ULP (see Prior work). float32 is small enough to check completely, so those
-figures can be replaced by the true worst case. People who rely on float32 results (reproducibility
-across machines, rotations built from sin/cos, values that must stay inside
-[-1, 1]) can then see exactly what they get.
+figures can be replaced by the true worst case. People who rely on float32
+results (reproducibility across machines, rotations built from sin/cos,
+values that must stay inside [-1, 1]) can then see exactly what they get.
 
 ## Summary of result
 
@@ -51,14 +52,18 @@ monotonicity of that path were measured only on a sample.
 
 All 2^32 float32 bit patterns were run through 21 unary functions and compared
 with the correctly rounded result (round-to-nearest-even of the exact value).
-Full tables: [`results/summary.md`](results/summary.md).
+Full tables: [`results/summary.md`](results/summary.md). The float32
+reference is tested against MPFR on a sample (claim 9), not proved for every
+input; see Limitations.
 
-1. **Worst-case error.** No function reaches 3.91 ULP. The largest errors are
-   `tan` 3.9000 (3.90005 to five decimals), `log` 3.832, `log10` 3.491, `arcsin` 3.120, `exp2` 2.843,
-   `expm1` 2.620, `exp` 2.541, `cosh` 2.478. `sqrt` is correctly rounded for
-   every input. This is inside the "up to 4 ULP" of the 2021
-   announcement and replaces it with exact per-function figures for this
-   build.
+1. **Worst-case error.** The largest error of any function is 3.9000 ULP
+   (`tan`). Next are `log` 3.832, `log10` 3.491, `arcsin` 3.120, `exp2`
+   2.843, `expm1` 2.620, `exp` 2.541, `cosh` 2.478. `sqrt` is correctly
+   rounded for every input. All functions stay below 4 ULP, the worst-case
+   figure the 2021 announcement gave for tan, cos, sin, asin, atan and expm1;
+   seven functions not on that list (`log`, `log10`, `exp2`, `exp`, `cosh`,
+   `log2`, `arccos`) exceed the 2 ULP it called typical. The table gives
+   exact per-function figures for this build.
 2. **How often the result is not the correctly rounded one.** Leaving
    out `sqrt` (never), it varies by a factor of about 600. As a share of the
    inputs whose result is not NaN: `arcsinh` 0.09 %, `log2` 0.49 %, `exp`
@@ -73,8 +78,10 @@ Full tables: [`results/summary.md`](results/summary.md).
    (`assert_array_max_ulp`) counts representable values between the result
    and the correctly rounded one, and the test data shipped in the wheel allow
    2 for float32 `exp2`. For 476 inputs the result is 3 values away, for
-   example at `x = 126.56739807128906` (2.843 ULP from the exact value). The
-   shipped test passes because none of the 476 is among its 714 samples.
+   example at `x = 126.56739807128906` (2.843 ULP from the exact value). None
+   of the 476 is among the test's 714 float32 samples
+   (`results/exp2_beyond_tolerance.json`), which is why the shipped test
+   does not detect them.
    Every other function stays inside its shipped tolerance on every input.
 5. **A negative stride changes the bits.** For 15 of the 21 functions,
    `np.f(x[::-1])[::-1]` differs from `np.f(x)`: for example 1,169,154,177
@@ -110,16 +117,16 @@ contiguous array.
 | 1 | For the stated build and CPU, the worst-case error of each float32 function over all inputs is the value in the "max error" column of `results/summary.md` (largest: `tan` 3.9000 ULP at `0x67997c79`) | computed | `python src/sweep.py <func>` for each function, then `python src/report.py`; compare `max_err_ulp` and `worst` in `results/float32_<func>.json` |
 | 2 | The number of float32 inputs whose result is not correctly rounded is the "not correctly rounded" column (smallest nonzero: `arccosh` 3,212,890; largest: `cbrt` 1,518,074,730); `sqrt` has none | computed | same; field `misrounded` |
 | 3 | Adjacent-input monotonicity violations per function are as in the "monotonicity violations" column; 10 of 18 checked functions have at least one, 8 have none (`exp2`, `log2`, `log1p`, `sinh`, `arcsinh`, `arccosh`, `arctanh`, `sqrt`) | computed | same; fields `mono_viol`, `mono_examples_hex`. One-line check of the example in the summary: `python -c "import numpy as np; print(np.exp(np.array([0.0024074981920421124, 0.002407498424872756], dtype=np.float32)))"` |
-| 4 | float32 `exp2` is 3 steps from the correctly rounded value for 476 inputs (for example `0x42fd2282`) and never more, which is outside the tolerance of 2 in the wheel's `umath-validation-set-exp2.csv`; 10,694 inputs have error above 2 ULP from the exact value. For every other function with an entry in the wheel's test data, no input is beyond the tolerance | computed | `results/float32_<func>.json` (`steps_ge_1_to_5`, `max_steps`, `hist_err_gt`, `worst`); columns "max steps", "tolerance" and "inputs beyond that tolerance" of `results/summary.md`, the tolerance being read from the installed wheel by `src/report.py` |
+| 4 | float32 `exp2` is 3 steps from the correctly rounded value for 476 inputs (for example `0x42fd2282`) and never more, which is outside the tolerance of 2 in the wheel's `umath-validation-set-exp2.csv`; none of the 476 is among that file's 714 float32 samples; 10,694 inputs have error above 2 ULP from the exact value. For every other function with an entry in the wheel's test data, no input is beyond the tolerance | computed | `results/float32_<func>.json` (`steps_ge_1_to_5`, `max_steps`, `hist_err_gt`, `worst`); `python src/exp2_tolerance.py` writes the 476 inputs and the comparison with the CSV to `results/exp2_beyond_tolerance.json`; columns "max steps", "tolerance" and "inputs beyond that tolerance" of `results/summary.md`, the tolerance being read from the installed wheel by `src/report.py` |
 | 5 | Exhaustively: reversing the input (`x[::-1]`) changes the result bits for 15 functions (counts in the "reversed" column), and never for `exp`, `log`, `sin`, `cos`, `tanh`, `sqrt`. Exhaustively: input stride 2, start offset 1, and inner loops of length 3 never change the bits for any float32 function | computed | fields `layout_reversed`, `layout_stride2`, `layout_offset1`, `layout_len3` |
-| 6 | On a fixed-seed sample of 2^22 inputs: input strides -1 and -2 and a reversed output array give the same set of differing inputs; input stride 3, output stride 2, and inner loops of length 1, 2, 7, 15, 16, 17 give no differences. On the first 2^15 of those: scalar calls equal the array result, and the negative-stride result equals glibc's scalar float function, for all 15 affected functions | computed (sample, not exhaustive) | `python src/layout_probe.py`; `results/layout_probe.json` |
+| 6 | On a fixed-seed sample of 2^22 inputs: input strides -1 and -2 and a reversed output array give results that are bit-identical to each other; input stride 3, output stride 2, and inner loops of length 2, 7, 15, 16, 17 give no differences from the contiguous call. On the first 2^15 of those: scalar calls (which also cover loops of length 1) equal the array result, and the negative-stride result equals glibc's scalar float function, for all 15 affected functions | computed (sample, not exhaustive) | `python src/layout_probe.py`; `results/layout_probe.json` |
 | 7 | Exhaustively, for all 21 float32 functions: no NaN-ness mismatch, no zero-sign mismatch, no infinity mismatch against the reference; `sin`, `cos`, `tanh` never exceed 1 in magnitude | computed | fields `nan_mismatch`, `zero_sign_mismatch`, `inf_mismatch`, `abs_gt_1` |
 | 8 | For all 65,536 float16 inputs, each of the 21 functions, on a contiguous array, has maximum error at most 0.5003 ULP and at most 8 inputs not correctly rounded; 11 functions give different bits for 1 to 20 inputs when the input has stride 2 or is reversed (the accuracy of those other results was not measured) | computed | `python src/sweep.py <func> --dtype float16`; `results/float16_<func>.json` |
 | 9 | The reference used in claims 1 to 8 agrees bit for bit, including the sign of zero and NaN-ness, with MPFR rounding directly to the target format, on: 2,000,012 sampled float32 inputs per function (579,846 to 1,996,113 of them with a non-NaN result, depending on the function's domain), a further 314 to 2,095 hard inputs per function (26,662 in total) taken from 16 blocks of 2^22 consecutive inputs, and all 65,536 float16 inputs per function. 0 disagreements in 21 + 21 runs | computed | `python src/validate.py`; `results/validate.json` (fields `compared_non_nan`, `both_nan`, `hard_inputs_compared`, `disagree`) |
 
 Claims 1 to 8 for float32 rest on the reference being right for the inputs not
 covered by claim 9. That is an assumption, stated under Method and
-Limitations. For float16 the reference is checked on every finite input.
+Limitations. For float16 the reference is checked on every input.
 
 ## Method
 
@@ -179,8 +186,9 @@ the value after the largest finite one, and the two zeros as one point).
 consecutive floats. For each function known to be monotone on that half, a
 violation is a pair of adjacent inputs (NaN results skipped) whose results
 move the wrong way. Pairs that straddle a chunk boundary are evaluated in a
-64-element window. The pair (-0, +0) joining the two halves is not checked. `sin`, `cos`, `tan` are not checked; `log`, `log2`,
-`log10`, `arccosh`, `sqrt` are checked for positive inputs only.
+64-element window. The pair (-0, +0) joining the two halves is not checked.
+`sin`, `cos`, `tan` are not checked; `log`, `log2`, `log10`, `arccosh`,
+`sqrt` are checked for positive inputs only.
 
 **Layout.** Each chunk is evaluated again as: every second element of a
 double-length buffer; starting from element 1; the first three columns of an
@@ -200,12 +208,18 @@ handling above. After those fixes every sweep was run again. A review inside
 the authoring session (not the independent review this repository requires)
 then asked for the step counts and for an oracle independent of `mp_round`;
 both were added and everything was run a third time. The committed files are
-from the third run. The second run is in the history at commit `d9e01a4`:
-the sweep files there differ from the current ones only in the run time and
-in the added fields `steps_ge_1_to_5` and `max_steps`, and
-`layout_probe.json` is unchanged, so the numbers were reproduced exactly. The
-first run is not in the repository; it gave the same numbers, which a reader
-cannot check. The machine was restarted during the second run, so
+from the third run. The second run is in the history at commit `d9e01a4`: the sweep
+files there differ from the current ones only in the run time and in the
+added fields `steps_ge_1_to_5` and `max_steps`, so the numbers were
+reproduced exactly. Of the first run, only four float32 files are in the
+history (`arccosh`, `arctanh`, `cbrt`, `sqrt` at commit `2575408`; the other
+files in that commit are already from the second run); they differ from the
+second run only in the run time. That the rest of the first run gave the
+same numbers cannot be checked by a reader. `sweep.py` has not been changed
+since the third run. `layout_probe.py`, `report.py` and `environment.py`
+were changed afterwards (an added field, column formatting, recorded
+versions) and rerun, and `exp2_tolerance.py` was added; no number that was
+already reported changed. The machine was restarted during the second run, so
 `results/environment.json` was written after the restart; only the kernel
 build string changed.
 
@@ -222,9 +236,9 @@ sh src/run_all.sh                       # everything in results/
 
 `run_all.sh` records the environment, runs `validate.py` (a few minutes),
 the 21 float16 sweeps (seconds), the 21 float32 sweeps, `layout_probe.py`
-(a few minutes) and `report.py`. The float32 sweeps took 103 minutes in
-total on 4 cores and 15 GB of memory, between 4.4 and 6.4 minutes per
-function. A single function is `python src/sweep.py tanh`.
+(a few minutes), `exp2_tolerance.py` (about 5 minutes) and `report.py`. The
+float32 sweeps took 103 minutes in total on 4 cores and 15 GB of memory,
+between 4.4 and 6.4 minutes per function. A single function is `python src/sweep.py tanh`.
 
 No random numbers are used by `sweep.py`. `validate.py` and
 `layout_probe.py` use `numpy.random.default_rng(20261123)`.
@@ -259,7 +273,9 @@ umath-validation-set tolerance". GitHub issue searches on numpy/numpy for
 `tanh float32 monotonic` and `float32 ulp exhaustive` returned no issues
 (logged-out view, 2026-11-23). Three further web searches with other terms
 on 2026-11-24, done by the in-session reviewer, also found no report of the
-monotonicity, stride or `exp2` findings. Alternative names covered: ULP error, correct
+monotonicity, stride or `exp2` findings. arXiv and DBLP were not queried
+separately; papers were reached through the web search and the reference
+lists of the two papers below. Alternative names covered: ULP error, correct
 rounding, accuracy of elementary/transcendental functions, SVML, universal
 intrinsics, strided/non-contiguous.
 
@@ -280,7 +296,9 @@ What was found:
   lot (tan 0.51 there, 3.900 here; cosh 0.51 there, 2.478 here), as expected
   from a different NumPy version, operating system and CPU. The paper uses
   Harrison's definition of ULP, which differs from ours only when the exact
-  value is close to a power of two. It reports maxima only: no counts of
+  value is exactly a power of two; the paper also notes that its enclosure
+  can overestimate by a factor of two when the value is very close to a
+  power of two. It reports maxima only: no counts of
   misrounded inputs, nothing on monotonicity, nothing on layout, and no FP16
   results for NumPy.
 - **B. Gladman, V. Innocente, J. Mather, K. Ozaki, P. Zimmermann, "Accuracy of
@@ -298,11 +316,19 @@ What was found:
   text.) The NumPy 2.5 reference pages for `numpy.tanh` and for ufunc basics
   give no accuracy guarantee. NumPy's test-suite checks sampled inputs against
   per-function tolerances of 2 to 4 ULP (data files in the wheel). The same
-  test-suite (`numpy/_core/tests/test_umath.py` in the wheel) deliberately
-  runs some functions on "Oddly strided arrays which may not be SIMD
-  compatible", including stride -1, so NumPy's developers know that the
-  stride selects the loop. What was not found is a statement of how many
-  results change, or by how much.
+  test-suite (`numpy/_core/tests/test_umath.py` in the wheel) has
+  `test_log_strides` and `test_exp_strides`, which call `np.log` and `np.exp`
+  on views with strides from -4 to 4 and compare with the contiguous result
+  to within 2 units in the last place. So NumPy's developers expect the
+  stride to be able to change the last bits. What was not found is a
+  statement of which functions are affected, how many results change, or by
+  how much.
+- **Other NumPy mailing-list threads** that turned up in the searches but
+  were not opened: "Floating point precision expectations in NumPy" (2021),
+  and "Precision changes to sin/cos in the next release?" (2023), whose
+  search-result snippet reads "The new error is <4 ULP similar to what it
+  was before, but only on high end Intel CPUs". Neither snippet mentions
+  monotonicity, strides or `exp2`.
 - **float16.** numpy/numpy issue 30821 (opened 2026-02-11) reported
   `np.tanh` on float16 arrays being 3 ULP off on Sapphire Rapids; pull
   request 31178 ("REV: Manual revert of float16 svml use", merged 2026-04-07)
@@ -345,14 +371,30 @@ published. Claims 2 to 8 were not found in the search described.
   worst-case error, misrounding counts and monotonicity were not measured.
   Findings 1 to 4 do not carry over to it: for example the reversed call
   returns the correctly rounded `exp2` at `0x42fd2282`.
-- **Layouts not tried:** unaligned buffers, in-place output (`out=x`),
-  byte-swapped input, and float64 input cast to the float32 loop.
+- **Layouts not tried by the committed code:** unaligned buffers, in-place
+  output (`out=x`), byte-swapped input, and float64 input cast to the float32
+  loop. The in-session reviewers reported no differences for these on
+  samples; that check is not in the repository.
 - **Layout claims beyond the four exhaustive layouts are sampled** (claim 6).
   The cause of the negative-stride difference was not traced in NumPy's source;
   "falls back to glibc's float function" is an inference from bit-identical
   results on 32,768 inputs per function.
 - **The "> k ULP" counts** use the float64 reference A and so could be off by
-  a few inputs whose error is within about 1e-9 ULP of a threshold.
+  a few inputs whose error is within about 1e-9 ULP of a threshold. They also
+  take the binade from A, not from the exact value: where the exact value is
+  just below a power of two and A rounds up to it, the per-input error is
+  halved. This affects only those counts and the choice of the eight
+  candidates for the maximum, not the misrounded or step counts. An
+  in-session reviewer found no such input with a wrong float32 result for
+  `exp`, `exp2`, `expm1`, `cos` and `tanh`; the other functions were not
+  scanned for it.
+- **A latent defect in `mp_round`:** for an exact value of zero it returns
+  +0 whatever the sign should be. It is reached only if a hard input has an
+  exactly zero result, which requires the two float64 references to disagree
+  about a zero. That did not happen (the sweeps report no zero-sign mismatch
+  and `validate.py` compares the sign of zero against MPFR), and the code
+  was left unchanged so that the committed results come from the committed
+  code.
 - **Not reported upstream.** The `exp2` tolerance, the monotonicity
   violations and the negative-stride difference have not been raised with
   NumPy. Doing so needs the person running the session.

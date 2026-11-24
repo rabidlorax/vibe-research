@@ -21,6 +21,12 @@ info["python"] = sys.version
 info["numpy"] = np.__version__
 info["numpy_simd"] = np._core._multiarray_umath.__cpu_features__ and sorted(
     k for k, v in np._core._multiarray_umath.__cpu_features__.items() if v)
+import gmpy2
+import importlib.metadata as md
+info["numpy_wheel_tags"] = [l.split(": ", 1)[1] for l in (md.distribution("numpy").read_text("WHEEL") or "").splitlines()
+                            if l.startswith("Tag: ")]
+info["gmpy2"] = gmpy2.version()
+info["mpfr"] = gmpy2.mpfr_version()
 info["mpmath"] = mpmath.__version__
 info["mpmath_backend"] = mpmath.libmp.BACKEND
 info["libc"] = " ".join(platform.libc_ver())

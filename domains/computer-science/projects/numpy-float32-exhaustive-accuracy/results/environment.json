@@ -67,6 +67,12 @@
   "X86_V3",
   "X86_V4"
  ],
+ "numpy_wheel_tags": [
+  "cp313-cp313-manylinux_2_27_x86_64",
+  "cp313-cp313-manylinux_2_28_x86_64"
+ ],
+ "gmpy2": "2.2.1",
+ "mpfr": "MPFR 4.2.1",
  "mpmath": "1.3.0",
  "mpmath_backend": "gmpy",
  "libc": "glibc 2.39",

@@ -8,4 +8,5 @@ python validate.py
 for f in $FUNCS; do python sweep.py "$f" --dtype float16; done
 for f in $FUNCS; do python sweep.py "$f"; done
 python layout_probe.py
+python exp2_tolerance.py
 python report.py

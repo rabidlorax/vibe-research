@@ -55,15 +55,21 @@ with np.errstate(all="ignore"):
             view = v if step > 0 else buf[::abs(step)][::-1]
             res = f(view)
             return res
+        res = {step: strided(step) for step in (2, 3, -1, -2)}
         for step in (2, 3, -1, -2):
-            r[f"in_stride_{step}"] = ndiff(strided(step), y)
+            r[f"in_stride_{step}"] = ndiff(res[step], y)
         ob = np.zeros(2 * N, dtype=np.float32)
         f(x, out=ob[::2])
         r["out_stride_2"] = ndiff(ob[::2], y)
         ob = np.zeros(N, dtype=np.float32)
         f(x, out=ob[::-1])
         r["out_reversed"] = ndiff(ob[::-1], y)
-        for L in (1, 2, 7, 15, 16, 17):
+        # do the three negative-stride layouts return the same bits as each other?
+        r["negative_layouts_mutually_identical"] = bool(
+            ndiff(res[-1], res[-2]) == 0 and ndiff(res[-1], ob[::-1]) == 0)
+        # (a row length of 1 would be merged into one strided loop, so it is
+        # not listed; length-1 loops are covered by the scalar calls below)
+        for L in (2, 7, 15, 16, 17):
             m = N // L
             b = np.zeros((m, L + 1), dtype=np.float32)
             b[:, :L] = x[:m * L].reshape(m, L)
