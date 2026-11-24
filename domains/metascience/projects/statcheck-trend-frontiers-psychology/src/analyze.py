@@ -28,9 +28,8 @@ OUT = ROOT / "results"
 SEED, BOOT = 20261123, 2000
 
 
-def cluster_boot(df, col, rng=None):
-    """95% percentile interval for the pooled share sum(col)/n, resampling articles.
-    The rng argument is ignored (kept so that callers need not change)."""
+def cluster_boot(df, col):
+    """95% percentile interval for the pooled share sum(col)/n, resampling articles."""
     g = df.groupby("pmcid")[col].agg(["sum", "size"]).to_numpy()
     # The generator is seeded from the data it resamples, not from a shared stream, so an
     # interval does not depend on which other intervals were computed before it.
@@ -52,13 +51,12 @@ def wilson(k, n):
 
 
 def yearly(res, arts, err="error_1t", dec="decision_error_1t"):
-    rng = np.random.default_rng(SEED)
     rows = []
     for y, a in arts.groupby("year"):
         r = res[res.year == y]
         per = r.groupby("pmcid").agg(n=(err, "size"), e=(err, "sum"), d=(dec, "sum"))
-        lo_e, hi_e = cluster_boot(r, err, rng)
-        lo_d, hi_d = cluster_boot(r, dec, rng)
+        lo_e, hi_e = cluster_boot(r, err)
+        lo_d, hi_d = cluster_boot(r, dec)
         k1, k2, n = int((per.e > 0).sum()), int((per.d > 0).sum()), len(per)
         w1, w2 = wilson(k1, n), wilson(k2, n)
         rows.append({
@@ -186,11 +184,10 @@ def main():
     m = res.merge(arts[["pmcid", "epub_year", "epub_month", "one_tail_text"]], on="pmcid")
     m["half"] = m.epub_year.astype(int).astype(str) + "H" + np.where(m.epub_month <= 6, "1", "2")
     am = arts.assign(half=arts.epub_year.astype(int).astype(str) + "H" + np.where(arts.epub_month <= 6, "1", "2"))
-    rng = np.random.default_rng(SEED + 1)
     hrows = []
     for h, d in m[m.epub_year >= 2023].groupby("half"):
-        lo, hi = cluster_boot(d, "error_1t", rng)
-        lo2, hi2 = cluster_boot(d, "error", rng)
+        lo, hi = cluster_boot(d, "error_1t")
+        lo2, hi2 = cluster_boot(d, "error")
         hrows.append({"half_year": h, "articles": int((am.half == h).sum()), "articles_with_results": d.pmcid.nunique(),
                       "results": len(d), "pct_inconsistent": 100 * d.error_1t.mean(), "ci_lo": 100 * lo,
                       "ci_hi": 100 * hi, "pct_inconsistent_no_allowance": 100 * d.error.mean(),
@@ -240,11 +237,10 @@ def main():
     ar = arts.dropna(subset=["received_year"]).copy()
     ar["rq"] = (ar.received_year.astype(int).astype(str) + "Q"
                 + ((ar.received_month.astype(int) - 1) // 3 + 1).astype(str))
-    rng = np.random.default_rng(SEED + 2)
     qrows = []
     for q, d in mr[mr.received_year >= 2023].groupby("rq"):
-        lo, hi = cluster_boot(d, "error_1t", rng)
-        lo2, hi2 = cluster_boot(d, "error", rng)
+        lo, hi = cluster_boot(d, "error_1t")
+        lo2, hi2 = cluster_boot(d, "error")
         any_flag = d.groupby("pmcid").error.max()
         qrows.append({"received_quarter": q, "articles_published_so_far": int((ar.rq == q).sum()),
                       "articles_with_results": d.pmcid.nunique(), "results": len(d),
@@ -259,7 +255,7 @@ def main():
     def rate(d, col="error"):
         if len(d) == 0:
             return "no results"
-        lo, hi = cluster_boot(d, col, rng)
+        lo, hi = cluster_boot(d, col)
         return (f"{100 * d[col].mean():.2f}% [{100 * lo:.2f}, {100 * hi:.2f}] "
                 f"({d.pmcid.nunique()} articles, {len(d)} results)")
 
@@ -288,7 +284,7 @@ def main():
     mr["rm"] = mr.received_year.astype(int).astype(str) + "-" + mr.received_month.astype(int).astype(str).str.zfill(2)
     mrows = []
     for mth, d in mr[mr.received_year >= 2025].groupby("rm"):
-        lo, hi = cluster_boot(d, "error", rng)
+        lo, hi = cluster_boot(d, "error")
         mrows.append({"received_month": mth, "articles_with_results": d.pmcid.nunique(), "results": len(d),
                       "pct_inconsistent_no_allowance": 100 * d.error.mean(), "ci_lo": 100 * lo, "ci_hi": 100 * hi,
                       "pct_inconsistent": 100 * d.error_1t.mean()})
@@ -308,7 +304,7 @@ def main():
     #     the only kind the newest cohorts can contain
     frows = []
     for q, d in mr[(mr.received_year >= 2022) & (mr.lag <= 3)].groupby("rq"):
-        lo, hi = cluster_boot(d, "error", rng)
+        lo, hi = cluster_boot(d, "error")
         frows.append({"received_quarter": q, "articles_with_results": d.pmcid.nunique(), "results": len(d),
                       "pct_inconsistent_no_allowance": 100 * d.error.mean(), "ci_lo": 100 * lo, "ci_hi": 100 * hi})
     fast = pd.DataFrame(frows)
@@ -351,10 +347,9 @@ def main():
     c3 = sub[sub.error == 0]
     cm = c3.received_year * 12 + c3.received_month
     share, flagrate = {}, {}
-    rng_n = np.random.default_rng(SEED + 3)  # own stream, so this block cannot shift intervals elsewhere
     for name, a, b in periods:
         d = c3[(cm >= a) & (cm <= b)]
-        lo, hi = cluster_boot(d, "exact", rng_n)
+        lo, hi = cluster_boot(d, "exact")
         share[name] = d.exact.mean()
         flagrate[name] = sub[(sm_ >= a) & (sm_ <= b)].error.mean()
         post.append(f"{name}: consistent three-decimal 'p =' results that match the face-value p exactly: "
@@ -425,6 +420,19 @@ def main():
         d = mr[(rmon_all >= lo_m) & (rmon_all <= hi_m)]
         post.append(f"{name}, published within 3 months, no allowance: {rate(d[d.lag <= 3])}")
         post.append(f"{name}, published after 4 or more months, no allowance: {rate(d[d.lag >= 4])}")
+    # (t) coverage: extracted results per p-value mentioned anywhere in the body, by receipt cohort.
+    #     A change here means the strict pattern is reading a different share of what is reported.
+    cov = ar[ar.received_year >= 2023].groupby("rq").agg(p=("p_mentions", "sum"), n=("n_results", "sum"))
+    post.append("extracted results per p-value mention, by receipt quarter: "
+                + ", ".join(f"{q}: {r.n / r.p:.3f}" for q, r in cov.iterrows() if r.p > 500))
+    for name, lo_m, hi_m in (("received 2023Q1-2025Q1", 2023 * 12 + 1, 2025 * 12 + 3),
+                             ("received 2025Q2-2026Q1", 2025 * 12 + 4, 2026 * 12 + 3),
+                             ("received Apr-May 2026", 2026 * 12 + 4, 2026 * 12 + 5),
+                             ("received Jun 2026 on", 2026 * 12 + 6, 9e9)):
+        d = ar[(arm >= lo_m) & (arm <= hi_m)]
+        post.append(f"{name}: {int(d.n_results.sum())} extracted results per {int(d.p_mentions.sum())} p-value "
+                    f"mentions = {d.n_results.sum() / d.p_mentions.sum():.3f}; p-value mentions per article "
+                    f"{d.p_mentions.mean():.1f}")
     late_a = ar[(arm >= 2026 * 12 + 6)]
     post.append(f"received Jun 2026 on: median body length {late_a.body_chars.median():.0f} characters "
                 f"({len(late_a)} articles)")

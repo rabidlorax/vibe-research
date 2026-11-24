@@ -35,10 +35,12 @@ CELL = {"td", "th"}
 
 ART_COLS = ["pmcid", "pmcid_ver", "doi", "year", "epub_year", "epub_month", "received_year", "received_month",
             "new_date_markup", "article_type", "section", "ai_statement", "country", "has_body", "body_chars",
-            "one_tail_text", "one_tail_strict", "n_results"]
+            "one_tail_text", "one_tail_strict", "p_mentions", "n_results"]
 FLAGS = ["error", "decision_error", "error_1t", "decision_error_1t", "error_1t_strict",
          "decision_error_1t_strict", "half_p_consistent", "p_zero"]
 RES_COLS = ["pmcid", "year", "kind", "df1", "df2", "stat", "p_cmp", "p_rep", "p_min", "p_max"] + FLAGS
+# any reported p-value in the body, however the result around it is written
+P_MENTION = re.compile(r"(?<![A-Za-z])[pP]\s?[<=>≤]\s?0?\.\d+")
 AI_USED = re.compile(r"Gen(erative)? AI was used", re.I)
 AI_NOT = re.compile(r"Gen(erative)? AI was not used|no Gen(erative)? AI was used", re.I)
 
@@ -161,7 +163,7 @@ def process(path):
         arts.append([pmcid, ids.get("pmcid-ver", ""), ids.get("doi", ""), year, ey, em, ry, rm, new_format,
                      a.get("article-type", ""), subjects[-1] if subjects else "", ai_statement(a), first_country(meta),
                      int(body is not None), len(text), int(bool(ONE_TAIL.search(text))),
-                     int(bool(ONE_TAIL_STRICT.search(text))), len(found)])
+                     int(bool(ONE_TAIL_STRICT.search(text))), len(P_MENTION.findall(text)), len(found)])
     return arts, ress, ctxs
 
 

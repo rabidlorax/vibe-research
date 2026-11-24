@@ -110,4 +110,9 @@ received Apr-May 2026, published within 3 months, no allowance: 4.38% [2.55, 6.7
 received Apr-May 2026, published after 4 or more months, no allowance: 8.61% [3.62, 13.86] (155 articles, 1220 results)
 received Jun 2026, published within 3 months, no allowance: 4.14% [2.24, 6.16] (144 articles, 1088 results)
 received Jun 2026, published after 4 or more months, no allowance: 1.10% [0.23, 2.10] (57 articles, 456 results)
+extracted results per p-value mention, by receipt quarter: 2023Q1: 0.250, 2023Q2: 0.238, 2023Q3: 0.205, 2023Q4: 0.221, 2024Q1: 0.190, 2024Q2: 0.183, 2024Q3: 0.181, 2024Q4: 0.167, 2025Q1: 0.192, 2025Q2: 0.149, 2025Q3: 0.129, 2025Q4: 0.154, 2026Q1: 0.145, 2026Q2: 0.153, 2026Q3: 0.156
+received 2023Q1-2025Q1: 22785 extracted results per 111874 p-value mentions = 0.204; p-value mentions per article 12.7
+received 2025Q2-2026Q1: 12038 extracted results per 83229 p-value mentions = 0.145; p-value mentions per article 14.8
+received Apr-May 2026: 2727 extracted results per 18790 p-value mentions = 0.145; p-value mentions per article 15.1
+received Jun 2026 on: 3467 extracted results per 21363 p-value mentions = 0.162; p-value mentions per article 15.6
 received Jun 2026 on: median body length 54162 characters (1369 articles)
