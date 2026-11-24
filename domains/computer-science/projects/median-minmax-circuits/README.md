@@ -6,7 +6,7 @@ evidence: external-data
 novelty: partially-known
 models: [claude-fable-5-2]
 started: 2026-11-23
-updated: 2026-11-23
+updated: 2026-11-24
 ---
 
 # Fewest min/max operations to compute a median of 5, 7 or 9 values
@@ -72,8 +72,9 @@ the number of operations. "Gate" means the same thing in circuit language
   bounds are SAT refutations of all smaller sizes under symmetry-breaking
   constraints justified by a written, unformalized proof (claim 8,
   `proved-informal`). The question for 7 and 9 is
-  **not settled**: 60 attempts to shorten the 20-operation median-of-7 program
-  by one operation all failed, which is weak evidence and proves nothing.
+  **not settled**: 60 attempts (covering 23 distinct sub-problems) to shorten
+  the 20-operation median-of-7 program by one operation all failed, which is
+  weak evidence and proves nothing.
 
 ## Claims
 
@@ -148,8 +149,9 @@ maximal false points.
 
 **Symmetry breaking and why it loses nothing** (claim 8). The searches use
 extra constraints to go faster. They are justified as follows. This is a
-written proof, not a machine-checked one. Only claim 4 depends on it: every
-other lower bound here is also confirmed with the constraints switched off.
+written proof, not a machine-checked one. Only claim 4 depends on it: the
+lower bounds for 5 inputs and for every catalogue class are also confirmed
+with the constraints switched off.
 
 Take a circuit of the smallest possible size s. Every gate has a path to the
 output (otherwise delete it), so the output is the only gate nobody uses and
@@ -209,8 +211,9 @@ only size exactly s. `lower_bounds.py` therefore runs every size from 1 up.
 - `src/brute_force.py` enumerates all circuits without any SAT solver or
   encoding: every 4-variable class (up to 7 gates) and every 5-variable class
   with minimum at most 5 gates agrees exactly, and no 5-variable class with a
-  larger SAT minimum is reachable in 5 gates (`python cross_check.py`:
-  28 + 59 classes agree, 149 correctly unreachable).
+  larger SAT minimum is reachable in 5 gates (`python cross_check.py`,
+  output in `results/cross_check.log`: 28 + 59 classes agree, 149 correctly
+  unreachable).
 - In all 210 + 30 catalogue classes the SAT minimum is at most the size of
   the catalogue's own circuit, as it must be if the encoding does not
   over-constrain; in 221 of the 240 it is equal.
@@ -229,7 +232,9 @@ all 32 inputs by code separate from the encoder.
 predecessor-closed set of 11 of the 20 gates of the pruned median-of-7
 network and ask for a completion with exactly 8 more gates (19 total) in
 which every added gate is used and the added gates are in canonical order. 60 random
-choices, all UNSAT (`results/local7_keep11.log`). What did not work: plain
+choices, all UNSAT (`results/local7_keep11.log`). The 60 choices contain
+only 23 distinct kept sets (the same 11 gates drawn in a different order
+give the same problem), so this is 23 distinct questions, not 60. What did not work: plain
 SAT search for a median-of-7 program of size 18, 19 or 20 returned nothing in
 about 15 minutes each before being stopped, even at 20 where a solution is
 known to exist, and the same with two or three disjoint comparators fixed as
@@ -277,7 +282,9 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   October 2023,
   <https://sites.math.rutgers.edu/~bas312/Research/Seidler.pdf> (marked
   "ALL RIGHTS RESERVED"; read, not redistributed); and the catalogue files `MonoCatFileA4var.txt` and `MonoCatFileA5var.txt` in the
-  same directory. Accessed 2026-11-23. No licence is stated, so the files are
+  same directory. The manuscript and catalogue files were accessed 2026-11-23, the
+  dissertation 2026-11-24. No licence is stated for the manuscript or the
+  catalogue files, so the files are
   not committed; `data/fetch_catalogue.sh` fetches them and
   `data/catalogue.sha256` records the checksums of the copies used.
 - This is a computed catalogue, not a measurement. We did not rerun the
@@ -286,7 +293,8 @@ python baseline.py && python verify.py ../results/baseline_median*.txt
   intended or are later changed. Claim 6 additionally trusts the catalogue's
   list of 210 class representatives to be complete (the count 210 agrees with
   the number of monotone 5-variable functions up to permutation of variables,
-  OEIS A003182, retrieved 2026-11-24: "inequivalent monotone Boolean
+  OEIS A003182, retrieved 2026-11-24, OEIS content is under CC BY-SA 4.0
+  `[licence from memory, unverified]`; only the number 210 is used: "inequivalent monotone Boolean
   functions of n or fewer variables", 2, 3, 5, 10, 30, 210, ...).
 - Quoted from the manuscript, so the comparison is exact. Abstract: "we produce
   minimum-size circuits for every Boolean function of four or fewer variables
@@ -402,11 +410,45 @@ Sergeev abstract below, were done after the results, during write-up.
   7.1.1 and 7.1.2 are an obvious place for the 5-input value and could not be
   read here (not openly accessible), so it may well be recorded there.
 
+- Topical database searches, run 2026-11-24 during quality control (after
+  the results). arXiv API, five queries, none of whose hits is on this
+  question by title: `"monotone circuit" AND majority AND exact` (0 hits);
+  `"median" AND "min/max" AND network` (3 hits, on sensor networks and
+  optimisation); `"monotone" AND "threshold function" AND "circuit
+  complexity"` (2 hits, on decision trees and extended formulations);
+  `"selection network" AND median AND optimal` (0); `"exact synthesis" AND
+  monotone AND majority` (0). OpenAlex full-text search, four queries, first
+  8 results of each examined by title: "monotone circuit complexity majority
+  exact small"; "minimum monotone circuit threshold function five
+  variables"; "median min max operations optimal network lower bound";
+  "optimal selection network median comparators". DBLP's search API returned
+  HTTP 202 with no results and was not searched.
+- One relevant hit from OpenAlex, abstract only read (single source, a Zenodo
+  record, so `literature` at best): R. Martino, "Optimality of a
+  25-Comparator Median Selection Network on Eleven Inputs", 2026-11-20,
+  doi:10.5281/zenodo.24397283. Its abstract states that "exactly 25
+  comparators are necessary and sufficient to select the sixth smallest of
+  eleven inputs" in a comparator-network model, with the upper bound being
+  "Bert Dobbelaere's published construction". That is a different cost model
+  from the one here (a comparator is one unit and produces both min and max
+  on fixed wires; here min and max are counted separately and results may be
+  reused freely), and neither model's bounds transfer exactly to the other.
+  It indicates that exact comparator counts for median selection on fewer
+  inputs are an active, possibly settled, topic; that literature (including
+  Dobbelaere's lists) was not read, and a specialist would start there for
+  7 and 9 inputs. The abstract also contains instructions to readers for
+  running its verification scripts; nothing from that record was downloaded
+  or run.
+
 What is known: the 10-, 20- and 30-operation programs (upper bounds) are
-classical. What was not found elsewhere: the matching lower bound for 5, the
-lower bounds for 7 and 9, and the 19 corrections to the catalogue. Hence
-`partially-known`. The search was a few hours' work by a model, not a
-specialist's survey.
+classical. What was not found elsewhere: the matching lower bound for 5 in
+the min/max-operation model, the lower bounds for 7 and 9, and the 19
+corrections to the catalogue. Hence `partially-known`. The search was a few
+hours' work by a model, not a specialist's survey.
+
+Outcome of the search: go ahead, with the scope as stated in the Question.
+The pre-work search found one source giving a value for 5 inputs (13, which
+the baseline network already contradicts), and nothing for 7 or 9.
 
 ## Limitations and open questions
 
@@ -431,7 +473,8 @@ specialist's survey.
   finish: the n=7 size-12 run was stopped after more than 30 minutes on a
   shared machine, the n=9 size-14 run after a few minutes.
 - The failed local search is not evidence of optimality of 20: it only
-  explored completions of 11-gate subsets of one particular program.
+  explored completions of 23 distinct 11-gate subsets of one particular
+  program.
 - Only single-output programs are covered. Median filters over sliding
   windows share work between neighbouring windows; that is a different
   problem.
@@ -453,3 +496,4 @@ specialist's survey.
 | 2026-11-23 | claude-fable-5-2, subagent of the authoring session (pre-review quality control, **not** an independent review under the standards) | Briefed with the repository only, not the author's conclusions. Reran all steps under 5 minutes, re-derived both CSVs against the catalogue with its own parser, read the encoder against the symmetry argument, checked quotations against the manuscript | No number found wrong. Ten issues, all fixed: the manuscript's own caveat about its search had not been quoted; a gap in the symmetry argument (now argued with triples); command paths; runtime totals; wording |
 | 2026-11-23 | claude-fable-5-2, second fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief. In addition found UNSAT without symmetry breaking at minimum-1 for all 142 catalogue classes with minimum 6 to 9 (its own scratch run, not committed here) | No number found wrong. Twelve issues, fixed: unread search hits described without being read (now read or dropped); claim 4's dependence on the unformalized argument made explicit; this log; smaller wording and command fixes. Not fixable without rewriting history: commit 2198bee combines a merge of `main` with project edits |
 | 2026-11-24 | claude-fable-5-2, third fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief. In addition wrote an independent SAT formulation (pair selectors, full truth table, no symmetry breaking) and confirmed minimum-1 UNSAT for the 186 classes with minimum 1 to 8 and 13 of the 14 with minimum 9; confirmed the 210 catalogue entries are 210 distinct classes out of 7581 monotone functions (scratch runs, not committed here) | No number found wrong. Seven issues, fixed: the author's 2023 dissertation had been missed (now read and quoted); catalogue lower bounds leaned on the symmetry argument (now rerun without it, `results/nosym_check.log`); the lemma is now its own `proved-informal` claim; wording and memory figures |
+| 2026-11-24 | claude-fable-5-2, fourth fresh subagent of the authoring session (pre-review quality control, **not** an independent review) | Same brief; reran all steps under 5 minutes, own catalogue parser, replayed the local search's random stream, re-fetched and checked all quoted sources | No number found wrong. Six issues, fixed: the 60 local-search trials are 23 distinct problems; `updated` date; topical arXiv and OpenAlex searches added and the search outcome stated; access dates; `results/cross_check.log` now saved |

@@ -20,7 +20,7 @@ python nosym_check.py ../data/raw/MonoCatFileA4var.txt ../results/catalogue_chec
 python nosym_check.py ../data/raw/MonoCatFileA5var.txt ../results/catalogue_check.csv ../results/nosym_check.log 4             # ~1 hour
 python brute_force.py 4 7 > ../results/brute_force_n4_d7.txt    # ~1 min, ~3 GB of memory
 python brute_force.py 5 5 > ../results/brute_force_n5_d5.txt    # ~10 s
-python cross_check.py
+python cross_check.py > ../results/cross_check.log
 python lower_bounds.py 7 11 > ../results/lower_bounds_7.log     # ~70 s
 python lower_bounds.py 9 13 > ../results/lower_bounds_9.log     # ~20 min, almost all in size 13
 python local_improve.py ../results/baseline_median7.txt 11 60 11 3000000 > ../results/local7_keep11.log   # ~27 min
