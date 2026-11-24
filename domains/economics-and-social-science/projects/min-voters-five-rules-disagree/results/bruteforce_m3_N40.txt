@@ -1,0 +1,27 @@
+m=3 N=40 convention=strict profiles=9366818
+PR 9
+PH 9
+RH -
+PRH -
+PB 4
+RB 5
+PRB 9
+HB 5
+PHB 9
+RHB -
+PRHB -
+PC 7
+RC 5
+PRC 9
+HC 5
+PHC 9
+RHC -
+PRHC -
+BC 5
+PBC 19
+RBC -
+PRBC -
+HBC -
+PHBC -
+RHBC -
+PRHBC -

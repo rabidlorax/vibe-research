@@ -1,0 +1,1 @@
+z results: 14709, flagged (no allowance) 2435; with Kolmogorov / Shapiro / 'normality' within 150 characters: 63, of which flagged 25

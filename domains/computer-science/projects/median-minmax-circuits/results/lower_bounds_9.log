@@ -1,0 +1,13 @@
+n=9 s=1 solver=cadical153 vars=782 clauses=2929 UNSAT 0.0s
+n=9 s=2 solver=cadical153 vars=1566 clauses=6383 UNSAT 0.0s
+n=9 s=3 solver=cadical153 vars=2352 clauses=10510 UNSAT 0.0s
+n=9 s=4 solver=cadical153 vars=3140 clauses=15344 UNSAT 0.0s
+n=9 s=5 solver=cadical153 vars=3930 clauses=20922 UNSAT 0.0s
+n=9 s=6 solver=cadical153 vars=4722 clauses=27284 UNSAT 0.0s
+n=9 s=7 solver=cadical153 vars=5516 clauses=34473 UNSAT 0.1s
+n=9 s=8 solver=cadical153 vars=6312 clauses=42535 UNSAT 0.2s
+n=9 s=9 solver=cadical153 vars=7110 clauses=51519 UNSAT 0.7s
+n=9 s=10 solver=cadical153 vars=7910 clauses=61477 UNSAT 1.9s
+n=9 s=11 solver=cadical153 vars=8712 clauses=72464 UNSAT 10.5s
+n=9 s=12 solver=cadical153 vars=9516 clauses=84538 UNSAT 68.0s
+n=9 s=13 solver=cadical153 vars=10322 clauses=97760 UNSAT 1146.3s

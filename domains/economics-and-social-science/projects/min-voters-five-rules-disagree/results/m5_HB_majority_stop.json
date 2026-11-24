@@ -1,0 +1,1 @@
+{"m": 5, "rules": "HB", "cases": 16, "full": false, "majority_stop": true, "highs_case_minima": [3, 3, 3, 3, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9], "highs_infeasible_cases": 0, "highs_min": 3, "highs_seconds": 0.1, "cpsat_min": 3, "cpsat_cap": 400, "cpsat_seconds": 0.2, "min_voters": 3, "witness": [["ABCDE", 1], ["EABCD", 1], ["EADBC", 1]], "witness_winners": {"H": "E", "B": "A"}}

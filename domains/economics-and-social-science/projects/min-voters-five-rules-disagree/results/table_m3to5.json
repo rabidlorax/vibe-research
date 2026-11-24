@@ -1,0 +1,2986 @@
+[
+{
+"m": 3,
+"rules": "PR",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 0,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ABC",
+4
+],
+[
+"BAC",
+3
+],
+[
+"CBA",
+2
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B"
+}
+},
+{
+"m": 3,
+"rules": "PH",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 1,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ACB",
+2
+],
+[
+"BAC",
+4
+],
+[
+"CAB",
+3
+]
+],
+"witness_winners": {
+"P": "B",
+"H": "C"
+}
+},
+{
+"m": 3,
+"rules": "PB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+4
+],
+"highs_infeasible_cases": 0,
+"highs_min": 4,
+"highs_seconds": 0.0,
+"cpsat_min": 4,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 4,
+"witness": [
+[
+"ABC",
+2
+],
+[
+"BCA",
+1
+],
+[
+"CBA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B"
+}
+},
+{
+"m": 3,
+"rules": "PC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ABC",
+3
+],
+[
+"BAC",
+2
+],
+[
+"CBA",
+2
+]
+],
+"witness_winners": {
+"P": "A",
+"C": "B"
+}
+},
+{
+"m": 3,
+"rules": "RH",
+"cases": 4,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 4,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 3,
+"rules": "RB",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5,
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABC",
+3
+],
+[
+"BCA",
+2
+]
+],
+"witness_winners": {
+"R": "A",
+"B": "B"
+}
+},
+{
+"m": 3,
+"rules": "RC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABC",
+2
+],
+[
+"BAC",
+1
+],
+[
+"CBA",
+2
+]
+],
+"witness_winners": {
+"R": "A",
+"C": "B"
+}
+},
+{
+"m": 3,
+"rules": "HB",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5,
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ACB",
+1
+],
+[
+"BAC",
+2
+],
+[
+"CAB",
+2
+]
+],
+"witness_winners": {
+"H": "C",
+"B": "A"
+}
+},
+{
+"m": 3,
+"rules": "HC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 1,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ACB",
+1
+],
+[
+"BAC",
+2
+],
+[
+"CAB",
+2
+]
+],
+"witness_winners": {
+"H": "C",
+"C": "A"
+}
+},
+{
+"m": 3,
+"rules": "BC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ACB",
+2
+],
+[
+"BAC",
+3
+]
+],
+"witness_winners": {
+"B": "A",
+"C": "B"
+}
+},
+{
+"m": 3,
+"rules": "PRH",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 2,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 3,
+"rules": "PRB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 0,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ACB",
+4
+],
+[
+"BCA",
+3
+],
+[
+"CBA",
+2
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"B": "C"
+}
+},
+{
+"m": 3,
+"rules": "PRC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 0,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ACB",
+4
+],
+[
+"BCA",
+3
+],
+[
+"CBA",
+2
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"C": "C"
+}
+},
+{
+"m": 3,
+"rules": "PHB",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 1,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ACB",
+2
+],
+[
+"BAC",
+4
+],
+[
+"CAB",
+3
+]
+],
+"witness_winners": {
+"P": "B",
+"H": "C",
+"B": "A"
+}
+},
+{
+"m": 3,
+"rules": "PHC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9
+],
+"highs_infeasible_cases": 1,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ACB",
+2
+],
+[
+"BAC",
+4
+],
+[
+"CAB",
+3
+]
+],
+"witness_winners": {
+"P": "B",
+"H": "C",
+"C": "A"
+}
+},
+{
+"m": 3,
+"rules": "PBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+19
+],
+"highs_infeasible_cases": 0,
+"highs_min": 19,
+"highs_seconds": 0.0,
+"cpsat_min": 19,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 19,
+"witness": [
+[
+"ABC",
+3
+],
+[
+"ACB",
+4
+],
+[
+"BAC",
+2
+],
+[
+"BCA",
+4
+],
+[
+"CBA",
+6
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B",
+"C": "C"
+}
+},
+{
+"m": 3,
+"rules": "RHB",
+"cases": 4,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 4,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 3,
+"rules": "RHC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 2,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 3,
+"rules": "RBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 1,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 3,
+"rules": "HBC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [],
+"highs_infeasible_cases": 2,
+"highs_min": null,
+"highs_seconds": 0.0,
+"cpsat_min": null,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": null
+},
+{
+"m": 4,
+"rules": "PR",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ABCD",
+3
+],
+[
+"BACD",
+2
+],
+[
+"CBAD",
+1
+],
+[
+"DBAC",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B"
+}
+},
+{
+"m": 4,
+"rules": "PH",
+"cases": 3,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+20
+],
+"highs_infeasible_cases": 1,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"ADBC",
+1
+],
+[
+"BADC",
+2
+],
+[
+"CABD",
+3
+],
+[
+"DABC",
+2
+]
+],
+"witness_winners": {
+"P": "C",
+"H": "D"
+}
+},
+{
+"m": 4,
+"rules": "PB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"ABCD",
+1
+],
+[
+"ABDC",
+1
+],
+[
+"BCDA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B"
+}
+},
+{
+"m": 4,
+"rules": "PC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABCD",
+2
+],
+[
+"BACD",
+1
+],
+[
+"CBAD",
+1
+],
+[
+"DBAC",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"C": "B"
+}
+},
+{
+"m": 4,
+"rules": "RH",
+"cases": 9,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+14,
+14
+],
+"highs_infeasible_cases": 6,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+2
+],
+[
+"BADC",
+4
+],
+[
+"CABD",
+5
+],
+[
+"DABC",
+3
+]
+],
+"witness_winners": {
+"R": "B",
+"H": "D"
+}
+},
+{
+"m": 4,
+"rules": "RB",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3,
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"ABCD",
+2
+],
+[
+"BCDA",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"B": "B"
+}
+},
+{
+"m": 4,
+"rules": "RC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABCD",
+2
+],
+[
+"CBAD",
+2
+],
+[
+"DBAC",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"C": "B"
+}
+},
+{
+"m": 4,
+"rules": "HB",
+"cases": 3,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5,
+5,
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"BADC",
+1
+],
+[
+"CABD",
+1
+],
+[
+"CADB",
+1
+],
+[
+"DABC",
+1
+],
+[
+"DACB",
+1
+]
+],
+"witness_winners": {
+"H": "D",
+"B": "A"
+}
+},
+{
+"m": 4,
+"rules": "HC",
+"cases": 3,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5,
+5
+],
+"highs_infeasible_cases": 1,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"BADC",
+1
+],
+[
+"CABD",
+2
+],
+[
+"DABC",
+2
+]
+],
+"witness_winners": {
+"H": "D",
+"C": "A"
+}
+},
+{
+"m": 4,
+"rules": "BC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"ADCB",
+1
+],
+[
+"BACD",
+1
+],
+[
+"BADC",
+1
+]
+],
+"witness_winners": {
+"B": "A",
+"C": "B"
+}
+},
+{
+"m": 4,
+"rules": "PRH",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+26
+],
+"highs_infeasible_cases": 4,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+2
+],
+[
+"BADC",
+4
+],
+[
+"CABD",
+5
+],
+[
+"DABC",
+3
+]
+],
+"witness_winners": {
+"P": "C",
+"R": "B",
+"H": "D"
+}
+},
+{
+"m": 4,
+"rules": "PRB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACBD",
+1
+],
+[
+"ACDB",
+2
+],
+[
+"BCAD",
+1
+],
+[
+"BCDA",
+1
+],
+[
+"CDBA",
+1
+],
+[
+"DCBA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"B": "C"
+}
+},
+{
+"m": 4,
+"rules": "PRC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACBD",
+3
+],
+[
+"BCAD",
+2
+],
+[
+"CBAD",
+1
+],
+[
+"DCBA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"C": "C"
+}
+},
+{
+"m": 4,
+"rules": "PHB",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+20,
+20
+],
+"highs_infeasible_cases": 2,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"ADCB",
+1
+],
+[
+"BADC",
+2
+],
+[
+"CABD",
+3
+],
+[
+"DACB",
+2
+]
+],
+"witness_winners": {
+"P": "C",
+"H": "D",
+"B": "A"
+}
+},
+{
+"m": 4,
+"rules": "PHC",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+20
+],
+"highs_infeasible_cases": 3,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"ADBC",
+1
+],
+[
+"BADC",
+2
+],
+[
+"CABD",
+3
+],
+[
+"DABC",
+2
+]
+],
+"witness_winners": {
+"P": "C",
+"H": "D",
+"C": "A"
+}
+},
+{
+"m": 4,
+"rules": "PBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ABDC",
+1
+],
+[
+"ACBD",
+2
+],
+[
+"BDCA",
+2
+],
+[
+"CBAD",
+2
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B",
+"C": "C"
+}
+},
+{
+"m": 4,
+"rules": "RHB",
+"cases": 18,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+14,
+14,
+14,
+14,
+14
+],
+"highs_infeasible_cases": 12,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+1
+],
+[
+"ADCB",
+1
+],
+[
+"BACD",
+1
+],
+[
+"BADC",
+3
+],
+[
+"CABD",
+5
+],
+[
+"DABC",
+3
+]
+],
+"witness_winners": {
+"R": "B",
+"H": "D",
+"B": "A"
+}
+},
+{
+"m": 4,
+"rules": "RHC",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+14,
+14
+],
+"highs_infeasible_cases": 9,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+2
+],
+[
+"BADC",
+4
+],
+[
+"CABD",
+5
+],
+[
+"DABC",
+3
+]
+],
+"witness_winners": {
+"R": "B",
+"H": "D",
+"C": "A"
+}
+},
+{
+"m": 4,
+"rules": "RBC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7,
+9
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACBD",
+3
+],
+[
+"BDCA",
+3
+],
+[
+"CABD",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"B": "B",
+"C": "C"
+}
+},
+{
+"m": 4,
+"rules": "HBC",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7,
+9,
+9,
+11
+],
+"highs_infeasible_cases": 2,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"BDCA",
+1
+],
+[
+"CABD",
+3
+],
+[
+"DBCA",
+3
+]
+],
+"witness_winners": {
+"H": "D",
+"B": "C",
+"C": "B"
+}
+},
+{
+"m": 4,
+"rules": "PRHB",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+26
+],
+"highs_infeasible_cases": 4,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+2
+],
+[
+"BACD",
+1
+],
+[
+"BADC",
+3
+],
+[
+"CABD",
+4
+],
+[
+"CADB",
+1
+],
+[
+"DABC",
+2
+],
+[
+"DACB",
+1
+]
+],
+"witness_winners": {
+"P": "C",
+"R": "B",
+"H": "D",
+"B": "A"
+}
+},
+{
+"m": 4,
+"rules": "PRHC",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+14,
+26
+],
+"highs_infeasible_cases": 4,
+"highs_min": 14,
+"highs_seconds": 0.0,
+"cpsat_min": 14,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 14,
+"witness": [
+[
+"ADBC",
+2
+],
+[
+"BADC",
+4
+],
+[
+"CABD",
+5
+],
+[
+"DABC",
+3
+]
+],
+"witness_winners": {
+"P": "C",
+"R": "B",
+"H": "D",
+"C": "A"
+}
+},
+{
+"m": 4,
+"rules": "PRBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+11
+],
+"highs_infeasible_cases": 0,
+"highs_min": 11,
+"highs_seconds": 0.0,
+"cpsat_min": 11,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 11,
+"witness": [
+[
+"ACBD",
+1
+],
+[
+"ADCB",
+3
+],
+[
+"BCDA",
+2
+],
+[
+"BDCA",
+1
+],
+[
+"CBDA",
+1
+],
+[
+"CDBA",
+1
+],
+[
+"DCAB",
+1
+],
+[
+"DCBA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"B": "C",
+"C": "D"
+}
+},
+{
+"m": 4,
+"rules": "PHBC",
+"cases": 6,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+9,
+11,
+23
+],
+"highs_infeasible_cases": 3,
+"highs_min": 9,
+"highs_seconds": 0.0,
+"cpsat_min": 9,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 9,
+"witness": [
+[
+"ADBC",
+1
+],
+[
+"BADC",
+2
+],
+[
+"CADB",
+1
+],
+[
+"CBAD",
+3
+],
+[
+"DABC",
+2
+]
+],
+"witness_winners": {
+"P": "C",
+"H": "D",
+"B": "A",
+"C": "B"
+}
+},
+{
+"m": 4,
+"rules": "RHBC",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+15,
+17
+],
+"highs_infeasible_cases": 10,
+"highs_min": 15,
+"highs_seconds": 0.0,
+"cpsat_min": 15,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 15,
+"witness": [
+[
+"ACBD",
+1
+],
+[
+"ACDB",
+1
+],
+[
+"BACD",
+2
+],
+[
+"BADC",
+2
+],
+[
+"CBAD",
+2
+],
+[
+"CBDA",
+1
+],
+[
+"DACB",
+2
+],
+[
+"DCAB",
+4
+]
+],
+"witness_winners": {
+"R": "B",
+"H": "D",
+"B": "C",
+"C": "A"
+}
+},
+{
+"m": 5,
+"rules": "PR",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ABCDE",
+3
+],
+[
+"BACDE",
+2
+],
+[
+"CBADE",
+1
+],
+[
+"DBACE",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B"
+}
+},
+{
+"m": 5,
+"rules": "PH",
+"cases": 4,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+15,
+35
+],
+"highs_infeasible_cases": 1,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CABED",
+2
+],
+[
+"DABCE",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"P": "D",
+"H": "E"
+}
+},
+{
+"m": 5,
+"rules": "PB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"ABDEC",
+1
+],
+[
+"ABEDC",
+1
+],
+[
+"DBCEA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B"
+}
+},
+{
+"m": 5,
+"rules": "PC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABCDE",
+2
+],
+[
+"BACDE",
+1
+],
+[
+"DBACE",
+1
+],
+[
+"EBACD",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"C": "B"
+}
+},
+{
+"m": 5,
+"rules": "RH",
+"cases": 16,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+11,
+11,
+11,
+27,
+27,
+27,
+27,
+27
+],
+"highs_infeasible_cases": 8,
+"highs_min": 11,
+"highs_seconds": 0.0,
+"cpsat_min": 11,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 11,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"CABED",
+3
+],
+[
+"DABCE",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"R": "C",
+"H": "E"
+}
+},
+{
+"m": 5,
+"rules": "RB",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3,
+3
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"ABCDE",
+1
+],
+[
+"ABEDC",
+1
+],
+[
+"BDECA",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"B": "B"
+}
+},
+{
+"m": 5,
+"rules": "RC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ABCDE",
+2
+],
+[
+"CBADE",
+2
+],
+[
+"DBACE",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"C": "B"
+}
+},
+{
+"m": 5,
+"rules": "HB",
+"cases": 4,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8,
+8
+],
+"highs_infeasible_cases": 0,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"BAEDC",
+1
+],
+[
+"CABED",
+2
+],
+[
+"DAECB",
+3
+],
+[
+"EABDC",
+2
+]
+],
+"witness_winners": {
+"H": "E",
+"B": "A"
+}
+},
+{
+"m": 5,
+"rules": "HC",
+"cases": 4,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8
+],
+"highs_infeasible_cases": 1,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CABED",
+2
+],
+[
+"DABCE",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"H": "E",
+"C": "A"
+}
+},
+{
+"m": 5,
+"rules": "BC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+3
+],
+"highs_infeasible_cases": 0,
+"highs_min": 3,
+"highs_seconds": 0.0,
+"cpsat_min": 3,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 3,
+"witness": [
+[
+"AEDCB",
+1
+],
+[
+"BAEDC",
+2
+]
+],
+"witness_winners": {
+"B": "A",
+"C": "B"
+}
+},
+{
+"m": 5,
+"rules": "PRH",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+12,
+17,
+27,
+27,
+47,
+47
+],
+"highs_infeasible_cases": 6,
+"highs_min": 12,
+"highs_seconds": 0.0,
+"cpsat_min": 12,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 12,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"CABED",
+3
+],
+[
+"DABCE",
+4
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"P": "D",
+"R": "C",
+"H": "E"
+}
+},
+{
+"m": 5,
+"rules": "PRB",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACBDE",
+2
+],
+[
+"ACEDB",
+1
+],
+[
+"BCAED",
+1
+],
+[
+"BCEDA",
+1
+],
+[
+"CBDEA",
+1
+],
+[
+"DCBAE",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"B": "C"
+}
+},
+{
+"m": 5,
+"rules": "PRC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACBDE",
+3
+],
+[
+"BCADE",
+2
+],
+[
+"CBADE",
+1
+],
+[
+"DCBAE",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"C": "C"
+}
+},
+{
+"m": 5,
+"rules": "PHB",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8,
+15,
+15,
+15,
+35,
+35,
+35
+],
+"highs_infeasible_cases": 3,
+"highs_min": 8,
+"highs_seconds": 0.1,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CABED",
+1
+],
+[
+"CAEDB",
+1
+],
+[
+"DABCE",
+1
+],
+[
+"DABEC",
+1
+],
+[
+"DAECB",
+1
+],
+[
+"EACBD",
+1
+],
+[
+"EADBC",
+1
+]
+],
+"witness_winners": {
+"P": "D",
+"H": "E",
+"B": "A"
+}
+},
+{
+"m": 5,
+"rules": "PHC",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8,
+15,
+15,
+35,
+35
+],
+"highs_infeasible_cases": 5,
+"highs_min": 8,
+"highs_seconds": 0.0,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CABED",
+2
+],
+[
+"DABCE",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"P": "D",
+"H": "E",
+"C": "A"
+}
+},
+{
+"m": 5,
+"rules": "PBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ACBED",
+2
+],
+[
+"BECDA",
+1
+],
+[
+"DCBEA",
+1
+],
+[
+"EBDCA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"B": "B",
+"C": "C"
+}
+},
+{
+"m": 5,
+"rules": "RHB",
+"cases": 48,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27
+],
+"highs_infeasible_cases": 24,
+"highs_min": 11,
+"highs_seconds": 0.2,
+"cpsat_min": 11,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.4,
+"min_voters": 11,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAEDC",
+1
+],
+[
+"CABED",
+1
+],
+[
+"CADBE",
+1
+],
+[
+"CAEDB",
+1
+],
+[
+"DABCE",
+1
+],
+[
+"DAEBC",
+1
+],
+[
+"DAECB",
+1
+],
+[
+"EABCD",
+1
+],
+[
+"EACBD",
+1
+]
+],
+"witness_winners": {
+"R": "C",
+"H": "E",
+"B": "A"
+}
+},
+{
+"m": 5,
+"rules": "RHC",
+"cases": 36,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+11,
+11,
+11,
+11,
+11,
+11,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27
+],
+"highs_infeasible_cases": 22,
+"highs_min": 11,
+"highs_seconds": 0.1,
+"cpsat_min": 11,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.2,
+"min_voters": 11,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"CABED",
+3
+],
+[
+"DABCE",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"R": "C",
+"H": "E",
+"C": "A"
+}
+},
+{
+"m": 5,
+"rules": "RBC",
+"cases": 2,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+5,
+5
+],
+"highs_infeasible_cases": 0,
+"highs_min": 5,
+"highs_seconds": 0.0,
+"cpsat_min": 5,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 5,
+"witness": [
+[
+"ACBED",
+2
+],
+[
+"BDECA",
+1
+],
+[
+"BECDA",
+1
+],
+[
+"CABED",
+1
+]
+],
+"witness_winners": {
+"R": "A",
+"B": "B",
+"C": "C"
+}
+},
+{
+"m": 5,
+"rules": "HBC",
+"cases": 12,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8,
+8,
+9,
+9,
+9,
+9,
+9
+],
+"highs_infeasible_cases": 3,
+"highs_min": 8,
+"highs_seconds": 0.1,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CABED",
+2
+],
+[
+"DABCE",
+2
+],
+[
+"DCAEB",
+1
+],
+[
+"ECABD",
+2
+]
+],
+"witness_winners": {
+"H": "E",
+"B": "A",
+"C": "C"
+}
+},
+{
+"m": 5,
+"rules": "PRHB",
+"cases": 24,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+12,
+12,
+17,
+17,
+27,
+27,
+27,
+27,
+47,
+47,
+47,
+47
+],
+"highs_infeasible_cases": 12,
+"highs_min": 12,
+"highs_seconds": 0.1,
+"cpsat_min": 12,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.2,
+"min_voters": 12,
+"witness": [
+[
+"AECBD",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"BAEDC",
+1
+],
+[
+"CABDE",
+1
+],
+[
+"CAEBD",
+2
+],
+[
+"DABCE",
+1
+],
+[
+"DABEC",
+1
+],
+[
+"DAEBC",
+1
+],
+[
+"DAECB",
+1
+],
+[
+"EABCD",
+1
+],
+[
+"EACBD",
+1
+]
+],
+"witness_winners": {
+"P": "D",
+"R": "C",
+"H": "E",
+"B": "A"
+}
+},
+{
+"m": 5,
+"rules": "PRHC",
+"cases": 24,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+12,
+12,
+17,
+17,
+27,
+27,
+27,
+47,
+47,
+47
+],
+"highs_infeasible_cases": 14,
+"highs_min": 12,
+"highs_seconds": 0.1,
+"cpsat_min": 12,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.1,
+"min_voters": 12,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"CABED",
+3
+],
+[
+"DABCE",
+4
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"P": "D",
+"R": "C",
+"H": "E",
+"C": "A"
+}
+},
+{
+"m": 5,
+"rules": "PRBC",
+"cases": 1,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+7
+],
+"highs_infeasible_cases": 0,
+"highs_min": 7,
+"highs_seconds": 0.0,
+"cpsat_min": 7,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.0,
+"min_voters": 7,
+"witness": [
+[
+"ACEDB",
+2
+],
+[
+"ADCEB",
+1
+],
+[
+"BDCEA",
+2
+],
+[
+"CDEBA",
+1
+],
+[
+"EDCBA",
+1
+]
+],
+"witness_winners": {
+"P": "A",
+"R": "B",
+"B": "C",
+"C": "D"
+}
+},
+{
+"m": 5,
+"rules": "PHBC",
+"cases": 24,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+8,
+8,
+8,
+9,
+9,
+9,
+15,
+15,
+15,
+15,
+35,
+35,
+35,
+35
+],
+"highs_infeasible_cases": 10,
+"highs_min": 8,
+"highs_seconds": 0.1,
+"cpsat_min": 8,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.2,
+"min_voters": 8,
+"witness": [
+[
+"BAECD",
+1
+],
+[
+"CAEBD",
+2
+],
+[
+"DCAEB",
+3
+],
+[
+"EABCD",
+2
+]
+],
+"witness_winners": {
+"P": "D",
+"H": "E",
+"B": "A",
+"C": "C"
+}
+},
+{
+"m": 5,
+"rules": "RHBC",
+"cases": 72,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+11,
+13,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27,
+27
+],
+"highs_infeasible_cases": 44,
+"highs_min": 11,
+"highs_seconds": 0.4,
+"cpsat_min": 11,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.6,
+"min_voters": 11,
+"witness": [
+[
+"AEBCD",
+1
+],
+[
+"BADCE",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"CABED",
+1
+],
+[
+"CBAED",
+2
+],
+[
+"DABEC",
+1
+],
+[
+"DAEBC",
+1
+],
+[
+"DBAEC",
+1
+],
+[
+"EACDB",
+1
+],
+[
+"EBADC",
+1
+]
+],
+"witness_winners": {
+"R": "C",
+"H": "E",
+"B": "A",
+"C": "B"
+}
+},
+{
+"m": 5,
+"rules": "PRHBC",
+"cases": 24,
+"full": false,
+"majority_stop": false,
+"highs_case_minima": [
+12,
+12,
+17,
+17,
+27,
+27,
+27,
+47,
+47,
+47
+],
+"highs_infeasible_cases": 14,
+"highs_min": 12,
+"highs_seconds": 0.1,
+"cpsat_min": 12,
+"cpsat_cap": 400,
+"cpsat_seconds": 0.2,
+"min_voters": 12,
+"witness": [
+[
+"AECBD",
+1
+],
+[
+"BAECD",
+1
+],
+[
+"BAEDC",
+1
+],
+[
+"CABDE",
+1
+],
+[
+"CAEBD",
+1
+],
+[
+"CBAED",
+1
+],
+[
+"DABEC",
+1
+],
+[
+"DBACE",
+2
+],
+[
+"DBAEC",
+1
+],
+[
+"EABCD",
+1
+],
+[
+"EBACD",
+1
+]
+],
+"witness_winners": {
+"P": "D",
+"R": "C",
+"H": "E",
+"B": "A",
+"C": "B"
+}
+}
+]
